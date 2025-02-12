@@ -11,7 +11,7 @@ use App\Services\Interfaces\UserServiceInterface;
  */
 class UserService implements UserServiceInterface
 {
-    public function paginate($number = null){
+    public function paginate($number){
         $users = User::paginate($number);
         return $users;
     }
