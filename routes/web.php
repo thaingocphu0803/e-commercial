@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Ajax\LocationController;
 use App\Http\Controllers\Backend\AuthenController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\UserController;
@@ -16,7 +17,14 @@ Route::post('/login', [AuthenController::class, 'login'])->name('auth.login');
 Route::get('/logout', [AuthenController::class, 'logout'])->name('auth.logout');
 
 // UserController
-Route::get('/user/index', [UserController::class, 'index'])->name('user.index')->middleware('admin');
+
+Route::controller(UserController::class)->middleware('admin')->prefix('user')->group(function () {
+    Route::get('index',  'index')->name('user.index');
+    Route::get('create', 'create')->name('user.create');
+});
+
+// AjaxController
+Route::get('/ajax/location/district', [LocationController::class, 'district'])->name('location.district');
 
 
 // DashboardController

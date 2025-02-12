@@ -29,5 +29,8 @@
  <!-- Sparkline demo data  -->
  <script src="../../../backend/js/demo/sparkline-demo.js"></script>
 
+ {{-- main.js --}}
+ <script src="../../../backend/js/main.js"></script>
+
  {{ $slot }}
 

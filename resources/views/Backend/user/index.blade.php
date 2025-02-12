@@ -1,16 +1,7 @@
 <x-backend.dashboard.layout>
     <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-lg-10">
-            <h2>Manager Member</h2>
-            <ol class="breadcrumb">
-                <li>
-                    <a href="{{ route('dashboard.index') }}">Dashboard</a>
-                </li>
-                <li class="active">
-                    <strong>Manager Member</strong>
-                </li>
-            </ol>
-        </div>
+        <x-backend.dashboard.breadcrumb title="Manage Member"/>
+
         <div class="col-lg-2">
         </div>
         <div class="col-lg-12 mt-20">
