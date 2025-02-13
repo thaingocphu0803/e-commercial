@@ -9,4 +9,8 @@ use Illuminate\Notifications\Notifiable;
 class Ward extends Model
 {
     use HasFactory, Notifiable;
+
+    public function district(){
+        return $this->belongsTo(District::class, 'district_code', 'code');
+    }
 }

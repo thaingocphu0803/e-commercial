@@ -21,10 +21,17 @@ Route::get('/logout', [AuthenController::class, 'logout'])->name('auth.logout');
 Route::controller(UserController::class)->middleware('admin')->prefix('user')->group(function () {
     Route::get('index',  'index')->name('user.index');
     Route::get('create', 'create')->name('user.create');
+    Route::post('store', 'store')->name('user.store');
+    Route::get('edit/{user}', 'edit')->name('user.edit');
+    Route::post('update/{id}', 'update')->name('user.update');
 });
 
 // AjaxController
-Route::get('/ajax/location/district', [LocationController::class, 'district'])->name('location.district');
+Route::controller(LocationController::class)->prefix('ajax/location')->group(function(){
+    Route::get('district', 'district')->name('location.district');
+    Route::get('ward', 'ward')->name('location.ward');
+});
+
 
 
 // DashboardController

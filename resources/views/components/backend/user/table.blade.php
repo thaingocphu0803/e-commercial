@@ -62,7 +62,7 @@
                     <input type="checkbox" class="js-switch" checked />
                 </td>
                 <td>
-                    <a href="#" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                    <a href="{{route('user.edit', $user->id)}}" class="btn btn-success"><i class="fa fa-edit"></i></a>
                     <a href="#" class="btn btn-danger">
                         <ic class="fa fa-trash"></i>
                     </a>

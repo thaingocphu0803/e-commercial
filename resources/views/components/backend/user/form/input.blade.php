@@ -2,6 +2,7 @@
     'inputName',
     'type',
     'labelName',
+    'value' => null,
     'rowLength' => null,
     'must' => false
 ])
@@ -12,6 +13,6 @@
             <span class="text-danger">*</span>
             @endif
         </label>
-        <input type="{{$type}}" name="{{$inputName}}" id="{{$inputName}}" class="form-control">
+        <input type="{{$type}}" name="{{$inputName}}" id="{{$inputName}}" value="{{old($inputName, $value)}}" class="form-control">
     </div>
 </div>

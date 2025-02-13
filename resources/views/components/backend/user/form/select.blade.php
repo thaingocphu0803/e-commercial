@@ -2,8 +2,13 @@
     'labelName',
     'data' => [],
     'name',
+    'value' => null,
     'must' => false,
 ])
+
+@php
+    $itemCodeDefault = !empty($value) ? $value : old($name)
+@endphp
 
 <div class="col-lg-6">
     <div class="form-row">
@@ -16,7 +21,7 @@
             <option selected disabled>Choose {{$labelName}}</option>
             @if(!empty($data))
                 @foreach ($data as $item)
-                <option value="{{$item->code}}">{{$item->name}}</option>
+                <option value="{{$item->code}}" @selected($itemCodeDefault == $item->code) >{{$item->name}}</option>
                 @endforeach
             @endif
         </select>

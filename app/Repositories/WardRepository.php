@@ -10,4 +10,8 @@ class WardRepository implements WardRepositoryInterface {
     {
         return Ward::all();
     }
+
+    public function findWardByDistrictId($district_id){
+        return Ward::where('district_code', $district_id)->get();
+    }
 }

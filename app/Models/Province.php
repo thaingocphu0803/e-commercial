@@ -9,4 +9,8 @@ use Illuminate\Notifications\Notifiable;
 class Province extends Model
 {
     use HasFactory, Notifiable;
+
+    public function districts(){
+        return $this->hasMany(District::class, 'province_code', 'code');
+    }
 }
