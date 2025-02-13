@@ -1,0 +1,76 @@
+.error-message{
+    color: red;
+    font-size: 12px;
+    margin: 5px;
+    font-style: italic;
+    justify-self: start;
+}
+
+.mb-20{
+    margin-bottom: 20px;
+}
+
+.mt-20{
+    margin-top:20px;
+}
+
+.mr-10{
+    margin-right:10px;
+}
+
+h5 {
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+.avt-col {
+    width: 100px;
+}
+table .image {
+    height: 100px;
+    display: block;
+}
+
+table strong {
+    min-width: 80px;
+    display: inline-block;
+}
+
+.img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.flex-space-between {
+    justify-content: space-between;
+}
+
+.flex-middle {
+    align-items: center;
+}
+
+.flex{
+    display: flex;
+}
+
+.search-btn{
+    width:100%;
+    height: 100%
+}
+
+.filter .perpage {
+    display: inline block;
+}
+
+.panel-title {
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    color: black;
+}
+
+.select2-container .select2-selection--single{
+    height: 34px !important;
+}
+

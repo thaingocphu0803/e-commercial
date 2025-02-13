@@ -1,5 +1,5 @@
 *
 !private/
-!public/backend/css/
-!public/backend/js/
+!public/backend/css/custom.css
+!public/backend/js/main.css
 !.gitignore
