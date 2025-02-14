@@ -8,7 +8,7 @@ namespace App\Repositories\Interfaces;
  */
 interface UserRepositoryInterface
 {
-    public function getPaginate($request);
+    public function paginate($request);
 
     public function create($payload);
 

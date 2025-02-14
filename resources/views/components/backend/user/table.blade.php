@@ -1,3 +1,4 @@
+
 <x-slot:heading>
     <link href="../../../backend/css/plugins/switchery/switchery.css" rel="stylesheet">
 </x-slot:heading>
@@ -42,10 +43,21 @@
                         <div class="user-information"><strong>Phone</strong>: {{ $user->phone }}</div>
                     </td>
                     <td>
-                        <div class="user-address">{{ $user->address }}</div>
-                        {{-- <div class="user-address"><strong>Ward</strong>: Phu Thuan</div>
-                        <div class="user-address"><strong>District</strong>: 7</div>
-                        <div class="user-address"><strong>City</strong>: Ho Chi Minh</div> --}}
+                        @if(optional($user->province)->name)
+                        <div class="user-address"><strong>City</strong>{{ $user->province->name}}</div>
+                        @endif
+
+                        @if (optional($user->district)->name)
+                        <div class="user-address"><strong>District</strong>{{ $user->district->name}}</div>
+                        @endif
+
+                        @if (optional($user->ward)->name)
+                        <div class="user-address"><strong>Ward</strong>{{ $user->ward->name }}</div>
+                        @endif
+
+                        @if ($user->address)
+                        <div class="user-address"><strong>Address</strong>{{ $user->address }}</div>
+                        @endif
                     </td>
                     <td class="js-switch-{{$user->id}}">
                         <input

@@ -11,7 +11,7 @@
             <div class="action flex gap-10">
                 <div class="perpage gap-10">
                     <select name="perpage" class="form-control perpage filter ">
-                        @for ($i = 20; $i <= 200; $i += 20)
+                        @for ($i = 10; $i <= 10; $i += 10)
                             <option value={{ $i }} @selected($perpage == $i)> {{ $i }} records
                             </option>
                         @endfor

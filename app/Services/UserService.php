@@ -22,7 +22,7 @@ class UserService implements UserServiceInterface
     }
 
     public function paginate($request){
-        $users = $this->userRepository->getPaginate($request);
+        $users = $this->userRepository->paginate($request);
         return $users;
     }
 

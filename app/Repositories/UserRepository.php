@@ -6,11 +6,12 @@ use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 
 class UserRepository implements UserRepositoryInterface {
-    public function getPaginate($request)
+    public function paginate($request)
     {
-        $perpage = $request->input('perpage') ?? 20;
+        $perpage = $request->input('perpage') ?? 10;
         $keywork = $request->input('keyword');
-        return User::where('name', 'like', '%'.$keywork.'%')
+        return User::with('province', 'district', 'ward')
+                    ->where('name', 'like', '%'.$keywork.'%')
                     ->orWhere('email', 'like', '%'.$keywork.'%')
                     ->orderBy('id', 'desc')
                     ->paginate($perpage)
