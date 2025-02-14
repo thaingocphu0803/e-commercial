@@ -8,9 +8,19 @@ namespace App\Repositories\Interfaces;
  */
 interface UserRepositoryInterface
 {
-    public function getPaginate($number);
+    public function getPaginate($request);
 
     public function create($payload);
 
     public function update($id, $payload);
+
+    public function destroy($id);
+
+    public function forceDestroy($id);
+
+    public function updateStatus($payload);
+
+    public function updateStatusAll($payload);
+
+
 }

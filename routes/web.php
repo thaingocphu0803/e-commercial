@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Ajax\DashboardController as AjaxDashboardController;
 use App\Http\Controllers\Ajax\LocationController;
 use App\Http\Controllers\Backend\AuthenController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\UserController;
-use App\Http\Middleware\AuthenticateMiddleware;
 use Illuminate\Support\Facades\Route;
+
+use function Pest\Laravel\delete;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,15 +26,22 @@ Route::controller(UserController::class)->middleware('admin')->prefix('user')->g
     Route::post('store', 'store')->name('user.store');
     Route::get('edit/{user}', 'edit')->name('user.edit');
     Route::post('update/{id}', 'update')->name('user.update');
+    Route::get('delete/{user}', 'delete')->name('user.delete');
+    Route::delete('destroy/{id}', 'destroy')->name('user.destroy');
+
 });
 
-// AjaxController
+// LocationController
 Route::controller(LocationController::class)->prefix('ajax/location')->group(function(){
     Route::get('district', 'district')->name('location.district');
     Route::get('ward', 'ward')->name('location.ward');
 });
 
-
+//DashboardController
+Route::controller(AjaxDashboardController::class)->prefix('ajax/dashboard')->middleware('admin')->group(function(){
+    Route::post('changeStatus', 'changeStatus')->name('dashboard.changeStatus');
+    Route::post('changeStatusAll', 'changeStatusAll')->name('dashboard.changeStatus');
+});
 
 // DashboardController
 Route::get('/dashboard/index', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('admin');

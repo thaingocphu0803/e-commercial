@@ -4,7 +4,8 @@
     'labelName',
     'value' => null,
     'rowLength' => null,
-    'must' => false
+    'must' => false,
+    'disabled' => false
 ])
 <div class="col-lg-{{ $rowLength ?? 6 }}">
     <div class="form-row">
@@ -13,6 +14,6 @@
             <span class="text-danger">*</span>
             @endif
         </label>
-        <input type="{{$type}}" name="{{$inputName}}" id="{{$inputName}}" value="{{old($inputName, $value)}}" class="form-control">
+        <input type="{{$type}}" name="{{$inputName}}" id="{{$inputName}}" value="{{old($inputName, $value)}}" @disabled($disabled) class="form-control">
     </div>
 </div>

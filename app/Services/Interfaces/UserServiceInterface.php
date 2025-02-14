@@ -13,4 +13,13 @@ interface UserServiceInterface
     public function create($request);
 
     public function update($id, $request);
+
+    public function destroy($id);
+
+    public function forceDestroy($id);
+
+    public function updateStatus($payload);
+
+    public function updateStatusAll($payload);
+
 }

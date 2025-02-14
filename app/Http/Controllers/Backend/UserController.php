@@ -24,9 +24,11 @@ class UserController extends Controller
         $this->provinceRepository = $provinceRepository;
     }
 
-    public function index(){
+    public function index(Request $request){
 
-        $users = $this->userService->paginate(5);
+        // dd($request);
+
+        $users = $this->userService->paginate($request);
 
         return view('Backend.user.index', [
             'users' => $users
@@ -78,4 +80,19 @@ class UserController extends Controller
 
         return redirect()->route('user.index')->with('success', 'Failed to updated member!');
     }
+
+    public function delete(User $user){
+        return view('backend.user.delete', [
+            'user' => $user
+        ]);
+    }
+
+    public function destroy($id){
+        if($this->userService->destroy($id)){
+            return redirect()->route('user.index')->with('success', 'Deleted member successfully!');
+        }
+
+        return redirect()->route('user.index')->with('success', 'Failed to delete member!');
+    }
+
 }

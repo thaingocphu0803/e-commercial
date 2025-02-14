@@ -1,19 +1,8 @@
 <x-backend.dashboard.layout>
 
-    <x-slot:heading>
-        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    </x-slot:heading>
-
-    <x-slot:script>
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-        <script>
-            $('.select2').select2();
-        </script>
-    </x-slot:script>
-
     @php
-    $url = isset($user) ? route('user.update', $user->id) : route('user.store');
-    $title = isset($user) ? "Edit Member" : "Add Member";
+        $url = isset($user) ? route('user.update', $user->id) : route('user.store');
+        $title = isset($user) ? 'Edit Member' : 'Add Member';
     @endphp
 
     <x-backend.dashboard.breadcrumb :title="$title" />
@@ -119,11 +108,12 @@
                         </div>
 
                     </div>
-                </div>
-            </div>
+                    <div class="flex flex-space-between">
+                        <a href="{{route('user.index')}}" class="btn btn-success mb-20 ">Cancel</a>
+                        <button type="submit" class="btn btn-primary mb-20 ">Save</button>
+                    </div>
 
-            <div class="text-right">
-                <button type="submit" class="btn btn-primary mb-20">Save</button>
+                </div>
             </div>
         </div>
     </form>
