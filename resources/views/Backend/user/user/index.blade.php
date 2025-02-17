@@ -8,11 +8,11 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>List Member </h5>
-                    <x-backend.user.toolbox/>
+                    <x-backend.dashboard.toolbox model="User" object="Member"/>
                 </div>
                 <div class="ibox-content">
-                    <x-backend.user.filter/>
-                    <x-backend.user.table :users="$users"/>
+                    <x-backend.user.user.filter :groupMember="$groupMember"/>
+                    <x-backend.user.user.table :users="$users"/>
                 </div>
             </div>
         </div>

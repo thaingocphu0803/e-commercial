@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Repositories\ProvinceRepository;
+use App\Services\UserCatalougeService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 
@@ -14,39 +15,38 @@ class UserController extends Controller
 {
     protected $userService;
     protected $provinceRepository;
+    protected $userCatalougeService;
 
     public function __construct(
         UserService $userService,
         ProvinceRepository $provinceRepository,
+        UserCatalougeService $userCatalougeService
         )
     {
         $this->userService = $userService;
         $this->provinceRepository = $provinceRepository;
+        $this->userCatalougeService = $userCatalougeService;
     }
 
     public function index(Request $request){
 
-        // dd($request);
-
         $users = $this->userService->paginate($request);
+        $userCatalouges = $this->userCatalougeService->getAll();
 
-        return view('Backend.user.index', [
-            'users' => $users
+
+        return view('Backend.user.user.index', [
+            'users' => $users,
+            'groupMember' => $userCatalouges
         ]);
     }
 
     public function create(){
         $provinces = $this->provinceRepository->getAll();
+        $userCatalouges = $this->userCatalougeService->getAll();
 
-        $groupMember = [
-          (object)[ 'code' => 1, 'name' => 'Admin'],
-          (object)[ 'code' => 2, 'name' => 'Customer']
-
-        ];
-
-        return view('Backend.user.create', [
+        return view('Backend.user.user.create', [
             'provinces' => $provinces,
-            'groupMember' => $groupMember
+            'groupMember' => $userCatalouges
         ]);
     }
 
@@ -55,34 +55,31 @@ class UserController extends Controller
             return redirect()->route('user.index')->with('success', 'Added new member successfully!');
         }
 
-        return redirect()->route('user.index')->with('success', 'Failed to add new member!');
+        return redirect()->route('user.index')->with('error', 'Failed to add new member!');
     }
 
     public function edit(User $user){
         $provinces = $this->provinceRepository->getAll();
+        $userCatalouges = $this->userCatalougeService->getAll();
 
-        $groupMember = [
-            (object)[ 'code' => 1, 'name' => 'Admin'],
-            (object)[ 'code' => 2, 'name' => 'Customer']
-
-          ];
-        return view('backend.user.create', [
-            'groupMember' => $groupMember,
+        return view('backend.user.user.create', [
+            'groupMember' => $userCatalouges,
             'provinces' => $provinces,
             'user' => $user
         ]);
     }
 
     public function update($id, UpdateUserRequest $request){
+
         if($this->userService->update($id, $request)){
             return redirect()->route('user.index')->with('success', 'Updated member successfully!');
         }
 
-        return redirect()->route('user.index')->with('success', 'Failed to updated member!');
+        return redirect()->route('user.index')->with('error', 'Failed to updated member!');
     }
 
     public function delete(User $user){
-        return view('backend.user.delete', [
+        return view('backend.user.user.delete', [
             'user' => $user
         ]);
     }
@@ -92,7 +89,7 @@ class UserController extends Controller
             return redirect()->route('user.index')->with('success', 'Deleted member successfully!');
         }
 
-        return redirect()->route('user.index')->with('success', 'Failed to delete member!');
+        return redirect()->route('user.index')->with('error', 'Failed to delete member!');
     }
 
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\Ajax\DashboardController as AjaxDashboardController;
 use App\Http\Controllers\Ajax\LocationController;
 use App\Http\Controllers\Backend\AuthenController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\UserCatalougeController;
 use App\Http\Controllers\Backend\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,17 @@ Route::controller(UserController::class)->middleware('admin')->prefix('user')->g
     Route::get('delete/{user}', 'delete')->name('user.delete');
     Route::delete('destroy/{id}', 'destroy')->name('user.destroy');
 
+});
+
+//UserCatalougeController
+Route::controller(UserCatalougeController::class)->middleware('admin')->prefix('user/catalouge')->group(function () {
+    Route::get('index',  'index')->name('user.catalouge.index');
+    Route::get('create', 'create')->name('user.catalouge.create');
+    Route::post('store', 'store')->name('user.catalouge.store');
+    Route::get('edit/{userCatalouge}', 'edit')->name('user.catalouge.edit');
+    Route::post('update/{id}', 'update')->name('user.catalouge.update');
+    Route::get('delete/{userCatalouge}', 'delete')->name('user.catalouge.delete');
+    Route::delete('destroy/{id}', 'destroy')->name('user.catalouge.destroy');
 });
 
 // LocationController

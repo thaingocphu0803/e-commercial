@@ -64,7 +64,7 @@ $(document).on("change", "#district_id", async function () {
     }
 });
 
-// change user status
+// change status
 $(document).on("change", ".status", async function (e) {
     e.preventDefault();
     let _this = $(this);
@@ -104,9 +104,6 @@ $(document).on("click", ".checkAll", function () {
             _this.closest("tr").removeClass("active-bg");
         }
     });
-
-
-
 });
 
 //change background checkItem
@@ -178,7 +175,7 @@ $(document).on('click', '.changeStatusAll', async function (e) {
             }
         }
 
-        if(requestData.value == 0){
+        if(requestData.value == 2){
             for( let i =0; i < ids.length; i++){
                 $(`.js-switch-${ids[i]}`)
                 .find('span.switchery').attr('style', cssDeActive1)

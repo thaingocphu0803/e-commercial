@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-lg-5">
                     <h3 class="panel-title">Common Information</h3>
-                    <div class="pannel-description">Enter user information to create new member</div>
+                    <div class="pannel-description">Enter user information to {{ isset($user) ? 'edit' : 'create new'}} member</div>
 
                 </div>
                 <div class="col-lg-7">
@@ -47,8 +47,8 @@
                                 <x-backend.user.form.input inputName="birthday" type="date" labelName='birthday'
                                     :value="$user->birthday ?? ''" />
 
-                                <x-backend.user.form.select labelName="group member" name="user_catalouge_id"
-                                    :data="$groupMember" :must="true" :value="$user->user_catalouge_id ?? ''" />
+                                <x-backend.user.form.select labelName="member group" name="user_catalouge_id"
+                                    :data="$groupMember" :must="true" :value="$user->userCatalouge->id ?? ''" />
                             </div>
                             @if (!isset($user))
                                 <div class="row mt-20">

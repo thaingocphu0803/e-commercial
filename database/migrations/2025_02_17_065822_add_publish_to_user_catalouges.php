@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('user_catalouges', function (Blueprint $table) {
             $table->tinyInteger('publish')->default(2);
         });
     }
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('user_catalouges', function (Blueprint $table) {
             $table->dropColumn('publish');
         });
     }

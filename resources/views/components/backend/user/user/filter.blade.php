@@ -11,7 +11,7 @@
             <div class="action flex gap-10">
                 <div class="perpage gap-10">
                     <select name="perpage" class="form-control perpage filter ">
-                        @for ($i = 10; $i <= 10; $i += 10)
+                        @for ($i = 10; $i <= 100; $i += 10)
                             <option value={{ $i }} @selected($perpage == $i)> {{ $i }} records
                             </option>
                         @endfor
@@ -19,18 +19,19 @@
                 </div>
 
                 <div class="flex gap-10">
-                    <select name="user_catalouge_id" class="form-control  select2">
-                        <option disabled selected> Choose User Status</option>
-                        <option value="1">Published</option>
-                        <option value="0">Private</option>
-
+                    <select name="publish" class="form-control  select2">
+                        <option value="0" selected> Choose User Status</option>
+                        <option value="1" @selected(request('publish') == 1)>Published</option>
+                        <option value="2" @selected(request('publish') == 2)>Private</option>
                     </select>
                 </div>
 
                 <div class="flex gap-10">
                     <select name="user_catalouge_id" class="form-control  select2">
-                        <option disabled selected> Choose Group Member</option>
-                        <option value="1">VIP Member</option>
+                        <option value="0" selected> Choose Member Group</option>
+                        @foreach ($groupMember as $group )
+                            <option value="{{$group->id}}" @selected(request('user_catalouge_id') == $group->id)>{{$group->name}}</option>
+                        @endforeach
                     </select>
                 </div>
 

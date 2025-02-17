@@ -1,3 +1,8 @@
+@props([
+    'model',
+    'object'
+])
+
 <div class="ibox-tools">
     <a class="collapse-link">
         <i class="fa fa-chevron-up"></i>
@@ -12,20 +17,20 @@
                 class="changeStatusAll"
                 data-value="1"
                 data-field="publish"
-                data-model="User"
+                data-model="{{$model}}"
             >
-                Publish choosen member
+                Publish choosen {{$object}}
             </a>
         </li>
         <li>
             <a
                 href="#"
                 class="changeStatusAll"
-                data-value="0"
+                data-value="2"
                 data-field="publish"
-                data-model="User"
+                data-model="{{$model}}"
             >
-                Private choosen member
+                Private choosen {{$object}}
             </a>
         </li>
     </ul>

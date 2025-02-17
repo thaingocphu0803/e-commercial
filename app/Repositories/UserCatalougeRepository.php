@@ -2,54 +2,51 @@
 
 namespace App\Repositories;
 
-use App\Models\User;
-use App\Repositories\Interfaces\UserRepositoryInterface;
+use App\Models\UserCatalouge;
+use App\Repositories\Interfaces\UserCatalougeRepositoryInterface;
 
-class UserRepository implements UserRepositoryInterface {
+class UserCatalougeRepository implements UserCatalougeRepositoryInterface {
+    public function getAll()
+    {
+        return UserCatalouge::select('name', 'id')
+                            ->where('publish', 1)
+                            ->get();
+    }
+
     public function paginate($request)
     {
         $perpage = $request->input('perpage') ?? 10;
         $keywork = $request->input('keyword');
         $publish = $request->input('publish');
-        $userCatalougeId = $request->input('user_catalouge_id');
 
-        $query =  User::with('province', 'district', 'ward', 'userCatalouge')
-                    ->where(function ($q) use ($keywork){
-                        $q->where('name', 'like', '%'.$keywork.'%')
-                            ->orWhere('email', 'like', '%'.$keywork.'%');
-                    });
+        $query =  UserCatalouge::withCount('users')->where('name', 'like', '%'.$keywork.'%');
+
 
         if(!empty($publish)){
             $query->where('publish', $publish);
         }
 
-        if((!empty($userCatalougeId))){
-            $query->where('user_catalouge_id', $userCatalougeId);
-        }
-
-
         return $query ->orderBy('id', 'desc')->paginate($perpage)->withQueryString();
     }
 
     public function create($payload){
-
-        return User::create($payload);
+        return UserCatalouge::create($payload);
     }
 
     public function update($id, $payload)
     {
-        return User::find($id)->update($payload);
+        return UserCatalouge::find($id)->update($payload);
     }
 
     public function destroy($id)
     {
-        return User::destroy($id);
+        return UserCatalouge::destroy($id);
     }
 
 
     public function forceDestroy($id)
     {
-        return User::forceDestroy($id);
+        return UserCatalouge::forceDestroy($id);
     }
 
     public function updateStatus($payload)
@@ -58,7 +55,7 @@ class UserRepository implements UserRepositoryInterface {
         $value = $payload['value'] == 1 ? 2 : 1;
         $columm = [ $payload['field'] => $value];
 
-        return User::find($modelId)->update($columm);
+        return UserCatalouge::find($modelId)->update($columm);
     }
 
 
@@ -68,6 +65,6 @@ class UserRepository implements UserRepositoryInterface {
         $value = $payload['value'];
         $columm = [ $payload['field'] => $value];
 
-        return User::whereIn('id', $ids)->update($columm);
+        return UserCatalouge::whereIn('id', $ids)->update($columm);
     }
 }

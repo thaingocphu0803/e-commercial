@@ -70,4 +70,8 @@ class User extends Authenticatable
     public function ward (){
         return $this->belongsTo(Ward::class, 'ward_id', 'code');
     }
+
+    public function userCatalouge(){
+        return $this->belongsTo(UserCatalouge::class, 'user_catalouge_id', 'id');
+    }
 }
