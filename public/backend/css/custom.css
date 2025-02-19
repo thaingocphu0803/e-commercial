@@ -92,3 +92,27 @@ table strong {
     gap: 10px;
 }
 
+
+.ellipsis{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.inline-block{
+    display: inline-block;
+}
+
+.bg-silver{
+    background-color: rgb(233, 227, 227);
+}
+
+.table-img{
+    width: 120px;
+    height: 90px;
+    border: 1px solid rgb(212, 208, 208);
+}
+
+.w-full{
+    width: 100%;
+}

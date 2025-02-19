@@ -2,6 +2,13 @@ let ward_select = $("#ward_id");
 let district_select = $("#district_id");
 const _token = $('meta[name="csrf-token"]').attr("content");
 
+const cloudName = "my-could-api";
+const uploadPreset = "laravel_app";
+const folder = "ImageFolder";
+const maxFiles = 1;
+const width = 300;
+const height = 300;
+
 // get district api
 $(document).on("change", "#province_id", async function () {
     let _this = $(this);
@@ -109,7 +116,7 @@ $(document).on("click", ".checkAll", function () {
 //change background checkItem
 $(document).on("click", ".checkItem", function () {
     let _this = $(this);
-    let allCheck = $('.checkItem:checked').length === $('.checkItem').length;
+    let allCheck = $(".checkItem:checked").length === $(".checkItem").length;
 
     if (_this.prop("checked")) {
         _this.closest("tr").addClass("active-bg");
@@ -117,20 +124,20 @@ $(document).on("click", ".checkItem", function () {
         _this.closest("tr").removeClass("active-bg");
     }
 
-    $('.checkAll').prop('checked', allCheck);
+    $(".checkAll").prop("checked", allCheck);
 });
 
 //change user status all
-$(document).on('click', '.changeStatusAll', async function (e) {
+$(document).on("click", ".changeStatusAll", async function (e) {
     e.preventDefault();
 
     let _this = $(this);
-    let ids = []
+    let ids = [];
 
-    $('.checkItem:checked').each(function(){
+    $(".checkItem:checked").each(function () {
         let checkItem = $(this);
         ids.push(checkItem.val());
-    })
+    });
     console.log(ids);
 
     let requestData = {
@@ -139,7 +146,7 @@ $(document).on('click', '.changeStatusAll', async function (e) {
         model: _this.attr("data-model"),
         field: _this.attr("data-field"),
         _token: _token,
-    }
+    };
 
     const response = await $.ajax({
         type: "POST",
@@ -148,45 +155,45 @@ $(document).on('click', '.changeStatusAll', async function (e) {
         dataType: "json",
     });
 
-
-    if(response.flag){
+    if (response.flag) {
         const cssActive1 = `
                             background-color: rgb(26, 179, 148); border-color: rgb(26, 179, 148);
                             box-shadow: rgb(26, 179, 148) 0px 0px 0px 16px inset; transition: border 0.4s,
                             box-shadow 0.4s, background-color 1.2s;
-                        `
-        const cssActive2 =  `
+                        `;
+        const cssActive2 = `
                             left: 20px; background-color: rgb(255, 255, 255);
                             transition: background-color 0.4s, left 0.2s;
-                        `
+                        `;
 
         const cssDeActive1 = `
                             box-shadow: rgb(223, 223, 223) 0px 0px 0px 0px inset; border-color: rgb(223, 223, 223);
                             background-color: rgb(255, 255, 255); transition: border 0.4s, box-shadow 0.4s;
-                        `
+                        `;
         const cssDeActive2 = `
                             left: 0px; transition: background-color 0.4s, left 0.2s;
-                        `
-        if(requestData.value == 1){
-            for( let i =0; i < ids.length; i++){
+                        `;
+        if (requestData.value == 1) {
+            for (let i = 0; i < ids.length; i++) {
                 $(`.js-switch-${ids[i]}`)
-                .find('span.switchery').attr('style', cssActive1)
-                .find('small').attr('style', cssActive2);
+                    .find("span.switchery")
+                    .attr("style", cssActive1)
+                    .find("small")
+                    .attr("style", cssActive2);
             }
         }
 
-        if(requestData.value == 2){
-            for( let i =0; i < ids.length; i++){
+        if (requestData.value == 2) {
+            for (let i = 0; i < ids.length; i++) {
                 $(`.js-switch-${ids[i]}`)
-                .find('span.switchery').attr('style', cssDeActive1)
-                .find('small').attr('style', cssDeActive2);
+                    .find("span.switchery")
+                    .attr("style", cssDeActive1)
+                    .find("small")
+                    .attr("style", cssDeActive2);
             }
         }
-
     }
-
-
-})
+});
 
 //re get location api
 $(() => {
@@ -199,4 +206,34 @@ $(() => {
     }
 });
 
+// select2 widget
 $(".select2").select2();
+
+// cloudinary upload widget
+let ImageWidget = cloudinary.createUploadWidget(
+    {
+        cloudName,
+        uploadPreset,
+        folder,
+        cropping: true,
+        maxFiles,
+        transformation: [{ width, height, crop: "thumb" }],
+        sources: ["local", "url", "image_search"],
+        googleApiKey: "AIzaSyBMnZuJmBV2_6QHMYDOleTyxe67M6RplNg",
+        searchBySites: ["all", "cloudinary.com"],
+        searchByRights: true,
+    },
+    (error, result) => {
+        if (!error && result && result.event === "success") {
+            $("#img_url").text(`${result.info.url}`);
+            $("#img_url").attr("href", `${result.info.url}`);
+            $("#image").val(btoa(result.info.url));
+
+            console.log(result.info);
+        }
+    }
+);
+
+$(document).on("click", "#upload_widget", function () {
+    ImageWidget.open();
+});

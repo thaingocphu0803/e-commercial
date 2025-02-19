@@ -19,10 +19,10 @@
                     <div class="ibox">
                         <div class="ibox-content">
                             <div class="row">
-                                <x-backend.user.form.input inputName="email" type="text" labelName='email'
+                                <x-backend.dashboard.form.input inputName="email" type="text" labelName='email'
                                     :value="$user->email ?? ''" :disabled="true" />
 
-                                <x-backend.user.form.input inputName="name" type="text" labelName='fullname'
+                                <x-backend.dashboard.form.input inputName="name" type="text" labelName='fullname'
                                     :value="$user->name ?? ''" :disabled="true" />
 
                             </div>

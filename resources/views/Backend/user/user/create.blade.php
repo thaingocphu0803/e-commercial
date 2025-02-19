@@ -36,33 +36,32 @@
                         </div>
                         <div class="ibox-content">
                             <div class="row">
-                                <x-backend.user.form.input inputName="email" type="text" labelName='email'
+                                <x-backend.dashboard.form.input inputName="email" type="text" labelName='email'
                                     :must="true" :value="$user->email ?? ''" />
 
-                                <x-backend.user.form.input inputName="name" type="text" labelName='fullname'
+                                <x-backend.dashboard.form.input inputName="name" type="text" labelName='fullname'
                                     :must="true" :value="$user->name ?? ''" />
                             </div>
 
                             <div class="row mt-20">
-                                <x-backend.user.form.input inputName="birthday" type="date" labelName='birthday'
+                                <x-backend.dashboard.form.input inputName="birthday" type="date" labelName='birthday'
                                     :value="$user->birthday ?? ''" />
 
-                                <x-backend.user.form.select labelName="member group" name="user_catalouge_id"
+                                <x-backend.dashboard.form.select labelName="member group" name="user_catalouge_id"
                                     :data="$groupMember" :must="true" :value="$user->userCatalouge->id ?? ''" />
                             </div>
                             @if (!isset($user))
                                 <div class="row mt-20">
-                                    <x-backend.user.form.input inputName="password" type="password" labelName='password'
+                                    <x-backend.dashboard.form.input inputName="password" type="password" labelName='password'
                                         :must="true" />
 
-                                    <x-backend.user.form.input inputName="password_confirmation" type="password"
+                                    <x-backend.dashboard.form.input inputName="password_confirmation" type="password"
                                         labelName='password confirmed' :must="true" :data />
                                 </div>
                             @endif
 
                             <div class="row mt-20">
-                                <x-backend.user.form.input inputName="image" type="text" rowLength='12'
-                                    labelName='Avatar' :value="$user->image ?? ''" />
+                                <x-backend.dashboard.form.upload rowLength='12' labelName='Avatar' :value="$user->image?? ''"/>
                             </div>
 
                         </div>
@@ -84,25 +83,25 @@
                         </div>
                         <div class="ibox-content">
                             <div class="row">
-                                <x-backend.user.form.select labelName="city" name="province_id" :data="$provinces" />
+                                <x-backend.dashboard.form.select labelName="city" name="province_id" :data="$provinces" />
 
 
-                                <x-backend.user.form.select labelName="district" name="district_id" />
+                                <x-backend.dashboard.form.select labelName="district" name="district_id" />
 
                             </div>
 
                             <div class="row mt-20">
-                                <x-backend.user.form.select labelName="ward" name="ward_id" />
+                                <x-backend.dashboard.form.select labelName="ward" name="ward_id" />
 
-                                <x-backend.user.form.input labelName="address" inputName="address" type="text"
+                                <x-backend.dashboard.form.input labelName="address" inputName="address" type="text"
                                     :value="$user->address ?? ''" />
                             </div>
 
                             <div class="row mt-20">
-                                <x-backend.user.form.input inputName="phone" type="text" labelName='phone'
+                                <x-backend.dashboard.form.input inputName="phone" type="text" labelName='phone'
                                     :value="$user->phone ?? ''" />
 
-                                <x-backend.user.form.input inputName="description" type="text"
+                                <x-backend.dashboard.form.input inputName="description" type="text"
                                     labelName='description' :value="$user->description ?? ''" />
                             </div>
                         </div>

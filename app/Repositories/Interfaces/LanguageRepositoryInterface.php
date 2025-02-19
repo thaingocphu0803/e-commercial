@@ -3,11 +3,13 @@
 namespace App\Repositories\Interfaces;
 
 /**
- * Interface UserRepositoryInterface
+ * Interface UserCatalougeRepositoryInterface
  * @package App\Repositories\Interfaces
  */
-interface UserRepositoryInterface
+interface LanguageRepositoryInterface
 {
+    public function getAll();
+
     public function paginate($request);
 
     public function create($payload);
@@ -21,5 +23,7 @@ interface UserRepositoryInterface
     public function updateStatus($payload);
 
     public function updateStatusAll($payload);
+
+    // public function updateByWhereIn($ids, $value);
 
 }

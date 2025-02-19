@@ -4,6 +4,7 @@ use App\Http\Controllers\Ajax\DashboardController as AjaxDashboardController;
 use App\Http\Controllers\Ajax\LocationController;
 use App\Http\Controllers\Backend\AuthenController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\LanguageController;
 use App\Http\Controllers\Backend\UserCatalougeController;
 use App\Http\Controllers\Backend\UserController;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,20 @@ Route::controller(UserCatalougeController::class)->middleware('admin')->prefix('
 Route::controller(LocationController::class)->prefix('ajax/location')->group(function(){
     Route::get('district', 'district')->name('location.district');
     Route::get('ward', 'ward')->name('location.ward');
+});
+
+//LanguageController
+// UserController
+
+Route::controller(LanguageController::class)->middleware('admin')->prefix('language')->group(function () {
+    Route::get('index',  'index')->name('language.index');
+    Route::get('create', 'create')->name('language.create');
+    Route::post('store', 'store')->name('language.store');
+    Route::get('edit/{language}', 'edit')->name('language.edit');
+    Route::post('update/{id}', 'update')->name('language.update');
+    Route::get('delete/{language}', 'delete')->name('language.delete');
+    Route::delete('destroy/{id}', 'destroy')->name('language.destroy');
+
 });
 
 //DashboardController

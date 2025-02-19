@@ -16,6 +16,9 @@ class AppServiceProvider extends ServiceProvider
         'App\Repositories\Interfaces\WardRepositoryInterface' => 'App\Repositories\WardRepository',
 
         'App\Repositories\Interfaces\UserCatalougeRepositoryInterface' => 'App\Repositories\UserCatalougeRepository',
+
+        'App\Repositories\Interfaces\LanguageRepositoryInterface' => 'App\Repositories\LanguageRepository',
+
     ];
 
     /**

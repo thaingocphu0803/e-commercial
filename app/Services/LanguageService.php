@@ -2,32 +2,34 @@
 
 namespace App\Services;
 
-use App\Repositories\UserCatalougeRepository;
+use App\Repositories\LanguageRepository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+
 /**
- * Class UserCatalougeService
+ * Class LanguageService
  * @package App\Services
  */
-class UserCatalougeService
+class LanguageService
 {
-    protected $userCatalougeRepository;
+    protected $languageRepository;
 
-    public function __construct(UserCatalougeRepository $userCatalougeRepository)
+    public function __construct(LanguageRepository $languageRepository)
     {
-        $this->userCatalougeRepository = $userCatalougeRepository;
+        $this->languageRepository = $languageRepository;
     }
 
     public function getAll()
     {
-        $userCatalouge = $this->userCatalougeRepository->getAll();
+        $userCatalouge = $this->languageRepository->getAll();
         return $userCatalouge;
     }
 
     public function paginate($request)
     {
-        $users = $this->userCatalougeRepository->paginate($request);
-        return $users;
+        $languages = $this->languageRepository->paginate($request);
+        return $languages;
     }
 
     public function create($request)
@@ -35,8 +37,9 @@ class UserCatalougeService
         DB::beginTransaction();
         try {
             $payload = $request->except(['_token']);
+            $payload['user_id'] = Auth::id();
 
-            $this->userCatalougeRepository->create($payload);
+            $this->languageRepository->create($payload);
 
             DB::commit();
 
@@ -55,7 +58,7 @@ class UserCatalougeService
         try {
             $payload = $request->except(['_token']);
 
-            $this->userCatalougeRepository->update($id, $payload);
+            $this->languageRepository->update($id, $payload);
 
             DB::commit();
 
@@ -73,7 +76,7 @@ class UserCatalougeService
     {
         DB::beginTransaction();
         try {
-            $this->userCatalougeRepository->destroy($id);
+            $this->languageRepository->destroy($id);
 
             DB::commit();
 
@@ -91,7 +94,7 @@ class UserCatalougeService
     {
         DB::beginTransaction();
         try {
-            $this->userCatalougeRepository->forceDestroy($id);
+            $this->languageRepository->forceDestroy($id);
 
             DB::commit();
 
@@ -110,9 +113,9 @@ class UserCatalougeService
 
         DB::beginTransaction();
         try {
-            $this->userCatalougeRepository->updateStatus($payload);
+            $this->languageRepository->updateStatus($payload);
 
-            $this->userCatalougeRepository->updateByWhereIn($payload['modelId'], $payload['value']);
+            // $this->languageRepository->updateByWhereIn($payload['modelId'], $payload['value']);
 
 
             DB::commit();
@@ -131,8 +134,8 @@ class UserCatalougeService
 
         DB::beginTransaction();
         try {
-            $this->userCatalougeRepository->updateStatusAll($payload);
-            $this->userCatalougeRepository->updateByWhereIn($payload['ids'], $payload['value']);
+            $this->languageRepository->updateStatusAll($payload);
+            // $this->languageRepository->updateByWhereIn($payload['ids'], $payload['value']);
             DB::commit();
 
             return true;

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUserRequest extends FormRequest
+class UpdateLanguageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,8 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-                "email" => 'required|email|unique:users,email,'.$this->id,
-                "name" => 'required|string',
-                "phone" => 'nullable|digits_between:10,13',
-                "user_catalouge_id" => 'required|integer'
-            ];
+            'name' => 'required|unique:languages,name,'. $this->id ,
+            'canonical' => 'required|unique:languages,canonical,'. $this->id
+        ];
     }
 }

@@ -24,5 +24,6 @@ interface UserCatalougeRepositoryInterface
 
     public function updateStatusAll($payload);
 
+    public function updateByWhereIn($ids, $value);
 
 }
