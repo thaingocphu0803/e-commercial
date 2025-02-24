@@ -5,22 +5,24 @@ namespace App\Http\Controllers\Ajax;
 use App\Http\Controllers\Controller;
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Laravel\Pail\ValueObjects\Origin\Console;
 
 class DashboardController extends Controller
 {
     protected $userService;
-    public function __construct( UserService $userService)
+    public function __construct(UserService $userService)
     {
         $this->userService =  $userService;
     }
 
-    public function changeStatus(Request $request){
+    public function changeStatus(Request $request)
+    {
 
 
 
         $payload = $request->except('_token');
 
-        $serviceNameSpace = '\App\Services\\'.ucfirst($payload['model']).'Service';
+        $serviceNameSpace = '\App\Services\\' . ucfirst($payload['model']) . 'Service';
 
         $serviceInstance = app($serviceNameSpace);
 
@@ -31,10 +33,11 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function changeStatusAll(Request $request){
+    public function changeStatusAll(Request $request)
+    {
         $payload = $request->except('_token');
 
-        $serviceNameSpace = '\App\Services\\'.ucfirst($payload['model']).'Service';
+        $serviceNameSpace = '\App\Services\\' . ucfirst($payload['model']) . 'Service';
 
         $serviceInstance = app($serviceNameSpace);
 
@@ -43,6 +46,17 @@ class DashboardController extends Controller
         return response()->json([
             'flag' => $flag
         ]);
-
     }
+
+    public function uploadImage(Request $request)
+    {
+        $uploadedFile = $request->file('file');
+        $response = cloudinary()->upload( $uploadedFile->getRealPath());
+
+
+        return response()->json([
+            'location' => $response->getSecurePath()
+        ]);
+    }
+
 }

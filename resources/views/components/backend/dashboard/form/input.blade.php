@@ -5,7 +5,8 @@
     'value' => null,
     'rowLength' => null,
     'must' => false,
-    'disabled' => false
+    'disabled' => false,
+    'tag' => null
 ])
 <div class="col-lg-{{ $rowLength ?? 6 }}">
     <div class="form-row">
@@ -13,7 +14,26 @@
             @if ($must)
             <span class="text-danger">*</span>
             @endif
+
         </label>
-        <input type="{{$type}}" name="{{$inputName}}" id="{{$inputName}}" value="{{old($inputName, $value)}}" @disabled($disabled) class="form-control">
+        @if ($tag === 'textarea')
+        <textarea
+            type="{{$type}}"
+            name="{{$inputName}}"
+            id="{{$inputName}}"
+            @disabled($disabled)
+            class="form-control tiny-editor"
+        >
+            {{old($inputName, $value)}}
+        </textarea>
+        @else
+        <input
+            type="{{$type}}"
+            name="{{$inputName}}"
+            id="{{$inputName}}"
+            value="{{old($inputName, $value)}}"
+            @disabled($disabled) class="form-control"
+        >
+        @endif
     </div>
 </div>

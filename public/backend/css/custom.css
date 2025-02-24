@@ -116,3 +116,11 @@ table strong {
 .w-full{
     width: 100%;
 }
+
+.flex-col{
+    flex-direction: column;
+}
+
+#meta_description{
+    height: 200px;
+}

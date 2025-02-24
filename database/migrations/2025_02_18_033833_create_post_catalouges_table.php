@@ -14,10 +14,6 @@ return new class extends Migration
     {
         Schema::create('post_catalouges', function (Blueprint $table) {
             $table->id();
-            $table->integer('parentid')->default(0);
-            $table->integer('lft')->default(0);
-            $table->integer('rgt')->default(0);
-            $table->integer('level')->default(0);
             $table->string('image')->nullable();
             $table->string('icon')->nullable();
             $table->string('album')->nullable();

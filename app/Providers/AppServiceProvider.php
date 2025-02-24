@@ -19,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
 
         'App\Repositories\Interfaces\LanguageRepositoryInterface' => 'App\Repositories\LanguageRepository',
 
+        'App\Repositories\Interfaces\PostCatalougeRepositoryInterface' => 'App\Repositories\PostCatalougeRepository',
+
+
     ];
 
     /**

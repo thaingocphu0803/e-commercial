@@ -204,13 +204,23 @@ $(() => {
     if (typeof districtId !== "undefined" && districtId != "") {
         $("#district_id").val(districtId).trigger("change");
     }
+
+    let img_url = $('#img_url').text().trim();
+
+    if (img_url) {
+        let _this = $('#img_show');
+        _this.attr('src', img_url);
+        _this.removeClass('hidden');
+
+    }
 });
+
 
 // select2 widget
 $(".select2").select2();
 
 // cloudinary upload widget
-let ImageWidget = cloudinary.createUploadWidget(
+const ImageWidget = cloudinary.createUploadWidget(
     {
         cloudName,
         uploadPreset,
@@ -227,6 +237,8 @@ let ImageWidget = cloudinary.createUploadWidget(
         if (!error && result && result.event === "success") {
             $("#img_url").text(`${result.info.url}`);
             $("#img_url").attr("href", `${result.info.url}`);
+            $("#img_show")?.attr("src", `${result.info.url}`);
+            $("#img_show")?.removeClass("hidden");
             $("#image").val(btoa(result.info.url));
 
             console.log(result.info);
@@ -237,3 +249,38 @@ let ImageWidget = cloudinary.createUploadWidget(
 $(document).on("click", "#upload_widget", function () {
     ImageWidget.open();
 });
+
+//TinyMCE
+
+$(".tiny-editor").each(function () {
+    let editorId = $(this).attr("id");
+
+    tinymce.init({
+        selector: `#${editorId}`,
+        height: height,
+        menubar: false,
+        plugins: [
+            // Core editing features
+            'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+            // Premium features
+            'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
+          ],
+          toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+          tinycomments_mode: 'embedded',
+          tinycomments_author: 'Author name',
+          mergetags_list: [
+            { value: 'First.Name', title: 'First Name' },
+            { value: 'Email', title: 'Email' },
+          ],
+
+          image_title: true,
+          automatic_uploads: true,
+          file_picker_types: 'image',
+          images_upload_url: `/ajax/dashboard/upload/image?_token=${_token}`,
+          images_reuse_filename: true,
+
+          content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
+          ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),    });
+
+});
+

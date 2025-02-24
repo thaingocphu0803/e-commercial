@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
+use Kalnoy\Nestedset\NodeTrait;
 
 class Language extends Model
 {
-    use HasFactory, Notifiable, SoftDeletes;
+    use HasFactory, Notifiable, SoftDeletes, NodeTrait;
+
+    protected $table = 'languages';
 
     protected $fillable =[
         'name',
@@ -19,4 +22,11 @@ class Language extends Model
         'description',
         'publish'
     ];
+
+
+    public function postCatalouges(){
+        return $this->belongsToMany(PostCatalouge::class, 'post_catalouge_language', 'language_id', 'post_catalouge_id')
+                    ->withPivot(['name', 'canonical', 'description', 'content', 'meta_title', 'meta_keyword', 'meta_description'])
+                    ->withTimestamps();
+    }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Ajax\LocationController;
 use App\Http\Controllers\Backend\AuthenController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\LanguageController;
+use App\Http\Controllers\Backend\PostCatalougeController;
 use App\Http\Controllers\Backend\UserCatalougeController;
 use App\Http\Controllers\Backend\UserController;
 use Illuminate\Support\Facades\Route;
@@ -51,8 +52,6 @@ Route::controller(LocationController::class)->prefix('ajax/location')->group(fun
 });
 
 //LanguageController
-// UserController
-
 Route::controller(LanguageController::class)->middleware('admin')->prefix('language')->group(function () {
     Route::get('index',  'index')->name('language.index');
     Route::get('create', 'create')->name('language.create');
@@ -64,10 +63,23 @@ Route::controller(LanguageController::class)->middleware('admin')->prefix('langu
 
 });
 
+//PostCatalougeController
+Route::controller(PostCatalougeController::class)->middleware('admin')->prefix('post/catalouge')->group(function () {
+    Route::get('index',  'index')->name('post.catalouge.index');
+    Route::get('create', 'create')->name('post.catalouge.create');
+    Route::post('store', 'store')->name('post.catalouge.store');
+    Route::get('edit/{postCatalouge}', 'edit')->name('post.catalouge.edit');
+    Route::post('update/{id}', 'update')->name('post.catalouge.update');
+    Route::get('delete/{postCatalouge}', 'delete')->name('post.catalouge.delete');
+    Route::delete('destroy/{id}', 'destroy')->name('post.catalouge.destroy');
+});
+
 //DashboardController
 Route::controller(AjaxDashboardController::class)->prefix('ajax/dashboard')->middleware('admin')->group(function(){
     Route::post('changeStatus', 'changeStatus')->name('dashboard.changeStatus');
     Route::post('changeStatusAll', 'changeStatusAll')->name('dashboard.changeStatus');
+    Route::post('upload/image', 'uploadImage')->name('dashboard.upload.image');
+
 });
 
 // DashboardController

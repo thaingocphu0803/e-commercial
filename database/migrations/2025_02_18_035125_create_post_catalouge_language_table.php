@@ -17,11 +17,11 @@ return new class extends Migration
             $table->foreignIdFor(PostCatalouge::class, 'post_catalouge_id')->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Language::class, 'language_id')->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->text('description');
-            $table->longText('content');
-            $table->string('meta_title');
-            $table->string('meta_keyword');
-            $table->text('meta_description');
+            $table->text('description')->nullable();
+            $table->longText('content')->nullable();
+            $table->string('meta_title')->nullable();
+            $table->string('meta_keyword')->nullable();
+            $table->text('meta_description')->nullable();
             $table->timestamps();
         });
     }
