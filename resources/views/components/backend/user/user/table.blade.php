@@ -36,7 +36,7 @@
                     </td>
                     <td>
                         @if (!empty($user->image))
-                            <img src="{{ base64_decode($user->image) }}" alt="country's flag" class="table-img">
+                            <img src="{{ base64_decode($user->image) }}" alt="user's image" class="table-img">
                         @endif
                     </td>
                     <td>

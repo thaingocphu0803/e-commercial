@@ -68,9 +68,9 @@ Route::controller(PostCatalougeController::class)->middleware('admin')->prefix('
     Route::get('index',  'index')->name('post.catalouge.index');
     Route::get('create', 'create')->name('post.catalouge.create');
     Route::post('store', 'store')->name('post.catalouge.store');
-    Route::get('edit/{postCatalouge}', 'edit')->name('post.catalouge.edit');
+    Route::get('edit/{id}', 'edit')->name('post.catalouge.edit');
     Route::post('update/{id}', 'update')->name('post.catalouge.update');
-    Route::get('delete/{postCatalouge}', 'delete')->name('post.catalouge.delete');
+    Route::get('delete/{id}', 'delete')->name('post.catalouge.delete');
     Route::delete('destroy/{id}', 'destroy')->name('post.catalouge.destroy');
 });
 

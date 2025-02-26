@@ -4,14 +4,15 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
 use App\Repositories\PostCatalougeRepository;
+use App\Services\Interfaces\PostCatalougeServiceInterface;
 use Illuminate\Support\Facades\Auth;
-
+use  Illuminate\Support\Str;
 
 /**
  * Class postCatalougeService
  * @package App\Services
  */
-class PostCatalougeService
+class PostCatalougeService implements PostCatalougeServiceInterface
 {
     protected   $postCatalougeRepository;
 
@@ -32,23 +33,31 @@ class PostCatalougeService
         return $languages;
     }
 
-    public function getToTree(){
+    public function getToTree()
+    {
         $postCatalouges = $this->postCatalougeRepository->getToTree();
-        $listNode= [];
+        $listNode = [];
         $traverse = function ($categories, $prefix = '-') use (&$traverse, &$listNode) {
             foreach ($categories as $category) {
                 $listNode[] = (object) [
-                    'id' => $category->name,
-                    'name' => $prefix.' '.$category->name,
+                    'id' => $category->id,
+                    'name' => $prefix . ' ' . $category->name,
                 ];
 
-                $traverse($category->children, $prefix.'-');
+                $traverse($category->children, $prefix . '-');
             }
         };
 
         $traverse($postCatalouges);
 
-         return $listNode;
+        return $listNode;
+    }
+
+    public function findById($id)
+    {
+        $postCatalouge = $this->postCatalougeRepository->findById($id);
+
+        return $postCatalouge;
     }
 
     public function create($request)
@@ -59,7 +68,8 @@ class PostCatalougeService
                 'parent_id',
                 'follow',
                 'publish',
-                'image'
+                'image',
+                'album'
             ]);
 
             $payloadPostCatalouge['user_id'] = Auth::id();
@@ -67,7 +77,7 @@ class PostCatalougeService
 
             $postCatalouge = $this->postCatalougeRepository->create($payloadPostCatalouge);
 
-            if($postCatalouge->id > 0){
+            if ($postCatalouge->id > 0) {
 
                 $payloadLanguage = $request->only([
                     'name',
@@ -82,8 +92,10 @@ class PostCatalougeService
 
                 $payloadLanguage['post_catalouge_id'] = $postCatalouge->id;
                 $payloadLanguage['language_id'] = $request->input('language_id') ?? 1;
+                $payloadPivot['canonical'] = Str::slug($payloadLanguage['canonical']);
 
-                $this->postCatalougeRepository->createPivotLanguage($postCatalouge, $payloadLanguage);
+
+                $this->postCatalougeRepository->createPivot($postCatalouge, $payloadLanguage);
             }
 
             DB::commit();
@@ -101,9 +113,35 @@ class PostCatalougeService
     {
         DB::beginTransaction();
         try {
-            $payload = $request->except(['_token']);
 
-            $this->postCatalougeRepository->update($id, $payload);
+            $payloadPostCatalouge = $request->only([
+                'parent_id',
+                'follow',
+                'publish',
+                'image',
+                'album'
+            ]);
+
+            $payloadPostCatalouge['user_id'] = Auth::id();
+
+            $updated = $this->postCatalougeRepository->update($id, $payloadPostCatalouge);
+
+             if($updated > 0){
+                $payloadPivot = $request->only([
+                    'name',
+                    'description',
+                    'content',
+                    'meta_title',
+                    'meta_keyword',
+                    'meta_description',
+                    'canonical',
+                    'language_id'
+                ]);
+
+                $payloadPivot['canonical'] = Str::slug($payloadPivot['canonical']);
+
+                $this->postCatalougeRepository->UpdatePivot($id, $payloadPivot);
+             }
 
             DB::commit();
 

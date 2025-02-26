@@ -12,6 +12,8 @@ interface PostCatalougeRepositoryInterface
 
     public function getToTree();
 
+    public function findById($id);
+
     public function paginate($request);
 
     public function create($payload);
@@ -26,7 +28,9 @@ interface PostCatalougeRepositoryInterface
 
     public function updateStatusAll($payload);
 
-    public function createPivotLanguage($model, $payload = []);
+    public function createPivot($model, $payload = []);
+
+    public function updatePivot($model, $payload = []);
 
 
     // public function updateByWhereIn($ids, $value);

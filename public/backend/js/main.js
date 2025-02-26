@@ -1,6 +1,7 @@
 let ward_select = $("#ward_id");
 let district_select = $("#district_id");
 const _token = $('meta[name="csrf-token"]').attr("content");
+let album = [];
 
 const cloudName = "my-could-api";
 const uploadPreset = "laravel_app";
@@ -8,6 +9,7 @@ const folder = "ImageFolder";
 const maxFiles = 1;
 const width = 300;
 const height = 300;
+
 
 // get district api
 $(document).on("change", "#province_id", async function () {
@@ -250,6 +252,88 @@ $(document).on("click", "#upload_widget", function () {
     ImageWidget.open();
 });
 
+// cloudinary upload Image
+const ImageUpload = cloudinary.createUploadWidget(
+    {
+        cloudName,
+        uploadPreset,
+        folder: 'album',
+        multiple: true,
+        transformation: [{ width, height, crop: "thumb" }],
+        sources: ["local", "url", "image_search"],
+        googleApiKey: "AIzaSyBMnZuJmBV2_6QHMYDOleTyxe67M6RplNg",
+        searchBySites: ["all", "cloudinary.com"],
+        searchByRights: true,
+    },
+    (error, result) => {
+        if (!error && result && result.event === "success") {
+
+            $('#sortable').append(`
+                <li class="ui-state-default">
+                    <div class="thumb">
+                        <span class="span image image-scaledown">
+                            <img src="${result.info.url}" alt="${result.info.asset_folder} image">
+                        </span>
+                        <button type="button" class="delete-image">
+                            <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </li>
+            `)
+
+            $('.click-to-upload').addClass('hidden');
+            $('.upload-list').removeClass('hidden');
+
+            album.push(result.info.url);
+        }
+    }
+
+);
+
+$(document).on("click", ".upload-picture", function (e) {
+    e.preventDefault();
+    ImageUpload.open();
+
+});
+
+//delete picture
+$(document).on("click", '.delete-image', function () {
+    let _this = $(this);
+
+    let item = _this.parents('.ui-state-default');
+    let itemUrl = item.find("img[src]").attr('src');
+    item.remove();
+
+    album = album.filter((url)=>{
+        return url != itemUrl
+    } )
+
+if($(`.ui-state-default`).length == 0 ){
+        $('.click-to-upload').removeClass('hidden');
+        $('.upload-list').addClass('hidden');
+    }
+})
+//add album to input value
+$(document).on('submit', '#post_catalouge_form', function(e){
+    e.preventDefault();
+
+    if(album.length > 0){
+        $('#album').val(JSON.stringify(album));
+    }else{
+        $('#album').val(null);
+    }
+
+
+    this.submit();
+})
+
+//get postCatalouge Album
+
+$('.img_album').each(function(){
+    let src = $(this).attr('src');
+    album.push(src);
+});
+
 //TinyMCE
 
 $(".tiny-editor").each(function () {
@@ -274,6 +358,7 @@ $(".tiny-editor").each(function () {
           ],
 
           image_title: true,
+          image_caption: true,
           automatic_uploads: true,
           file_picker_types: 'image',
           images_upload_url: `/ajax/dashboard/upload/image?_token=${_token}`,
@@ -283,4 +368,16 @@ $(".tiny-editor").each(function () {
           ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),    });
 
 });
+
+$('#sortable').sortable({
+    update: function(event, ui) {
+        // Lấy index mới của phần tử được kéo
+        let newIndex = ui.item.index();
+        console.log('ui', ui);
+        console.log('event', event);
+        console.log("Phần tử được kéo có index mới là:", newIndex);
+    }
+});
+
+$("#sortable").disableSelection();
 

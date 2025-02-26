@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DeletePostCatalougeRequest;
 use App\Http\Requests\StorePostCatalougeRequest;
 use App\Http\Requests\UpdatePostCatalougeRequest;
 use App\Models\Language;
-use App\Models\PostCatalouge;
 use App\Services\PostCatalougeService;
 use Illuminate\Http\Request;
 
@@ -23,6 +23,7 @@ class PostCatalougeController extends Controller
     public function index(Request $request)
     {
         $postCatalouges = $this->postCatalougeService->paginate($request);
+
         return view('Backend.post.catalouge.index', [
             'postCatalouges' => $postCatalouges
         ]);
@@ -47,16 +48,22 @@ class PostCatalougeController extends Controller
         return redirect()->route('post.catalouge.index')->with('error', 'Failed to add new post group!');
     }
 
-    public function edit(PostCatalouge $postCatalouge)
+    public function edit($id)
     {
+        $postCatalouge =$this->postCatalougeService->findById($id);
+
+        $listNode = $this->postCatalougeService->getToTree();
+        $languages = Language::select('id', 'name')->get();
         return view('backend.post.catalouge.create', [
+            'listNode' => $listNode,
+            'languages' => $languages,
             'postCatalouge' => $postCatalouge
+
         ]);
     }
 
     public function update($id, UpdatePostCatalougeRequest $request)
     {
-
         if ($this->postCatalougeService->update($id, $request)) {
             return redirect()->route('post.catalouge.index')->with('success', 'Updated post group successfully!');
         }
@@ -64,14 +71,16 @@ class PostCatalougeController extends Controller
         return redirect()->route('post.catalouge.index')->with('error', 'Failed to updated post group!');
     }
 
-    public function delete(PostCatalouge $postCatalouge)
+    public function delete($id)
     {
+        $postCatalouge =$this->postCatalougeService->findById($id);
+
         return view('backend.post.catalouge.delete', [
-            'post group' => $postCatalouge
+            'postCatalouge' => $postCatalouge
         ]);
     }
 
-    public function destroy($id)
+    public function destroy($id, DeletePostCatalougeRequest $request)
     {
         if ($this->postCatalougeService->destroy($id)) {
             return redirect()->route('post.catalouge.index')->with('success', 'Deleted post group successfully!');

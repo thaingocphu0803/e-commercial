@@ -5,7 +5,7 @@
     'value' => null,
     'rowLength' => null,
     'must' => false,
-    'disabled' => false,
+    'readOnly' => false,
     'tag' => null
 ])
 <div class="col-lg-{{ $rowLength ?? 6 }}">
@@ -21,7 +21,7 @@
             type="{{$type}}"
             name="{{$inputName}}"
             id="{{$inputName}}"
-            @disabled($disabled)
+            @readonly($readOnly)
             class="form-control tiny-editor"
         >
             {{old($inputName, $value)}}
@@ -32,7 +32,8 @@
             name="{{$inputName}}"
             id="{{$inputName}}"
             value="{{old($inputName, $value)}}"
-            @disabled($disabled) class="form-control"
+            @readonly($readOnly)
+            class="form-control"
         >
         @endif
     </div>

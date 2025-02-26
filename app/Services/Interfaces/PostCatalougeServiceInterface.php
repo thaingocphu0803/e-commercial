@@ -12,6 +12,8 @@ interface PostCatalougeServiceInterface
 
     public function getToTree();
 
+    public function findById($id);
+
     public function paginate($number);
 
     public function create($request);

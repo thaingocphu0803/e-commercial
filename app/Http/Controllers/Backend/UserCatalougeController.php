@@ -22,7 +22,6 @@ class UserCatalougeController extends Controller
 
     public function index(Request $request){
         $userCatalouges = $this->userCatalougeService->paginate($request);
-        // dd($userCatalouges);
         return view('Backend.user.catalouge.index', [
             'userCatalouges' => $userCatalouges
         ]);

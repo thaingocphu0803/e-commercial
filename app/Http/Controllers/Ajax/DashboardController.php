@@ -17,9 +17,6 @@ class DashboardController extends Controller
 
     public function changeStatus(Request $request)
     {
-
-
-
         $payload = $request->except('_token');
 
         $serviceNameSpace = '\App\Services\\' . ucfirst($payload['model']) . 'Service';

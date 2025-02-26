@@ -22,9 +22,8 @@
 
                 <th><input type="checkbox" class="checkAll check-table" name="input"></th>
                 <th>Image</th>
-                <th>Laguage</th>
+                <th>Name</th>
                 <th>Canonical</th>
-                <th>Description</th>
                 <th>Active</th>
                 <th>Action</th>
             </tr>
@@ -32,25 +31,26 @@
         <tbody>
             @foreach ($postCatalouges as $postCatalouge)
                 <tr>
-                    <td><input type="checkbox" name="input" class="checkItem check-table" value="{{ $postCatalouge->id }}">
+                    <td><input type="checkbox" name="input" class="checkItem check-table"
+                            value="{{ $postCatalouge->id }}">
                     </td>
-                    <td class="text-capitalize">{{ $postCatalouge->name }}</td>
                     <td>
                         @if (!empty($postCatalouge->image))
-                            <img src="{{ base64_decode($postCatalouge->image) }}" alt="country's flag" class="table-img">
+                            <img src="{{ base64_decode($postCatalouge->image) }}" alt="country's flag"
+                                class="table-img">
                         @endif
                     </td>
+                    <td class="text-capitalize">{{ $postCatalouge->name }}</td>
                     <td>{{ $postCatalouge->canonical }}</td>
-                    <td>{{ $postCatalouge->description }}</td>
                     <td class="js-switch-{{ $postCatalouge->id }}">
                         <input type="checkbox" class="js-switch status" data-model="postCatalouge" data-field="publish"
                             data-modelId="{{ $postCatalouge->id }}" value="{{ $postCatalouge->publish }}"
                             @checked($postCatalouge->publish == 1) />
                     </td>
                     <td>
-                        <a href="{{ route('postCatalouge.edit', $postCatalouge->id) }}" class="btn btn-success"><i
+                        <a href="{{ route('post.catalouge.edit', $postCatalouge->id) }}" class="btn btn-success"><i
                                 class="fa fa-edit"></i></a>
-                        <a href="{{ route('postCatalouge.delete', $postCatalouge->id) }}" class="btn btn-danger">
+                        <a href="{{ route('post.catalouge.delete', $postCatalouge->id) }}" class="btn btn-danger">
                             <i class="fa fa-trash"></i>
                         </a>
 

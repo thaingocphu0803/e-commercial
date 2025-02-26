@@ -33,4 +33,15 @@ class PostCatalouge extends Model
         ->withPivot(['name', 'canonical', 'description', 'content', 'meta_title', 'meta_keyword', 'meta_description'])
         ->withTimestamps();
     }
+
+    public static function isNodeCheck($id){
+        $postCatalouge = PostCatalouge::find($id);
+        // dd(($postCatalouge->_rgt - $postCatalouge->_lft));
+       if(($postCatalouge->_rgt - $postCatalouge->_lft) != 1){
+            return false;
+       }
+
+       return true;
+
+    }
 }

@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\CheckPostCatalougeChildrenRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePostCatalougeRequest extends FormRequest
+class DeletePostCatalougeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,17 +22,11 @@ class StorePostCatalougeRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->id;
         return [
-            'name' => 'required|unique:post_catalouge_language,name,' . $this->id . ',post_catalouge_id',
-            'canonical' => 'required|unique:post_catalouge_language,canonical,' . $this->id . ',post_catalouge_id',
-            'language_id' => 'required|integer'
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'language_id.required' => 'The language is required.'
+            'name' => [
+                new CheckPostCatalougeChildrenRule($id)
+            ]
         ];
     }
 }

@@ -21,8 +21,19 @@ class UpdatePostCatalougeRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
-            //
+            'name' => 'required|unique:post_catalouge_language,name,' . $this->id . ',post_catalouge_id',
+            'canonical' => 'required|unique:post_catalouge_language,canonical,' . $this->id . ',post_catalouge_id',
+            'language_id' => 'required|integer'
+        ];
+    }
+
+
+    public function messages()
+    {
+        return [
+            'language_id.required' => 'The language is required.'
         ];
     }
 }

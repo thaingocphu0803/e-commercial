@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\LanguageRepository;
+use App\Services\Interfaces\LanguageServiceInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\DB;
  * Class LanguageService
  * @package App\Services
  */
-class LanguageService
+class LanguageService implements LanguageServiceInterface
 {
     protected $languageRepository;
 
