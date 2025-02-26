@@ -15,9 +15,9 @@ class PostCatalougeRepository implements PostCatalougeRepositoryInterface
             ->get();
     }
 
-    public function getToTree()
+    public function getToTree($id = null)
     {
-        $postCatalouges = PostCatalouge::with('languages')->orderBy('_lft', 'asc')->get();
+        $postCatalouges = PostCatalouge::with('languages')->where('id', '!=', $id)->orderBy('_lft', 'asc')->get();
 
         $postCatalouges = $postCatalouges->map(function ($postCatalouge) {
             if ($postCatalouge->languages->isNotEmpty()) {

@@ -22,7 +22,16 @@ class StorePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|unique:post_catalouge_language,name',
+            'canonical' => 'required|unique:post_catalouge_language,canonical',
+            'language_id' => 'required|integer'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'language_id.required' => 'The language is required.'
         ];
     }
 }

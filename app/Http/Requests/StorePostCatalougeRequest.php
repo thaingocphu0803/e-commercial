@@ -22,8 +22,8 @@ class StorePostCatalougeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:post_catalouge_language,name,' . $this->id . ',post_catalouge_id',
-            'canonical' => 'required|unique:post_catalouge_language,canonical,' . $this->id . ',post_catalouge_id',
+            'name' => 'required|unique:post_catalouge_language,name',
+            'canonical' => 'required|unique:post_catalouge_language,canonical',
             'language_id' => 'required|integer'
         ];
     }

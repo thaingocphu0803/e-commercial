@@ -18,7 +18,8 @@ class Post extends Model
         'album',
         'order',
         'publish',
-        'user_id'
+        'user_id',
+        'follow'
     ];
 
     public function languages(){

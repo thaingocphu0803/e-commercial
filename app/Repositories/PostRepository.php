@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Post;
+use App\Models\PostCatalouge;
 use App\Models\PostCatalougeLanguage;
 use App\Repositories\Interfaces\PostRepositoryInterface;
 
@@ -17,7 +18,7 @@ class PostRepository implements PostRepositoryInterface
 
     public function getToTree()
     {
-        $postCatalouges = Post::with('languages')->orderBy('_lft', 'asc')->get();
+        $postCatalouges = PostCatalouge::with('languages')->orderBy('_lft', 'asc')->get();
 
         $postCatalouges = $postCatalouges->map(function ($post) {
             if ($post->languages->isNotEmpty()) {
@@ -85,7 +86,7 @@ class PostRepository implements PostRepositoryInterface
         }
     }
 
-    public function createPivot($model, $payload = [])
+    public function createLanguagePivot($model, $payload = [])
     {
         return $model->languages()->attach($model->id, $payload);
     }

@@ -11,8 +11,8 @@
                     <x-backend.dashboard.toolbox model="post" object="post"/>
                 </div>
                 <div class="ibox-content">
-                    <x-backend.post.catalouge.filter/>
-                    <x-backend.post.catalouge.table :posts="$posts" />
+                    <x-backend.post.post.filter/>
+                    {{-- <x-backend.post.post.table :posts="$posts" /> --}}
                 </div>
             </div>
         </div>

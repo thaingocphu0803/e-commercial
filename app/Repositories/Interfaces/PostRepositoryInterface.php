@@ -28,7 +28,7 @@ interface PostRepositoryInterface
 
     public function updateStatusAll($payload);
 
-    public function createPivot($model, $payload = []);
+    public function createLanguagePivot($model, $payload = []);
 
     public function updatePivot($model, $payload = []);
 

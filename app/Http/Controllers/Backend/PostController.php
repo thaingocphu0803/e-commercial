@@ -21,10 +21,10 @@ class PostController extends Controller
 
     public function index(Request $request)
     {
-        $posts = $this->postService->paginate($request);
+        // $posts = $this->postService->paginate($request);
 
-        return view('Backend.post.index', [
-            'posts' => $posts
+        return view('Backend.post.post.index', [
+            // 'posts' => $posts
         ]);
     }
 
@@ -33,7 +33,7 @@ class PostController extends Controller
         $listNode = $this->postService->getToTree();
         $languages = Language::select('id', 'name')->get();
 
-        return view('Backend.post.create', [
+        return view('Backend.post.post.create', [
             'listNode' => $listNode,
             'languages' => $languages
         ]);
@@ -41,6 +41,7 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
+
         if ($this->postService->create($request)) {
             return redirect()->route('post.index')->with('success', 'Added new post group successfully!');
         }
@@ -53,7 +54,7 @@ class PostController extends Controller
 
         $listNode = $this->postService->getToTree();
         $languages = Language::select('id', 'name')->get();
-        return view('backend.post.create', [
+        return view('backend.post.post.create', [
             'listNode' => $listNode,
             'languages' => $languages,
             'post' => $post
@@ -74,7 +75,7 @@ class PostController extends Controller
     {
         $post = $this->postService->findById($id);
 
-        return view('backend.post.delete', [
+        return view('backend.post.post.delete', [
             'post' => $post
         ]);
     }

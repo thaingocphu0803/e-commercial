@@ -52,7 +52,7 @@ class PostCatalougeController extends Controller
     {
         $postCatalouge =$this->postCatalougeService->findById($id);
 
-        $listNode = $this->postCatalougeService->getToTree();
+        $listNode = $this->postCatalougeService->getToTree($id);
         $languages = Language::select('id', 'name')->get();
         return view('backend.post.catalouge.create', [
             'listNode' => $listNode,

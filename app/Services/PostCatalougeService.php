@@ -33,9 +33,9 @@ class PostCatalougeService implements PostCatalougeServiceInterface
         return $languages;
     }
 
-    public function getToTree()
+    public function getToTree($id = null)
     {
-        $postCatalouges = $this->postCatalougeRepository->getToTree();
+        $postCatalouges = $this->postCatalougeRepository->getToTree($id);
         $listNode = [];
         $traverse = function ($categories, $prefix = '-') use (&$traverse, &$listNode) {
             foreach ($categories as $category) {

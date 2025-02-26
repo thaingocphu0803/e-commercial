@@ -103,8 +103,11 @@
                             <h5>CHOOSE PARENT SECTION</h5>
                         </div>
                         <div class="ibox-content">
-                            <div class="row">
-                                <x-backend.dashboard.form.select labelName="Parent Section" name="parent_id"
+                            <div class="row flex flex-col gap-10">
+                                <x-backend.dashboard.form.select labelName="Parent Section" name="post_catalouge_id"
+                                    rowLength="12" :data="$listNode" :value="$post->parent_id ?? ''" />
+
+                                    <x-backend.dashboard.form.multiselect labelName="Sub Section" name="catalouge"
                                     rowLength="12" :data="$listNode" :value="$post->parent_id ?? ''" />
                             </div>
                         </div>

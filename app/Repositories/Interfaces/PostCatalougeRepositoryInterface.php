@@ -10,7 +10,7 @@ interface PostCatalougeRepositoryInterface
 {
     public function getAll();
 
-    public function getToTree();
+    public function getToTree($id = null);
 
     public function findById($id);
 

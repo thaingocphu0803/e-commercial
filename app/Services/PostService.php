@@ -55,29 +55,32 @@ class PostService implements PostServiceInterface
 
     public function findById($id)
     {
-        $postCatalouge = $this->postRepository->findById($id);
+        $post = $this->postRepository->findById($id);
 
-        return $postCatalouge;
+        return $post;
     }
 
     public function create($request)
     {
+        // dd($request);
         DB::beginTransaction();
         try {
-            $payloadPostCatalouge = $request->only([
-                'parent_id',
+            $payloadPost = $request->only([
+                'post_id',
                 'follow',
                 'publish',
                 'image',
                 'album'
             ]);
 
-            $payloadPostCatalouge['user_id'] = Auth::id();
-            $payloadPostCatalouge['parent_id'] = $request->input('parent_id') ?? null;
+            $payloadPost['user_id'] = Auth::id();
+            $payloadPost['parent_id'] = $request->input('parent_id') ?? null;
 
-            $postCatalouge = $this->postRepository->create($payloadPostCatalouge);
+            $post = $this->postRepository->create($payloadPost);
 
-            if ($postCatalouge->id > 0) {
+
+
+            if ($post->id > 0) {
 
                 $payloadLanguage = $request->only([
                     'name',
@@ -90,12 +93,16 @@ class PostService implements PostServiceInterface
                     'language_id'
                 ]);
 
-                $payloadLanguage['post_catalouge_id'] = $postCatalouge->id;
+                $payloadLanguage['post_id'] = $post->id;
                 $payloadLanguage['language_id'] = $request->input('language_id') ?? 1;
                 $payloadPivot['canonical'] = Str::slug($payloadLanguage['canonical']);
 
+                $this->postRepository->createLanguagePivot($post, $payloadLanguage);
 
-                $this->postRepository->createPivot($postCatalouge, $payloadLanguage);
+                $payloadPostCatalouge = $request->input('catalouge');
+
+                dd($payloadPostCatalouge);
+
             }
 
             DB::commit();
@@ -114,7 +121,7 @@ class PostService implements PostServiceInterface
         DB::beginTransaction();
         try {
 
-            $payloadPostCatalouge = $request->only([
+            $payloadPost = $request->only([
                 'parent_id',
                 'follow',
                 'publish',
@@ -122,9 +129,9 @@ class PostService implements PostServiceInterface
                 'album'
             ]);
 
-            $payloadPostCatalouge['user_id'] = Auth::id();
+            $payloadPost['user_id'] = Auth::id();
 
-            $updated = $this->postRepository->update($id, $payloadPostCatalouge);
+            $updated = $this->postRepository->update($id, $payloadPost);
 
              if($updated > 0){
                 $payloadPivot = $request->only([
