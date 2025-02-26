@@ -34,9 +34,12 @@ class PostCatalouge extends Model
         ->withTimestamps();
     }
 
+    public function posts(){
+        return $this->belongsToMany(Post::class, 'post_catalouge_post', 'post_catalouge_id', 'post_id');
+    }
+
     public static function isNodeCheck($id){
         $postCatalouge = PostCatalouge::find($id);
-        // dd(($postCatalouge->_rgt - $postCatalouge->_lft));
        if(($postCatalouge->_rgt - $postCatalouge->_lft) != 1){
             return false;
        }

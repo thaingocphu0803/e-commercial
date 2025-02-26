@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\AuthenController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\LanguageController;
 use App\Http\Controllers\Backend\PostCatalougeController;
+use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\Backend\UserCatalougeController;
 use App\Http\Controllers\Backend\UserController;
 use Illuminate\Support\Facades\Route;
@@ -61,6 +62,17 @@ Route::controller(LanguageController::class)->middleware('admin')->prefix('langu
     Route::get('delete/{language}', 'delete')->name('language.delete');
     Route::delete('destroy/{id}', 'destroy')->name('language.destroy');
 
+});
+
+//PostController
+Route::controller(PostController::class)->middleware('admin')->prefix('post')->group(function () {
+    Route::get('index',  'index')->name('post.index');
+    Route::get('create', 'create')->name('post.create');
+    Route::post('store', 'store')->name('post.store');
+    Route::get('edit/{id}', 'edit')->name('post.edit');
+    Route::post('update/{id}', 'update')->name('post.update');
+    Route::get('delete/{id}', 'delete')->name('post.delete');
+    Route::delete('destroy/{id}', 'destroy')->name('post.destroy');
 });
 
 //PostCatalougeController

@@ -10,4 +10,24 @@ use Illuminate\Notifications\Notifiable;
 class Post extends Model
 {
     use HasFactory, Notifiable, SoftDeletes;
+
+    protected $fillable = [
+        'post_catalouge_id',
+        'image',
+        'icon',
+        'album',
+        'order',
+        'publish',
+        'user_id'
+    ];
+
+    public function languages(){
+        return $this->belongsToMany(Language::class, 'post_language', 'post_id', 'language_id')
+        ->withPivot(['name', 'canonical', 'description', 'content', 'meta_title', 'meta_keyword', 'meta_description'])
+        ->withTimestamps();
+    }
+
+    public function post_catalouges(){
+        return $this->belongsToMany(PostCatalouge::class, 'post_catalouge_post',  'post_id' ,'post_catalouge_id'  );
+    }
 }

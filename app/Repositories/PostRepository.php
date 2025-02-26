@@ -2,28 +2,28 @@
 
 namespace App\Repositories;
 
-use App\Models\PostCatalouge;
+use App\Models\Post;
 use App\Models\PostCatalougeLanguage;
-use App\Repositories\Interfaces\PostCatalougeRepositoryInterface;
+use App\Repositories\Interfaces\PostRepositoryInterface;
 
-class PostCatalougeRepository implements PostCatalougeRepositoryInterface
+class PostRepository implements PostRepositoryInterface
 {
     public function getAll()
     {
-        return PostCatalouge::select('name', 'id')
+        return Post::select('name', 'id')
             ->where('publish', 1)
             ->get();
     }
 
     public function getToTree()
     {
-        $postCatalouges = PostCatalouge::with('languages')->orderBy('_lft', 'asc')->get();
+        $postCatalouges = Post::with('languages')->orderBy('_lft', 'asc')->get();
 
-        $postCatalouges = $postCatalouges->map(function ($postCatalouge) {
-            if ($postCatalouge->languages->isNotEmpty()) {
-                $postCatalouge['name'] = $postCatalouge->languages->first()->pivot->name;
+        $postCatalouges = $postCatalouges->map(function ($post) {
+            if ($post->languages->isNotEmpty()) {
+                $post['name'] = $post->languages->first()->pivot->name;
             }
-            return $postCatalouge;
+            return $post;
         });
 
         return $postCatalouges->toTree();
@@ -31,17 +31,17 @@ class PostCatalougeRepository implements PostCatalougeRepositoryInterface
 
     public function findById($id)
     {
-        $postCatalouge = PostCatalouge::with('languages')->findOrFail($id);
-        if ($postCatalouge->languages->isEmpty()) {
+        $post = Post::with('languages')->findOrFail($id);
+        if ($post->languages->isEmpty()) {
             return false;
         }
 
-        $pivot = $postCatalouge->languages->first()->pivot;
-        $pivot['parent_id'] = $postCatalouge->parent_id;
-        $pivot['publish'] = $postCatalouge->publish;
-        $pivot['follow'] = $postCatalouge->follow;
-        $pivot['image'] = $postCatalouge->image;
-        $pivot['album'] = $postCatalouge->album;
+        $pivot = $post->languages->first()->pivot;
+        $pivot['parent_id'] = $post->parent_id;
+        $pivot['publish'] = $post->publish;
+        $pivot['follow'] = $post->follow;
+        $pivot['image'] = $post->image;
+        $pivot['album'] = $post->album;
 
 
         return  $pivot;
@@ -54,7 +54,7 @@ class PostCatalougeRepository implements PostCatalougeRepositoryInterface
         $keyword = $request->input('keyword');
         $publish = $request->input('publish');
 
-        $query =  PostCatalouge::select(
+        $query =  Post::select(
             'post_catalouges.id as id',
             'post_catalouges.image as image',
             'pcl.name as name',
@@ -76,12 +76,12 @@ class PostCatalougeRepository implements PostCatalougeRepositoryInterface
 
     public function create($payload)
     {
-        $parent = PostCatalouge::find($payload['parent_id']);
+        $parent = Post::find($payload['parent_id']);
 
         if (!empty($parent)) {
             return $parent->children()->create($payload);
         } else {
-            return PostCatalouge::create($payload);
+            return Post::create($payload);
         }
     }
 
@@ -92,7 +92,7 @@ class PostCatalougeRepository implements PostCatalougeRepositoryInterface
 
     public function update($id, $payload)
     {
-        return PostCatalouge::find($id)->update($payload);
+        return Post::find($id)->update($payload);
     }
 
     public function UpdatePivot($id, $payload = [])
@@ -103,16 +103,16 @@ class PostCatalougeRepository implements PostCatalougeRepositoryInterface
 
     public function destroy($id)
     {
-        $node = PostCatalouge::findOrFail($id);
+        $node = Post::findOrFail($id);
         $left = $node->_lft;
         $right = $node->_rgt;
         $width = $right - $left + 1;
 
-        $deteted = PostCatalouge::destroy($id);
+        $deteted = Post::destroy($id);
 
         if ($deteted) {
-            PostCatalouge::where('_lft', '>', $right)->decrement('_lft', $width);
-            PostCatalouge::where('_rgt', '>', $right)->decrement('_rgt', $width);
+            Post::where('_lft', '>', $right)->decrement('_lft', $width);
+            Post::where('_rgt', '>', $right)->decrement('_rgt', $width);
 
             return true;
         }
@@ -123,7 +123,7 @@ class PostCatalougeRepository implements PostCatalougeRepositoryInterface
 
     public function forceDestroy($id)
     {
-        return PostCatalouge::forceDestroy($id);
+        return Post::forceDestroy($id);
     }
 
     public function updateStatus($payload)
@@ -132,7 +132,7 @@ class PostCatalougeRepository implements PostCatalougeRepositoryInterface
         $value = $payload['value'] == 1 ? 2 : 1;
         $columm = [$payload['field'] => $value];
 
-        return PostCatalouge::find($modelId)->update($columm);
+        return Post::find($modelId)->update($columm);
     }
 
 
@@ -142,7 +142,7 @@ class PostCatalougeRepository implements PostCatalougeRepositoryInterface
         $value = $payload['value'];
         $columm = [$payload['field'] => $value];
 
-        return PostCatalouge::whereIn('id', $ids)->update($columm);
+        return Post::whereIn('id', $ids)->update($columm);
     }
 
     // public function updateByWhereIn($ids, $value)

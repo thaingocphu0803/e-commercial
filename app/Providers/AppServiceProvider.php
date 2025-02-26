@@ -21,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
 
         'App\Repositories\Interfaces\PostCatalougeRepositoryInterface' => 'App\Repositories\PostCatalougeRepository',
 
+        'App\Repositories\Interfaces\PostRepositoryInterface' => 'App\Repositories\PostRepository',
+
+
 
     ];
 
