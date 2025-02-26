@@ -11,7 +11,7 @@
             ? route('post.update', $post->post_catalouge_id)
             : route('post.store');
 
-        $title = isset($post) ? 'Edit Post Group' : 'Add Post Group';
+        $title = isset($post) ? 'Edit Post' : 'Add Post';
 
         $publish = $post->publish ?? '';
         $follow = $post->follow ?? '';
@@ -128,13 +128,13 @@
 
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5>CHOOSE POST GROUP IMAGE</h5>
+                            <h5>CHOOSE POST IMAGE</h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <x-backend.dashboard.form.upload rowLength="12" labelName="post group image" :value="$post->image ?? '' " />
-                                    <img class="col-lg-12 hidden" id="img_show" alt="post group image"
+                                    <x-backend.dashboard.form.upload rowLength="12" labelName="post image" :value="$post->image ?? '' " />
+                                    <img class="col-lg-12 hidden" id="img_show" alt="post image"
                                         height="250px">
                                 </div>
                             </div>
@@ -150,7 +150,7 @@
                                 <div class="col-lg-12 flex flex-col gap-10">
                                     <div class="flex gap-10">
                                         <select name="publish" class="form-control  select2">
-                                            <option disabled selected> Choose Post Group Status</option>
+                                            <option disabled selected> Choose Post Status</option>
                                             <option value="1" @selected(old('publish', $publish) == 1)>Published</option>
                                             <option value="2" @selected(old('publish', $publish) == 2)>Private</option>
                                         </select>
@@ -158,7 +158,7 @@
 
                                     <div class="flex gap-10">
                                         <select name="follow" class="form-control  select2">
-                                            <option disabled selected> Choose Post Group Direction</option>
+                                            <option disabled selected> Choose Post Direction</option>
                                             <option value="1" @selected(old('follow', $follow) == 1)>Follow</option>
                                             <option value="2" @selected(old('follow', $follow) == 2)>Unfollow</option>
                                         </select>

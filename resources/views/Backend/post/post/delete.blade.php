@@ -1,7 +1,7 @@
 <x-backend.dashboard.layout>
 
 
-    <x-backend.dashboard.breadcrumb title="Delete Language" />
+    <x-backend.dashboard.breadcrumb title="Delete Post" />
 
     @if ($errors->any())
         <div class="alert alert-danger">

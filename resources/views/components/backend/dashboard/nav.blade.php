@@ -29,7 +29,7 @@
             </x-backend.dashboard.nav.module>
 
             <x-backend.dashboard.nav.module icon='fa-file' title="Manage Post">
-                {{-- <li><a href="{{ route('post.index') }}">Post</a></li> --}}
+                <li><a href="{{ route('post.index') }}">Post</a></li>
                 <li><a href="{{ route('post.catalouge.index') }}">Post Group</a></li>
             </x-backend.dashboard.nav.module>
 

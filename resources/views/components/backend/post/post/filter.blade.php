@@ -20,7 +20,7 @@
 
                 <div class="flex gap-10">
                     <select name="publish" class="form-control  select2">
-                        <option value="0" selected> Choose Post Group Status</option>
+                        <option value="0" selected> Choose Post Status</option>
                         <option value="1" @selected(request('publish') == 1)>Published</option>
                         <option value="2" @selected(request('publish') == 2)>Private</option>
                     </select>
@@ -39,7 +39,7 @@
                     </div>
                 </div>
             </div>
-            <a href="{{ route('post.create') }}" class="btn btn-danger"><i class="fa fa-plus"> Add Post Group</i></a>
+            <a href="{{ route('post.create') }}" class="btn btn-danger"><i class="fa fa-plus"> Add Post</i></a>
 
         </div>
     </div>
