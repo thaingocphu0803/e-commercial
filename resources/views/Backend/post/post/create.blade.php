@@ -117,7 +117,7 @@
                                     rowLength="12"
                                     :data="$listNode"
                                     :value="$post->catalouges ?? []"
-                                    :parent="$post->post_catalouge_id"
+                                    :parent="$post->post_catalouge_id ?? ''"
                                 />
                             </div>
                         </div>

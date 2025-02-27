@@ -26,6 +26,15 @@
                     </select>
                 </div>
 
+                <div class="flex gap-10">
+                    <select name="post_catalouge_id" class="form-control  select2">
+                        <option value="0" selected> Choose Parent Section</option>
+                        @foreach ($listNode as $item)
+                            <option value="{{$item->id}}" @selected(request('post_catalouge_id') == $item->id)>{{$item->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <div class="flex flex-middle gap-10">
                     <div class="input-group">
                         <input class="form-control" type="text" name="keyword"

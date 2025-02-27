@@ -22,8 +22,11 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $posts = $this->postService->paginate($request);
+        $listNode = $this->postService->getToTree();
+
         return view('Backend.post.post.index', [
-            'posts' => $posts
+            'posts' => $posts,
+            'listNode' => $listNode,
         ]);
     }
 
@@ -63,7 +66,6 @@ class PostController extends Controller
 
     public function update($id, UpdatePostRequest $request)
     {
-        // dd($this->postService->update($id, $request));
         if ($this->postService->update($id, $request)) {
             return redirect()->route('post.index')->with('success', 'Updated post successfully!');
         }

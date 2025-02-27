@@ -32,7 +32,6 @@ class UserController extends Controller
 
         $users = $this->userService->paginate($request);
 
-        // dd($users);
         $userCatalouges = $this->userCatalougeService->getAll();
 
 

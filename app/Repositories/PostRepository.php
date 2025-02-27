@@ -45,7 +45,6 @@ class PostRepository implements PostRepositoryInterface
         $pivot['catalouges'] = $post->postCatalouges
                                 ->pluck('pivot.post_catalouge_id')
                                 ->toArray();
-
         return  $pivot;
     }
 
@@ -55,6 +54,7 @@ class PostRepository implements PostRepositoryInterface
         $perpage = $request->input('perpage') ?? 10;
         $keyword = $request->input('keyword');
         $publish = $request->input('publish');
+        $post_catalouge_id = $request->input('post_catalouge_id');
 
         $query =  Post::with('postCatalouges.languages')->select(
             'posts.id as id',
@@ -64,15 +64,28 @@ class PostRepository implements PostRepositoryInterface
             'posts.order as order'
         )
             ->join('post_language as pl', 'pl.post_id', '=', 'posts.id')
+            ->join('post_catalouge_post as pcp', 'pcp.post_id', '=', 'posts.id')
             ->where(function ($q) use ($keyword) {
                 $q->where('pl.name', 'like', '%' . $keyword . '%');
             });
 
         if (!empty($publish)) {
-            $query->where('publish', $publish);
+            $query->where('posts.publish', $publish);
+        }
+
+        if(!empty($post_catalouge_id)){
+            $catalouges = $this->getDescendantsAndSelf($post_catalouge_id);
+            if(!empty($catalouges)){
+                $query->WhereIn('posts.post_catalouge_id', $catalouges)->distinct();
+            }
         }
 
         return $query->paginate($perpage)->withQueryString();
+    }
+
+    public function getDescendantsAndSelf($id)
+    {
+        return PostCatalouge::descendantsAndSelf($id)->pluck('id');
     }
 
     public function create($payload)
