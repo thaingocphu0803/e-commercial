@@ -116,6 +116,13 @@ table strong {
 .w-full{
     width: 100%;
 }
+.w-80{
+    width: 80px;
+}
+
+.flex-row{
+    flex-direction: row;
+}
 
 .flex-col{
     flex-direction: column;
@@ -189,6 +196,26 @@ table strong {
     color: #fff;
 }
 
-/* .hidden{
-    display: none;
-} */
+a, .main-title{
+    color: #2962ff;
+}
+
+.main-title{
+    display: flex;
+    max-height: 3em;
+    overflow: hidden;
+    flex-direction: row;
+    text-overflow: ellipsis;
+    font-weight: 600;
+}
+
+.catalouge{
+    font-size: 10px;
+}
+.catalouge span{
+    font-weight: 600    ;
+}
+
+.catalouge a{
+    color: #333;
+}

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class PostLanguage extends Model
 {
+    protected $table = 'post_language';
+
     protected $fillable = [
         'post_id',
         'language_id',

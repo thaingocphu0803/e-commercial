@@ -28,7 +28,7 @@ class Post extends Model
         ->withTimestamps();
     }
 
-    public function post_catalouges(){
+    public function postCatalouges(){
         return $this->belongsToMany(PostCatalouge::class, 'post_catalouge_post',  'post_id' ,'post_catalouge_id'  );
     }
 }

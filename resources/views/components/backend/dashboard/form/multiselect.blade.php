@@ -2,14 +2,11 @@
     'labelName' => null,
     'data' => [],
     'name',
-    'value' => null,
+    'value' => [],
     'must' => false,
     'rowLength' => null,
+    'parent' => null,
 ])
-
-@php
-    $itemCodeDefault = !empty($value) ? $value : old($name);
-@endphp
 
 <div class="col-lg-{{ $rowLength ?? 6 }}">
     <div class="form-row">
@@ -20,17 +17,23 @@
         </label>
         <select name="{{ $name }}[]" id="{{ $name }}" class="form-control select2" multiple>
 
-            @if (empty(old($name)))
+            @if (empty(old($name, $value)))
                 <option selected disabled>Choose {{ $labelName }}</option>
             @endif
 
             @if (!empty($data))
                 @foreach ($data as $item)
-
                     @php
                         $itemId = $item->code ?? $item->id;
+                        $isSelected = in_array($itemId, old($name, $value)) && $itemId != $parent;
                     @endphp
-                    <option value="{{ $itemId }}" @selected(in_array($itemId, old($name, [])))>{{ $item->name }}</option>
+
+                        <option
+                            value="{{ $itemId }}"
+                            @selected($isSelected)
+                        >
+                            {{ $item->name }}
+                        </option>
                 @endforeach
             @endif
         </select>

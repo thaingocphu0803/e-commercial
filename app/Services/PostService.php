@@ -62,7 +62,6 @@ class PostService implements PostServiceInterface
 
     public function create($request)
     {
-        // dd($request);
         DB::beginTransaction();
         try {
             $payloadPost = $request->only([
@@ -73,12 +72,11 @@ class PostService implements PostServiceInterface
                 'album'
             ]);
 
+
             $payloadPost['user_id'] = Auth::id();
-            $payloadPost['parent_id'] = $request->input('parent_id') ?? null;
+            $payloadPost['post_catalouge_id'] = $request->input('post_catalouge_id') ?? null;
 
             $post = $this->postRepository->create($payloadPost);
-
-
 
             if ($post->id > 0) {
 
@@ -99,9 +97,12 @@ class PostService implements PostServiceInterface
 
                 $this->postRepository->createLanguagePivot($post, $payloadLanguage);
 
-                $payloadPostCatalouge = $request->input('catalouge');
+                $catalouges = $request->input('catalouge');
+                array_push( $catalouges, $payloadPost['post_catalouge_id'] );
 
-                dd($payloadPostCatalouge);
+                $payloadCatalouge= array_unique($catalouges);
+
+                $this->postRepository->createCatalougePivot($post, $payloadCatalouge);
 
             }
 
@@ -122,7 +123,7 @@ class PostService implements PostServiceInterface
         try {
 
             $payloadPost = $request->only([
-                'parent_id',
+                'post_catalouge_id',
                 'follow',
                 'publish',
                 'image',
@@ -145,9 +146,17 @@ class PostService implements PostServiceInterface
                     'language_id'
                 ]);
 
+
                 $payloadPivot['canonical'] = Str::slug($payloadPivot['canonical']);
 
-                $this->postRepository->UpdatePivot($id, $payloadPivot);
+                $this->postRepository->updatePostLanguage($id, $payloadPivot);
+
+                $catalouges = $request->input('catalouge');
+                array_push( $catalouges, $payloadPost['post_catalouge_id'] );
+
+                $payloadCatalouge= array_unique($catalouges);
+
+                $this->postRepository->updateCatalougePivot($id, $payloadCatalouge);
              }
 
             DB::commit();

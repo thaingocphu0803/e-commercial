@@ -29,4 +29,10 @@ class Language extends Model
                     ->withPivot(['name', 'canonical', 'description', 'content', 'meta_title', 'meta_keyword', 'meta_description'])
                     ->withTimestamps();
     }
+
+    public function posts(){
+        return $this->belongsToMany(Post::class, 'post_language', 'language_id','post_id')
+        ->withPivot(['name', 'canonical', 'description', 'content', 'meta_title', 'meta_keyword', 'meta_description'])
+        ->withTimestamps();
+    }
 }

@@ -6,9 +6,8 @@
     </x-slot:heading>
 
     @php
-
         $url = isset($post)
-            ? route('post.update', $post->post_catalouge_id)
+            ? route('post.update', $post->post_id)
             : route('post.store');
 
         $title = isset($post) ? 'Edit Post' : 'Add Post';
@@ -104,11 +103,22 @@
                         </div>
                         <div class="ibox-content">
                             <div class="row flex flex-col gap-10">
-                                <x-backend.dashboard.form.select labelName="Parent Section" name="post_catalouge_id"
-                                    rowLength="12" :data="$listNode" :value="$post->parent_id ?? ''" />
+                                <x-backend.dashboard.form.select
+                                    labelName="Parent Section"
+                                    name="post_catalouge_id"
+                                    rowLength="12"
+                                    :data="$listNode"
+                                    :value="$post->post_catalouge_id ?? ''"
+                                />
 
-                                    <x-backend.dashboard.form.multiselect labelName="Sub Section" name="catalouge"
-                                    rowLength="12" :data="$listNode" :value="$post->parent_id ?? ''" />
+                                <x-backend.dashboard.form.multiselect
+                                    labelName="Sub Section"
+                                    name="catalouge"
+                                    rowLength="12"
+                                    :data="$listNode"
+                                    :value="$post->catalouges ?? []"
+                                    :parent="$post->post_catalouge_id"
+                                />
                             </div>
                         </div>
                     </div>

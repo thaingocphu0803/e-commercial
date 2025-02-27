@@ -12,7 +12,7 @@
                 </div>
                 <div class="ibox-content">
                     <x-backend.post.post.filter/>
-                    {{-- <x-backend.post.post.table :posts="$posts" /> --}}
+                    <x-backend.post.post.table :posts="$posts" />
                 </div>
             </div>
         </div>

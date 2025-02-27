@@ -21,10 +21,9 @@ class PostController extends Controller
 
     public function index(Request $request)
     {
-        // $posts = $this->postService->paginate($request);
-
+        $posts = $this->postService->paginate($request);
         return view('Backend.post.post.index', [
-            // 'posts' => $posts
+            'posts' => $posts
         ]);
     }
 
@@ -41,19 +40,19 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-
         if ($this->postService->create($request)) {
-            return redirect()->route('post.index')->with('success', 'Added new post group successfully!');
+            return redirect()->route('post.index')->with('success', 'Added new post successfully!');
         }
-        return redirect()->route('post.index')->with('error', 'Failed to add new post group!');
+        return redirect()->route('post.index')->with('error', 'Failed to add new post!');
     }
 
     public function edit($id)
     {
-        $post = $this->postService->findById($id);
 
+        $post = $this->postService->findById($id);
         $listNode = $this->postService->getToTree();
         $languages = Language::select('id', 'name')->get();
+
         return view('backend.post.post.create', [
             'listNode' => $listNode,
             'languages' => $languages,
@@ -64,11 +63,12 @@ class PostController extends Controller
 
     public function update($id, UpdatePostRequest $request)
     {
+        // dd($this->postService->update($id, $request));
         if ($this->postService->update($id, $request)) {
-            return redirect()->route('post.index')->with('success', 'Updated post group successfully!');
+            return redirect()->route('post.index')->with('success', 'Updated post successfully!');
         }
 
-        return redirect()->route('post.index')->with('error', 'Failed to updated post group!');
+        return redirect()->route('post.index')->with('error', 'Failed to updated post!');
     }
 
     public function delete($id)
@@ -83,9 +83,9 @@ class PostController extends Controller
     public function destroy($id)
     {
         if ($this->postService->destroy($id)) {
-            return redirect()->route('post.index')->with('success', 'Deleted post group successfully!');
+            return redirect()->route('post.index')->with('success', 'Deleted post successfully!');
         }
 
-        return redirect()->route('post.index')->with('error', 'Failed to delete post group!');
+        return redirect()->route('post.index')->with('error', 'Failed to delete post!');
     }
 }

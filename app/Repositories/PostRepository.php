@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Post;
 use App\Models\PostCatalouge;
-use App\Models\PostCatalougeLanguage;
+use App\Models\PostLanguage;
 use App\Repositories\Interfaces\PostRepositoryInterface;
 
 class PostRepository implements PostRepositoryInterface
@@ -32,18 +32,19 @@ class PostRepository implements PostRepositoryInterface
 
     public function findById($id)
     {
-        $post = Post::with('languages')->findOrFail($id);
+        $post = Post::with('languages', 'postCatalouges')->findOrFail($id);
         if ($post->languages->isEmpty()) {
             return false;
         }
-
         $pivot = $post->languages->first()->pivot;
-        $pivot['parent_id'] = $post->parent_id;
+        $pivot['post_catalouge_id'] = $post->post_catalouge_id;
         $pivot['publish'] = $post->publish;
         $pivot['follow'] = $post->follow;
         $pivot['image'] = $post->image;
         $pivot['album'] = $post->album;
-
+        $pivot['catalouges'] = $post->postCatalouges
+                                ->pluck('pivot.post_catalouge_id')
+                                ->toArray();
 
         return  $pivot;
     }
@@ -55,35 +56,28 @@ class PostRepository implements PostRepositoryInterface
         $keyword = $request->input('keyword');
         $publish = $request->input('publish');
 
-        $query =  Post::select(
-            'post_catalouges.id as id',
-            'post_catalouges.image as image',
-            'pcl.name as name',
-            'pcl.canonical as canonical',
-            'post_catalouges.publish as publish'
+        $query =  Post::with('postCatalouges.languages')->select(
+            'posts.id as id',
+            'posts.image as image',
+            'pl.name as name',
+            'posts.publish as publish',
+            'posts.order as order'
         )
-            ->join('post_catalouge_language as pcl', 'pcl.post_catalouge_id', '=', 'post_catalouges.id')
+            ->join('post_language as pl', 'pl.post_id', '=', 'posts.id')
             ->where(function ($q) use ($keyword) {
-                $q->where('pcl.name', 'like', '%' . $keyword . '%')
-                    ->orWhere('pcl.canonical', 'like', '%' . $keyword . '%');
+                $q->where('pl.name', 'like', '%' . $keyword . '%');
             });
 
         if (!empty($publish)) {
             $query->where('publish', $publish);
         }
 
-        return $query->orderBy('post_catalouges._lft')->paginate($perpage)->withQueryString();
+        return $query->paginate($perpage)->withQueryString();
     }
 
     public function create($payload)
     {
-        $parent = Post::find($payload['parent_id']);
-
-        if (!empty($parent)) {
-            return $parent->children()->create($payload);
-        } else {
             return Post::create($payload);
-        }
     }
 
     public function createLanguagePivot($model, $payload = [])
@@ -91,34 +85,31 @@ class PostRepository implements PostRepositoryInterface
         return $model->languages()->attach($model->id, $payload);
     }
 
+    public function createCatalougePivot($model, $payload = [])
+    {
+        return $model->postCatalouges()->sync($payload);
+    }
+
+    public function updateCatalougePivot($id, $payload = [])
+    {
+        return Post::find($id)->postCatalouges()->sync($payload);
+    }
+
+
     public function update($id, $payload)
     {
         return Post::find($id)->update($payload);
     }
 
-    public function UpdatePivot($id, $payload = [])
+    public function updatePostLanguage($id, $payload = [])
     {
-        return PostCatalougeLanguage::where('post_catalouge_id', $id)
+        return PostLanguage::where('post_id', $id)
             ->update($payload);
     }
 
     public function destroy($id)
     {
-        $node = Post::findOrFail($id);
-        $left = $node->_lft;
-        $right = $node->_rgt;
-        $width = $right - $left + 1;
-
-        $deteted = Post::destroy($id);
-
-        if ($deteted) {
-            Post::where('_lft', '>', $right)->decrement('_lft', $width);
-            Post::where('_rgt', '>', $right)->decrement('_rgt', $width);
-
-            return true;
-        }
-
-        return false;
+        return Post::destroy($id);
     }
 
 

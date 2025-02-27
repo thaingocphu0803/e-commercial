@@ -13,7 +13,7 @@
         </div>
     @endif
 
-    <form action="{{ route('post.destroy', $post->post_catalouge_id) }}" method="POST" class="box">
+    <form action="{{ route('post.destroy', $post->post_id) }}" method="POST" class="box">
         @csrf
         @method('delete')
 

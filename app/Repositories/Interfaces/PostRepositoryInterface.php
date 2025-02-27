@@ -30,8 +30,11 @@ interface PostRepositoryInterface
 
     public function createLanguagePivot($model, $payload = []);
 
-    public function updatePivot($model, $payload = []);
+    public function createCatalougePivot($model, $payload = []);
 
+    public function updatePostLanguage($model, $payload = []);
+
+    public function updateCatalougePivot($id, $payload = []);
 
     // public function updateByWhereIn($ids, $value);
 
