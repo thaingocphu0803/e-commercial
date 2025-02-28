@@ -21,10 +21,10 @@ class LanguageRepository implements LanguageRepositoryInterface
         $publish = $request->input('publish');
 
         return  Language::keyword($keywork ?? null)
-        ->publish($publish ?? null)
-        ->orderBy('id', 'desc')
-        ->paginate($perpage)
-        ->withQueryString();
+            ->publish($publish ?? null)
+            ->orderBy('id', 'desc')
+            ->paginate($perpage)
+            ->withQueryString();
     }
 
     public function create($payload)
@@ -65,6 +65,14 @@ class LanguageRepository implements LanguageRepositoryInterface
         $columm = [$payload['field'] => $value];
 
         return Language::whereIn('id', $ids)->update($columm);
+    }
+
+    public function changeCurrent($canonical)
+    {
+        return Language::query()->update([
+            'current' => Language::raw("IF(canonical = '$canonical', 1, 0)")
+        ]);
+
     }
 
     // public function updateByWhereIn($ids, $value)

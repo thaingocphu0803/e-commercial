@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateLanguageRequest;
 use App\Models\Language;
 use App\Services\LanguageService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class LanguageController extends Controller
 {
@@ -71,5 +72,19 @@ class LanguageController extends Controller
         }
 
         return redirect()->route('language.index')->with('error', 'Failed to delete language!');
+    }
+
+    public function changeCurrent($canonical){
+
+        if($this->languageService->changeCurrent($canonical))
+        {
+
+            session([
+                'app_locale' => $canonical
+            ]);
+
+        }
+        return back();
+
     }
 }

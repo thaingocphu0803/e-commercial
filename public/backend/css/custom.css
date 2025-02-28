@@ -219,3 +219,12 @@ a, .main-title{
 .catalouge a{
     color: #333;
 }
+
+.language-item{
+    height: 40px;
+    border: 1px solid #333 ;
+}
+
+a.active{
+    background-color: #99d69d;
+}

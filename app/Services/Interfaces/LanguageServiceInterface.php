@@ -24,4 +24,7 @@ interface LanguageServiceInterface
 
     public function updateStatusAll($payload);
 
+    public function changeCurrent($canonical);
+
+
 }

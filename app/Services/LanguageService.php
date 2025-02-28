@@ -147,4 +147,22 @@ class LanguageService implements LanguageServiceInterface
             return false;
         }
     }
+
+    public function changeCurrent($canonical)
+    {
+        DB::beginTransaction();
+        try {
+
+            $this->languageRepository->changeCurrent($canonical);
+
+            DB::commit();
+
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            echo $e->getMessage();
+
+            return false;
+        }
+    }
 }

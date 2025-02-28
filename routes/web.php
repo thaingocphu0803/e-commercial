@@ -18,13 +18,13 @@ Route::get('/', function () {
 });
 
 // AuthenController
-Route::get('/admin', [AuthenController::class, 'index'])->name('auth.admin')->middleware('login');
+Route::get('/admin', [AuthenController::class, 'index'])->name('auth.admin')->middleware(['login', 'locale']);
 Route::post('/login', [AuthenController::class, 'login'])->name('auth.login');
 Route::get('/logout', [AuthenController::class, 'logout'])->name('auth.logout');
 
 // UserController
 
-Route::controller(UserController::class)->middleware('admin')->prefix('user')->group(function () {
+Route::controller(UserController::class)->middleware(['admin', 'locale'])->prefix('user')->group(function () {
     Route::get('index',  'index')->name('user.index');
     Route::get('create', 'create')->name('user.create');
     Route::post('store', 'store')->name('user.store');
@@ -36,7 +36,7 @@ Route::controller(UserController::class)->middleware('admin')->prefix('user')->g
 });
 
 //UserCatalougeController
-Route::controller(UserCatalougeController::class)->middleware('admin')->prefix('user/catalouge')->group(function () {
+Route::controller(UserCatalougeController::class)->middleware(['admin', 'locale'])->prefix('user/catalouge')->group(function () {
     Route::get('index',  'index')->name('user.catalouge.index');
     Route::get('create', 'create')->name('user.catalouge.create');
     Route::post('store', 'store')->name('user.catalouge.store');
@@ -53,7 +53,7 @@ Route::controller(LocationController::class)->prefix('ajax/location')->group(fun
 });
 
 //LanguageController
-Route::controller(LanguageController::class)->middleware('admin')->prefix('language')->group(function () {
+Route::controller(LanguageController::class)->middleware(['admin', 'locale'])->prefix('language')->group(function () {
     Route::get('index',  'index')->name('language.index');
     Route::get('create', 'create')->name('language.create');
     Route::post('store', 'store')->name('language.store');
@@ -61,11 +61,12 @@ Route::controller(LanguageController::class)->middleware('admin')->prefix('langu
     Route::post('update/{id}', 'update')->name('language.update');
     Route::get('delete/{language}', 'delete')->name('language.delete');
     Route::delete('destroy/{id}', 'destroy')->name('language.destroy');
+    Route::get('change/{canonical}', 'changeCurrent')->name('language.change');
 
 });
 
 //PostController
-Route::controller(PostController::class)->middleware('admin')->prefix('post')->group(function () {
+Route::controller(PostController::class)->middleware(['admin', 'locale'])->prefix('post')->group(function () {
     Route::get('index',  'index')->name('post.index');
     Route::get('create', 'create')->name('post.create');
     Route::post('store', 'store')->name('post.store');
@@ -76,7 +77,7 @@ Route::controller(PostController::class)->middleware('admin')->prefix('post')->g
 });
 
 //PostCatalougeController
-Route::controller(PostCatalougeController::class)->middleware('admin')->prefix('post/catalouge')->group(function () {
+Route::controller(PostCatalougeController::class)->middleware(['admin', 'locale'])->prefix('post/catalouge')->group(function () {
     Route::get('index',  'index')->name('post.catalouge.index');
     Route::get('create', 'create')->name('post.catalouge.create');
     Route::post('store', 'store')->name('post.catalouge.store');
@@ -87,7 +88,7 @@ Route::controller(PostCatalougeController::class)->middleware('admin')->prefix('
 });
 
 //DashboardController
-Route::controller(AjaxDashboardController::class)->prefix('ajax/dashboard')->middleware('admin')->group(function(){
+Route::controller(AjaxDashboardController::class)->prefix('ajax/dashboard')->middleware(['admin', 'locale'])->group(function(){
     Route::post('changeStatus', 'changeStatus')->name('dashboard.changeStatus');
     Route::post('changeStatusAll', 'changeStatusAll')->name('dashboard.changeStatus');
     Route::post('upload/image', 'uploadImage')->name('dashboard.upload.image');
@@ -95,4 +96,4 @@ Route::controller(AjaxDashboardController::class)->prefix('ajax/dashboard')->mid
 });
 
 // DashboardController
-Route::get('/dashboard/index', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('admin');
+Route::get('/dashboard/index', [DashboardController::class, 'index'])->name('dashboard.index')->middleware(['admin', 'locale']);

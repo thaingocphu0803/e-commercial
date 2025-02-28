@@ -24,6 +24,8 @@ interface LanguageRepositoryInterface
 
     public function updateStatusAll($payload);
 
+    public function changeCurrent($canonical);
+
     // public function updateByWhereIn($ids, $value);
 
 }
