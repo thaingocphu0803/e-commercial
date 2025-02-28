@@ -23,7 +23,6 @@
                 <th><input type="checkbox" class="checkAll check-table" name="input"></th>
                 <th>Flag</th>
                 <th>Name</th>
-                <th>Canonical</th>
                 <th>Description</th>
                 <th>Active</th>
                 <th>Action</th>
@@ -40,7 +39,6 @@
                         @endif
                     </td>
                     <td class="text-capitalize">{{ $language->name }}</td>
-                    <td>{{ $language->canonical }}</td>
                     <td>{{ $language->description }}</td>
                     <td class="js-switch-{{ $language->id }}">
                         <input type="checkbox" class="js-switch status" data-model="language" data-field="publish"

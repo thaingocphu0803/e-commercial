@@ -64,13 +64,7 @@ class PostService implements PostServiceInterface
     {
         DB::beginTransaction();
         try {
-            $payloadPost = $request->only([
-                'post_id',
-                'follow',
-                'publish',
-                'image',
-                'album'
-            ]);
+            $payloadPost = $request->only($this->getRequestPost());
 
 
             $payloadPost['user_id'] = Auth::id();
@@ -80,16 +74,7 @@ class PostService implements PostServiceInterface
 
             if ($post->id > 0) {
 
-                $payloadLanguage = $request->only([
-                    'name',
-                    'description',
-                    'content',
-                    'meta_title',
-                    'meta_keyword',
-                    'meta_description',
-                    'canonical',
-                    'language_id'
-                ]);
+                $payloadLanguage = $request->only($this->getRequestPivot());
 
                 $payloadLanguage['post_id'] = $post->id;
                 $payloadLanguage['language_id'] = $request->input('language_id') ?? 1;
@@ -122,29 +107,14 @@ class PostService implements PostServiceInterface
         DB::beginTransaction();
         try {
 
-            $payloadPost = $request->only([
-                'post_catalouge_id',
-                'follow',
-                'publish',
-                'image',
-                'album'
-            ]);
+            $payloadPost = $request->only($this->getRequestPost());
 
             $payloadPost['user_id'] = Auth::id();
 
             $updated = $this->postRepository->update($id, $payloadPost);
 
              if($updated > 0){
-                $payloadPivot = $request->only([
-                    'name',
-                    'description',
-                    'content',
-                    'meta_title',
-                    'meta_keyword',
-                    'meta_description',
-                    'canonical',
-                    'language_id'
-                ]);
+                $payloadPivot = $request->only($this->getRequestPivot());
 
 
                 $payloadPivot['canonical'] = Str::slug($payloadPivot['canonical']);
@@ -155,6 +125,7 @@ class PostService implements PostServiceInterface
                 array_push( $catalouges, $payloadPost['post_catalouge_id'] );
 
                 $payloadCatalouge= array_unique($catalouges);
+
 
                 $this->postRepository->updateCatalougePivot($id, $payloadCatalouge);
              }
@@ -244,5 +215,31 @@ class PostService implements PostServiceInterface
 
             return false;
         }
+    }
+
+    public function getRequestPost()
+    {
+        return [
+            'post_id',
+            'follow',
+            'publish',
+            'image',
+            'album',
+            'post_catalouge_id'
+        ];
+    }
+
+    public function getRequestPivot()
+    {
+        return [
+            'name',
+            'description',
+            'content',
+            'meta_title',
+            'meta_keyword',
+            'meta_description',
+            'canonical',
+            'language_id'
+        ];
     }
 }

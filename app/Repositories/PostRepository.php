@@ -63,24 +63,19 @@ class PostRepository implements PostRepositoryInterface
             'posts.publish as publish',
             'posts.order as order'
         )
-            ->join('post_language as pl', 'pl.post_id', '=', 'posts.id')
-            ->join('post_catalouge_post as pcp', 'pcp.post_id', '=', 'posts.id')
-            ->where(function ($q) use ($keyword) {
-                $q->where('pl.name', 'like', '%' . $keyword . '%');
-            });
-
-        if (!empty($publish)) {
-            $query->where('posts.publish', $publish);
-        }
+        ->join('post_language as pl', 'pl.post_id', '=', 'posts.id')
+        ->join('post_catalouge_post as pcp', 'pcp.post_id', '=', 'posts.id')
+        ->keyword($keyword ?? null)
+        ->publish($publish ?? null);
 
         if(!empty($post_catalouge_id)){
             $catalouges = $this->getDescendantsAndSelf($post_catalouge_id);
             if(!empty($catalouges)){
-                $query->WhereIn('posts.post_catalouge_id', $catalouges)->distinct();
+                $query->WhereIn('posts.post_catalouge_id', $catalouges);
             }
         }
 
-        return $query->paginate($perpage)->withQueryString();
+        return $query->distinct()->paginate($perpage)->withQueryString();
     }
 
     public function getDescendantsAndSelf($id)

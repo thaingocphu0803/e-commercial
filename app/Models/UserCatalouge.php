@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\QueryScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -9,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 
 class UserCatalouge extends Model
 {
-    use HasFactory, Notifiable, SoftDeletes;
+    use HasFactory, Notifiable, SoftDeletes, QueryScope;
 
     protected $fillable = [
         'name',

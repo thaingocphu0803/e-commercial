@@ -64,13 +64,7 @@ class PostCatalougeService implements PostCatalougeServiceInterface
     {
         DB::beginTransaction();
         try {
-            $payloadPostCatalouge = $request->only([
-                'parent_id',
-                'follow',
-                'publish',
-                'image',
-                'album'
-            ]);
+            $payloadPostCatalouge = $request->only($this->getRequestPostCatalouge());
 
             $payloadPostCatalouge['user_id'] = Auth::id();
             $payloadPostCatalouge['parent_id'] = $request->input('parent_id') ?? null;
@@ -79,16 +73,7 @@ class PostCatalougeService implements PostCatalougeServiceInterface
 
             if ($postCatalouge->id > 0) {
 
-                $payloadLanguage = $request->only([
-                    'name',
-                    'description',
-                    'content',
-                    'meta_title',
-                    'meta_keyword',
-                    'meta_description',
-                    'canonical',
-                    'language_id'
-                ]);
+                $payloadLanguage = $request->only($this->getRequestPivot());
 
                 $payloadLanguage['post_catalouge_id'] = $postCatalouge->id;
                 $payloadLanguage['language_id'] = $request->input('language_id') ?? 1;
@@ -114,29 +99,14 @@ class PostCatalougeService implements PostCatalougeServiceInterface
         DB::beginTransaction();
         try {
 
-            $payloadPostCatalouge = $request->only([
-                'parent_id',
-                'follow',
-                'publish',
-                'image',
-                'album'
-            ]);
+            $payloadPostCatalouge = $request->only($this->getRequestPostCatalouge());
 
             $payloadPostCatalouge['user_id'] = Auth::id();
 
             $updated = $this->postCatalougeRepository->update($id, $payloadPostCatalouge);
 
              if($updated > 0){
-                $payloadPivot = $request->only([
-                    'name',
-                    'description',
-                    'content',
-                    'meta_title',
-                    'meta_keyword',
-                    'meta_description',
-                    'canonical',
-                    'language_id'
-                ]);
+                $payloadPivot = $request->only($this->getRequestPivot());
 
                 $payloadPivot['canonical'] = Str::slug($payloadPivot['canonical']);
 
@@ -228,5 +198,31 @@ class PostCatalougeService implements PostCatalougeServiceInterface
 
             return false;
         }
+    }
+
+    public function getRequestPostCatalouge()
+    {
+        return [
+            'parent_id',
+            'follow',
+            'publish',
+            'image',
+            'album'
+        ];
+    }
+
+
+    public function getRequestPivot()
+    {
+        return [
+            'name',
+            'description',
+            'content',
+            'meta_title',
+            'meta_keyword',
+            'meta_description',
+            'canonical',
+            'language_id'
+        ];
     }
 }

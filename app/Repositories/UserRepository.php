@@ -13,15 +13,15 @@ class UserRepository implements UserRepositoryInterface {
         $publish = $request->input('publish');
         $userCatalougeId = $request->input('user_catalouge_id');
 
-        $query =  User::with('province', 'district', 'ward', 'userCatalouge')
-                    ->where(function ($q) use ($keywork){
-                        $q->where('name', 'like', '%'.$keywork.'%')
-                            ->orWhere('email', 'like', '%'.$keywork.'%');
-                    });
+        $query = User::with(
+            'province',
+            'district',
+            'ward',
+            'userCatalouge'
+        )
+        ->keyword($keywork ?? null)
+        ->publish($publish ?? null);
 
-        if(!empty($publish)){
-            $query->where('publish', $publish);
-        }
 
         if((!empty($userCatalougeId))){
             $query->where('user_catalouge_id', $userCatalougeId);

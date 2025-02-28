@@ -61,15 +61,9 @@ class PostCatalougeRepository implements PostCatalougeRepositoryInterface
             'pcl.canonical as canonical',
             'post_catalouges.publish as publish'
         )
-            ->join('post_catalouge_language as pcl', 'pcl.post_catalouge_id', '=', 'post_catalouges.id')
-            ->where(function ($q) use ($keyword) {
-                $q->where('pcl.name', 'like', '%' . $keyword . '%')
-                    ->orWhere('pcl.canonical', 'like', '%' . $keyword . '%');
-            });
-
-        if (!empty($publish)) {
-            $query->where('publish', $publish);
-        }
+        ->join('post_catalouge_language as pcl', 'pcl.post_catalouge_id', '=', 'post_catalouges.id')
+        ->keyword($keyword ?? null)
+        ->publish($publish ?? null);
 
         return $query->orderBy('post_catalouges._lft')->paginate($perpage)->withQueryString();
     }

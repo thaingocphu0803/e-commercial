@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\QueryScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,7 +11,7 @@ use Kalnoy\Nestedset\NodeTrait;
 
 class PostCatalouge extends Model
 {
-    use HasFactory, Notifiable, SoftDeletes, NodeTrait;
+    use HasFactory, Notifiable, SoftDeletes, NodeTrait, QueryScope;
 
     protected $table = 'post_catalouges';
 

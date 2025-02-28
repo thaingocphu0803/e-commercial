@@ -21,14 +21,12 @@ class UserCatalougeRepository implements UserCatalougeRepositoryInterface
         $keywork = $request->input('keyword');
         $publish = $request->input('publish');
 
-        $query =  UserCatalouge::withCount('users')->where('name', 'like', '%' . $keywork . '%');
-
-
-        if (!empty($publish)) {
-            $query->where('publish', $publish);
-        }
-
-        return $query->orderBy('id', 'desc')->paginate($perpage)->withQueryString();
+        return  UserCatalouge::withCount('users')
+        ->keyword($keywork ?? null)
+        ->publish($publish ?? null)
+        ->orderBy('id', 'desc')
+        ->paginate($perpage)
+        ->withQueryString();
     }
 
     public function create($payload)

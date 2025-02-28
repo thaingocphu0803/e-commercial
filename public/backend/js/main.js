@@ -10,6 +10,21 @@ const maxFiles = 1;
 const width = 300;
 const height = 300;
 
+const tinyPlugins = [
+    'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link',
+    'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount','checklist',
+    'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed','a11ychecker',
+    'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable','advcode', 'editimage',
+    'advtemplate', 'mentions', 'tinycomments', 'tableofcontents','footnotes', 'mergetags',
+    'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
+  ]
+
+const tinyToolBar = `
+        undo redo | blocks fontfamily fontsize | bold italic underline strikethrough |
+        link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography |
+        align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat
+    `;
+
 
 // get district api
 $(document).on("change", "#province_id", async function () {
@@ -343,13 +358,8 @@ $(".tiny-editor").each(function () {
         selector: `#${editorId}`,
         height: height,
         menubar: false,
-        plugins: [
-            // Core editing features
-            'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
-            // Premium features
-            'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
-          ],
-          toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+        plugins: tinyPlugins,
+          toolbar: tinyToolBar,
           tinycomments_mode: 'embedded',
           tinycomments_author: 'Author name',
           mergetags_list: [
@@ -365,19 +375,11 @@ $(".tiny-editor").each(function () {
           images_reuse_filename: true,
 
           content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
-          ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),    });
+    });
 
 });
 
-$('#sortable').sortable({
-    update: function(event, ui) {
-        // Lấy index mới của phần tử được kéo
-        let newIndex = ui.item.index();
-        console.log('ui', ui);
-        console.log('event', event);
-        console.log("Phần tử được kéo có index mới là:", newIndex);
-    }
-});
+$('#sortable').sortable();
 
 $("#sortable").disableSelection();
 

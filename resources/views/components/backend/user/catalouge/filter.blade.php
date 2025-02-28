@@ -29,7 +29,7 @@
                 <div class="flex flex-middle gap-10">
                     <div class="input-group">
                         <input class="form-control" type="text" name="keyword"
-                            value="{{ request('keyword') ?? old('keyword') }}" placeholder="Enter keyword...">
+                            value="{{ request('keyword') ?? old('keyword') }}" placeholder="Search by name...">
 
                         <span class="input-group-btn">
                             <button class="btn btn-primary search-btn" type="submit">

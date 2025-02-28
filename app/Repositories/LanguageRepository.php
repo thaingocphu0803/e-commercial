@@ -20,16 +20,11 @@ class LanguageRepository implements LanguageRepositoryInterface
         $keywork = $request->input('keyword');
         $publish = $request->input('publish');
 
-        $query =  Language::where(function ($q) use ($keywork){
-                                    $q->where('name', 'like', '%' . $keywork . '%')
-                                    ->orWhere('canonical', 'like', '%' . $keywork . '%');
-                                });
-
-        if (!empty($publish)) {
-            $query->where('publish', $publish);
-        }
-
-        return $query->orderBy('id', 'desc')->paginate($perpage)->withQueryString();
+        return  Language::keyword($keywork ?? null)
+        ->publish($publish ?? null)
+        ->orderBy('id', 'desc')
+        ->paginate($perpage)
+        ->withQueryString();
     }
 
     public function create($payload)
