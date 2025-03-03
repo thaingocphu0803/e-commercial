@@ -21,11 +21,11 @@
             <tr>
 
                 <th><input type="checkbox" class="checkAll check-table" name="input"></th>
-                <th>Name</th>
-                <th>Number of Member</th>
-                <th>Description</th>
-                <th>Active</th>
-                <th>Action</th>
+                <th>{{__('table.name')}}</th>
+                <th>{{__('table.numMember')}}</th>
+                <th>{{__('table.description')}}</th>
+                <th>{{__('table.active')}}</th>
+                <th>{{__('table.action')}}</th>
             </tr>
         </thead>
         <tbody>

@@ -11,10 +11,10 @@
 <div class="ibox">
     <div class="ibox-title">
         <div class="flex flex-middle flex-space-between">
-            <h5>Album</h5>
+            <h5>{{__('dashboard.album')}}</h5>
             <div class="upload-album">
                 <a href="#" class="upload-picture">
-                    Upload
+                    {{__('dashboard.upload')}}
                 </a>
             </div>
         </div>
@@ -56,7 +56,7 @@
                                 </g>
                             </svg> </a>
                     </div>
-                    <div class="small-text">Click here or click the button to upload!</div>
+                    <div class="small-text">{{__('dashboard.clickToUpload', [ 'attribute' => 'button'])}}</div>
                 </div>
                 <div class="upload-list {{ !empty($album) ? '' : 'hidden' }}">
                     <div class="row">

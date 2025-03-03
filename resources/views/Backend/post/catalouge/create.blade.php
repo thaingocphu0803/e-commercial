@@ -11,7 +11,7 @@
             ? route('post.catalouge.update', $postCatalouge->post_catalouge_id)
             : route('post.catalouge.store');
 
-        $title = isset($postCatalouge) ? 'Edit Post Group' : 'Add Post Group';
+        $title = isset($postCatalouge) ? __('form.addObject', ['attribute' => 'Post Group']) : __('form.editObject', ['attribute' => 'Post Group']);
 
         $publish = $postCatalouge->publish ?? '';
         $follow = $postCatalouge->follow ?? '';
@@ -39,7 +39,7 @@
                 <div class="col-lg-9">
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5>Common Information</h5>
+                            <h5>{{__('form.ObjectInfor', ['attribute'=>'Common'])}}</h5>
                             <div class="ibox-content">
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -67,7 +67,7 @@
 
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5>SEO setting</h5>
+                            <h5>{{__('form.seoSet')}}</h5>
                         </div>
                         <div class="ibox-content">
                             <div class="seo-wrapper flex flex-col gap-10">
@@ -100,7 +100,9 @@
                 <div class="col-lg-3">
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5>CHOOSE PARENT SECTION</h5>
+                            <h5>
+                                {{__('form.chooseObject', ['attribute' => 'Parent Section'])}}
+                            </h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
@@ -112,7 +114,9 @@
 
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5>CHOOSE LANGUAGE</h5>
+                            <h5>
+                                {{__('form.chooseObject', ['attribute' => 'Language'])}}
+                            </h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
@@ -128,7 +132,9 @@
 
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5>CHOOSE POST GROUP IMAGE</h5>
+                            <h5>
+                                {{__('form.chooseObject', ['attribute' => 'Post Group Image'])}}
+                            </h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
@@ -143,24 +149,36 @@
 
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5>ADVANCE SETTING</h5>
+                            <h5>
+                                {{__('form.advanceSet')}}
+                            </h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
                                 <div class="col-lg-12 flex flex-col gap-10">
                                     <div class="flex gap-10">
                                         <select name="publish" class="form-control  select2">
-                                            <option disabled selected> Choose Post Group Status</option>
-                                            <option value="1" @selected(old('publish', $publish) == 1)>Published</option>
-                                            <option value="2" @selected(old('publish', $publish) == 2)>Private</option>
+                                            <option disabled selected>
+                                                {{__('form.chooseObject', ['attribute' => 'Post Group Status'])}}
+                                            </option>
+                                            <option value="1" @selected(old('publish', $publish) == 1)>
+                                                {{__('form.published')}}
+                                            </option>
+                                            <option value="2" @selected(old('publish', $publish) == 2)>
+                                                {{__('form.private')}}
+                                            </option>
                                         </select>
                                     </div>
 
                                     <div class="flex gap-10">
                                         <select name="follow" class="form-control  select2">
-                                            <option disabled selected> Choose Post Group Direction</option>
-                                            <option value="1" @selected(old('follow', $follow) == 1)>Follow</option>
-                                            <option value="2" @selected(old('follow', $follow) == 2)>Unfollow</option>
+                                            <option disabled selected> {{__('form.chooseObject', ['attribute' => 'Post Group Direction'])}}</option>
+                                            <option value="1" @selected(old('follow', $follow) == 1)>
+                                                {{__('form.follow')}}
+                                            </option>
+                                            <option value="2" @selected(old('follow', $follow) == 2)>
+                                                {{__('form.unfollow')}}
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -170,8 +188,12 @@
                 </div>
             </div>
             <div class="flex flex-space-between">
-                <a href="{{ route('post.catalouge.index') }}" class="btn btn-success mb-20 ">Cancel</a>
-                <button type="submit" class="btn btn-primary mb-20 ">Save</button>
+                <a href="{{ route('post.catalouge.index') }}" class="btn btn-success mb-20 ">
+                    {{__('form.cancel')}}
+                </a>
+                <button type="submit" class="btn btn-primary mb-20 ">
+                    {{__('form.save')}}
+                </button>
             </div>
     </form>
 </x-backend.dashboard.layout>

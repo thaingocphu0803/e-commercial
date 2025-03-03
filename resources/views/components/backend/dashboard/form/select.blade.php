@@ -19,7 +19,7 @@
             @endif
         </label>
         <select name="{{ $name }}" id="{{ $name }}" class="form-control select2" {{$attributes}}>
-            <option selected disabled>Choose {{ $labelName }}</option>
+            <option selected disabled> {{__('dashboard.choose') $labelName }}</option>
             @if (!empty($data))
                 @foreach ($data as $item)
                     @php

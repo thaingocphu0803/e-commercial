@@ -2,7 +2,7 @@
 
     @php
         $url = isset($user) ? route('user.update', $user->id) : route('user.store');
-        $title = isset($user) ? 'Edit Member' : 'Add Member';
+        $title = isset($user) ? __('form.addObject', ['attribute' => 'Member']) : __('form.editObject', ['attribute' => 'Member']);
     @endphp
 
     <x-backend.dashboard.breadcrumb :title="$title" />
@@ -17,22 +17,26 @@
         </div>
     @endif
 
-
-
     <form action="{{ $url }}" method="POST" class="box">
         @csrf
 
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-5">
-                    <h3 class="panel-title">Common Information</h3>
-                    <div class="pannel-description">Enter user information to {{ isset($user) ? 'edit' : 'create new'}} member</div>
+                    <h3 class="panel-title">
+                        {{__('form.ObjectInfor', ['attribute'=>'Common'])}}
+                    </h3>
+                    <div class="pannel-description">
+                        {{ __('form.enterMember', 'attribute' =>(isset($user) ? 'edit' : 'create new')) }}
+                    </div>
 
                 </div>
                 <div class="col-lg-7">
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5>Common Information</h5>
+                            <h5>
+                                {{__('form.ObjectInfor', ['attribute'=>'Common'])}}
+                            </h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
@@ -72,14 +76,20 @@
 
             <div class="row">
                 <div class="col-lg-5">
-                    <h3 class="panel-title">Contact Information</h3>
-                    <div class="pannel-description">Contact information can be ignored</div>
+                    <h3 class="panel-title">
+                        {{__('form.ObjectInfor', ['attribute'=>'Contact'] )}}
+                    </h3>
+                    <div class="pannel-description">
+                        {{__('form.contactInforIgnore')}}
+                    </div>
 
                 </div>
                 <div class="col-lg-7">
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5>Contact Information</h5>
+                            <h5>
+                                {{__('form.ObjectInfor') ['attribute'=>'Contact']}}
+                            </h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
@@ -108,8 +118,8 @@
 
                     </div>
                     <div class="flex flex-space-between">
-                        <a href="{{route('user.index')}}" class="btn btn-success mb-20 ">Cancel</a>
-                        <button type="submit" class="btn btn-primary mb-20 ">Save</button>
+                        <a href="{{route('user.index')}}" class="btn btn-success mb-20 ">{{__('form.cancel')}}</a>
+                        <button type="submit" class="btn btn-primary mb-20 ">{{__('form.save')}}</button>
                     </div>
 
                 </div>

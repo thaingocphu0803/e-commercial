@@ -19,7 +19,7 @@
                 data-field="publish"
                 data-model="{{$model}}"
             >
-                Publish choosen {{$object}}
+                 {{__('dashboard.stateChoosen', ['attribute' => 'Publish']) .' '.$object}}
             </a>
         </li>
         <li>
@@ -30,8 +30,8 @@
                 data-field="publish"
                 data-model="{{$model}}"
             >
-                Private choosen {{$object}}
-            </a>
+            {{__('dashboard.stateChoosen', ['attribute' => 'Private']).' '.$object}}
+        </a>
         </li>
     </ul>
     <a class="close-link">

@@ -2,7 +2,7 @@
 
     @php
         $url = isset($userCatalouge) ? route('user.catalouge.update', $userCatalouge->id) : route('user.catalouge.store');
-        $title = isset($userCatalouge) ? 'Edit Member Group' : 'Add Member Group';
+        $title = isset($userCatalouge) ? __('form.addObject', ['attribute' => 'Member Group']) : __('form.editObject', ['attribute' => 'Member Group']);
     @endphp
 
     <x-backend.dashboard.breadcrumb :title="$title" />
@@ -25,14 +25,20 @@
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-5">
-                    <h3 class="panel-title">Common Information</h3>
-                    <div class="pannel-description">Enter group information to {{ isset($userCatalouge) ? 'edit' : 'create new'}} member group</div>
+                    <h3 class="panel-title">
+                        {{__('form.ObjectInfor', ['attribute'=>'Common'])}}
+                    </h3>
+                    <div class="pannel-description">
+                        {{ __('form.enterMemberGroup', ['attribute' => (isset($userCatalouge) ? 'edit' : 'create new')])}}
+                    </div>
 
                 </div>
                 <div class="col-lg-7">
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5>Common Information</h5>
+                            <h5>
+                                {{__('form.ObjectInfor', ['attribute'=>'Common'])}}
+                            </h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
@@ -46,8 +52,12 @@
 
                     </div>
                     <div class="flex flex-space-between">
-                        <a href="{{route('user.catalouge.index')}}" class="btn btn-success mb-20 ">Cancel</a>
-                        <button type="submit" class="btn btn-primary mb-20 ">Save</button>
+                        <a href="{{route('user.catalouge.index')}}" class="btn btn-success mb-20 ">
+                            {{__('form.cancel')}}
+                        </a>
+                        <button type="submit" class="btn btn-primary mb-20 ">
+                            {{__('form.save')}}
+                        </button>
                     </div>
                 </div>
             </div>

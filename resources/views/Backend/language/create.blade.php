@@ -2,7 +2,7 @@
 
     @php
         $url = isset($language) ? route('language.update', $language->id) : route('language.store');
-        $title = isset($language) ? 'Edit Language' : 'Add Language';
+        $title = isset($language) ? __('form.addObject', ['attribute' => 'Language']) : __('form.editObject', ['attribute' => 'Language']);
     @endphp
 
     <x-backend.dashboard.breadcrumb :title="$title" />
@@ -25,14 +25,20 @@
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-5">
-                    <h3 class="panel-title">Common Information</h3>
-                    <div class="pannel-description">Enter group information to {{ isset($language) ? 'edit' : 'create new'}} language</div>
+                    <h3 class="panel-title">
+                        {{__('form.ObjectInfor', ['attribute'=>'Common'])}}
+                    </h3>
+                    <div class="pannel-description">
+                        {{__('form.enterInforTo', ['attribute' => (isset($language) ? 'edit' : 'create new')]) }}
+                    </div>
 
                 </div>
                 <div class="col-lg-7">
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5>Common Information</h5>
+                            <h5>
+                                {{__('form.')}}
+                            </h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
@@ -53,8 +59,12 @@
 
                     </div>
                     <div class="flex flex-space-between">
-                        <a href="{{route('language.index')}}" class="btn btn-success mb-20 ">Cancel</a>
-                        <button type="submit" class="btn btn-primary mb-20 ">Save</button>
+                        <a href="{{route('language.index')}}" class="btn btn-success mb-20 ">
+                            {{__table('form.cancel')}}
+                        </a>
+                        <button type="submit" class="btn btn-primary mb-20 ">
+                            {{__table('form.save')}}
+                        </button>
                     </div>
                 </div>
             </div>

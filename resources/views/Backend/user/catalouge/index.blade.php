@@ -7,7 +7,7 @@
         <div class="col-lg-12 mt-20">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>List Member </h5>
+                    <h5>{{ __('table.listObject', ['attribute' => 'Member Group']) }}</h5>
                     <x-backend.dashboard.toolbox model="userCatalouge" object="Member Group"/>
                 </div>
                 <div class="ibox-content">

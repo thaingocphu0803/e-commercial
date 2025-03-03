@@ -9,8 +9,8 @@
         <label for="upload_widget" class="control-label text-right text-capitalize">
             {{ $labelName }}
         </label>
-        <button class="btn form-control bg-silver text-capitalize" type="button" id="upload_widget">Choose
-            {{ $labelName }} to upload</button>
+        <button class="btn form-control bg-silver text-capitalize" type="button" id="upload_widget">
+            {{_('dashboard.choose') $labelName _('dashboard.toUpload')}}</button>
         <input type="text" class="hidden" name="image" id="image" value="{{ old('image', $value) }}">
         <p class="form-controll">
             <a href="{{ old('image', $value) ? base64_decode(old('image', $value)) : '' }}"

@@ -12,7 +12,8 @@
                 <div class="perpage gap-10">
                     <select name="perpage" class="form-control perpage filter ">
                         @for ($i = 10; $i <= 100; $i += 10)
-                            <option value={{ $i }} @selected($perpage == $i)> {{ $i }} records
+                            <option value={{ $i }} @selected($perpage == $i)>
+                                {{$i.' '.__('table.records')}}
                             </option>
                         @endfor
                     </select>
@@ -20,17 +21,28 @@
 
                 <div class="flex gap-10">
                     <select name="publish" class="form-control  select2">
-                        <option value="0" selected> Choose User Status</option>
-                        <option value="1" @selected(request('publish') == 1)>Published</option>
-                        <option value="2" @selected(request('publish') == 2)>Private</option>
+                        <option value="0" selected>
+                            {{__('table.chooseObject', ['attribute' => 'User Status'])}}
+                        </option>
+
+                        <option value="1" @selected(request('publish') == 1)>
+                            {{__('table.published')}}
+                        </option>
+                        <option value="2" @selected(request('publish') == 2)>
+                            {{__('table.private')}}
+                        </option>
                     </select>
                 </div>
 
                 <div class="flex gap-10">
                     <select name="user_catalouge_id" class="form-control  select2">
-                        <option value="0" selected> Choose Member Group</option>
+                        <option value="0" selected>
+                            {{__('table.chooseObject', ['attribute' => 'Member Group'])}}
+                        </option>
                         @foreach ($groupMember as $group )
-                            <option value="{{$group->id}}" @selected(request('user_catalouge_id') == $group->id)>{{$group->name}}</option>
+                            <option value="{{$group->id}}" @selected(request('user_catalouge_id') == $group->id)>
+                                {{$group->name}}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -38,17 +50,21 @@
                 <div class="flex flex-middle gap-10">
                     <div class="input-group">
                         <input class="form-control" type="text" name="keyword"
-                            value="{{ request('keyword') ?? old('keyword') }}" placeholder="Search by name...">
+                            value="{{ request('keyword') ?? old('keyword') }}" placeholder="{{ __('table.searchBy', ['attribute' => 'Name']) }}...">
 
                         <span class="input-group-btn">
                             <button class="btn btn-primary search-btn" type="submit">
-                                Search
+                                {{__('table.search')}}
                             </button>
                         </span>
                     </div>
                 </div>
             </div>
-            <a href="{{ route('user.create') }}" class="btn btn-danger"><i class="fa fa-plus"> Add Member</i></a>
+            <a href="{{ route('user.create') }}" class="btn btn-danger">
+                <i class="fa fa-plus">
+                    {{__('table.addObject', ['attribute' => 'Member'])}}
+                </i>
+            </a>
 
         </div>
     </div>

@@ -21,10 +21,10 @@
             <tr>
 
                 <th><input type="checkbox" class="checkAll check-table" name="input"></th>
-                <th>Name</th>
-                <th class="text-center w-80">Order</th>
-                <th class="text-center">Active</th>
-                <th class="text-center">Action</th>
+                <th>{{__('table.name')}}</th>
+                <th class="text-center w-80">{{__('table.order')}}</th>
+                <th class="text-center">{{__('table.active')}}</th>
+                <th class="text-center">{{__('table.action')}}</th>
             </tr>
         </thead>
         <tbody>
@@ -53,7 +53,7 @@
                                     </span>
                                 </div>
                                 <div class="catalouge flex gap-10">
-                                    <span class="text-danger">Catalouge Group:</span>
+                                    <span class="text-danger">{{__('dashboard.objectGroup', ['object' => 'Catalouge'])}}:</span>
                                     @foreach ($post->postCatalouges as $postCatalouge)
                                     <a href="#" title="">{{$postCatalouge->languages->pluck('pivot.name')->implode(',')}}</a>
                                     @endforeach

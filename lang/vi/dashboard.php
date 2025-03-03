@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'profile' => 'Hồ sơ',
+    'contacts' => 'Liên hệ',
+    'mailbox' => 'Hộp thư',
+    'logout' => 'Đăng xuất',
+    'managerObject' => 'Quản lý :object',
+    'member' => 'Thành viên',
+    'objectGroup' => 'Nhóm :object',
+    'post' => 'Bài viết',
+    'language' => 'Ngôn ngữ',
+    'album' => 'Album',
+    'upload' => 'Tải lên',
+    'clickToUpload' => 'Nhấn vào đây hoặc nhấn vào :attribute để tải lên!',
+    'dashboard' => 'Bảng điều khiển',
+    'copyright' => 'Bản quyền',
+    'company' => 'Công ty',
+    'readAll' => 'Đọc tất cả :attribute',
+    'seeAll' => 'Xem tất cả :attribute',
+    'stateChoosen' => ':attribute đã chọn',
+    'choose' => 'Chọn',
+    'toUpload' => 'để tải lên',
+    'listObject' => 'Danh sách :attribute'
+];

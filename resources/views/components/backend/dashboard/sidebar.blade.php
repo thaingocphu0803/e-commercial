@@ -70,7 +70,7 @@
                     <li>
                         <div class="text-center link-block">
                             <a href="mailbox.html">
-                                <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
+                                <i class="fa fa-envelope"></i> <strong>{{__('dashboard.readAll', [ 'attribute' => 'Message'])}}</strong>
                             </a>
                         </div>
                     </li>
@@ -111,7 +111,7 @@
                     <li>
                         <div class="text-center link-block">
                             <a href="notifications.html">
-                                <strong>See All Alerts</strong>
+                                <strong>{{__('dashboard.seeAll', [ 'attribute' => 'Alerts'])}}</strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </div>

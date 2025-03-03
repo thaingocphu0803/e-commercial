@@ -20,10 +20,13 @@
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-5">
-                    <h3 class="panel-title">Post Catalouge Information</h3>
-                    <div class="pannel-description">Do you want delete post catalouge with name: <span
-                            class="text-danger">{{ $postCatalouge->name }}</span></div>
-                    <div class="pannel-description">Note: You can not recover after deleting.</div>
+                    <h3 class="panel-title">
+                        {{__('form.ObjectInfor', ['attribute' => 'Post Cataloue'])}}
+                    </h3>
+                    <div class="pannel-description">
+                        {{__('form.DelQuestion')}}<span class="text-danger">{{ $postCatalouge->name }}</span>
+                    </div>
+                    <div class="pannel-description">{{__('form.DelNote')}}</div>
 
                 </div>
                 <div class="col-lg-7">
@@ -42,8 +45,12 @@
 
                     </div>
                     <div class="flex flex-space-between">
-                        <a href="{{ route('post.catalouge.index') }}" class="btn btn-success mb-20 ">Cancel</a>
-                        <button type="submit" class="btn btn-danger mb-20 ">Delete</button>
+                        <a href="{{ route('post.catalouge.index') }}" class="btn btn-success mb-20 ">
+                            {{__('form.cancel')}}
+                        </a>
+                        <button type="submit" class="btn btn-danger mb-20 ">
+                            {{__('form.DelNote')}}
+                        </button>
                     </div>
 
                 </div>

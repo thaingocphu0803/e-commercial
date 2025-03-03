@@ -1,8 +1,5 @@
 <div class="footer">
-    <div class="pull-right">
-        10GB of <strong>250GB</strong> Free.
-    </div>
     <div>
-        <strong>Copyright</strong> TPro Company &copy; 2014-2017
+        <strong>{{__('dashboard.copyright')}}</strong> TPro {{__('dashboard.company')}} &copy; {{date("Y")}}
     </div>
 </div>

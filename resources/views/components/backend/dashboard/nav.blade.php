@@ -11,11 +11,11 @@
                             </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
                         </span> </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a href="profile.html">{{__('nav.profile')}}</a></li>
-                        <li><a href="contacts.html">{{__('nav.contacts')}}</a></li>
-                        <li><a href="mailbox.html">{{__('nav.mailbox')}}</a></li>
+                        <li><a href="profile.html">{{__('dashboard.profile')}}</a></li>
+                        <li><a href="contacts.html">{{__('dashboard.contacts')}}</a></li>
+                        <li><a href="mailbox.html">{{__('dashboard.mailbox')}}</a></li>
                         <li class="divider"></li>
-                        <li><a href="{{ route('auth.logout') }}">{{__('nav.logout')}}</a></li>
+                        <li><a href="{{ route('auth.logout') }}">{{__('dashboard.logout')}}</a></li>
                     </ul>
                 </div>
                 <div class="logo-element">
@@ -23,18 +23,18 @@
                 </div>
             </li>
 
-            <x-backend.dashboard.nav.module icon='fa-user-circle-o' :title="__('nav.managerMember')">
-                <li><a href="{{ route('user.index') }}">{{__('nav.member')}}</a></li>
-                <li><a href="{{ route('user.catalouge.index') }}">{{__('nav.memberGroup')}}</a></li>
+            <x-backend.dashboard.nav.module icon='fa-user-circle-o' :title="__('dashboard.managerObject', ['object' => 'Member'])">
+                <li><a href="{{ route('user.index') }}">{{__('dashboard.member')}}</a></li>
+                <li><a href="{{ route('user.catalouge.index') }}">{{__('dashboard.objectGroup', ['object' => 'Member'])}}</a></li>
             </x-backend.dashboard.nav.module>
 
-            <x-backend.dashboard.nav.module icon='fa-file' :title="__('nav.managerPost')">
-                <li><a href="{{ route('post.index') }}">{{__('nav.post')}}</a></li>
-                <li><a href="{{ route('post.catalouge.index') }}">{{__('nav.postGroup')}}</a></li>
+            <x-backend.dashboard.nav.module icon='fa-file' :title="__('dashboard.managerObject', ['object' => 'Post'])">
+                <li><a href="{{ route('post.index') }}">{{__('dashboard.post')}}</a></li>
+                <li><a href="{{ route('post.catalouge.index') }}">{{__('dashboard.objectGroup', ['object' => 'Post'])}}</a></li>
             </x-backend.dashboard.nav.module>
 
-            <x-backend.dashboard.nav.module icon='fa-cog' :title="__('nav.managerLanguage')">
-                <li><a href="{{ route('language.index') }}">{{__('nav.language')}}</a></li>
+            <x-backend.dashboard.nav.module icon='fa-cog' :title="__('dashboard.managerObject', ['object' => 'Language'])">
+                <li><a href="{{ route('language.index') }}">{{__('dashboard.language')}}</a></li>
             </x-backend.dashboard.nav.module>
         </ul>
 

@@ -17,9 +17,9 @@
                             <span class="text-danger">*</span>
                         @endif
                     </span>
-                    @if($labelName != 'keyword')
-                        <span class="count_meta-{{$inputName}}}}">0 character(s)</span>
-                    @endif
+                    {{-- @if($labelName != 'keyword')
+                        <span class="count_meta-{{$inputName}}}}">0 characters</span>
+                    @endif --}}
                 </div>
             </label>
 
