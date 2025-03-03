@@ -8,7 +8,7 @@ return [
     'managerObject' => 'Quản lý :object',
     'member' => 'Thành viên',
     'objectGroup' => 'Nhóm :object',
-    'post' => 'Bài viết',
+    'post' => 'bài viết',
     'language' => 'Ngôn ngữ',
     'album' => 'Album',
     'upload' => 'Tải lên',
@@ -21,5 +21,9 @@ return [
     'stateChoosen' => ':attribute đã chọn',
     'choose' => 'Chọn',
     'toUpload' => 'để tải lên',
-    'listObject' => 'Danh sách :attribute'
+    'listObject' => 'Danh sách :attribute',
+    'postGroup' => 'Nhóm bài viết',
+    'memberGroup' => 'Nhóm Thành Viên',
+    'canonical' => 'Đường dẫn',
+    'name' => 'Tên',
 ];

@@ -28,4 +28,12 @@ return [
     'searchBy' => 'Tìm kiếm theo :attribute',
     'order' => 'Thứ tự',
     'objectGroup' => 'Nhóm :attribute',
+    'listObject' => 'Danh sách :attribute',
+    'languageStatus' => 'trạng thái ngôn ngữ',
+    'postStatus' => 'trạng thái bài viết',
+    'memberStatus' => 'trạng thái thành viên',
+    'memberGroupStatus' => 'trạng thái nhóm thành viên',
+    'postGroupStatus' => 'trạng thái nhóm bài viết',
+    'parentSection' => 'mục cha'
+
 ];

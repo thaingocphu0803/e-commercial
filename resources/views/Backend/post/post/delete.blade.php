@@ -21,10 +21,10 @@
             <div class="row">
                 <div class="col-lg-5">
                     <h3 class="panel-title">
-                        {{__('form.ObjectInfor', ['attribute' => 'Post Catalouge'])}}
+                        {{__('form.ObjectInfor', ['attribute' => __('dashboard.post')])}}
                     </h3>
                     <div class="pannel-description">
-                        {{__('form.DelQuestion', ['attribute' => 'Post Catalouge'])}}
+                        {{__('form.DelQuestion', ['attribute' => __('dashboard.post')])}}
                         <span class="text-danger">{{ $post->name }}</span>
                     </div>
                     <div class="pannel-description">
@@ -36,11 +36,11 @@
                     <div class="ibox">
                         <div class="ibox-content">
                             <div class="row">
-                                <x-backend.dashboard.form.input inputName="name" type="text" labelName='name'
+                                <x-backend.dashboard.form.input inputName="name" type="text" :labelName="__('dashboard.name')"
                                     :value="$post->name ?? ''" :readOnly="true" />
 
                                 <x-backend.dashboard.form.input inputName="canonical" type="text"
-                                    labelName='canonical' :value="$post->canonical ?? ''" :readOnly="true" />
+                                    :labelName="__('dashboard.canonical')" :value="$post->canonical ?? ''" :readOnly="true" />
 
                             </div>
 

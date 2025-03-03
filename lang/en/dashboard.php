@@ -21,5 +21,8 @@ return [
     'stateChoosen' => ':attribute choosen',
     'choose' => 'Choose',
     'toUpload' => 'to upload',
-    'listObject' => 'List :attribute'
+    'postGroup' => 'Post Group',
+    'memberGroup' => 'Member Group',
+    'canonical' => 'canonical',
+    'name' => 'Name',
 ];

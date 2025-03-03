@@ -22,7 +22,7 @@
                 <div class="flex gap-10">
                     <select name="publish" class="form-control  select2">
                         <option value="0" selected>
-                            {{__('table.chooseObject', ['object' => 'Language Status'])}}
+                            {{__('table.chooseObject', ['attribute' => __('table.languageStatus')])}}
                         </option>
                         <option value="1" @selected(request('publish') == 1)>
                             {{__('table.published')}}
@@ -36,11 +36,11 @@
                 <div class="flex flex-middle gap-10">
                     <div class="input-group">
                         <input class="form-control" type="text" name="keyword"
-                            value="{{ request('keyword') ?? old('keyword') }}" placeholder="{{ __('table.searchBy', ['attribute' => 'Name']) }}...">
+                            value="{{ request('keyword') ?? old('keyword') }}" placeholder="{{ __('table.searchBy', ['attribute' => __('table.name')]) }}...">
 
                         <span class="input-group-btn">
                             <button class="btn btn-primary search-btn" type="submit">
-                               /{{__('table.search')}}
+                               {{__('table.search')}}
                             </button>
                         </span>
                     </div>
@@ -48,7 +48,7 @@
             </div>
             <a href="{{ route('language.create') }}" class="btn btn-danger">
                 <i class="fa fa-plus">
-                    {{-- {{__('table.addObject', ['object' => 'Language'])}} --}}
+                    {{__('table.addObject', ['attribute' => __('dashboard.language')])}}
                 </i>
             </a>
 

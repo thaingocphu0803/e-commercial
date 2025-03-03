@@ -22,7 +22,7 @@
                 <div class="flex gap-10">
                     <select name="publish" class="form-control  select2">
                         <option value="0" selected>
-                            {{__('table.chooseObject', ['attribute' => 'User Status'])}}
+                            {{__('table.chooseObject', ['attribute' => __('table.memberStatus')])}}
                         </option>
 
                         <option value="1" @selected(request('publish') == 1)>
@@ -37,7 +37,7 @@
                 <div class="flex gap-10">
                     <select name="user_catalouge_id" class="form-control  select2">
                         <option value="0" selected>
-                            {{__('table.chooseObject', ['attribute' => 'Member Group'])}}
+                            {{__('table.chooseObject', ['attribute' => __('dashboard.memberGroup')])}}
                         </option>
                         @foreach ($groupMember as $group )
                             <option value="{{$group->id}}" @selected(request('user_catalouge_id') == $group->id)>
@@ -50,7 +50,7 @@
                 <div class="flex flex-middle gap-10">
                     <div class="input-group">
                         <input class="form-control" type="text" name="keyword"
-                            value="{{ request('keyword') ?? old('keyword') }}" placeholder="{{ __('table.searchBy', ['attribute' => 'Name']) }}...">
+                        value="{{ request('keyword') ?? old('keyword') }}" placeholder="{{ __('table.searchBy', ['attribute' => __('table.name')]) }}...">
 
                         <span class="input-group-btn">
                             <button class="btn btn-primary search-btn" type="submit">
@@ -62,7 +62,7 @@
             </div>
             <a href="{{ route('user.create') }}" class="btn btn-danger">
                 <i class="fa fa-plus">
-                    {{__('table.addObject', ['attribute' => 'Member'])}}
+                    {{__('table.addObject', ['attribute' => __('dashboard.member')])}}
                 </i>
             </a>
 

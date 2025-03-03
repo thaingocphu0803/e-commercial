@@ -122,7 +122,8 @@
 
             <li>
                 <a href="{{ route('auth.logout') }}">
-                    <i class="fa fa-sign-out"></i> Log out
+                    <i class="fa fa-sign-out"></i>
+                    {{__('dashboard.logout')}}
                 </a>
             </li>
             {{-- <li>

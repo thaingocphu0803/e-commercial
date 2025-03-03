@@ -21,4 +21,5 @@ return [
     'stateChoosen' => ':attribute choosen',
     'choose' => 'Choose',
     'toUpload' => 'to upload'
+
 ];

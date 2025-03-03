@@ -11,10 +11,10 @@
             <div class="row">
                 <div class="col-lg-5">
                     <h3 class="panel-title">
-                        {{__('form.ObjectInfor', ['attribute' => 'Member'])}}
+                        {{__('form.ObjectInfor', ['attribute' => __('dashboard.member')])}}
                     </h3>
                     <div class="pannel-description">
-                        {{__('form.DelQuestion', ['attribute' => 'Member'])}}
+                        {{__('form.DelQuestion', ['attribute' => __('dashboard.member')])}}
                         <span class="text-danger">{{ $user->name }}</span>
                     </div>
                     <div class="pannel-description">{{__('form.DelNote')}}</div>
@@ -24,10 +24,10 @@
                     <div class="ibox">
                         <div class="ibox-content">
                             <div class="row">
-                                <x-backend.dashboard.form.input inputName="email" type="text" labelName='email'
+                                <x-backend.dashboard.form.input inputName="email" type="text" :labelName="__('table.name')"
                                     :value="$user->email ?? ''" :disabled="true" />
 
-                                <x-backend.dashboard.form.input inputName="name" type="text" labelName='fullname'
+                                <x-backend.dashboard.form.input inputName="name" type="text" :labelName="__('table.fullname')"
                                     :value="$user->name ?? ''" :disabled="true" />
 
                             </div>

@@ -28,4 +28,11 @@ return [
     'searchBy' => 'Search By :attribute',
     'order' => 'Order',
     'objectGroup' => ':attribute Group',
+    'listObject' => 'List :attribute',
+    'languageStatus' => 'Language Status',
+    'postStatus' => 'Post Status',
+    'memberStatus' => 'Member Status',
+    'memberGroupStatus' => 'Member Group Status',
+    'postGroupStatus' => 'Post Group Status',
+    'parentSection' => 'parent section'
 ];
