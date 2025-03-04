@@ -53,7 +53,7 @@
                                     </span>
                                 </div>
                                 <div class="catalouge flex gap-10">
-                                    <span class="text-danger">{{__('dashboard.objectGroup', ['object' => 'Catalouge'])}}:</span>
+                                    <span class="text-danger">{{__('dashboard.objectGroup', ['object' => __('table.catalouge')])}}:</span>
                                     @foreach ($post->postCatalouges as $postCatalouge)
                                     <a href="#" title="">{{$postCatalouge->languages->pluck('pivot.name')->implode(',')}}</a>
                                     @endforeach

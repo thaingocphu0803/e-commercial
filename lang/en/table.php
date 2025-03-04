@@ -34,5 +34,6 @@ return [
     'memberStatus' => 'Member Status',
     'memberGroupStatus' => 'Member Group Status',
     'postGroupStatus' => 'Post Group Status',
-    'parentSection' => 'parent section'
+    'parentSection' => 'parent section',
+    'catalouge' => 'catalouge'
 ];

@@ -34,5 +34,6 @@ return [
     'memberStatus' => '会员状态',
     'memberGroupStatus' => '会员组状态',
     'postGroupStatus' => '帖子组状态',
-    'parentSection' => '父版块'
+    'parentSection' => '父版块',
+    'catalouge' => '目录'
 ];

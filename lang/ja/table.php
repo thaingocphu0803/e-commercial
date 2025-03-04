@@ -34,5 +34,6 @@ return [
     'memberStatus' => 'メンバーステータス',
     'memberGroupStatus' => 'メンバーグループステータス',
     'postGroupStatus' => '投稿グループステータス',
-    'parentSection' => '親セクション'
+    'parentSection' => '親セクション',
+    'catalouge' => 'カタログ'
 ];

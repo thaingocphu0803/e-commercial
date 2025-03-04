@@ -34,6 +34,7 @@ return [
     'memberStatus' => 'trạng thái thành viên',
     'memberGroupStatus' => 'trạng thái nhóm thành viên',
     'postGroupStatus' => 'trạng thái nhóm bài viết',
-    'parentSection' => 'mục cha'
+    'parentSection' => 'mục cha',
+    'catalouge' => 'Danh mục'
 
 ];
