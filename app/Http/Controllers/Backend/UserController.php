@@ -53,10 +53,10 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request){
         if($this->userService->create($request)){
-            return redirect()->route('user.index')->with('success', 'Added new member successfully!');
+            return redirect()->route('user.index')->with('success', __('alert.addSuccess', ['attribute'=> __('dashboard.member')]));
         }
 
-        return redirect()->route('user.index')->with('error', 'Failed to add new member!');
+        return redirect()->route('user.index')->with('error', __('alert.addError', ['attribute'=> __('dashboard.member')]));
     }
 
     public function edit(User $user){
@@ -73,10 +73,10 @@ class UserController extends Controller
     public function update($id, UpdateUserRequest $request){
 
         if($this->userService->update($id, $request)){
-            return redirect()->route('user.index')->with('success', 'Updated member successfully!');
+            return redirect()->route('user.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('dashboard.member')]));
         }
 
-        return redirect()->route('user.index')->with('error', 'Failed to updated member!');
+        return redirect()->route('user.index')->with('error', __('alert.updateError', ['attribute'=> __('dashboard.member')]));
     }
 
     public function delete(User $user){
@@ -87,10 +87,10 @@ class UserController extends Controller
 
     public function destroy($id){
         if($this->userService->destroy($id)){
-            return redirect()->route('user.index')->with('success', 'Deleted member successfully!');
+            return redirect()->route('user.index')->with('success', __('alert.deleteSuccess', ['attribute'=> __('dashboard.member')]));
         }
 
-        return redirect()->route('user.index')->with('error', 'Failed to delete member!');
+        return redirect()->route('user.index')->with('error', __('alert.deleteError', ['attribute'=> __('dashboard.member')]));
     }
 
 }

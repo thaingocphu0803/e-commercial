@@ -36,9 +36,9 @@ class LanguageController extends Controller
     public function store(StoreLanguageRequest $request)
     {
         if ($this->languageService->create($request)) {
-            return redirect()->route('language.index')->with('success', 'Added new language successfully!');
+            return redirect()->route('language.index')->with('success', __('alert.addSuccess', ['attribute'=> __('dashboard.language')]));
         }
-        return redirect()->route('language.index')->with('error', 'Failed to add new language!');
+        return redirect()->route('language.index')->with('error', __('alert.addError', ['attribute'=> __('dashboard.language')]));
     }
 
     public function edit(Language $language)
@@ -52,10 +52,10 @@ class LanguageController extends Controller
     {
 
         if ($this->languageService->update($id, $request)) {
-            return redirect()->route('language.index')->with('success', 'Updated language successfully!');
+            return redirect()->route('language.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('dashboard.language')]));
         }
 
-        return redirect()->route('language.index')->with('error', 'Failed to updated language!');
+        return redirect()->route('language.index')->with('error', __('alert.updateError', ['attribute'=> __('dashboard.language')]));
     }
 
     public function delete(Language $language)
@@ -68,10 +68,10 @@ class LanguageController extends Controller
     public function destroy($id)
     {
         if ($this->languageService->destroy($id)) {
-            return redirect()->route('language.index')->with('success', 'Deleted language successfully!');
+            return redirect()->route('language.index')->with('success', __('alert.deleteSuccess', ['attribute'=> __('dashboard.language')]));
         }
 
-        return redirect()->route('language.index')->with('error', 'Failed to delete language!');
+        return redirect()->route('language.index')->with('error', __('alert.deleteError', ['attribute'=> __('dashboard.language')]));
     }
 
     public function changeCurrent($canonical){

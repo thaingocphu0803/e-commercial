@@ -1,7 +1,9 @@
 <x-backend.dashboard.layout>
 
 
-    <x-backend.dashboard.breadcrumb title="Delete Language" />
+    <x-backend.dashboard.breadcrumb
+        :title="__('form.delObject', ['attribute'=>__('dashboard.postGroup')])"
+    />
 
     @if ($errors->any())
         <div class="alert alert-danger">

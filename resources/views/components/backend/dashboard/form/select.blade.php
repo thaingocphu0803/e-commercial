@@ -15,11 +15,12 @@
     <div class="form-row">
         <label for="{{ $name }}" class="control-label text-right text-capitalize">{{ $labelName }}
             @if ($must)
+
                 <span class="text-danger">*</span>
             @endif
         </label>
         <select name="{{ $name }}" id="{{ $name }}" class="form-control select2" {{$attributes}}>
-            <option selected disabled> {{__('dashboard.choose') $labelName }}</option>
+            <option selected disabled> {{__('dashboard.choose') .' '. $labelName }}</option>
             @if (!empty($data))
                 @foreach ($data as $item)
                     @php

@@ -12,7 +12,7 @@
             <label for="{{ $inputName }}" class="control-label tex-left w-full text-capitalize">
                 <div class="flex flex-space-between">
                     <span>
-                        SEO {{ $labelName }}
+                        {{ $labelName }} SEO
                         @if ($must)
                             <span class="text-danger">*</span>
                         @endif

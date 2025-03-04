@@ -33,9 +33,9 @@ class UserCatalougeController extends Controller
 
     public function store(StoreUserCatalougeRequest $request){
         if($this->userCatalougeService->create($request)){
-            return redirect()->route('user.catalouge.index')->with('success', 'Added new member group successfully!');
+            return redirect()->route('user.catalouge.index')->with('success', __('alert.addSuccess', ['attribute'=> __('dashboard.memberGroup')]));
         }
-        return redirect()->route('user.catalouge.index')->with('error', 'Failed to add new member group!');
+        return redirect()->route('user.catalouge.index')->with('error', __('alert.addError', ['attribute'=> __('dashboard.memberGroup')]));
     }
 
     public function edit(UserCatalouge $userCatalouge){
@@ -47,10 +47,10 @@ class UserCatalougeController extends Controller
     public function update($id, UpdateUserCatalougeRequest $request){
 
         if($this->userCatalougeService->update($id, $request)){
-            return redirect()->route('user.catalouge.index')->with('success', 'Updated member group successfully!');
+            return redirect()->route('user.catalouge.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('dashboard.memberGroup')]));
         }
 
-        return redirect()->route('user.catalouge.index')->with('error', 'Failed to updated member group!');
+        return redirect()->route('user.catalouge.index')->with('error', __('alert.updateError', ['attribute'=> __('dashboard.memberGroup')]));
     }
 
     public function delete(UserCatalouge $userCatalouge){
@@ -61,10 +61,10 @@ class UserCatalougeController extends Controller
 
     public function destroy($id){
         if($this->userCatalougeService->destroy($id)){
-            return redirect()->route('user.catalouge.index')->with('success', 'Deleted member group successfully!');
+            return redirect()->route('user.catalouge.index')->with('success', __('alert.deleteSuccess', ['attribute'=> __('dashboard.memberGroup')]));
         }
 
-        return redirect()->route('user.catalouge.index')->with('error', 'Failed to delete member group!');
+        return redirect()->route('user.catalouge.index')->with('error', __('alert.deleteError', ['attribute'=> __('dashboard.memberGroup')]));
     }
 
 }

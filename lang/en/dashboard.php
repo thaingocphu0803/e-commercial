@@ -6,7 +6,7 @@ return [
     'mailbox' => 'Mailbox',
     'logout' => 'Logout',
     'managerObject' => 'Manager :object',
-    'member' => 'Member',
+    'member' => 'member',
     'objectGroup' => ':object group',
     'post' => 'Post',
     'language' => 'Language',
@@ -22,7 +22,9 @@ return [
     'choose' => 'Choose',
     'toUpload' => 'to upload',
     'postGroup' => 'Post Group',
-    'memberGroup' => 'Member Group',
+    'memberGroup' => 'member Group',
     'canonical' => 'canonical',
-    'name' => 'Name',
+    'name' => 'name',
+    'flag' => 'flag',
+    'description' => 'description'
 ];

@@ -6,7 +6,7 @@ return [
     'mailbox' => 'Hộp thư',
     'logout' => 'Đăng xuất',
     'managerObject' => 'Quản lý :object',
-    'member' => 'Thành viên',
+    'member' => 'thành viên',
     'objectGroup' => 'Nhóm :object',
     'post' => 'bài viết',
     'language' => 'Ngôn ngữ',
@@ -22,8 +22,10 @@ return [
     'choose' => 'Chọn',
     'toUpload' => 'để tải lên',
     'listObject' => 'Danh sách :attribute',
-    'postGroup' => 'Nhóm bài viết',
-    'memberGroup' => 'Nhóm Thành Viên',
+    'postGroup' => 'nhóm bài viết',
+    'memberGroup' => 'nhóm thành viên',
     'canonical' => 'Đường dẫn',
-    'name' => 'Tên',
+    'name' => 'tên',
+    'flag' => 'quốc kỳ',
+    'description' => 'mô tả'
 ];

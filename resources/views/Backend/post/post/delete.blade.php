@@ -1,7 +1,9 @@
 <x-backend.dashboard.layout>
 
 
-    <x-backend.dashboard.breadcrumb title="Delete Post" />
+    <x-backend.dashboard.breadcrumb
+        :title="__('form.delObject', ['attribute'=>__('dashboard.post')])"
+    />
 
     @if ($errors->any())
         <div class="alert alert-danger">

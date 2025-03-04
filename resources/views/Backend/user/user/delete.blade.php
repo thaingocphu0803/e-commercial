@@ -1,7 +1,9 @@
 <x-backend.dashboard.layout>
 
 
-    <x-backend.dashboard.breadcrumb title="Delete Member" />
+    <x-backend.dashboard.breadcrumb
+        :title="__('form.delObject', ['attribute'=>__('dashboard.member')])"
+    />
 
     <form action="{{ route('user.destroy', $user->id) }}" method="POST" class="box">
         @csrf

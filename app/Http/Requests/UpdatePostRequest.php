@@ -32,7 +32,7 @@ class UpdatePostRequest extends FormRequest
     public function messages()
     {
         return [
-            'language_id.required' => 'The language is required.'
+            'language_id.required' => __('validation.requireLanguage')
         ];
     }
 }

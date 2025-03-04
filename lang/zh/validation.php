@@ -1,0 +1,72 @@
+<?php
+
+return [
+
+    'accepted' => ':attribute 必须被接受。',
+    'accepted_if' => '当 :other 为 :value 时，:attribute 必须被接受。',
+    'active_url' => ':attribute 必须是一个有效的 URL。',
+    'after' => ':attribute 必须是 :date 之后的日期。',
+    'after_or_equal' => ':attribute 必须是 :date 当天或之后的日期。',
+    'alpha' => ':attribute 只能包含字母。',
+    'alpha_dash' => ':attribute 只能包含字母、数字、破折号和下划线。',
+    'alpha_num' => ':attribute 只能包含字母和数字。',
+    'array' => ':attribute 必须是一个数组。',
+    'ascii' => ':attribute 只能包含 ASCII 字符。',
+    'before' => ':attribute 必须是 :date 之前的日期。',
+    'before_or_equal' => ':attribute 必须是 :date 当天或之前的日期。',
+    'between' => [
+        'array' => ':attribute 必须包含 :min 到 :max 项。',
+        'file' => ':attribute 必须介于 :min 到 :max KB 之间。',
+        'numeric' => ':attribute 必须介于 :min 到 :max 之间。',
+        'string' => ':attribute 必须介于 :min 到 :max 个字符之间。',
+    ],
+    'boolean' => ':attribute 字段必须为 true 或 false。',
+    'confirmed' => ':attribute 确认不匹配。',
+    'current_password' => '密码错误。',
+    'date' => ':attribute 必须是一个有效的日期。',
+    'date_equals' => ':attribute 必须是等于 :date 的日期。',
+    'date_format' => ':attribute 必须符合格式 :format。',
+    'decimal' => ':attribute 必须是 :decimal 位小数。',
+    'digits' => ':attribute 必须是 :digits 位数字。',
+    'digits_between' => ':attribute 必须介于 :min 到 :max 位数字之间。',
+    'email' => ':attribute 必须是一个有效的电子邮件地址。',
+    'ends_with' => ':attribute 必须以以下之一结尾: :values。',
+    'exists' => '所选的 :attribute 无效。',
+    'file' => ':attribute 必须是一个文件。',
+    'image' => ':attribute 必须是图片。',
+    'integer' => ':attribute 必须是整数。',
+    'max' => [
+        'array' => ':attribute 不能超过 :max 项。',
+        'file' => ':attribute 不能大于 :max KB。',
+        'numeric' => ':attribute 不能大于 :max。',
+        'string' => ':attribute 不能超过 :max 个字符。',
+    ],
+    'min' => [
+        'array' => ':attribute 至少包含 :min 项。',
+        'file' => ':attribute 至少为 :min KB。',
+        'numeric' => ':attribute 必须至少为 :min。',
+        'string' => ':attribute 必须至少包含 :min 个字符。',
+    ],
+    'numeric' => ':attribute 必须是数字。',
+    'required' => ':attribute 为必填项。',
+    'same' => ':attribute 和 :other 必须匹配。',
+    'size' => [
+        'array' => ':attribute 必须包含 :size 项。',
+        'file' => ':attribute 必须为 :size KB。',
+        'numeric' => ':attribute 必须是 :size。',
+        'string' => ':attribute 必须是 :size 个字符。',
+    ],
+    'string' => ':attribute 必须是字符串。',
+    'unique' => ':attribute 已被占用。',
+    'url' => ':attribute 必须是一个有效的 URL。',
+
+    'custom' => [
+        'attribute-name' => [
+            'rule-name' => '自定义消息',
+        ],
+    ],
+
+    'attributes' => [],
+
+    'requireLanguage' => '必须选择语言。',
+];

@@ -1,5 +1,38 @@
 <?php
 
- return [
-
- ];
+return [
+    'name' => '名称',
+    'numMember' => '会员数量',
+    'description' => '描述',
+    'active' => '激活',
+    'action' => '操作',
+    'records' => '记录',
+    'chooseObject' => '选择 :attribute',
+    'published' => '已发布',
+    'private' => '私有',
+    'search' => '搜索',
+    'addObject' => '添加 :attribute',
+    'avatar' => '头像',
+    'information' => '信息',
+    'address' => '地址',
+    'group' => '分组',
+    'fullname' => '全名',
+    'email' => '邮箱',
+    'phone' => '电话',
+    'city' => '城市',
+    'district' => '区',
+    'ward' => '街道/乡镇',
+    'flag' => '标志',
+    'image' => '图片',
+    'canonical' => '规范化',
+    'searchBy' => '按 :attribute 搜索',
+    'order' => '排序',
+    'objectGroup' => ':attribute 组',
+    'listObject' => ':attribute 列表',
+    'languageStatus' => '语言状态',
+    'postStatus' => '帖子状态',
+    'memberStatus' => '会员状态',
+    'memberGroupStatus' => '会员组状态',
+    'postGroupStatus' => '帖子组状态',
+    'parentSection' => '父版块'
+];

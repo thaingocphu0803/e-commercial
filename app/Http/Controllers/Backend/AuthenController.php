@@ -27,10 +27,10 @@ class AuthenController extends Controller
         ];
 
        if(Auth::attempt($credentials)){
-            return redirect()->route('dashboard.index')->with('success', 'Login successfully!');
+            return redirect()->route('dashboard.index')->with('success', __('alert.loginSuccess'));
        }
 
-       return redirect()->route('auth.admin')->with('error', 'Login Failed!');
+       return redirect()->route('auth.admin')->with('error',  __('alert.loginFail'));
 
     }
 
@@ -40,6 +40,6 @@ class AuthenController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('auth.admin')->with('success', 'Logout successfully!');
+        return redirect()->route('auth.admin')->with('success', __('alert.logoutSuccess'));
     }
 }

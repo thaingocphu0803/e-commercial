@@ -190,5 +190,6 @@ return [
     */
 
     'attributes' => [],
+    'requireLanguage' => 'The language is required.',
 
 ];

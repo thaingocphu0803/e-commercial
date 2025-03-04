@@ -2,7 +2,8 @@
 
     @php
         $url = isset($userCatalouge) ? route('user.catalouge.update', $userCatalouge->id) : route('user.catalouge.store');
-        $title = isset($userCatalouge) ? __('form.addObject', ['attribute' => 'Member Group']) : __('form.editObject', ['attribute' => 'Member Group']);
+        $title = isset($userCatalouge) ? __('form.editObject', ['attribute' => __('dashboard.memberGroup')]) : __('form.addObject', ['attribute' => __('dashboard.memberGroup')]);
+        $action = isset($userCatalouge) ? __('form.edit') : __('form.create');
     @endphp
 
     <x-backend.dashboard.breadcrumb :title="$title" />
@@ -26,10 +27,10 @@
             <div class="row">
                 <div class="col-lg-5">
                     <h3 class="panel-title">
-                        {{__('form.ObjectInfor', ['attribute'=>'Common'])}}
+                        {{__('form.ObjectInfor', ['attribute'=> __('form.common')])}}
                     </h3>
                     <div class="pannel-description">
-                        {{ __('form.enterMemberGroup', ['attribute' => (isset($userCatalouge) ? 'edit' : 'create new')])}}
+                        {{ __('form.enterMemberGroup', ['attribute' => $action])}}
                     </div>
 
                 </div>
@@ -37,16 +38,25 @@
                     <div class="ibox">
                         <div class="ibox-title">
                             <h5>
-                                {{__('form.ObjectInfor', ['attribute'=>'Common'])}}
+                                {{__('form.ObjectInfor', ['attribute'=> __('form.common')])}}
                             </h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
-                                <x-backend.dashboard.form.input inputName="name" type="text" labelName='name'
-                                    :must="true" :value="$userCatalouge->name ?? ''" />
+                                <x-backend.dashboard.form.input
+                                    inputName="name"
+                                    type="text"
+                                    :labelName="__('dashboard.name')"
+                                    :must="true"
+                                    :value="$userCatalouge->name ?? ''"
+                                />
 
-                                <x-backend.dashboard.form.input inputName="description" type="text" labelName='description'
-                                    :value="$userCatalouge->description ?? ''" />
+                                <x-backend.dashboard.form.input
+                                    inputName="description"
+                                    type="text"
+                                    :labelName="__('dashboard.description')"
+                                    :value="$userCatalouge->description ?? ''"
+                                />
                             </div>
                         </div>
 

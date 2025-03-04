@@ -43,9 +43,9 @@ class PostCatalougeController extends Controller
     public function store(StorePostCatalougeRequest $request)
     {
         if ($this->postCatalougeService->create($request)) {
-            return redirect()->route('post.catalouge.index')->with('success', 'Added new post group successfully!');
+            return redirect()->route('post.catalouge.index')->with('success', __('alert.addSuccess', ['attribute'=> __('dashboard.postGroup')]));
         }
-        return redirect()->route('post.catalouge.index')->with('error', 'Failed to add new post group!');
+        return redirect()->route('post.catalouge.index')->with('error', __('alert.addError', ['attribute'=> __('dashboard.postGroup')]));
     }
 
     public function edit($id)
@@ -65,10 +65,10 @@ class PostCatalougeController extends Controller
     public function update($id, UpdatePostCatalougeRequest $request)
     {
         if ($this->postCatalougeService->update($id, $request)) {
-            return redirect()->route('post.catalouge.index')->with('success', 'Updated post group successfully!');
+            return redirect()->route('post.catalouge.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('dashboard.postGroup')]));
         }
 
-        return redirect()->route('post.catalouge.index')->with('error', 'Failed to updated post group!');
+        return redirect()->route('post.catalouge.index')->with('error', __('alert.updateError', ['attribute'=> __('dashboard.postGroup')]));
     }
 
     public function delete($id)
@@ -83,9 +83,9 @@ class PostCatalougeController extends Controller
     public function destroy($id, DeletePostCatalougeRequest $request)
     {
         if ($this->postCatalougeService->destroy($id)) {
-            return redirect()->route('post.catalouge.index')->with('success', 'Deleted post group successfully!');
+            return redirect()->route('post.catalouge.index')->with('success', __('alert.deleteSuccess', ['attribute'=> __('dashboard.postGroup')]));
         }
 
-        return redirect()->route('post.catalouge.index')->with('error', 'Failed to delete post group!');
+        return redirect()->route('post.catalouge.index')->with('error', __('alert.deleteError', ['attribute'=> __('dashboard.postGroup')]));
     }
 }

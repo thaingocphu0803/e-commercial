@@ -56,7 +56,7 @@
                                 </g>
                             </svg> </a>
                     </div>
-                    <div class="small-text">{{__('dashboard.clickToUpload', [ 'attribute' => 'button'])}}</div>
+                    <div class="small-text">{{__('dashboard.clickToUpload', [ 'attribute' => __('form.button')])}}</div>
                 </div>
                 <div class="upload-list {{ !empty($album) ? '' : 'hidden' }}">
                     <div class="row">

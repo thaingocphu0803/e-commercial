@@ -1,7 +1,9 @@
 <x-backend.dashboard.layout>
 
 
-    <x-backend.dashboard.breadcrumb title="Delete Member" />
+    <x-backend.dashboard.breadcrumb
+        :title="__('form.delObject', ['attribute'=>__('dashboard.memberGroup')])"
+    />
 
     <form action="{{ route('user.catalouge.destroy', $userCatalouge->id) }}" method="POST" class="box">
         @csrf
@@ -11,10 +13,10 @@
             <div class="row">
                 <div class="col-lg-5">
                     <h3 class="panel-title">
-                        {{__('form.ObjectInfor', ['attribute' =>'Member Group'])}}
+                        {{__('form.ObjectInfor', ['attribute' =>__('dashboard.memberGroup')])}}
                     </h3>
                     <div class="pannel-description">
-                        {{__('form.DelQuestion', ['attribute' => 'Member Group'])}}
+                        {{__('form.DelQuestion', ['attribute' => __('dashboard.memberGroup')])}}
                         <span class="text-danger">{{ $userCatalouge->name }}</span>
                     </div>
                     <div class="pannel-description">

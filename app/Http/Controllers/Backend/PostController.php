@@ -44,9 +44,9 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         if ($this->postService->create($request)) {
-            return redirect()->route('post.index')->with('success', 'Added new post successfully!');
+            return redirect()->route('post.index')->with('success',  __('alert.addSuccess', ['attribute'=> __('dashboard.post')]));
         }
-        return redirect()->route('post.index')->with('error', 'Failed to add new post!');
+        return redirect()->route('post.index')->with('error',  __('alert.addError', ['attribute'=> __('dashboard.post')]));
     }
 
     public function edit($id)
@@ -67,10 +67,10 @@ class PostController extends Controller
     public function update($id, UpdatePostRequest $request)
     {
         if ($this->postService->update($id, $request)) {
-            return redirect()->route('post.index')->with('success', 'Updated post successfully!');
+            return redirect()->route('post.index')->with('success',  __('alert.updateSuccess', ['attribute'=> __('dashboard.post')]));
         }
 
-        return redirect()->route('post.index')->with('error', 'Failed to updated post!');
+        return redirect()->route('post.index')->with('error',  __('alert.updateError', ['attribute'=> __('dashboard.post')]));
     }
 
     public function delete($id)
@@ -85,9 +85,9 @@ class PostController extends Controller
     public function destroy($id)
     {
         if ($this->postService->destroy($id)) {
-            return redirect()->route('post.index')->with('success', 'Deleted post successfully!');
+            return redirect()->route('post.index')->with('success',  __('alert.deleteSuccess', ['attribute'=> __('dashboard.post')]));
         }
 
-        return redirect()->route('post.index')->with('error', 'Failed to delete post!');
+        return redirect()->route('post.index')->with('error',  __('alert.deleteError', ['attribute'=> __('dashboard.post')]));
     }
 }
