@@ -27,5 +27,6 @@ return [
     'canonical' => 'Đường dẫn',
     'name' => 'tên',
     'flag' => 'quốc kỳ',
-    'description' => 'mô tả'
+    'description' => 'mô tả',
+    'permission' => 'quyền hạn'
 ];

@@ -5,6 +5,7 @@ return [
     'enterLanguage' => ':attribute の言語情報を入力',
     'enterMemberGroup' => ':attribute のメンバーグループ情報を入力',
     'enterMember' => ':attribute のメンバー情報を入力',
+    'enterPermission' => ':attribute の権限情報を入力してください',
     'save' => '保存',
     'cancel' => 'キャンセル',
     'delete' => '削除',

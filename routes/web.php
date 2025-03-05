@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\PostCatalougeController;
 use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\Backend\UserCatalougeController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\PermissionController;
 use Illuminate\Support\Facades\Route;
 
 use function Pest\Laravel\delete;
@@ -63,6 +64,17 @@ Route::controller(LanguageController::class)->middleware(['admin', 'locale'])->p
     Route::delete('destroy/{id}', 'destroy')->name('language.destroy');
     Route::get('change/{canonical}', 'changeCurrent')->name('language.change');
 
+});
+
+//PermissionController
+Route::controller(PermissionController::class)->middleware(['admin', 'locale'])->prefix('permission')->group(function () {
+    Route::get('index',  'index')->name('permission.index');
+    Route::get('create', 'create')->name('permission.create');
+    Route::post('store', 'store')->name('permission.store');
+    Route::get('edit/{permission}', 'edit')->name('permission.edit');
+    Route::post('update/{id}', 'update')->name('permission.update');
+    Route::get('delete/{permission}', 'delete')->name('permission.delete');
+    Route::delete('destroy/{id}', 'destroy')->name('permission.destroy');
 });
 
 //PostController

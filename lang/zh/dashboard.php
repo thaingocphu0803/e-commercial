@@ -26,5 +26,6 @@ return [
     'canonical' => '规范化',
     'name' => '名称',
     'flag' => '标志',
-    'description' => '描述'
+    'description' => '描述',
+    'permission' => '权限'
 ];

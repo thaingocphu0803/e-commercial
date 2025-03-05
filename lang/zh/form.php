@@ -5,6 +5,7 @@ return [
     'enterLanguage' => '输入 :attribute 语言信息',
     'enterMemberGroup' => '输入 :attribute 会员组信息',
     'enterMember' => '输入 :attribute 会员信息',
+    'enterPermission' => '请输入 :attribute 的权限信息',
     'save' => '保存',
     'cancel' => '取消',
     'delete' => '删除',

@@ -5,6 +5,7 @@ return [
     'enterLanguage' => 'Enter information to :attribute language',
     'enterMemberGroup' => 'Enter information to :attribute Member Group',
     'enterMember' => 'Enter information to :attribute Member',
+    'enterPermission' => 'Enter information to :attribute Permission',
     'save' => 'Save',
     'cancel' => 'Cancel',
     'delete' => 'Delete',

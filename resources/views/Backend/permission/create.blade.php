@@ -1,9 +1,9 @@
 <x-backend.dashboard.layout>
 
     @php
-        $url = isset($language) ? route('language.update', $language->id) : route('language.store');
-        $title = isset($language) ? __('form.editObject', ['attribute' => __('dashboard.language')]) : __('form.addObject', ['attribute' => __('dashboard.language')]);
-        $action = isset($language) ? __('form.edit') : __('form.create');
+        $url = isset($permission) ? route('permission.update', $permission->id) : route('permission.store');
+        $title = isset($permission) ? __('form.editObject', ['attribute' => __('dashboard.permission')]) : __('form.addObject', ['attribute' => __('dashboard.permission')]);
+        $action = isset($permission) ? __('form.edit') : __('form.create');
     @endphp
 
     <x-backend.dashboard.breadcrumb :title="$title" />
@@ -30,7 +30,7 @@
                         {{__('form.ObjectInfor', ['attribute'=> __('form.common')])}}
                     </h3>
                     <div class="pannel-description">
-                        {{__('form.enterLanguage', ['attribute' => $action]) }}
+                        {{__('form.enterPermission', ['attribute' => $action]) }}
                     </div>
 
                 </div>
@@ -44,23 +44,16 @@
                         <div class="ibox-content">
                             <div class="row">
                                 <x-backend.dashboard.form.input inputName="name" type="text" :labelName="__('dashboard.name')"
-                                    :must="true" :value="$language->name ?? ''" />
+                                    :must="true" :value="$permission->name ?? ''" />
 
                                 <x-backend.dashboard.form.input inputName="canonical" type="text" :labelName="__('dashboard.canonical')"
-                                    :must="true" :value="$language->canonical ?? ''" />
-                            </div>
-
-                            <div class="row mt-20">
-                                <x-backend.dashboard.form.upload :labelName="__('dashboard.flag')" :value="$language->image ?? '' "/>
-
-                                <x-backend.dashboard.form.input inputName="description" type="text" :labelName="__('dashboard.description')"
-                                    :value="$language->description ?? ''" />
+                                    :must="true" :value="$permission->canonical ?? ''" />
                             </div>
                         </div>
 
                     </div>
                     <div class="flex flex-space-between">
-                        <a href="{{route('language.index')}}" class="btn btn-success mb-20 ">
+                        <a href="{{route('permission.index')}}" class="btn btn-success mb-20 ">
                             {{__('form.cancel')}}
                         </a>
                         <button type="submit" class="btn btn-primary mb-20 ">

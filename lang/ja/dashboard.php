@@ -26,5 +26,6 @@ return [
     'canonical' => 'カノニカル',
     'name' => '名前',
     'flag' => 'フラグ',
-    'description' => '説明'
+    'description' => '説明',
+    'permission' => '権限'
 ];

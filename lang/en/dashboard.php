@@ -26,5 +26,6 @@ return [
     'canonical' => 'canonical',
     'name' => 'name',
     'flag' => 'flag',
-    'description' => 'description'
+    'description' => 'description',
+    'permission' => 'permission'
 ];
