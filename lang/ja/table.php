@@ -35,5 +35,6 @@ return [
     'memberGroupStatus' => 'メンバーグループステータス',
     'postGroupStatus' => '投稿グループステータス',
     'parentSection' => '親セクション',
-    'catalouge' => 'カタログ'
+    'catalouge' => 'カタログ',
+    'PermissionAssignment' => '権限割り当て'
 ];

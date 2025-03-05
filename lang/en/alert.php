@@ -10,5 +10,7 @@ return [
     'updateError' => 'Failed to updated :attribute!',
     'deleteSuccess' => 'Deleted :attribute successfully!',
     'deleteError' => 'Failed to delete :attribute!',
+    'permitSuccess' => 'Permited Successfully!',
+    'permitError'   => 'Failed to permitted',
 
 ];

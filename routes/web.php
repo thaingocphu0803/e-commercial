@@ -45,6 +45,9 @@ Route::controller(UserCatalougeController::class)->middleware(['admin', 'locale'
     Route::post('update/{id}', 'update')->name('user.catalouge.update');
     Route::get('delete/{userCatalouge}', 'delete')->name('user.catalouge.delete');
     Route::delete('destroy/{id}', 'destroy')->name('user.catalouge.destroy');
+    Route::get('permission', 'permission')->name('user.catalouge.permission');
+    Route::post('updatePermission', 'updatePermission')->name('user.catalouge.updatePermission');
+
 });
 
 // LocationController

@@ -24,4 +24,6 @@ interface UserCatalougeServiceInterface
 
     public function updateStatusAll($payload);
 
+    public function setPermission($request);
+
 }

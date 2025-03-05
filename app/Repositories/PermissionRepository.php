@@ -9,9 +9,7 @@ class PermissionRepository implements PermissionRepositoryInterface
 {
     public function getAll()
     {
-        return Permission::select('name', 'id')
-            ->where('publish', 1)
-            ->get();
+        return Permission::all();
     }
 
     public function paginate($request)

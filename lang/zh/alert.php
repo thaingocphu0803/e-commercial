@@ -10,5 +10,8 @@ return [
     'updateError' => '更新 :attribute 失败！',
     'deleteSuccess' => '成功删除 :attribute！',
     'deleteError' => '删除 :attribute 失败！',
+    'permitSuccess' => '授权成功！',
+    'permitError'   => '授权失败！',
+
 ];
 

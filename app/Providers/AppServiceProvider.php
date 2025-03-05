@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -44,6 +45,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Gate::define('modules', function($user, $permissionName){
+            if($user->publish == 2){
+                return false;
+            }
+
+            $permission = $user->userCatalouge->permissions;
+            if ($permission->contains('canonical', $permissionName)){
+                return true;
+            }
+
+            return false;
+        });
     }
 }

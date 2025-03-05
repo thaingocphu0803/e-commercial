@@ -10,4 +10,7 @@ return [
     'updateError' => 'Cập nhật :attribute thất bại!',
     'deleteSuccess' => 'Xóa :attribute thành công!',
     'deleteError' => 'Xóa :attribute thất bại!',
+    'permitSuccess' => 'Cấp quyền thành công!',
+    'permitError'   => 'Cấp quyền thất bại!',
+
 ];

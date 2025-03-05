@@ -48,12 +48,18 @@
                     </div>
                 </div>
             </div>
-            <a href="{{ route('user.catalouge.create') }}" class="btn btn-danger">
-                <i class="fa fa-plus">
-                    {{__('table.addObject', ['attribute' => __('dashboard.memberGroup')])}}
-                </i>
-            </a>
-
+            <div class="flex flex-middle gap-10">
+                <a href="{{ route('user.catalouge.permission') }}" class="btn btn-warning">
+                    <i class="fa fa-key">
+                        {{__('table.PermissionAssignment')}}
+                    </i>
+                </a>
+                <a href="{{ route('user.catalouge.create') }}" class="btn btn-danger">
+                    <i class="fa fa-plus">
+                        {{__('table.addObject', ['attribute' => __('dashboard.memberGroup')])}}
+                    </i>
+                </a>
+            </div>
         </div>
     </div>
 

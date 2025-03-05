@@ -10,6 +10,7 @@ use App\Repositories\ProvinceRepository;
 use App\Services\UserCatalougeService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -29,7 +30,7 @@ class UserController extends Controller
     }
 
     public function index(Request $request){
-
+        Gate::authorize('modules', 'user.index');
         $users = $this->userService->paginate($request);
 
         $userCatalouges = $this->userCatalougeService->getAll();
@@ -42,6 +43,7 @@ class UserController extends Controller
     }
 
     public function create(){
+        Gate::authorize('modules', 'user.create');
         $provinces = $this->provinceRepository->getAll();
         $userCatalouges = $this->userCatalougeService->getAll();
 
@@ -52,6 +54,7 @@ class UserController extends Controller
     }
 
     public function store(StoreUserRequest $request){
+        Gate::authorize('modules', 'user.create');
         if($this->userService->create($request)){
             return redirect()->route('user.index')->with('success', __('alert.addSuccess', ['attribute'=> __('dashboard.member')]));
         }
@@ -60,6 +63,7 @@ class UserController extends Controller
     }
 
     public function edit(User $user){
+        Gate::authorize('modules', 'user.update');
         $provinces = $this->provinceRepository->getAll();
         $userCatalouges = $this->userCatalougeService->getAll();
 
@@ -71,7 +75,7 @@ class UserController extends Controller
     }
 
     public function update($id, UpdateUserRequest $request){
-
+        Gate::authorize('modules', 'user.update');
         if($this->userService->update($id, $request)){
             return redirect()->route('user.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('dashboard.member')]));
         }
@@ -80,12 +84,14 @@ class UserController extends Controller
     }
 
     public function delete(User $user){
+        Gate::authorize('modules', 'user.delete');
         return view('backend.user.user.delete', [
             'user' => $user
         ]);
     }
 
     public function destroy($id){
+        Gate::authorize('modules', 'user.delete');
         if($this->userService->destroy($id)){
             return redirect()->route('user.index')->with('success', __('alert.deleteSuccess', ['attribute'=> __('dashboard.member')]));
         }

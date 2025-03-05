@@ -35,6 +35,7 @@ return [
     'memberGroupStatus' => 'trạng thái nhóm thành viên',
     'postGroupStatus' => 'trạng thái nhóm bài viết',
     'parentSection' => 'mục cha',
-    'catalouge' => 'Danh mục'
+    'catalouge' => 'Danh mục',
+    'PermissionAssignment' => 'Phân quyền'
 
 ];

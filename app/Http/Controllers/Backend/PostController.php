@@ -8,6 +8,7 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Models\Language;
 use App\Services\PostService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -21,6 +22,7 @@ class PostController extends Controller
 
     public function index(Request $request)
     {
+        Gate::authorize('modules', 'post.index');
         $posts = $this->postService->paginate($request);
         $listNode = $this->postService->getToTree();
 
@@ -32,6 +34,7 @@ class PostController extends Controller
 
     public function create()
     {
+        Gate::authorize('modules', 'post.create');
         $listNode = $this->postService->getToTree();
         $languages = Language::select('id', 'name')->get();
 
@@ -43,6 +46,7 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
+        Gate::authorize('modules', 'post.create');
         if ($this->postService->create($request)) {
             return redirect()->route('post.index')->with('success',  __('alert.addSuccess', ['attribute'=> __('dashboard.post')]));
         }
@@ -51,7 +55,7 @@ class PostController extends Controller
 
     public function edit($id)
     {
-
+        Gate::authorize('modules', 'post.update');
         $post = $this->postService->findById($id);
         $listNode = $this->postService->getToTree();
         $languages = Language::select('id', 'name')->get();
@@ -66,6 +70,7 @@ class PostController extends Controller
 
     public function update($id, UpdatePostRequest $request)
     {
+        Gate::authorize('modules', 'post.update');
         if ($this->postService->update($id, $request)) {
             return redirect()->route('post.index')->with('success',  __('alert.updateSuccess', ['attribute'=> __('dashboard.post')]));
         }
@@ -75,6 +80,7 @@ class PostController extends Controller
 
     public function delete($id)
     {
+        Gate::authorize('modules', 'post.delete');
         $post = $this->postService->findById($id);
 
         return view('backend.post.post.delete', [
@@ -84,6 +90,7 @@ class PostController extends Controller
 
     public function destroy($id)
     {
+        Gate::authorize('modules', 'post.delete');
         if ($this->postService->destroy($id)) {
             return redirect()->route('post.index')->with('success',  __('alert.deleteSuccess', ['attribute'=> __('dashboard.post')]));
         }

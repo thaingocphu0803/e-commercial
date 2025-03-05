@@ -9,6 +9,7 @@ use App\Http\Requests\UpdatePostCatalougeRequest;
 use App\Models\Language;
 use App\Services\PostCatalougeService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PostCatalougeController extends Controller
 {
@@ -22,6 +23,7 @@ class PostCatalougeController extends Controller
 
     public function index(Request $request)
     {
+        Gate::authorize('modules', 'post.catalouge.index');
         $postCatalouges = $this->postCatalougeService->paginate($request);
 
         return view('Backend.post.catalouge.index', [
@@ -31,6 +33,7 @@ class PostCatalougeController extends Controller
 
     public function create()
     {
+        Gate::authorize('modules', 'post.catalouge.create');
         $listNode = $this->postCatalougeService->getToTree();
         $languages = Language::select('id', 'name')->get();
 
@@ -42,6 +45,7 @@ class PostCatalougeController extends Controller
 
     public function store(StorePostCatalougeRequest $request)
     {
+        Gate::authorize('modules', 'post.catalouge.create');
         if ($this->postCatalougeService->create($request)) {
             return redirect()->route('post.catalouge.index')->with('success', __('alert.addSuccess', ['attribute'=> __('dashboard.postGroup')]));
         }
@@ -50,6 +54,7 @@ class PostCatalougeController extends Controller
 
     public function edit($id)
     {
+        Gate::authorize('modules', 'post.catalouge.update');
         $postCatalouge =$this->postCatalougeService->findById($id);
 
         $listNode = $this->postCatalougeService->getToTree($id);
@@ -64,6 +69,7 @@ class PostCatalougeController extends Controller
 
     public function update($id, UpdatePostCatalougeRequest $request)
     {
+        Gate::authorize('modules', 'post.catalouge.update');
         if ($this->postCatalougeService->update($id, $request)) {
             return redirect()->route('post.catalouge.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('dashboard.postGroup')]));
         }
@@ -73,6 +79,7 @@ class PostCatalougeController extends Controller
 
     public function delete($id)
     {
+        Gate::authorize('modules', 'post.catalouge.delete');
         $postCatalouge =$this->postCatalougeService->findById($id);
 
         return view('backend.post.catalouge.delete', [
@@ -80,8 +87,9 @@ class PostCatalougeController extends Controller
         ]);
     }
 
-    public function destroy($id, DeletePostCatalougeRequest $request)
+    public function destroy($id)
     {
+        Gate::authorize('modules', 'post.catalouge.delete');
         if ($this->postCatalougeService->destroy($id)) {
             return redirect()->route('post.catalouge.index')->with('success', __('alert.deleteSuccess', ['attribute'=> __('dashboard.postGroup')]));
         }

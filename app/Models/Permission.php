@@ -15,4 +15,8 @@ class Permission extends Model
         'name',
         'canonical'
     ];
+
+    public function userCatalouges(){
+        return $this->belongsToMany(UserCatalouge::class, 'user_catalouge_permission', 'permission_id', 'user_catalouge_id');
+    }
 }

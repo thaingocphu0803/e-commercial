@@ -26,4 +26,6 @@ interface UserCatalougeRepositoryInterface
 
     public function updateByWhereIn($ids, $value);
 
+    public function setPermission($id, $payload);
+
 }

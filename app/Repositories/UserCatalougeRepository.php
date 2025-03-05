@@ -10,7 +10,7 @@ class UserCatalougeRepository implements UserCatalougeRepositoryInterface
 {
     public function getAll()
     {
-        return UserCatalouge::select('name', 'id')
+        return UserCatalouge::with('permissions')
             ->where('publish', 1)
             ->get();
     }
@@ -81,4 +81,10 @@ class UserCatalougeRepository implements UserCatalougeRepositoryInterface
                 ->update(['publish' => $value]);
         }
     }
+
+    public function setPermission($id, $payload)
+    {
+        return UserCatalouge::find($id)->permissions()->sync($payload);
+    }
+
 }

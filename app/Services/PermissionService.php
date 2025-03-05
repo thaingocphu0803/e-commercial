@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\PermissionRepository;
+use App\Services\Interfaces\PermissionServiceInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\DB;
  * Class PermissionService
  * @package App\Services
  */
-class PermissionService
+class PermissionService implements PermissionServiceInterface
 {
     protected $permissionRepository;
 
@@ -21,14 +22,14 @@ class PermissionService
 
     public function getAll()
     {
-        $userCatalouge = $this->permissionRepository->getAll();
-        return $userCatalouge;
+        $permissions = $this->permissionRepository->getAll();
+        return $permissions;
     }
 
     public function paginate($request)
     {
-        $languages = $this->permissionRepository->paginate($request);
-        return $languages;
+        $permissions = $this->permissionRepository->paginate($request);
+        return $permissions;
     }
 
     public function create($request)

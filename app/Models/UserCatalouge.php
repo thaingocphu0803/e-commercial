@@ -21,4 +21,8 @@ class UserCatalouge extends Model
     public function users(){
         return $this->hasMany(User::class, 'user_catalouge_id', 'id');
     }
+
+    public function permissions(){
+        return $this->belongsToMany(Permission::class, 'user_catalouge_permission', 'user_catalouge_id', 'permission_id');
+    }
 }
