@@ -23,8 +23,7 @@ class AppServiceProvider extends ServiceProvider
 
         'App\Repositories\Interfaces\PostRepositoryInterface' => 'App\Repositories\PostRepository',
 
-
-
+        'App\Repositories\Interfaces\RouterRepositoryInterface' => 'App\Repositories\RouterRepository',
     ];
 
     /**

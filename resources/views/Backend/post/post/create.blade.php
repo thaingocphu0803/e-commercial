@@ -131,6 +131,7 @@
                                     name="post_catalouge_id"
                                     rowLength="12"
                                     :data="$listNode"
+                                    :must="true"
                                     :value="$post->post_catalouge_id ?? ''"
                                 />
 

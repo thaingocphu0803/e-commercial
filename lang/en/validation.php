@@ -191,5 +191,5 @@ return [
 
     'attributes' => [],
     'requireLanguage' => 'The language is required.',
-
+    'requireParentCatalouge' => 'The parent catalouge is required'
 ];

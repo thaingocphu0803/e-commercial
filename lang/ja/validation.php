@@ -69,4 +69,5 @@ return [
     'attributes' => [],
 
     'requireLanguage' => '言語の選択が必要です。',
+    'requireParentCatalouge' => '親カタログは必須です'
 ];

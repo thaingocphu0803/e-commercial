@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
 use App\Repositories\PostCatalougeRepository;
+use App\Repositories\RouterRepository;
 use App\Services\Interfaces\PostCatalougeServiceInterface;
 use Illuminate\Support\Facades\Auth;
 use  Illuminate\Support\Str;
@@ -15,10 +16,12 @@ use  Illuminate\Support\Str;
 class PostCatalougeService implements PostCatalougeServiceInterface
 {
     protected   $postCatalougeRepository;
+    protected   $routerRepository;
 
-    public function __construct(PostCatalougeRepository $postCatalougeRepository)
+    public function __construct(PostCatalougeRepository $postCatalougeRepository, RouterRepository $routeRepository)
     {
         $this->postCatalougeRepository = $postCatalougeRepository;
+        $this->routerRepository = $routeRepository;
     }
 
     public function getAll()
@@ -78,9 +81,10 @@ class PostCatalougeService implements PostCatalougeServiceInterface
                 $payloadLanguage['post_catalouge_id'] = $postCatalouge->id;
                 $payloadLanguage['language_id'] = $request->input('language_id') ?? 1;
                 $payloadPivot['canonical'] = Str::slug($payloadLanguage['canonical']);
-
-
                 $this->postCatalougeRepository->createPivot($postCatalouge, $payloadLanguage);
+
+                $router = $this->getRouterPayload($payloadPivot['canonical'], $postCatalouge->id);
+                $this->routerRepository->create($router);
             }
 
             DB::commit();
@@ -106,11 +110,13 @@ class PostCatalougeService implements PostCatalougeServiceInterface
             $updated = $this->postCatalougeRepository->update($id, $payloadPostCatalouge);
 
              if($updated > 0){
+
                 $payloadPivot = $request->only($this->getRequestPivot());
-
                 $payloadPivot['canonical'] = Str::slug($payloadPivot['canonical']);
-
                 $this->postCatalougeRepository->UpdatePivot($id, $payloadPivot);
+
+                $router = $this->getRouterPayload($payloadPivot['canonical'], $id);
+                $this->routerRepository->update($router);
              }
 
             DB::commit();
@@ -223,6 +229,14 @@ class PostCatalougeService implements PostCatalougeServiceInterface
             'meta_description',
             'canonical',
             'language_id'
+        ];
+    }
+
+    public function getRouterPayload($canonical, $module_id){
+        return [
+            'canonical' => $canonical,
+            'module_id' => $module_id,
+            'controllers' => 'App\\Http\\Controllers\\Frontend\\PostCatalougeController'
         ];
     }
 }

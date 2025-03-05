@@ -23,7 +23,8 @@ class StorePostRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:post_catalouge_language,name',
-            'canonical' => 'required|unique:post_catalouge_language,canonical',
+            'canonical' => 'required|unique:routers,canonical',
+            'post_catalouge_id' => 'required',
             'language_id' => 'required|integer'
         ];
     }
@@ -31,7 +32,8 @@ class StorePostRequest extends FormRequest
     public function messages()
     {
         return [
-            'language_id.required' => __('validation.requireLanguage')
+            'language_id.required' => __('validation.requireLanguage'),
+            'post_catalouge_id.required' => __('validation.requireParentCatalouge')
         ];
     }
 }

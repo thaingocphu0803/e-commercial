@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
 use App\Repositories\PostRepository;
+use App\Repositories\RouterRepository;
 use App\Services\Interfaces\PostServiceInterface;
 use Illuminate\Support\Facades\Auth;
 use  Illuminate\Support\Str;
@@ -15,10 +16,12 @@ use  Illuminate\Support\Str;
 class PostService implements PostServiceInterface
 {
     protected   $postRepository;
+    protected   $routerRepository;
 
-    public function __construct(PostRepository $postRepository)
+    public function __construct(PostRepository $postRepository, RouterRepository $routerRepository)
     {
         $this->postRepository = $postRepository;
+        $this->routerRepository = $routerRepository;
     }
 
     public function getAll()
@@ -82,12 +85,16 @@ class PostService implements PostServiceInterface
 
                 $this->postRepository->createLanguagePivot($post, $payloadLanguage);
 
-                $catalouges = $request->input('catalouge');
-                array_push( $catalouges, $payloadPost['post_catalouge_id'] );
+                $catalouges = $request->input('catalouge') ?? [];
+
+                array_push( $catalouges, $payloadPost['post_catalouge_id'] ?? [] );
 
                 $payloadCatalouge= array_unique($catalouges);
 
                 $this->postRepository->createCatalougePivot($post, $payloadCatalouge);
+
+                $router = $this->getRouterPayload($payloadPivot['canonical'], $post->id);
+                $this->routerRepository->create($router);
 
             }
 
@@ -106,7 +113,6 @@ class PostService implements PostServiceInterface
     {
         DB::beginTransaction();
         try {
-
             $payloadPost = $request->only($this->getRequestPost());
 
             $payloadPost['user_id'] = Auth::id();
@@ -121,13 +127,16 @@ class PostService implements PostServiceInterface
 
                 $this->postRepository->updatePostLanguage($id, $payloadPivot);
 
-                $catalouges = $request->input('catalouge');
+                $catalouges = $request->input('catalouge') ?? [];
                 array_push( $catalouges, $payloadPost['post_catalouge_id'] );
 
                 $payloadCatalouge= array_unique($catalouges);
 
 
                 $this->postRepository->updateCatalougePivot($id, $payloadCatalouge);
+
+                $router = $this->getRouterPayload($payloadPivot['canonical'], $id);
+                $this->routerRepository->update($router);
              }
 
             DB::commit();
@@ -240,6 +249,15 @@ class PostService implements PostServiceInterface
             'meta_description',
             'canonical',
             'language_id'
+        ];
+    }
+
+    public function getRouterPayload($canonical, $module_id)
+    {
+        return [
+            'canonical' => $canonical,
+            'module_id' => $module_id,
+            'controllers' => 'App\\Http\\Controllers\\Frontend\\PostController'
         ];
     }
 }

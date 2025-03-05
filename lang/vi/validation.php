@@ -119,5 +119,6 @@ return [
 
     'attributes' => [],
     'requireLanguage' => 'Ngôn ngữ là bắt buộc.',
+    'requireParentCatalouge' => 'Danh mục cha là bắt buộc'
 
 ];

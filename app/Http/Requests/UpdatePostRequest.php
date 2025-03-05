@@ -23,7 +23,8 @@ class UpdatePostRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:post_language,name,' . $this->id . ',post_id',
-            'canonical' => 'required|unique:post_language,canonical,' . $this->id . ',post_id',
+            'canonical' => 'required|unique:routers,canonical,' . $this->id . ',module_id',
+            'post_catalouge_id' => 'required',
             'language_id' => 'required|integer'
         ];
     }
@@ -32,7 +33,8 @@ class UpdatePostRequest extends FormRequest
     public function messages()
     {
         return [
-            'language_id.required' => __('validation.requireLanguage')
+            'language_id.required' => __('validation.requireLanguage'),
+            'post_catalouge_id.required' => __('validation.requireParentCatalouge')
         ];
     }
 }

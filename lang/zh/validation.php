@@ -69,4 +69,5 @@ return [
     'attributes' => [],
 
     'requireLanguage' => '必须选择语言。',
+    'requireParentCatalouge' => '父目录是必需的'
 ];
