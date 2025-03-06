@@ -11,11 +11,11 @@
                             </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
                         </span> </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a href="profile.html">{{__('dashboard.profile')}}</a></li>
-                        <li><a href="contacts.html">{{__('dashboard.contacts')}}</a></li>
-                        <li><a href="mailbox.html">{{__('dashboard.mailbox')}}</a></li>
+                        <li><a href="profile.html">{{ __('dashboard.profile') }}</a></li>
+                        <li><a href="contacts.html">{{ __('dashboard.contacts') }}</a></li>
+                        <li><a href="mailbox.html">{{ __('dashboard.mailbox') }}</a></li>
                         <li class="divider"></li>
-                        <li><a href="{{ route('auth.logout') }}">{{__('dashboard.logout')}}</a></li>
+                        <li><a href="{{ route('auth.logout') }}">{{ __('dashboard.logout') }}</a></li>
                     </ul>
                 </div>
                 <div class="logo-element">
@@ -24,20 +24,59 @@
             </li>
 
             <x-backend.dashboard.nav.module icon='fa-user-circle-o' :title="__('dashboard.managerObject', ['object' => __('dashboard.member')])">
-                <li><a class="text-capitalize" href="{{ route('user.index') }}">{{__('dashboard.member')}}</a></li>
-                <li><a class="text-capitalize" href="{{ route('user.catalouge.index') }}">{{__('dashboard.objectGroup', ['object' => __('dashboard.member')])}}</a></li>
-                <li><a class="text-capitalize" href="{{ route('permission.index') }}">{{ __('dashboard.permission')}}</a></li>
+                @can('modules', 'user.index')
+                    <li>
+                        <a class="text-capitalize" href="{{ route('user.index') }}">
+                            {{ __('dashboard.member') }}
+                        </a>
+                    </li>
+                @endcan
+
+                @can('modules', 'user.catalouge.index')
+                    <li>
+                        <a class="text-capitalize" href="{{ route('user.catalouge.index') }}">
+                            {{ __('dashboard.objectGroup', ['object' => __('dashboard.member')]) }}
+                        </a>
+                    </li>
+                @endcan
+
+                @can('modules', 'permission.index')
+                    <li>
+                        <a class="text-capitalize" href="{{ route('permission.index') }}">
+                            {{ __('dashboard.permission') }}
+                        </a>
+                    </li>
+                @endcan
+
             </x-backend.dashboard.nav.module>
 
-            <x-backend.dashboard.nav.module icon='fa-file' :title="__('dashboard.managerObject', ['object' =>  __('dashboard.post')])">
-                <li><a class="text-capitalize" href="{{ route('post.index') }}">{{__('dashboard.post')}}</a></li>
-                <li><a class="text-capitalize" href="{{ route('post.catalouge.index') }}">{{__('dashboard.objectGroup', ['object' =>  __('dashboard.post')])}}</a></li>
+            <x-backend.dashboard.nav.module icon='fa-file' :title="__('dashboard.managerObject', ['object' => __('dashboard.post')])">
+                @can('modules', 'post.index')
+                    <li>
+                        <a class="text-capitalize" href="{{ route('post.index') }}">
+                            {{ __('dashboard.post') }}
+                        </a>
+                    </li>
+                @endcan
+
+                @can('modules', 'post.catalouge.index')
+                    <li>
+                        <a class="text-capitalize" href="{{ route('post.catalouge.index') }}">
+                            {{ __('dashboard.objectGroup', ['object' => __('dashboard.post')]) }}
+                        </a>
+                    </li>
+                @endcan
             </x-backend.dashboard.nav.module>
 
-            <x-backend.dashboard.nav.module icon='fa-cog' :title="__('dashboard.managerObject', ['object' =>  __('dashboard.language')])">
-                <li><a class="text-capitalize" href="{{ route('language.index') }}">{{__('dashboard.language')}}</a></li>
+            <x-backend.dashboard.nav.module icon='fa-cog' :title="__('dashboard.managerObject', ['object' => __('dashboard.language')])">
+                @can('modules', 'language.index')
+                    <li>
+                        <a class="text-capitalize" href="{{ route('language.index') }}">
+                            {{ __('dashboard.language') }}
+                        </a>
+                    </li>
+                @endcan
             </x-backend.dashboard.nav.module>
         </ul>
-
     </div>
 </nav>

@@ -21,33 +21,44 @@
             <tr>
 
                 <th><input type="checkbox" class="checkAll check-table" name="input"></th>
-                <th>{{__('table.name')}}</th>
-                <th>{{__('table.numMember')}}</th>
-                <th>{{__('table.description')}}</th>
-                <th>{{__('table.active')}}</th>
-                <th>{{__('table.action')}}</th>
+                <th>{{ __('table.name') }}</th>
+                <th>{{ __('table.numMember') }}</th>
+                <th>{{ __('table.description') }}</th>
+                <th class="text-center">{{ __('table.active') }}</th>
+                <th class="text-center">{{ __('table.action') }}</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($userCatalouges as $userCatalouge)
                 <tr>
-                    <td><input type="checkbox" name="input" class="checkItem check-table"
-                            value="{{ $userCatalouge->id }}"></td>
+                    <td>
+                        <input
+                            type="checkbox"
+                            name="input"
+                            class="checkItem check-table"
+                            value="{{ $userCatalouge->id }}"
+                        >
+                    </td>
                     <td class="text-capitalize">{{ $userCatalouge->name }}</td>
                     <td class="text-capitalize">{{ $userCatalouge->users_count }}</td>
                     <td>{{ $userCatalouge->description }}</td>
-                    <td class="js-switch-{{ $userCatalouge->id }}">
+                    <td class="js-switch-{{ $userCatalouge->id }} text-center">
                         <input type="checkbox" class="js-switch status" data-model="userCatalouge" data-field="publish"
                             data-modelId="{{ $userCatalouge->id }}" value="{{ $userCatalouge->publish }}"
                             @checked($userCatalouge->publish == 1) />
                     </td>
-                    <td>
-                        <a href="{{ route('user.catalouge.edit', $userCatalouge->id) }}" class="btn btn-success"><i
-                                class="fa fa-edit"></i></a>
-                        <a href="{{ route('user.catalouge.delete', $userCatalouge->id) }}" class="btn btn-danger">
-                            <i class="fa fa-trash"></i>
-                        </a>
+                    <td class="text-center">
+                        @can('modules', 'user.catalouge.update')
+                            <a href="{{ route('user.catalouge.edit', $userCatalouge->id) }}" class="btn btn-success">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                        @endcan
 
+                        @can('modules', 'user.catalouge.delete')
+                            <a href="{{ route('user.catalouge.delete', $userCatalouge->id) }}" class="btn btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        @endcan
                     </td>
                 </tr>
             @endforeach

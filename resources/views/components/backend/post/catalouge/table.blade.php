@@ -21,11 +21,11 @@
             <tr>
 
                 <th><input type="checkbox" class="checkAll check-table" name="input"></th>
-                <th>{{__('table.image')}}</th>
-                <th>{{__('table.name')}}</th>
-                <th>{{__('table.canonical')}}</th>
-                <th>{{__('table.active')}}</th>
-                <th>{{__('table.action')}}</th>
+                <th>{{ __('table.image') }}</th>
+                <th>{{ __('table.name') }}</th>
+                <th>{{ __('table.canonical') }}</th>
+                <th class="text-center">{{ __('table.active') }}</th>
+                <th class="text-center">{{ __('table.action') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -42,18 +42,23 @@
                     </td>
                     <td class="text-capitalize">{{ $postCatalouge->name }}</td>
                     <td>{{ $postCatalouge->canonical }}</td>
-                    <td class="js-switch-{{ $postCatalouge->id }}">
+                    <td class="js-switch-{{ $postCatalouge->id }} text-center">
                         <input type="checkbox" class="js-switch status" data-model="postCatalouge" data-field="publish"
                             data-modelId="{{ $postCatalouge->id }}" value="{{ $postCatalouge->publish }}"
                             @checked($postCatalouge->publish == 1) />
                     </td>
-                    <td>
-                        <a href="{{ route('post.catalouge.edit', $postCatalouge->id) }}" class="btn btn-success"><i
-                                class="fa fa-edit"></i></a>
-                        <a href="{{ route('post.catalouge.delete', $postCatalouge->id) }}" class="btn btn-danger">
-                            <i class="fa fa-trash"></i>
-                        </a>
+                    <td class="text-center">
+                        @can('modules', 'post.catalouge.update')
+                            <a href="{{ route('post.catalouge.edit', $postCatalouge->id) }}" class="btn btn-success">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                        @endcan
 
+                        @can('modules', 'post.catalouge.delete')
+                            <a href="{{ route('post.catalouge.delete', $postCatalouge->id) }}" class="btn btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        @endcan
                     </td>
                 </tr>
             @endforeach

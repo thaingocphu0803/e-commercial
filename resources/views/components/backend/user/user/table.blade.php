@@ -24,9 +24,9 @@
                 <th class="avt-col">{{ __('table.avatar') }}</th>
                 <th>{{ __('table.information') }}</th>
                 <th>{{ __('table.address') }}</th>
-                <th>{{ __('table.group') }}</th>
-                <th>{{ __('table.active') }}</th>
-                <th>{{ __('table.action') }}</th>
+                <th class="text-center">{{ __('table.group') }}</th>
+                <th class="text-center">{{ __('table.active') }}</th>
+                <th class="text-center">{{ __('table.action') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -73,19 +73,24 @@
                             </div>
                         @endif
                     </td>
-                    <td class="text-capitalize">{{ $user->userCatalouge->name }}</td>
-                    <td class="js-switch-{{ $user->id }}">
+                    <td class="text-capitalize text-center">{{ $user->userCatalouge->name }}</td>
+                    <td class="js-switch-{{ $user->id }} text-center">
                         <input type="checkbox" class="js-switch status" data-model="user" data-field="publish"
                             data-modelId="{{ $user->id }}" value="{{ $user->publish }}"
                             @checked($user->publish == 1) />
                     </td>
-                    <td>
-                        <a href="{{ route('user.edit', $user->id) }}" class="btn btn-success"><i
-                                class="fa fa-edit"></i></a>
-                        <a href="{{ route('user.delete', $user->id) }}" class="btn btn-danger">
-                            <i class="fa fa-trash"></i>
-                        </a>
+                    <td class="text-center">
+                        @can('modules', 'user.update')
+                            <a href="{{ route('user.edit', $user->id) }}" class="btn btn-success">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                        @endcan
 
+                        @can('modules', 'user.delete')
+                            <a href="{{ route('user.delete', $user->id) }}" class="btn btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        @endcan
                     </td>
                 </tr>
             @endforeach

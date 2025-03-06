@@ -21,11 +21,11 @@
             <tr>
 
                 <th><input type="checkbox" class="checkAll check-table" name="input"></th>
-                <th>{{__('table.flag')}}</th>
-                <th>{{__('table.name')}}</th>
-                <th>{{__('table.description')}}</th>
-                <th>{{__('table.active')}}</th>
-                <th>{{__('table.action')}}</th>
+                <th>{{ __('table.flag') }}</th>
+                <th>{{ __('table.name') }}</th>
+                <th>{{ __('table.description') }}</th>
+                <th class="text-center">{{ __('table.active') }}</th>
+                <th class="text-center">{{ __('table.action') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -40,18 +40,23 @@
                     </td>
                     <td class="text-capitalize">{{ $language->name }}</td>
                     <td>{{ $language->description }}</td>
-                    <td class="js-switch-{{ $language->id }}">
+                    <td class="js-switch-{{ $language->id }} text-center">
                         <input type="checkbox" class="js-switch status" data-model="language" data-field="publish"
                             data-modelId="{{ $language->id }}" value="{{ $language->publish }}"
                             @checked($language->publish == 1) />
                     </td>
-                    <td>
-                        <a href="{{ route('language.edit', $language->id) }}" class="btn btn-success"><i
-                                class="fa fa-edit"></i></a>
-                        <a href="{{ route('language.delete', $language->id) }}" class="btn btn-danger">
-                            <i class="fa fa-trash"></i>
-                        </a>
+                    <td class="text-center">
+                        @can('modules', 'language.update')
+                            <a href="{{ route('language.edit', $language->id) }}" class="btn btn-success">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                        @endcan
 
+                        @can('modules', 'language.delete')
+                            <a href="{{ route('language.delete', $language->id) }}" class="btn btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        @endcan
                     </td>
                 </tr>
             @endforeach

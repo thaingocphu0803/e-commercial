@@ -21,10 +21,10 @@
             <tr>
 
                 <th><input type="checkbox" class="checkAll check-table" name="input"></th>
-                <th>{{__('table.name')}}</th>
-                <th class="text-center w-80">{{__('table.order')}}</th>
-                <th class="text-center">{{__('table.active')}}</th>
-                <th class="text-center">{{__('table.action')}}</th>
+                <th>{{ __('table.name') }}</th>
+                <th class="text-center w-80">{{ __('table.order') }}</th>
+                <th class="text-center">{{ __('table.active') }}</th>
+                <th class="text-center">{{ __('table.action') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -53,9 +53,11 @@
                                     </span>
                                 </div>
                                 <div class="catalouge flex gap-10">
-                                    <span class="text-danger">{{__('dashboard.objectGroup', ['object' => __('table.catalouge')])}}:</span>
+                                    <span
+                                        class="text-danger">{{ __('dashboard.objectGroup', ['object' => __('table.catalouge')]) }}:</span>
                                     @foreach ($post->postCatalouges as $postCatalouge)
-                                    <a href="#" title="">{{$postCatalouge->languages->pluck('pivot.name')->implode(',')}}</a>
+                                        <a href="#"
+                                            title="">{{ $postCatalouge->languages->pluck('pivot.name')->implode(',') }}</a>
                                     @endforeach
                                 </div>
                             </div>
@@ -75,12 +77,18 @@
                     </td>
 
                     <td class="text-center">
-                        <a href="{{ route('post.edit', $post->id) }}" class="btn btn-success">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                        <a href="{{ route('post.delete', $post->id) }}" class="btn btn-danger">
-                            <i class="fa fa-trash"></i>
-                        </a>
+
+                        @can('modules', 'post.update')
+                            <a href="{{ route('post.edit', $post->id) }}" class="btn btn-success">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                        @endcan
+
+                        @can('modules', 'post.delete')
+                            <a href="{{ route('post.delete', $post->id) }}" class="btn btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        @endcan
 
                     </td>
 

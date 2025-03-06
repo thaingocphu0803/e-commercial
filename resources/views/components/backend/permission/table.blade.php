@@ -21,9 +21,9 @@
             <tr>
 
                 <th><input type="checkbox" class="checkAll check-table" name="input"></th>
-                <th>{{__('table.name')}}</th>
-                <th>{{__('table.canonical')}}</th>
-                <th>{{__('table.action')}}</th>
+                <th>{{ __('table.name') }}</th>
+                <th>{{ __('table.canonical') }}</th>
+                <th class="text-center">{{ __('table.action') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -33,12 +33,19 @@
                     </td>
                     <td class="text-capitalize">{{ $permission->name }}</td>
                     <td>{{ $permission->canonical }}</td>
-                    <td>
-                        <a href="{{ route('permission.edit', $permission->id) }}" class="btn btn-success"><i
-                                class="fa fa-edit"></i></a>
-                        <a href="{{ route('permission.delete', $permission->id) }}" class="btn btn-danger">
-                            <i class="fa fa-trash"></i>
-                        </a>
+                    <td class="text-center">
+
+                        @can('modules', 'permission.update')
+                            <a href="{{ route('permission.edit', $permission->id) }}" class="btn btn-success">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                        @endcan
+
+                        @can('modules', 'permission.delete')
+                            <a href="{{ route('permission.delete', $permission->id) }}" class="btn btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        @endcan
 
                     </td>
                 </tr>

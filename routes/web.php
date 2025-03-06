@@ -9,7 +9,7 @@ use App\Http\Controllers\Backend\PostCatalougeController;
 use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\Backend\UserCatalougeController;
 use App\Http\Controllers\Backend\UserController;
-use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\Backend\PermissionController;
 use Illuminate\Support\Facades\Route;
 
 use function Pest\Laravel\delete;
