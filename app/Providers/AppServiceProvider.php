@@ -28,6 +28,8 @@ class AppServiceProvider extends ServiceProvider
 
         'App\Repositories\Interfaces\PermissionRepositoryInterface' => 'App\Repositories\PermissionRepository',
 
+        'App\Repositories\Interfaces\GenerateRepositoryInterface' => 'App\Repositories\GenerateRepository',
+
     ];
 
     /**

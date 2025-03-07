@@ -4,6 +4,7 @@ use App\Http\Controllers\Ajax\DashboardController as AjaxDashboardController;
 use App\Http\Controllers\Ajax\LocationController;
 use App\Http\Controllers\Backend\AuthenController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\GenerateController;
 use App\Http\Controllers\Backend\LanguageController;
 use App\Http\Controllers\Backend\PostCatalougeController;
 use App\Http\Controllers\Backend\PostController;
@@ -78,6 +79,18 @@ Route::controller(PermissionController::class)->middleware(['admin', 'locale'])-
     Route::post('update/{id}', 'update')->name('permission.update');
     Route::get('delete/{permission}', 'delete')->name('permission.delete');
     Route::delete('destroy/{id}', 'destroy')->name('permission.destroy');
+});
+
+
+//GenerateController
+Route::controller(GenerateController::class)->middleware(['admin', 'locale'])->prefix('generate')->group(function () {
+    Route::get('index',  'index')->name('generate.index');
+    Route::get('create', 'create')->name('generate.create');
+    Route::post('store', 'store')->name('generate.store');
+    Route::get('edit/{generate}', 'edit')->name('generate.edit');
+    Route::post('update/{id}', 'update')->name('generate.update');
+    Route::get('delete/{generate}', 'delete')->name('generate.delete');
+    Route::delete('destroy/{id}', 'destroy')->name('generate.destroy');
 });
 
 //PostController

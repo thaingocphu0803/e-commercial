@@ -76,6 +76,14 @@
                         </a>
                     </li>
                 @endcan
+
+                @can('modules', 'generate.index')
+                <li>
+                    <a class="text-capitalize" href="{{ route('generate.index') }}">
+                        {{ __('dashboard.generate') }}
+                    </a>
+                </li>
+                @endcan
             </x-backend.dashboard.nav.module>
         </ul>
     </div>
