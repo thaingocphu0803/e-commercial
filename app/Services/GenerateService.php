@@ -7,6 +7,7 @@ use App\Services\Interfaces\GenerateServiceInterface;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use NunoMaduro\Collision\Provider;
 
 /**
  * Class GenerateService
@@ -15,6 +16,12 @@ use Illuminate\Support\Facades\File;
 class GenerateService implements GenerateServiceInterface
 {
     protected $generateRepository;
+    private const TEMPLATE_CATALOUGE = "TemplateCatalouge";
+    private const TEMPLATE = "Template";
+    private const SERVICE = "Service";
+    private const REPOSITORY = "Repository";
+
+
 
     public function __construct(GenerateRepository $generateRepository)
     {
@@ -38,10 +45,6 @@ class GenerateService implements GenerateServiceInterface
         DB::beginTransaction();
         try {
 
-            // $this->makeController();
-            // $this->makeModel();
-            // $this->makeRepository();
-            // $this->makeService();
             // $this->makeProvider();
             // $this->makeRequest();
             // $this->makeView();
@@ -50,10 +53,17 @@ class GenerateService implements GenerateServiceInterface
             // $this->makeLang();
             $payload = $request->except(['_token']);
 
-            $this->generateRepository->create($payload);
+            // $this->generateRepository->create($payload);
 
             DB::commit();
-            $this->makeDatabase($request);
+            // $this->makeDatabase($request);
+            // $this->makeController($request);
+            // $this->makeModel($request);
+            $this->makeRepository($request);
+            // $this->makeService($request);
+
+
+
 
             return true;
         } catch (\Exception $e) {
@@ -177,106 +187,247 @@ class GenerateService implements GenerateServiceInterface
         }
     }
 
-    private function makeDatabase($request){
-        $payload = $request->only('name', 'schema', 'module_type');
-        $migrationTableName = $this->convertToTableName($payload['name']);
-        $migrationFileName = date('Y_m_d_His').'_create_'.$migrationTableName.'s_table.php';
-        $migrationPath = database_path("migrations\\$migrationFileName");
+    private function makeDatabase($request)
+    {
+        try {
+            $payload = $request->only('name', 'schema', 'module_type');
+            $name = lcfirst($payload['name']);
+            $migrationTableName = $this->convertToTableName($name);
+            $templatePath = base_path('app\\templates\\TemplateMigration.php');
+            $templateContent = file_get_contents($templatePath);
 
-        $migrationContent = $this->mainSchema($payload['schema'], $migrationTableName);
+            $option = [
+                'schema' => $payload['schema'],
+                'migrationTableName' => $migrationTableName
+            ];
 
-        $filePut = File::put($migrationPath, $migrationContent);
-        if(!$filePut) return false;
+            $migrationFileName = date('Y_m_d_His') . '_create_' . $migrationTableName . 's_table.php';
+            $migrationPath = database_path("migrations\\$migrationFileName");
+            $newContent = $this->replaceTemplateContent($option, $templateContent);
 
-        if($payload['module_type']!= 3){
-            $migrationPivotContent = $this->pivotSchema($migrationTableName);
-            $migrationPivotFileName = date('Y_m_d_His').'_create_'.$migrationTableName.'_language_table.php';
+            File::put($migrationPath, $newContent);
 
-            $migrationPivotPath = database_path("migrations\\$migrationPivotFileName");
+            if ($payload['module_type'] != 3) {
+                $templatePivotPath = base_path('app\\templates\\TemplatePivotMigration.php');
+                $templatePivotContent = file_get_contents($templatePivotPath);
+                $newPivotContent = $this->replaceTemplateContent($option, $templatePivotContent);
 
-            $filePivotPut = File::put($migrationPivotPath, $migrationPivotContent);
-            if(!$filePivotPut) return false;
 
-            // $runMigate = Artisan::call('migrate');
-            // if($runMigate != 0) return false;
+                $migrationPivotFileName = date('Y_m_d_His', time() + 10) . '_create_' . $migrationTableName . '_language_table.php';
+                $migrationPivotPath = database_path("migrations\\$migrationPivotFileName");
+
+                File::put($migrationPivotPath, $newPivotContent);
+
+                Artisan::call('migrate');
+            }
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            echo $e->getMessage();
+
+            return false;
         }
-
-        return true;
     }
 
-    private function pivotSchema($migrationTableName){
-        return <<<PIVOT
-<?php
-
-use App\Models\Language;
-use App\Models\PostCatalouge;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
-
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    private function makeController($request)
     {
-        Schema::create('{$migrationTableName}_language', function (Blueprint \$table) {
-            \$table->foreignId('{$migrationTableName}_id')->constrained('{$migrationTableName}s')->cascadeOnDelete();
-            \$table->foreignIdFor(Language::class, 'language_id')->constrained()->cascadeOnDelete();
-            \$table->string('name');
-            \$table->text('description')->nullable();
-            \$table->longText('content')->nullable();
-            \$table->string('meta_title')->nullable();
-            \$table->string('meta_keyword')->nullable();
-            \$table->text('meta_description')->nullable();
-            \$table->timestamps();
-        });
+        $payload = $request->only('name', 'module_type');
+        $name = lcfirst($payload['name']);
+
+        switch ($payload['module_type']) {
+            case 1:
+                $this->createTemplateController($name, self::TEMPLATE_CATALOUGE);
+                break;
+            case 2:
+                $this->createTemplateController($name, self::TEMPLATE);
+                break;
+            default:
+                $this->createSingleController($name);
+        }
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    private function makeModel($request)
     {
-        Schema::dropIfExists('{$migrationTableName}_language');
+        $payload = $request->only('name', 'module_type');
+        $name = lcfirst($payload['name']);
+
+        switch ($payload['module_type']) {
+            case 1:
+                $this->createTemplateModel($name, self::TEMPLATE_CATALOUGE);
+                break;
+            case 2:
+                $this->createTemplateModel($name, self::TEMPLATE);
+                break;
+            default:
+                break;
+        }
     }
-};
 
-PIVOT;
-    }
-
-    private function mainSchema($schema, $migrationTableName){
-        return <<<MAIN
-<?php
-
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
-
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    private function makeService($request)
     {
-        {$schema}
+        $payload = $request->only('name', 'module_type');
+        $name = lcfirst($payload['name']);
+
+        switch ($payload['module_type']) {
+            case 1:
+                $this->createTemplatePattern($name, self::TEMPLATE_CATALOUGE, self::SERVICE);
+                break;
+            case 2:
+                $this->createTemplatePattern($name, self::TEMPLATE, self::SERVICE);
+                break;
+            default:
+                break;
+        }
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    private function makeRepository($request)
     {
-        Schema::dropIfExists('{$migrationTableName}s');
-    }
-};
-MAIN;
+        $payload = $request->only('name', 'module_type');
+        $name = lcfirst($payload['name']);
+
+        switch ($payload['module_type']) {
+            case 1:
+                $this->createTemplatePattern($name, self::TEMPLATE_CATALOUGE, self::REPOSITORY);
+                break;
+            case 2:
+                $this->createTemplatePattern($name, self::TEMPLATE, self::REPOSITORY);
+                break;
+            default:
+                break;
+        }
     }
 
-    private function convertToTableName($name){
+    private function createTemplateController($name, $templateName)
+    {
+        try {
+            $ModuleTemplate = ucfirst($name);
+            $moduleTemplate = $name;
+            $moduleView = $this->converToViewFolder($name);
+
+            $templatePath = base_path('app\\templates\\' . $templateName . 'Controller.php');
+            $templateContent = file_get_contents($templatePath);
+
+            $option = [
+                'ModuleTemplate' => $ModuleTemplate,
+                'moduleTemplate' => $moduleTemplate,
+                'moduleView' => $moduleView
+            ];
+            $newContent = $this->replaceTemplateContent($option, $templateContent);
+            $controllerPath = base_path('app\\Http\\Controllers\\Backend\\' . $ModuleTemplate . 'Controller.php');
+
+            File::put($controllerPath, $newContent);
+
+            return true;
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+
+            return false;
+        }
+    }
+
+    private function createSingleController($name) {}
+
+    private function  createTemplateModel($name, $templateName)
+    {
+
+        try {
+            $moduleTable  = $this->convertToTableName($name);
+            $ModuleTemplate = ucfirst($name);
+            $moduleTemplate = $name;
+            $relation = explode('_', $moduleTable)[0];
+            $relationModel = ucfirst($relation);
+
+            $templatePath =  base_path('app\\templates\\' . $templateName . 'Model.php');
+            $templateContent = file_get_contents($templatePath);
+
+            $option = [
+                'moduleTable' => $moduleTable,
+                'ModuleTemplate' => $ModuleTemplate,
+                'moduleTemplate' => $moduleTemplate,
+                'relation' => $relation,
+                'relationModel' => $relationModel
+            ];
+
+            $newContent = $this->replaceTemplateContent($option, $templateContent);
+            $modelPath = base_path('app\\Models\\' . $ModuleTemplate . '.php');
+
+            File::put($modelPath, $newContent);
+            return true;
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+
+            return false;
+        }
+    }
+    private function createTemplatePattern($name, $templateName, $pattern)
+    {
+        try {
+            $templateInterfacePath = base_path('app\\templates\\' . $templateName . $pattern . 'Interface.php');
+            $templatePath = base_path('app\\templates\\' . $templateName . $pattern . '.php');
+            $folderPattern = ($pattern == 'Repository') ? 'Repositories' : 'Services';
+
+            $templateInterfaceContent = file_get_contents($templateInterfacePath);
+            if (!$templateInterfaceContent) return false;
+
+            $templateContent = file_get_contents($templatePath);
+            if (!$templateContent) return false;
+
+            $ModuleName = ucfirst($name);
+            $moduleTableName  = $this->convertToTableName($name);
+
+            $option = [
+                'ModuleName' => $ModuleName,
+                'moduleName' => $name,
+                'moduleTableName' => $moduleTableName
+            ];
+
+            $newInterfaceContent = $this->replaceTemplateContent($option, $templateInterfaceContent);
+            $newContent = $this->replaceTemplateContent($option, $templateContent);
+
+            $patternInterfacePath = base_path('app\\' . $folderPattern . '\\Interfaces\\' . $ModuleName . $pattern . 'Interface.php');
+            $patternPath = base_path('app\\' . $folderPattern . '\\' . $ModuleName . $pattern . '.php');
+
+            $putPatternInterFace = File::put($patternInterfacePath, $newInterfaceContent);
+
+            if (!$putPatternInterFace) return false;
+
+            $putPattern = File::put($patternPath, $newContent);
+
+            if (!$putPattern) return false;
+
+            if($pattern == 'Repository'){
+                $insertAppProvider =  "'App\Repositories\Interfaces\'.$ModuleName.'RepositoryInterface' => 'App\Repositories\'.$ModuleName.'Repository'";
+                $providerPath = base_path('app\\Provides\\AppServiceProvider.php');
+                $providerContent = file_get_contents($providerPath);
+                dd($providerContent);
+            }
+
+            return true;
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+
+            return false;
+        }
+    }
+
+    private function convertToTableName($name)
+    {
         $temp = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $name));
         return $temp;
+    }
+
+    private function converToViewFolder($name)
+    {
+        $temp = strtolower(preg_replace('/(?<!^)[A-Z]/', '.$0', $name));
+        return $temp;
+    }
+
+    private function replaceTemplateContent($dataArray, $templateContent)
+    {
+        foreach ($dataArray as $key => $val) {
+            $templateContent = str_replace('{' . $key . '}', $val, $templateContent);
+        }
+
+        return $templateContent;
     }
 }

@@ -28,12 +28,14 @@
                     <div class="ibox">
                         <div class="ibox-content">
                             <div class="row">
-                                <x-backend.dashboard.form.input inputName="name" type="text" :labelName="__('dashboard.name')"
-                                    :value="$generate->name ?? ''" :disabled="true" />
-
-                                <x-backend.dashboard.form.input inputName="canonical" type="text" :labelName="__('dashboard.canonical')"
-                                    :value="$generate->canonical ?? ''" :disabled="true" />
-
+                                <x-backend.dashboard.form.input
+                                    inputName="name"
+                                    type="text"
+                                    :labelName="__('dashboard.name')"
+                                    :value="$generate->name ?? ''"
+                                    :disabled="true"
+                                    rowLength="12"
+                                />
                             </div>
 
                         </div>

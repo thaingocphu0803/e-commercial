@@ -3,42 +3,42 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
-use App\Repositories\PostCatalougeRepository;
+use App\Repositories\{ModuleName}Repository;
 use App\Repositories\RouterRepository;
-use App\Services\Interfaces\PostCatalougeServiceInterface;
+use App\Services\Interfaces\{ModuleName}ServiceInterface;
 use Illuminate\Support\Facades\Auth;
 use  Illuminate\Support\Str;
 
 /**
- * Class PostCatalougeService
+ * Class {ModuleName}Service
  * @package App\Services
  */
-class PostCatalougeService implements PostCatalougeServiceInterface
+class {ModuleName}Service implements {ModuleName}ServiceInterface
 {
-    protected   $postCatalougeRepository;
+    protected   ${moduleName}Repository;
     protected   $routerRepository;
 
-    public function __construct(PostCatalougeRepository $postCatalougeRepository, RouterRepository $routeRepository)
+    public function __construct({ModuleName}Repository ${moduleName}Repository, RouterRepository $routeRepository)
     {
-        $this->postCatalougeRepository = $postCatalougeRepository;
+        $this->{moduleName}Repository = ${moduleName}Repository;
         $this->routerRepository = $routeRepository;
     }
 
     public function getAll()
     {
-        $userCatalouge = $this->postCatalougeRepository->getAll();
+        $userCatalouge = $this->{moduleName}Repository->getAll();
         return $userCatalouge;
     }
 
     public function paginate($request)
     {
-        $languages = $this->postCatalougeRepository->paginate($request);
+        $languages = $this->{moduleName}Repository->paginate($request);
         return $languages;
     }
 
     public function getToTree($id = null)
     {
-        $postCatalouges = $this->postCatalougeRepository->getToTree($id);
+        ${moduleName}s = $this->{moduleName}Repository->getToTree($id);
         $listNode = [];
         $traverse = function ($categories, $prefix = '-') use (&$traverse, &$listNode) {
             foreach ($categories as $category) {
@@ -51,39 +51,39 @@ class PostCatalougeService implements PostCatalougeServiceInterface
             }
         };
 
-        $traverse($postCatalouges);
+        $traverse(${moduleName}s);
 
         return $listNode;
     }
 
     public function findById($id)
     {
-        $postCatalouge = $this->postCatalougeRepository->findById($id);
+        ${moduleName} = $this->{moduleName}Repository->findById($id);
 
-        return $postCatalouge;
+        return ${moduleName};
     }
 
     public function create($request)
     {
         DB::beginTransaction();
         try {
-            $payloadPostCatalouge = $request->only($this->getRequestPostCatalouge());
+            $payload{ModuleName} = $request->only($this->getRequest{ModuleName}());
 
-            $payloadPostCatalouge['user_id'] = Auth::id();
-            $payloadPostCatalouge['parent_id'] = $request->input('parent_id') ?? null;
+            $payload{ModuleName}['user_id'] = Auth::id();
+            $payload{ModuleName}['parent_id'] = $request->input('parent_id') ?? null;
 
-            $postCatalouge = $this->postCatalougeRepository->create($payloadPostCatalouge);
+            ${moduleName} = $this->{moduleName}Repository->create($payload{ModuleName});
 
-            if ($postCatalouge->id > 0) {
+            if (${moduleName}->id > 0) {
 
                 $payloadLanguage = $request->only($this->getRequestPivot());
 
-                $payloadLanguage['post_catalouge_id'] = $postCatalouge->id;
+                $payloadLanguage['{moduleTableName}_id'] = ${moduleName}->id;
                 $payloadLanguage['language_id'] = $request->input('language_id') ?? 1;
                 $payloadPivot['canonical'] = Str::slug($payloadLanguage['canonical']);
-                $this->postCatalougeRepository->createPivot($postCatalouge, $payloadLanguage);
+                $this->{moduleName}Repository->createPivot(${moduleName}, $payloadLanguage);
 
-                $router = $this->getRouterPayload($payloadPivot['canonical'], $postCatalouge->id);
+                $router = $this->getRouterPayload($payloadPivot['canonical'], ${moduleName}->id);
                 $this->routerRepository->create($router);
             }
 
@@ -103,17 +103,17 @@ class PostCatalougeService implements PostCatalougeServiceInterface
         DB::beginTransaction();
         try {
 
-            $payloadPostCatalouge = $request->only($this->getRequestPostCatalouge());
+            $payload{ModuleName} = $request->only($this->getRequest{ModuleName}());
 
-            $payloadPostCatalouge['user_id'] = Auth::id();
+            $payload{ModuleName}['user_id'] = Auth::id();
 
-            $updated = $this->postCatalougeRepository->update($id, $payloadPostCatalouge);
+            $updated = $this->{moduleName}Repository->update($id, $payload{ModuleName});
 
              if($updated > 0){
 
                 $payloadPivot = $request->only($this->getRequestPivot());
                 $payloadPivot['canonical'] = Str::slug($payloadPivot['canonical']);
-                $this->postCatalougeRepository->UpdatePivot($id, $payloadPivot);
+                $this->{moduleName}Repository->UpdatePivot($id, $payloadPivot);
 
                 $router = $this->getRouterPayload($payloadPivot['canonical'], $id);
                 $this->routerRepository->update($router);
@@ -135,7 +135,7 @@ class PostCatalougeService implements PostCatalougeServiceInterface
     {
         DB::beginTransaction();
         try {
-            $this->postCatalougeRepository->destroy($id);
+            $this->{moduleName}Repository->destroy($id);
 
             DB::commit();
 
@@ -153,7 +153,7 @@ class PostCatalougeService implements PostCatalougeServiceInterface
     {
         DB::beginTransaction();
         try {
-            $this->postCatalougeRepository->forceDestroy($id);
+            $this->{moduleName}Repository->forceDestroy($id);
 
             DB::commit();
 
@@ -172,9 +172,9 @@ class PostCatalougeService implements PostCatalougeServiceInterface
 
         DB::beginTransaction();
         try {
-            $this->postCatalougeRepository->updateStatus($payload);
+            $this->{moduleName}Repository->updateStatus($payload);
 
-            // $this->postCatalougeRepository->updateByWhereIn($payload['modelId'], $payload['value']);
+            // $this->{moduleName}Repository->updateByWhereIn($payload['modelId'], $payload['value']);
 
 
             DB::commit();
@@ -193,8 +193,8 @@ class PostCatalougeService implements PostCatalougeServiceInterface
 
         DB::beginTransaction();
         try {
-            $this->postCatalougeRepository->updateStatusAll($payload);
-            // $this->postCatalougeRepository->updateByWhereIn($payload['ids'], $payload['value']);
+            $this->{moduleName}Repository->updateStatusAll($payload);
+            // $this->{moduleName}Repository->updateByWhereIn($payload['ids'], $payload['value']);
             DB::commit();
 
             return true;
@@ -206,7 +206,7 @@ class PostCatalougeService implements PostCatalougeServiceInterface
         }
     }
 
-    public function getRequestPostCatalouge()
+    public function getRequest{ModuleName}()
     {
         return [
             'parent_id',
@@ -236,7 +236,7 @@ class PostCatalougeService implements PostCatalougeServiceInterface
         return [
             'canonical' => $canonical,
             'module_id' => $module_id,
-            'controllers' => 'App\\Http\\Controllers\\Frontend\\PostCatalougeController'
+            'controllers' => 'App\\Http\\Controllers\\Frontend\\{ModuleName}Controller'
         ];
     }
 }
