@@ -1,4 +1,4 @@
-<form action="{{ route('generate.index') }}">
+<form action="{{ route('{routerPath}.index') }}">
     @csrf
 
     @php
@@ -22,7 +22,7 @@
                 <div class="flex gap-10">
                     <select name="publish" class="form-control  select2">
                         <option value="0" selected>
-                            {{ __('table.chooseObject', ['attribute' => __('table.languageStatus')]) }}
+                            {{ __('form.chooseObject', ['attribute' => __('table.{module}Status')]) }}
                         </option>
                         <option value="1" @selected(request('publish') == 1)>
                             {{ __('table.published') }}
@@ -48,14 +48,13 @@
                 </div>
             </div>
 
-            @can('modules', 'generate.create')
-                <a href="{{ route('generate.create') }}" class="btn btn-danger">
+            @can('modules', '{routerPath}.create')
+                <a href="{{ route('{routerPath}.create') }}" class="btn btn-danger">
                     <i class="fa fa-plus">
-                        {{ __('table.addObject', ['attribute' => __('dashboard.generate')]) }}
+                        {{ __('table.addObject', ['attribute' => __('dashboard.{module}')]) }}
                     </i>
                 </a>
             @endcan
-
         </div>
     </div>
 

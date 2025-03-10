@@ -46,11 +46,17 @@
                                 <x-backend.dashboard.form.input
                                     inputName="name"
                                     type="text"
-                                    :labelName="__('dashboard.name')"
+                                    :labelName="__('dashboard.modelName')"
                                     :must="true"
                                     :value="$generate->name ?? ''"
-                                    rowLength="12"
                                 />
+                                <x-backend.dashboard.form.input
+                                inputName="module"
+                                type="text"
+                                :labelName="__('dashboard.moduleName')"
+                                :must="true"
+                                :value="$generate->module ?? ''"
+                            />
                             </div>
                             <div class="row mt-20">
                                 <div class="col-lg-6">
@@ -68,6 +74,14 @@
                                         </select>
                                     </div>
                                 </div>
+
+                                <x-backend.dashboard.form.input
+                                inputName="router"
+                                type="text"
+                                :labelName="__('dashboard.router')"
+                                :must="true"
+                                :value="$generate->router ?? ''"
+                            />
                             </div>
                         </div>
                     </div>
