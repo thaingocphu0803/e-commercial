@@ -44,26 +44,19 @@ class GenerateService implements GenerateServiceInterface
     {
         DB::beginTransaction();
         try {
-
-            // $this->makeRoute();
-            // $this->makeLang();
             $payload = $request->except(['_token']);
-
-            // $this->generateRepository->create($payload);
-
+            $this->generateRepository->create($payload);
             DB::commit();
-            // $this->makeDatabase($request);
-            // $this->makeController($request);
-            // $this->makeModel($request);
-            // $this->makeRule($request);
-            // $this->makeRequest($request);
-            // $this->makeRepository($request);
-            // $this->makeService($request);
+
+            $this->makeDatabase($request);
+            $this->makeModel($request);
+            $this->makeRule($request);
+            $this->makeRequest($request);
+            $this->makeRepository($request);
+            $this->makeService($request);
+            $this->makeController($request);
+            $this->makeRoute($request);
             $this->makeView($request);
-
-
-
-
 
             return true;
         } catch (\Exception $e) {
@@ -381,12 +374,11 @@ class GenerateService implements GenerateServiceInterface
             $exactComponentPath = "$baseComponentPath\\$exactFolder";
             $routerPath = (count($extractModule) == 2) ? $extractModule[0] . '.' . $extractModule[1] : $extractModule[0];
             $module  = (count($extractModule) == 2) ? $extractModule[0] . 'Group' : $extractModule[0];
-            // dd($this->makeDirectory($baseViewPath));
-            if(!$this->makeDirectory($baseViewPath)) return false;
-            if(!$this->makeDirectory($baseComponentPath)) return false;
+            if (!$this->makeDirectory($baseViewPath)) return false;
+            if (!$this->makeDirectory($baseComponentPath)) return false;
 
-            if(!$this->makeDirectory($exactViewPath)) return false;
-            if(!$this->makeDirectory($exactComponentPath)) return false;
+            if (!$this->makeDirectory($exactViewPath)) return false;
+            if (!$this->makeDirectory($exactComponentPath)) return false;
 
             $componentFile = [
                 'filter.blade.php',
@@ -435,12 +427,50 @@ class GenerateService implements GenerateServiceInterface
         }
     }
 
+    private function makeRoute($request)
+    {
+
+        try {
+            $name = $request->input('name');
+            $ModuleName = ucfirst($name);
+            $moduleRouterName = $this->convertToRouterName($name);
+            $moduleViewName = $this->convertToViewFolder($name);
+
+            $templatePath = base_path('app\\templates\\TemplateRouter.php');
+            $templateContent = file_get_contents($templatePath);
+            $option = [
+                'ModuleName' => $ModuleName,
+                'moduleRouterName' => $moduleRouterName,
+                'moduleViewName' => $moduleViewName
+            ];
+            $newTemplateContent = $this->replaceTemplateContent($option, $templateContent);
+            $useController = 'use App\\Http\\Controllers\\Backend\\' . $ModuleName . 'Controller;' . "\n";
+            $routerPath = base_path('routes\\web.php');
+            $routerContent = file_get_contents($routerPath);
+            $useControllerPosition = strpos($routerContent, '//@use-controller@');
+
+            $newControllerContent  = $this->insertFile($routerContent, $routerPath, $useController, $useControllerPosition);
+
+            if ($newControllerContent){
+                $newModulePosition =  strpos($newControllerContent, '//@new-module@');
+                $putRouter  = $this->insertFile($newControllerContent, $routerPath, $newTemplateContent, $newModulePosition);
+                if (!$putRouter) return false;
+            }
+
+            return true;
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+
+            return false;
+        }
+    }
+
     private function createTemplateController($name, $templateName)
     {
         try {
             $ModuleTemplate = ucfirst($name);
             $moduleTemplate = $name;
-            $moduleView = $this->converToViewFolder($name);
+            $moduleView = $this->convertToViewFolder($name);
 
             $templatePath = base_path('app\\templates\\' . $templateName . 'Controller.php');
             $templateContent = file_get_contents($templatePath);
@@ -540,8 +570,8 @@ class GenerateService implements GenerateServiceInterface
                 $position =  strpos($providerContent, "];");
                 if ($position === false) return false;
 
-                $newProviderContent = substr_replace($providerContent, $insertAppProvider, $position, 0);
-                File::put($providerPath, $newProviderContent);
+                $newContent = $this->insertFile($providerContent, $providerPath, $insertAppProvider, $position);
+                if (!$newContent) return false;
             }
 
             return true;
@@ -558,9 +588,15 @@ class GenerateService implements GenerateServiceInterface
         return $temp;
     }
 
-    private function converToViewFolder($name)
+    private function convertToViewFolder($name)
     {
         $temp = strtolower(preg_replace('/(?<!^)[A-Z]/', '.$0', $name));
+        return $temp;
+    }
+
+    private function convertToRouterName($name)
+    {
+        $temp = strtolower(preg_replace('/(?<!^)[A-Z]/', '/$0', $name));
         return $temp;
     }
 
@@ -581,5 +617,14 @@ class GenerateService implements GenerateServiceInterface
             return true;
         }
         return false;
+    }
+
+    private function insertFile($content, $path, $insertLine, $position)
+    {
+        $newProviderContent = substr_replace($content, $insertLine, $position, 0);
+
+        if (!File::put($path, $newProviderContent)) return false;
+
+        return $newProviderContent;
     }
 }

@@ -13,7 +13,7 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\PermissionController;
 use Illuminate\Support\Facades\Route;
 
-use function Pest\Laravel\delete;
+//@use-controller@
 
 Route::get('/', function () {
     return view('welcome');
@@ -67,7 +67,6 @@ Route::controller(LanguageController::class)->middleware(['admin', 'locale'])->p
     Route::get('delete/{language}', 'delete')->name('language.delete');
     Route::delete('destroy/{id}', 'destroy')->name('language.destroy');
     Route::get('change/{canonical}', 'changeCurrent')->name('language.change');
-
 });
 
 //PermissionController
@@ -114,6 +113,8 @@ Route::controller(PostCatalougeController::class)->middleware(['admin', 'locale'
     Route::get('delete/{id}', 'delete')->name('post.catalouge.delete');
     Route::delete('destroy/{id}', 'destroy')->name('post.catalouge.destroy');
 });
+
+//@new-module@
 
 //DashboardController
 Route::controller(AjaxDashboardController::class)->prefix('ajax/dashboard')->middleware(['admin', 'locale'])->group(function(){
