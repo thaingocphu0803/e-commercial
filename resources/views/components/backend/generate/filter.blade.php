@@ -22,7 +22,7 @@
                 <div class="flex gap-10">
                     <select name="publish" class="form-control  select2">
                         <option value="0" selected>
-                            {{ __('table.chooseObject', ['attribute' => __('table.languageStatus')]) }}
+                            {{ __('table.chooseObject', ['attribute' => __('table.moduleStatus')]) }}
                         </option>
                         <option value="1" @selected(request('publish') == 1)>
                             {{ __('table.published') }}

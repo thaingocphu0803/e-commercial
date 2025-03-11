@@ -4,12 +4,12 @@ namespace App\Services;
 
 use App\Repositories\GenerateRepository;
 use App\Repositories\PermissionRepository;
+use App\Repositories\UserCatalougeRepository;
 use App\Services\Interfaces\GenerateServiceInterface;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use NunoMaduro\Collision\Provider;
 
 /**
  * Class GenerateService
@@ -19,6 +19,7 @@ class GenerateService implements GenerateServiceInterface
 {
     protected $generateRepository;
     protected $permissionRepository;
+    protected $userCatalougeRepository;
     private const TEMPLATE_CATALOUGE = "TemplateCatalouge";
     private const TEMPLATE = "Template";
     private const SERVICE = "Service";
@@ -26,10 +27,14 @@ class GenerateService implements GenerateServiceInterface
 
 
 
-    public function __construct(GenerateRepository $generateRepository, PermissionRepository $permissionRepository)
-    {
+    public function __construct(
+        GenerateRepository $generateRepository,
+        PermissionRepository $permissionRepository,
+        UserCatalougeRepository $userCatalougeRepository
+    ) {
         $this->generateRepository = $generateRepository;
         $this->permissionRepository = $permissionRepository;
+        $this->userCatalougeRepository = $userCatalougeRepository;
     }
 
     public function getAll()
@@ -50,19 +55,19 @@ class GenerateService implements GenerateServiceInterface
         try {
             $payload = $request->except(['_token']);
 
-            // $this->insertPermission($request);
-            // $this->generateRepository->create($payload);
+            $this->insertPermission($request);
+            $this->generateRepository->create($payload);
             DB::commit();
 
-            // $this->makeDatabase($request);
-            // $this->makeModel($request);
-            // $this->makeRule($request);
-            // $this->makeRequest($request);
-            // $this->makeRepository($request);
-            // $this->makeService($request);
-            // $this->makeController($request);
-            // $this->makeRoute($request);
-            // $this->makeView($request);
+            $this->makeDatabase($request);
+            $this->makeModel($request);
+            $this->makeRule($request);
+            $this->makeRequest($request);
+            $this->makeRepository($request);
+            $this->makeService($request);
+            $this->makeController($request);
+            $this->makeRoute($request);
+            $this->makeView($request);
             $this->makeNavModule($request);
 
             return true;
@@ -660,26 +665,35 @@ class GenerateService implements GenerateServiceInterface
             "$canonical.delete",
         ];
 
+        $payloadPermission = [];
+
         foreach ($namePermission as $key => $val) {
             $payload = [
                 'name' => $val,
                 'canonical' => $canonicalPermission[$key]
             ];
 
-            $this->permissionRepository->create($payload);
+            $permission = $this->permissionRepository->create($payload);
+            if ($permission->id) {
+                $payloadPermission[] = $permission->id;
+            }
         }
+        $updatePermisison = $this->updateUserPermission($payloadPermission);
+        if (!$updatePermisison) return false;
+        return true;
     }
 
     private function makeNavModule($request)
     {
-        $moduleName = lcfirst($request->input('name'));
-        $moduleViewName = $this->convertToPeriodBetween($moduleName);
+        $name = lcfirst($request->input('name'));
+        $name = $this->convertToDashBetween($name);
+        $moduleName = explode('_', $name)[0];
         $templatePath = base_path('app\\templates\\views\\component\\module.blade.php');
         $templateContent = file_get_contents($templatePath);
         $option = [
             'moduleName' => $moduleName,
-            'moduleViewName' => $moduleViewName
         ];
+
         $newContent = $this->replaceTemplateContent($option, $templateContent);
         $this->insertToNavView($newContent, $moduleName);
     }
@@ -700,6 +714,17 @@ class GenerateService implements GenerateServiceInterface
         } catch (\Exception $e) {
             echo $e->getMessage();
 
+            return false;
+        }
+    }
+    private function updateUserPermission($payload)
+    {
+        try {
+            $userCatalougeId = Auth::user()->userCatalouge->id;
+            $this->userCatalougeRepository->attachPermission($userCatalougeId, $payload);
+            return true;
+        } catch (\Exception $e) {
+            echo $e->getMessage();
             return false;
         }
     }

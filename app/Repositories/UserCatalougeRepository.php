@@ -87,4 +87,9 @@ class UserCatalougeRepository implements UserCatalougeRepositoryInterface
         return UserCatalouge::find($id)->permissions()->sync($payload);
     }
 
+    public function attachPermission($id, $payload)
+    {
+        return UserCatalouge::find($id)->permissions()->attach($payload);
+    }
+
 }

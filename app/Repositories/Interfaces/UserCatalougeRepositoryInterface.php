@@ -28,4 +28,7 @@ interface UserCatalougeRepositoryInterface
 
     public function setPermission($id, $payload);
 
+    public function attachPermission($id, $payload);
+
+
 }
