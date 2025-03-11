@@ -223,8 +223,25 @@ class GenerateService implements GenerateServiceInterface
 
                 File::put($migrationPivotPath, $newPivotContent);
 
-                Artisan::call('migrate');
             }
+
+            if($payload['module_type'] == 2){
+                $moduleName = explode('_', $migrationTableName)[0];
+                $option = [
+                    'moduleName' => $moduleName,
+                    'ModuleName' => ucfirst($moduleName)
+                ];
+                $templatePath = base_path('app\\templates\\TemplateDetailPivotMigration.php');
+                $templateContent = file_get_contents($templatePath);
+                $newContent = $this->replaceTemplateContent($option, $templateContent);
+                $migrationFileName = date('Y_m_d_His', time() + 20) . '_create_' . $moduleName . '_catalouge_'.$moduleName.'_table.php';
+                $migrationPath = database_path("migrations\\$migrationFileName");
+
+                File::put($migrationPath, $newContent);
+            }
+
+            Artisan::call('migrate');
+
             return true;
         } catch (\Exception $e) {
             DB::rollBack();
