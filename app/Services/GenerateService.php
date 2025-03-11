@@ -55,20 +55,20 @@ class GenerateService implements GenerateServiceInterface
         try {
             $payload = $request->except(['_token']);
 
-            $this->insertPermission($request);
-            $this->generateRepository->create($payload);
+            // $this->insertPermission($request);
+            // $this->generateRepository->create($payload);
             DB::commit();
 
-            $this->makeDatabase($request);
-            $this->makeModel($request);
-            $this->makeRule($request);
-            $this->makeRequest($request);
-            $this->makeRepository($request);
-            $this->makeService($request);
-            $this->makeController($request);
-            $this->makeRoute($request);
+            // $this->makeDatabase($request);
+            // $this->makeModel($request);
+            // $this->makeRule($request);
+            // $this->makeRequest($request);
+            // $this->makeRepository($request);
+            // $this->makeService($request);
+            // $this->makeController($request);
+            // $this->makeRoute($request);
             $this->makeView($request);
-            $this->makeNavModule($request);
+            // $this->makeNavModule($request);
 
             return true;
         } catch (\Exception $e) {
@@ -386,11 +386,14 @@ class GenerateService implements GenerateServiceInterface
             $exactComponentPath = "$baseComponentPath\\$exactFolder";
             $routerPath = (count($extractModule) == 2) ? $extractModule[0] . '.' . $extractModule[1] : $extractModule[0];
             $module  = (count($extractModule) == 2) ? $extractModule[0] . 'Group' : $extractModule[0];
+
             if (!$this->makeDirectory($baseViewPath)) return false;
+
             if (!$this->makeDirectory($baseComponentPath)) return false;
 
             if (!$this->makeDirectory($exactViewPath)) return false;
             if (!$this->makeDirectory($exactComponentPath)) return false;
+
 
             $componentFile = [
                 'filter.blade.php',
@@ -631,10 +634,9 @@ class GenerateService implements GenerateServiceInterface
     {
 
         if (!File::exists($path)) {
-            File::makeDirectory($path, 0755, true);
-            return true;
+            if(!File::makeDirectory($path, 0755, true)) return false;
         }
-        return false;
+        return true;
     }
 
     private function insertFile($content, $path, $insertLine, $position)
