@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Repositories\GenerateRepository;
+use App\Repositories\PermissionRepository;
 use App\Services\Interfaces\GenerateServiceInterface;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -16,6 +18,7 @@ use NunoMaduro\Collision\Provider;
 class GenerateService implements GenerateServiceInterface
 {
     protected $generateRepository;
+    protected $permissionRepository;
     private const TEMPLATE_CATALOUGE = "TemplateCatalouge";
     private const TEMPLATE = "Template";
     private const SERVICE = "Service";
@@ -23,9 +26,10 @@ class GenerateService implements GenerateServiceInterface
 
 
 
-    public function __construct(GenerateRepository $generateRepository)
+    public function __construct(GenerateRepository $generateRepository, PermissionRepository $permissionRepository)
     {
         $this->generateRepository = $generateRepository;
+        $this->permissionRepository = $permissionRepository;
     }
 
     public function getAll()
@@ -45,18 +49,21 @@ class GenerateService implements GenerateServiceInterface
         DB::beginTransaction();
         try {
             $payload = $request->except(['_token']);
-            $this->generateRepository->create($payload);
+
+            // $this->insertPermission($request);
+            // $this->generateRepository->create($payload);
             DB::commit();
 
-            $this->makeDatabase($request);
-            $this->makeModel($request);
-            $this->makeRule($request);
-            $this->makeRequest($request);
-            $this->makeRepository($request);
-            $this->makeService($request);
-            $this->makeController($request);
-            $this->makeRoute($request);
-            $this->makeView($request);
+            // $this->makeDatabase($request);
+            // $this->makeModel($request);
+            // $this->makeRule($request);
+            // $this->makeRequest($request);
+            // $this->makeRepository($request);
+            // $this->makeService($request);
+            // $this->makeController($request);
+            // $this->makeRoute($request);
+            // $this->makeView($request);
+            $this->makeNavModule($request);
 
             return true;
         } catch (\Exception $e) {
@@ -185,7 +192,7 @@ class GenerateService implements GenerateServiceInterface
         try {
             $payload = $request->only('name', 'schema', 'module_type');
             $name = lcfirst($payload['name']);
-            $migrationTableName = $this->convertToTableName($name);
+            $migrationTableName = $this->convertToDashBetween($name);
             $templatePath = base_path('app\\templates\\TemplateMigration.php');
             $templateContent = file_get_contents($templatePath);
 
@@ -296,7 +303,7 @@ class GenerateService implements GenerateServiceInterface
             $payload = $request->only('name', 'module_type');
             $moduleName = lcfirst($payload['name']);
             $ModuleName = ucfirst($payload['name']);
-            $moduleTableName = $this->convertToTableName($moduleName);
+            $moduleTableName = $this->convertToDashBetween($moduleName);
 
             $fileRequestName = [
                 "Store{$ModuleName}Request.php",
@@ -365,7 +372,7 @@ class GenerateService implements GenerateServiceInterface
     {
         try {
             $moduleName = lcfirst($request->input('name'));
-            $moduleTableName = $this->convertToTableName($moduleName);
+            $moduleTableName = $this->convertToDashBetween($moduleName);
             $extractModule = explode('_', $moduleTableName);
             $baseViewPath = resource_path("views\\Backend\\$extractModule[0]");
             $baseComponentPath = resource_path("views\\components\\backend\\$extractModule[0]");
@@ -433,8 +440,8 @@ class GenerateService implements GenerateServiceInterface
         try {
             $name = $request->input('name');
             $ModuleName = ucfirst($name);
-            $moduleRouterName = $this->convertToRouterName($name);
-            $moduleViewName = $this->convertToViewFolder($name);
+            $moduleRouterName = $this->convertToSlashBetween($name);
+            $moduleViewName = $this->convertToPeriodBetween($name);
 
             $templatePath = base_path('app\\templates\\TemplateRouter.php');
             $templateContent = file_get_contents($templatePath);
@@ -451,7 +458,7 @@ class GenerateService implements GenerateServiceInterface
 
             $newControllerContent  = $this->insertFile($routerContent, $routerPath, $useController, $useControllerPosition);
 
-            if ($newControllerContent){
+            if ($newControllerContent) {
                 $newModulePosition =  strpos($newControllerContent, '//@new-module@');
                 $putRouter  = $this->insertFile($newControllerContent, $routerPath, $newTemplateContent, $newModulePosition);
                 if (!$putRouter) return false;
@@ -470,7 +477,7 @@ class GenerateService implements GenerateServiceInterface
         try {
             $ModuleTemplate = ucfirst($name);
             $moduleTemplate = $name;
-            $moduleView = $this->convertToViewFolder($name);
+            $moduleView = $this->convertToPeriodBetween($name);
 
             $templatePath = base_path('app\\templates\\' . $templateName . 'Controller.php');
             $templateContent = file_get_contents($templatePath);
@@ -499,7 +506,7 @@ class GenerateService implements GenerateServiceInterface
     {
 
         try {
-            $moduleTable  = $this->convertToTableName($name);
+            $moduleTable  = $this->convertToDashBetween($name);
             $ModuleTemplate = ucfirst($name);
             $moduleTemplate = $name;
             $relation = explode('_', $moduleTable)[0];
@@ -541,7 +548,7 @@ class GenerateService implements GenerateServiceInterface
             if (!$templateContent) return false;
 
             $ModuleName = ucfirst($name);
-            $moduleTableName  = $this->convertToTableName($name);
+            $moduleTableName  = $this->convertToDashBetween($name);
 
             $option = [
                 'ModuleName' => $ModuleName,
@@ -582,21 +589,27 @@ class GenerateService implements GenerateServiceInterface
         }
     }
 
-    private function convertToTableName($name)
+    private function convertToDashBetween($name)
     {
         $temp = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $name));
         return $temp;
     }
 
-    private function convertToViewFolder($name)
+    private function convertToPeriodBetween($name)
     {
         $temp = strtolower(preg_replace('/(?<!^)[A-Z]/', '.$0', $name));
         return $temp;
     }
 
-    private function convertToRouterName($name)
+    private function convertToSlashBetween($name)
     {
         $temp = strtolower(preg_replace('/(?<!^)[A-Z]/', '/$0', $name));
+        return $temp;
+    }
+
+    private function convertToSpaceBetween($name)
+    {
+        $temp = strtolower(preg_replace('/(?<!^)[A-Z]/', ' $0', $name));
         return $temp;
     }
 
@@ -626,5 +639,68 @@ class GenerateService implements GenerateServiceInterface
         if (!File::put($path, $newProviderContent)) return false;
 
         return $newProviderContent;
+    }
+
+    private function insertPermission($request)
+    {
+        $name = lcfirst($request->input('name'));
+        $module  = $this->convertToSpaceBetween($name);
+        $canonical = $this->convertToPeriodBetween($name);
+        $namePermission = [
+            "Xem danh sách $module",
+            "Tạo $module",
+            "Sửa $module",
+            "Xóa $module"
+        ];
+
+        $canonicalPermission = [
+            "$canonical.index",
+            "$canonical.create",
+            "$canonical.update",
+            "$canonical.delete",
+        ];
+
+        foreach ($namePermission as $key => $val) {
+            $payload = [
+                'name' => $val,
+                'canonical' => $canonicalPermission[$key]
+            ];
+
+            $this->permissionRepository->create($payload);
+        }
+    }
+
+    private function makeNavModule($request)
+    {
+        $moduleName = lcfirst($request->input('name'));
+        $moduleViewName = $this->convertToPeriodBetween($moduleName);
+        $templatePath = base_path('app\\templates\\views\\component\\module.blade.php');
+        $templateContent = file_get_contents($templatePath);
+        $option = [
+            'moduleName' => $moduleName,
+            'moduleViewName' => $moduleViewName
+        ];
+        $newContent = $this->replaceTemplateContent($option, $templateContent);
+        $this->insertToNavView($newContent, $moduleName);
+    }
+
+    private function insertToNavView($insertContent, $moduleName)
+    {
+        try {
+
+            $navPath = resource_path('views\\components\\backend\\dashboard\\nav.blade.php');
+            $navContent = file_get_contents($navPath);
+            $modulePosition = strpos($navContent, "dashboard.$moduleName");
+            if (!$modulePosition) {
+                $insertPosition = strpos($navContent, '{{-- @new-module --}}');
+                $newContent = $this->insertFile($navContent, $navPath, $insertContent, $insertPosition);
+                if (!$newContent) return false;
+            }
+            return true;
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+
+            return false;
+        }
     }
 }

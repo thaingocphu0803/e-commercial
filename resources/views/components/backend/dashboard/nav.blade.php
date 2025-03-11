@@ -50,6 +50,8 @@
 
             </x-backend.dashboard.nav.module>
 
+            {{-- @new-module --}}
+
             <x-backend.dashboard.nav.module icon='fa-file' :title="__('dashboard.managerObject', ['object' => __('dashboard.post')])">
                 @can('modules', 'post.index')
                     <li>
