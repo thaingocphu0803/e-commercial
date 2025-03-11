@@ -55,20 +55,20 @@ class GenerateService implements GenerateServiceInterface
         try {
             $payload = $request->except(['_token']);
 
-            // $this->insertPermission($request);
-            // $this->generateRepository->create($payload);
+            $this->insertPermission($request);
+            $this->generateRepository->create($payload);
             DB::commit();
 
-            // $this->makeDatabase($request);
-            // $this->makeModel($request);
-            // $this->makeRule($request);
-            // $this->makeRequest($request);
-            // $this->makeRepository($request);
-            // $this->makeService($request);
-            // $this->makeController($request);
-            // $this->makeRoute($request);
+            $this->makeDatabase($request);
+            $this->makeModel($request);
+            $this->makeRule($request);
+            $this->makeRequest($request);
+            $this->makeRepository($request);
+            $this->makeService($request);
+            $this->makeController($request);
+            $this->makeRoute($request);
             $this->makeView($request);
-            // $this->makeNavModule($request);
+            $this->makeNavModule($request);
 
             return true;
         } catch (\Exception $e) {
