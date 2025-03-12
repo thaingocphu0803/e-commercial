@@ -49,6 +49,8 @@
                                     :labelName="__('dashboard.modelName')"
                                     :must="true"
                                     :value="$generate->name ?? ''"
+                                    placeholder="example: product"
+
                                 />
                                 <x-backend.dashboard.form.input
                                 inputName="module_icon"
@@ -56,10 +58,10 @@
                                 :labelName="__('dashboard.moduleIcon')"
                                 :must="true"
                                 :value="$generate->module ?? ''"
-                                placeholder="e  xample: fa-icon"
+                                placeholder="example: fa-icon"
                             />
                             </div>
-                            <div class="row mt-20">
+                            {{-- <div class="row mt-20">
                                 <div class="col-lg-6">
                                     <div class="form-row">
                                         <label for="module_type" class="control-label text-left">
@@ -75,7 +77,7 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -96,23 +98,44 @@
                     <div class="ibox">
                         <div class="ibox-title">
                             <h5>
-                                {{__('form.ObjectInfor', ['attribute'=> __('form.common')])}}
+                                {{__('form.ObjectInfor', ['attribute'=> __('form.schemaCatalouge')])}}
                             </h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
                                 <x-backend.dashboard.form.input
-                                    inputName="schema"
+                                    inputName="schema_catalouge"
                                     type="text"
-                                    :labelName="__('dashboard.schema')"
+                                    :labelName="__('dashboard.schemaCatalouge')"
                                     :must="true"
                                     :value="$generate->name ?? ''"
                                     rowLength="12"
                                     tag="textarea"
+                                    style="height: 250px"
                                 />
                             </div>
                         </div>
-
+                    </div>
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>
+                                {{__('form.ObjectInfor', ['attribute'=> __('form.schemaDetail')])}}
+                            </h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <x-backend.dashboard.form.input
+                                    inputName="schema_detail"
+                                    type="text"
+                                    :labelName="__('dashboard.schemaDetail')"
+                                    :must="true"
+                                    :value="$generate->name ?? ''"
+                                    rowLength="12"
+                                    tag="textarea"
+                                    style="height: 250px"
+                                />
+                            </div>
+                        </div>
                     </div>
                     <div class="flex flex-space-between">
                         <a href="{{route('generate.index')}}" class="btn btn-success mb-20 ">

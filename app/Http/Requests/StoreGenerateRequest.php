@@ -24,7 +24,8 @@ class StoreGenerateRequest extends FormRequest
         return [
             'name' => 'required|unique:generates,name',
             'module_icon' => 'required',
-            'schema' => 'required'
+            'schema_detail' => 'required',
+            'schema_catalouge' => 'required',
         ];
     }
 }

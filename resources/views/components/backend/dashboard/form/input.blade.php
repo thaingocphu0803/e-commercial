@@ -23,6 +23,7 @@
             id="{{$inputName}}"
             @readonly($readOnly)
             class="form-control tiny-editor"
+            {{$attributes}}
         >
             {{old($inputName, $value)}}
         </textarea>

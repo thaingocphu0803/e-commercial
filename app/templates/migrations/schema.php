@@ -12,7 +12,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('{migrationTableName}s', function (Blueprint $table) {
+        Schema::create('{tableName}s', function (Blueprint $table) {
+            //@$table->integer('{moduleName}_catalouge_id')->default(0);
             {schema}
         });
     }
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('{migrationTableName}s');
+        Schema::dropIfExists('{tableName}s');
     }
 };

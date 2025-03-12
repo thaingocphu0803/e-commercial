@@ -59,7 +59,7 @@ class GenerateService implements GenerateServiceInterface
             // $this->generateRepository->create($payload);
             DB::commit();
 
-            // $this->makeDatabase($request);
+            $this->makeDatabase($request);
             // $this->makeModel($request);
             // $this->makeRule($request);
             // $this->makeRequest($request);
@@ -68,7 +68,7 @@ class GenerateService implements GenerateServiceInterface
             // $this->makeController($request);
             // $this->makeRoute($request);
             // $this->makeView($request);
-            $this->makeNavModule($request);
+            // $this->makeNavModule($request);
 
             return true;
         } catch (\Exception $e) {
@@ -195,49 +195,50 @@ class GenerateService implements GenerateServiceInterface
     private function makeDatabase($request)
     {
         try {
-            $payload = $request->only('name', 'schema', 'module_type');
-            $name = lcfirst($payload['name']);
-            $migrationTableName = $this->convertToDashBetween($name);
-            $templatePath = base_path('app\\templates\\TemplateMigration.php');
-            $templateContent = file_get_contents($templatePath);
+            $payload = $request->only('name', 'schema_detail', 'schema_catalouge', 'module_type');
+            $moduleName = $this->convertToDashBetween($payload['name']);
+            $tableCatalougeName = $moduleName . '_catalouge';
+            $schemaPath = base_path('app\\templates\\migrations\\schema.php');
+            $shemaContent = file_get_contents($schemaPath);
 
-            $option = [
-                'schema' => $payload['schema'],
-                'migrationTableName' => $migrationTableName
+            $optionCatalouge = [
+                'schema' => $payload['schema_catalouge'],
+                'tableName' => $tableCatalougeName
             ];
 
-            $migrationFileName = date('Y_m_d_His') . '_create_' . $migrationTableName . 's_table.php';
-            $migrationPath = database_path("migrations\\$migrationFileName");
-            $newContent = $this->replaceTemplateContent($option, $templateContent);
+            $catalougeFile = date('Y_m_d_His') . '_create_' . $optionCatalouge['tableName'] . 's_table.php';
+            $catalougeMigration  = $this->createMigration($optionCatalouge, $shemaContent, $catalougeFile);
+            if (!$catalougeMigration) return false;
 
-            File::put($migrationPath, $newContent);
+            $optionDetail = [
+                'schema' => $payload['schema_detail'],
+                'tableName' => $moduleName,
+                'moduleName' => $moduleName,
 
-            if ($payload['module_type'] != 3) {
-                $templatePivotPath = base_path('app\\templates\\TemplatePivotMigration.php');
-                $templatePivotContent = file_get_contents($templatePivotPath);
-                $newPivotContent = $this->replaceTemplateContent($option, $templatePivotContent);
+            ];
+
+            $shemaContent = str_replace('//@', '', $shemaContent);
+            $detailFile = date('Y_m_d_His', time() + 10) . '_create_' . $optionDetail['tableName'] . 's_table.php';
+            $detailMigration  = $this->createMigration($optionDetail, $shemaContent, $detailFile);
+            if (!$detailMigration) return false;
+
+            $pivotLanguagepath = base_path('app\\templates\\migrations\\pivotLanguage.php');
+            $pivotLanguageContent = file_get_contents($pivotLanguagepath);
+
+            $pivotLanguageCFile = date('Y_m_d_His', time() + 20) . '_create_' . $optionCatalouge['tableName'] . '_language_table.php';
+            $pivotLanguageCMigration = $this->createMigration($optionCatalouge, $pivotLanguageContent, $pivotLanguageCFile);
+            if (!$pivotLanguageCMigration) return false;
+
+            $pivotLanguageDFile = date('Y_m_d_His', time() + 30) . '_create_' . $optionCatalouge['tableName'] . '_language_table.php';
+            $pivotLanguageDMigration = $this->createMigration($optionDetail, $pivotLanguageContent, $pivotLanguageDFile);
+            if (!$pivotLanguageDMigration) return false;
 
 
-                $migrationPivotFileName = date('Y_m_d_His', time() + 10) . '_create_' . $migrationTableName . '_language_table.php';
-                $migrationPivotPath = database_path("migrations\\$migrationPivotFileName");
-
-                File::put($migrationPivotPath, $newPivotContent);
-
-            }
-
-            if($payload['module_type'] == 2){
-                $moduleName = explode('_', $migrationTableName)[0];
-                $option = [
-                    'moduleName' => $moduleName,
-                ];
-                $templatePath = base_path('app\\templates\\TemplateDetailPivotMigration.php');
-                $templateContent = file_get_contents($templatePath);
-                $newContent = $this->replaceTemplateContent($option, $templateContent);
-                $migrationFileName = date('Y_m_d_His', time() + 20) . '_create_' . $moduleName . '_catalouge_'.$moduleName.'_table.php';
-                $migrationPath = database_path("migrations\\$migrationFileName");
-
-                File::put($migrationPath, $newContent);
-            }
+            $pivotModulePath = base_path('app\\templates\\migrations\\pivotModule.php');
+            $pivotModuleContent = file_get_contents($pivotModulePath);
+            $pivotModuleFile = date('Y_m_d_His', time() + 40) . '_create_' . $optionCatalouge['tableName'] . '_' . $optionDetail['tableName'] . '_table.php';
+            $pivotModuleMigration = $this->createMigration($optionDetail, $pivotModuleContent, $pivotModuleFile);
+            if (!$pivotModuleMigration) return false;
 
             Artisan::call('migrate');
 
@@ -402,7 +403,7 @@ class GenerateService implements GenerateServiceInterface
             $exactViewPath =  "$baseViewPath\\$exactFolder";
             $exactComponentPath = "$baseComponentPath\\$exactFolder";
             $routerPath = (count($extractModule) == 2) ? $extractModule[0] . '.' . $extractModule[1] : $extractModule[0];
-            $componentPath = (count($extractModule) == 2) ? $extractModule[0] . '.' . $extractModule[1] : $extractModule[0].".".$extractModule[0];
+            $componentPath = (count($extractModule) == 2) ? $extractModule[0] . '.' . $extractModule[1] : $extractModule[0] . "." . $extractModule[0];
 
             $module  = (count($extractModule) == 2) ? $extractModule[0] . 'Group' : $extractModule[0];
 
@@ -425,7 +426,7 @@ class GenerateService implements GenerateServiceInterface
                 'index.blade.php',
             ];
 
-            if($moduleType == 2){
+            if ($moduleType == 2) {
                 $templateFile[0] = 'createdetail.blade.php';
             }
 
@@ -449,7 +450,7 @@ class GenerateService implements GenerateServiceInterface
             }
 
             foreach ($templateFile as $fileName) {
-                if( $fileName == 'createdetail.blade.php'){
+                if ($fileName == 'createdetail.blade.php') {
                     $fileName = 'create.blade.php';
                 }
                 $templatePath = base_path("app\\templates\\views\\template\\$fileName");
@@ -661,7 +662,7 @@ class GenerateService implements GenerateServiceInterface
     {
 
         if (!File::exists($path)) {
-            if(!File::makeDirectory($path, 0755, true)) return false;
+            if (!File::makeDirectory($path, 0755, true)) return false;
         }
         return true;
     }
@@ -758,5 +759,15 @@ class GenerateService implements GenerateServiceInterface
             echo $e->getMessage();
             return false;
         }
+    }
+
+    private function createMigration($option, $template, $fileName)
+    {
+        $path = database_path("migrations\\$fileName");
+        $newContent = $this->replaceTemplateContent($option, $template);
+
+        if (!File::put($path, $newContent)) return false;
+
+        return $newContent;
     }
 }

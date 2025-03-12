@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('generates', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->longtext('schema');
+            $table->string('module_icon');
+            $table->longtext('schema_detail');
+            $table->longtext('schema_catalouge');
             $table->timestamps();
         });
     }

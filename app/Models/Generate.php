@@ -14,6 +14,8 @@ class Generate extends Model
 
     protected $fillable = [
         'name',
-        'schema'
+        'module_icon',
+        'schema_detail',
+        'schema_catalouge'
     ];
 }
