@@ -55,19 +55,19 @@ class GenerateService implements GenerateServiceInterface
         try {
             $payload = $request->except(['_token']);
 
-            $this->insertPermission($request);
-            $this->generateRepository->create($payload);
+            // $this->insertPermission($request);
+            // $this->generateRepository->create($payload);
             DB::commit();
 
-            $this->makeDatabase($request);
-            $this->makeModel($request);
-            $this->makeRule($request);
-            $this->makeRequest($request);
-            $this->makeRepository($request);
-            $this->makeService($request);
-            $this->makeController($request);
-            $this->makeRoute($request);
-            $this->makeView($request);
+            // $this->makeDatabase($request);
+            // $this->makeModel($request);
+            // $this->makeRule($request);
+            // $this->makeRequest($request);
+            // $this->makeRepository($request);
+            // $this->makeService($request);
+            // $this->makeController($request);
+            // $this->makeRoute($request);
+            // $this->makeView($request);
             $this->makeNavModule($request);
 
             return true;
@@ -229,7 +229,6 @@ class GenerateService implements GenerateServiceInterface
                 $moduleName = explode('_', $migrationTableName)[0];
                 $option = [
                     'moduleName' => $moduleName,
-                    'ModuleName' => ucfirst($moduleName)
                 ];
                 $templatePath = base_path('app\\templates\\TemplateDetailPivotMigration.php');
                 $templateContent = file_get_contents($templatePath);
@@ -393,6 +392,7 @@ class GenerateService implements GenerateServiceInterface
     private function makeView($request)
     {
         try {
+            $moduleType = $request->input('module_type');
             $moduleName = lcfirst($request->input('name'));
             $moduleTableName = $this->convertToDashBetween($moduleName);
             $extractModule = explode('_', $moduleTableName);
@@ -402,6 +402,8 @@ class GenerateService implements GenerateServiceInterface
             $exactViewPath =  "$baseViewPath\\$exactFolder";
             $exactComponentPath = "$baseComponentPath\\$exactFolder";
             $routerPath = (count($extractModule) == 2) ? $extractModule[0] . '.' . $extractModule[1] : $extractModule[0];
+            $componentPath = (count($extractModule) == 2) ? $extractModule[0] . '.' . $extractModule[1] : $extractModule[0].".".$extractModule[0];
+
             $module  = (count($extractModule) == 2) ? $extractModule[0] . 'Group' : $extractModule[0];
 
             if (!$this->makeDirectory($baseViewPath)) return false;
@@ -423,8 +425,13 @@ class GenerateService implements GenerateServiceInterface
                 'index.blade.php',
             ];
 
+            if($moduleType == 2){
+                $templateFile[0] = 'createdetail.blade.php';
+            }
+
             $option = [
                 'routerPath' => $routerPath,
+                'componentPath' => $componentPath,
                 'module' => $module,
                 'moduleName' => $moduleName,
                 'moduleTableName' => $moduleTableName
@@ -442,6 +449,9 @@ class GenerateService implements GenerateServiceInterface
             }
 
             foreach ($templateFile as $fileName) {
+                if( $fileName == 'createdetail.blade.php'){
+                    $fileName = 'create.blade.php';
+                }
                 $templatePath = base_path("app\\templates\\views\\template\\$fileName");
                 $templateContent  = file_get_contents($templatePath);
                 $newContent = $this->replaceTemplateContent($option, $templateContent);
@@ -451,6 +461,7 @@ class GenerateService implements GenerateServiceInterface
                     File::put($viewPath, $newContent);
                 }
             }
+
             return true;
         } catch (\Exception $e) {
             echo $e->getMessage();
@@ -488,7 +499,6 @@ class GenerateService implements GenerateServiceInterface
                 $putRouter  = $this->insertFile($newControllerContent, $routerPath, $newTemplateContent, $newModulePosition);
                 if (!$putRouter) return false;
             }
-
             return true;
         } catch (\Exception $e) {
             echo $e->getMessage();
@@ -706,11 +716,13 @@ class GenerateService implements GenerateServiceInterface
     {
         $name = lcfirst($request->input('name'));
         $name = $this->convertToDashBetween($name);
+        $moduleIcon = $request->input('module_icon');
         $moduleName = explode('_', $name)[0];
         $templatePath = base_path('app\\templates\\views\\component\\module.blade.php');
         $templateContent = file_get_contents($templatePath);
         $option = [
             'moduleName' => $moduleName,
+            'moduleIcon' => $moduleIcon
         ];
 
         $newContent = $this->replaceTemplateContent($option, $templateContent);

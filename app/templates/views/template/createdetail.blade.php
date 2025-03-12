@@ -6,14 +6,14 @@
     </x-slot:heading>
 
     @php
-        $url = isset($post)
-            ? route('post.update', $post->post_id)
-            : route('post.store');
+        $url = isset(${moduleName})
+            ? route('{routerPath}.update', ${moduleName}->post_id)
+            : route('{routerPath}.store');
 
-        $title = isset($post) ? __('form.editObject', ['attribute' => __('dashboard.post')]) : __('form.addObject', ['attribute' => __('dashboard.post')]);
+        $title = isset(${moduleName}) ? __('form.editObject', ['attribute' => __('dashboard.{module}')]) : __('form.addObject', ['attribute' => __('dashboard.{module}')]);
 
-        $publish = $post->publish ?? '';
-        $follow = $post->follow ?? '';
+        $publish = ${moduleName}->publish ?? '';
+        $follow = ${moduleName}->follow ?? '';
     @endphp
 
     <x-backend.dashboard.breadcrumb :title="$title" />
@@ -30,7 +30,7 @@
 
 
 
-    <form action="{{ $url }}" method="POST" class="box" id="post_catalouge_form">
+    <form action="{{ $url }}" method="POST" class="box" id="{moduleTableName}_form">
         @csrf
 
         <div class="wrapper wrapper-content animated fadeInRight">
@@ -51,7 +51,7 @@
                                                 :labelName="__('dashboard.name')"
                                                 :must="true"
                                                 rowLength="12"
-                                                :value="$post->name ?? ''"
+                                                :value="${moduleName}->name ?? ''"
                                             />
 
                                             <x-backend.dashboard.form.input
@@ -59,7 +59,7 @@
                                                 type="text"
                                                 :labelName="__('dashboard.description')"
                                                 rowLength="12"
-                                                :value="$post->description ?? ''"
+                                                :value="${moduleName}->description ?? ''"
                                                 tag='textarea'
                                             />
 
@@ -69,7 +69,7 @@
                                                 type="text"
                                                 :labelName="__('form.content')"
                                                 rowLength="12"
-                                                :value="$post->content ?? ''"
+                                                :value="${moduleName}->content ?? ''"
                                                 tag='textarea'
                                             />
                                         </div>
@@ -80,7 +80,7 @@
                     </div>
 
 
-                    <x-backend.dashboard.album :album="$post->album ?? '' "/>
+                    <x-backend.dashboard.album :album="${moduleName}->album ?? '' "/>
 
 
                     <div class="ibox">
@@ -94,24 +94,24 @@
                                 <x-backend.dashboard.form.seo
                                     :labelName="__('form.title')"
                                     inputName='meta_title'
-                                    :value="$post->meta_title ?? ''"
+                                    :value="${moduleName}->meta_title ?? ''"
                                 />
                                 <x-backend.dashboard.form.seo
                                     :labelName="__('form.keyword')"
                                     inputName='meta_keyword'
-                                    :value="$post->meta_keyword ?? ''"
+                                    :value="${moduleName}->meta_keyword ?? ''"
                                 />
                                 <x-backend.dashboard.form.seo
                                     :labelName="__('dashboard.description')"
                                     inputName='meta_description'
                                     tag='textarea'
-                                    :value="$post->meta_description ?? ''"
+                                    :value="${moduleName}->meta_description ?? ''"
                                     />
                                 <x-backend.dashboard.form.seo
                                     :labelName="__('dashboard.canonical')"
                                     inputName='canonical'
                                     :must="true"
-                                    :value="$post->canonical ?? ''"
+                                    :value="${moduleName}->canonical ?? ''"
                                 />
                             </div>
                         </div>
@@ -128,11 +128,11 @@
                             <div class="row flex flex-col gap-10">
                                 <x-backend.dashboard.form.select
                                     :labelName="__('form.parentSection')"
-                                    name="post_catalouge_id"
+                                    name="{moduleName}_catalouge_id"
                                     rowLength="12"
                                     :data="$listNode"
                                     :must="true"
-                                    :value="$post->post_catalouge_id ?? ''"
+                                    :value="${moduleName}->{moduleName}_catalouge_id ?? ''"
                                 />
 
                                 <x-backend.dashboard.form.multiselect
@@ -140,8 +140,8 @@
                                     name="catalouge"
                                     rowLength="12"
                                     :data="$listNode"
-                                    :value="$post->catalouges ?? []"
-                                    :parent="$post->post_catalouge_id ?? ''"
+                                    :value="${moduleName}->catalouges ?? []"
+                                    :parent="${moduleName}->{moduleName}_catalouge_id ?? ''"
                                 />
                             </div>
                         </div>
@@ -163,7 +163,7 @@
                                             rowLength="12"
                                             :data="$languages"
                                             :must="true"
-                                            :value="$post->language_id ?? ''"
+                                            :value="${moduleName}->language_id ?? ''"
                                         />
                                     </div>
                                 </div>
@@ -174,7 +174,7 @@
                     <div class="ibox">
                         <div class="ibox-title">
                             <h5>
-                                {{__('form.chooseObject', ['attribute' => __('form.postImage')])}}
+                                {{__('form.chooseObject', ['attribute' =>  __('form.{module}Image')])}}
                             </h5>
                         </div>
                         <div class="ibox-content">
@@ -182,13 +182,13 @@
                                 <div class="col-lg-12">
                                     <x-backend.dashboard.form.upload
                                         rowLength="12"
-                                        :labelName="__('form.postImage')"
-                                        :value="$post->image ?? '' "
+                                        :labelName="__('form.{module}Image')"
+                                        :value="${moduleName}->image ?? '' "
                                     />
                                     <img
                                         class="col-lg-12 hidden"
                                         id="img_show"
-                                        :alt="__('form.postImage')"
+                                        :alt="__('form.{module}Image')"
                                         height="250px"
                                     >
                                 </div>
@@ -208,7 +208,7 @@
                                     <div class="flex gap-10">
                                         <select name="publish" class="form-control  select2">
                                             <option disabled selected>
-                                                {{__('form.chooseObject', ['attribute' => __('table.postStatus')])}}
+                                                {{__('form.chooseObject', ['attribute' => __('table.{module}Status')])}}
                                             </option>
                                             <option value="1" @selected(old('publish', $publish) == 1)>
                                                 {{__('form.published')}}
@@ -222,7 +222,7 @@
                                     <div class="flex gap-10">
                                         <select name="follow" class="form-control  select2">
                                             <option disabled selected>
-                                                {{__('form.chooseObject', ['attribute' => __('form.postVision')])}}
+                                                {{__('form.chooseObject', ['attribute' => __('form.{module}Vision')])}}
                                             </option>
                                             <option value="1" @selected(old('follow', $follow) == 1)>
                                                 {{__('form.follow')}}
@@ -239,7 +239,7 @@
                 </div>
             </div>
             <div class="flex flex-space-between">
-                <a href="{{ route('post.index') }}" class="btn btn-success mb-20 ">
+                <a href="{{ route('{routerPath}.index') }}" class="btn btn-success mb-20 ">
                     {{__('form.cancel')}}
                 </a>
                 <button type="submit" class="btn btn-primary mb-20 ">

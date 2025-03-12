@@ -51,11 +51,12 @@
                                     :value="$generate->name ?? ''"
                                 />
                                 <x-backend.dashboard.form.input
-                                inputName="module"
+                                inputName="module_icon"
                                 type="text"
-                                :labelName="__('dashboard.moduleName')"
+                                :labelName="__('dashboard.moduleIcon')"
                                 :must="true"
                                 :value="$generate->module ?? ''"
+                                placeholder="e  xample: fa-icon"
                             />
                             </div>
                             <div class="row mt-20">
@@ -74,14 +75,6 @@
                                         </select>
                                     </div>
                                 </div>
-
-                                <x-backend.dashboard.form.input
-                                inputName="router"
-                                type="text"
-                                :labelName="__('dashboard.router')"
-                                :must="true"
-                                :value="$generate->router ?? ''"
-                            />
                             </div>
                         </div>
                     </div>

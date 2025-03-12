@@ -34,6 +34,7 @@
             value="{{old($inputName, $value)}}"
             @readonly($readOnly)
             class="form-control"
+            {{$attributes}}
         >
         @endif
     </div>

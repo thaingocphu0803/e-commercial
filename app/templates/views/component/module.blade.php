@@ -1,8 +1,8 @@
-            <x-backend.dashboard.nav.module icon='fa-file' :title="__('dashboard.managerObject', ['object' => __('dashboard.{moduleName}')])">
+            <x-backend.dashboard.nav.module icon='{moduleIcon}' :title="__('dashboard.managerObject', ['object' => __('dashboard.{moduleName}')])">
                 @can('modules', '{moduleName}.index')
                     <li>
                         <a class="text-capitalize"
-                            href="{{ Route::has('{moduleName}.index') ? route('{moduleName}.index') : '#' }}">
+                            href="/{moduleName}/index">
                             {{ __('dashboard.{moduleName}') }}
                         </a>
                     </li>
@@ -11,7 +11,7 @@
                 @can('modules', '{moduleName}.catalouge.index')
                     <li>
                         <a class="text-capitalize"
-                            href="{{ Route::has('{moduleName}.catalouge.index') ? route('{moduleName}.catalouge.index') : '#' }}">
+                            href="/{moduleName}/catalouge/index">
                             {{ __('dashboard.objectGroup', ['object' => __('dashboard.{moduleName}')]) }}
                         </a>
                     </li>
