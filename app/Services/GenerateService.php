@@ -59,8 +59,8 @@ class GenerateService implements GenerateServiceInterface
             // $this->generateRepository->create($payload);
             DB::commit();
 
-            $this->makeDatabase($request);
-            // $this->makeModel($request);
+            // $this->makeDatabase($request);
+            $this->makeModel($request);
             // $this->makeRule($request);
             // $this->makeRequest($request);
             // $this->makeRepository($request);
@@ -196,7 +196,7 @@ class GenerateService implements GenerateServiceInterface
     {
         try {
             $payload = $request->only('name', 'schema_detail', 'schema_catalouge', 'module_type');
-            $moduleName = $this->convertToDashBetween($payload['name']);
+            $moduleName =lcfirst($payload['name']);
             $tableCatalougeName = $moduleName . '_catalouge';
             $schemaPath = base_path('app\\templates\\migrations\\schema.php');
             $shemaContent = file_get_contents($schemaPath);
@@ -251,6 +251,36 @@ class GenerateService implements GenerateServiceInterface
         }
     }
 
+    private function makeModel($request)
+    {
+        try {
+            $moduleName =lcfirst($request->input('name'));
+            $moduleCatalougeName = $moduleName.'Catalouge';
+            $tableCatalougeName = $moduleName.'_catalouge';
+
+            $option = [
+                'moduleName' => $moduleName,
+                'ModuleName' => ucfirst($moduleName),
+                'ModuleCatalougeName' => ucfirst($moduleCatalougeName),
+                'moduleCatalougeName' => $moduleCatalougeName,
+                'tableCatalougeName' => $tableCatalougeName
+
+            ];
+
+            $catalougePath =  base_path('app\\templates\\models\\moduleCatalouge.php');
+            $catalougeContent = file_get_contents($catalougePath);
+
+            $moduleCatalougeContent = $this->replaceTemplateContent($option, $catalougeContent);
+            $moduleCatalougePath = base_path('app\\Models\\' . $option['ModuleCatalougeName'] . '.php');
+            File::put($moduleCatalougePath, $moduleCatalougeContent);
+            return true;
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+
+            return false;
+        }
+    }
+
     private function makeController($request)
     {
         $payload = $request->only('name', 'module_type');
@@ -262,23 +292,6 @@ class GenerateService implements GenerateServiceInterface
                 break;
             case 2:
                 $this->createTemplateController($name, self::TEMPLATE);
-                break;
-            default:
-                $this->createSingleController($name);
-        }
-    }
-
-    private function makeModel($request)
-    {
-        $payload = $request->only('name', 'module_type');
-        $name = lcfirst($payload['name']);
-
-        switch ($payload['module_type']) {
-            case 1:
-                $this->createTemplateModel($name, self::TEMPLATE_CATALOUGE);
-                break;
-            case 2:
-                $this->createTemplateModel($name, self::TEMPLATE);
                 break;
             default:
                 break;
@@ -536,40 +549,6 @@ class GenerateService implements GenerateServiceInterface
         }
     }
 
-    private function createSingleController($name) {}
-
-    private function  createTemplateModel($name, $templateName)
-    {
-
-        try {
-            $moduleTable  = $this->convertToDashBetween($name);
-            $ModuleTemplate = ucfirst($name);
-            $moduleTemplate = $name;
-            $relation = explode('_', $moduleTable)[0];
-            $relationModel = ucfirst($relation);
-
-            $templatePath =  base_path('app\\templates\\' . $templateName . 'Model.php');
-            $templateContent = file_get_contents($templatePath);
-
-            $option = [
-                'moduleTable' => $moduleTable,
-                'ModuleTemplate' => $ModuleTemplate,
-                'moduleTemplate' => $moduleTemplate,
-                'relation' => $relation,
-                'relationModel' => $relationModel
-            ];
-
-            $newContent = $this->replaceTemplateContent($option, $templateContent);
-            $modelPath = base_path('app\\Models\\' . $ModuleTemplate . '.php');
-
-            File::put($modelPath, $newContent);
-            return true;
-        } catch (\Exception $e) {
-            echo $e->getMessage();
-
-            return false;
-        }
-    }
     private function createTemplatePattern($name, $templateName, $pattern)
     {
         try {

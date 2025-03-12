@@ -9,17 +9,17 @@ use Illuminate\Notifications\Notifiable;
 use Kalnoy\Nestedset\NodeTrait;
 
 
-class PostCatalougeLanguage extends Model
+class {ModuleName}Language extends Model
 {
     use HasFactory, Notifiable, SoftDeletes,NodeTrait;
 
-    protected $table = 'post_catalouge_language';
+    protected $table = '{tableName}_language';
     public $incrementing = false;
     protected $primaryKey = null;
 
 
     protected $fillable = [
-        "post_catalouge_id",
+        "{tableName}_id",
         "language_id",
         "name",
         "description",

@@ -9,11 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Kalnoy\Nestedset\NodeTrait;
 
-class {ModuleTemplate} extends Model
+class ProductCatalouge extends Model
 {
     use HasFactory, Notifiable, SoftDeletes, NodeTrait, QueryScope;
 
-    protected $table = '{moduleTable}s';
+    protected $table = 'product_catalouges';
 
     protected $fillable = [
         'parent_id',
@@ -30,18 +30,18 @@ class {ModuleTemplate} extends Model
     ];
 
     public function languages(){
-        return $this->belongsToMany(Language::class, '{moduleTable}_language', '{moduleTable}_id', 'language_id')
+        return $this->belongsToMany(Language::class, 'product_catalouge_language', 'product_catalouge_id', 'language_id')
         ->withPivot(['name', 'canonical', 'description', 'content', 'meta_title', 'meta_keyword', 'meta_description'])
         ->withTimestamps();
     }
 
-    public function {relation}s(){
-        return $this->belongsToMany({relationModel}::class, '{moduleTable}_{relation}', '{moduleTable}_id', '{relation}_id');
+    public function products(){
+        return $this->belongsToMany(Product::class, 'product_catalouge_product', 'product_catalouge_id', 'product_id');
     }
 
     public static function isNodeCheck($id){
-        ${moduleTemplate} = {ModuleTemplate}::find($id);
-       if((${moduleTemplate}->_rgt - ${moduleTemplate}->_lft) != 1){
+        $productCatalouge = ProductCatalouge::find($id);
+       if(($productCatalouge->_rgt - $productCatalouge->_lft) != 1){
             return false;
        }
 
