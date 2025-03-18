@@ -60,9 +60,9 @@ class GenerateService implements GenerateServiceInterface
             DB::commit();
 
             // $this->makeDatabase($request);
-            $this->makeModel($request);
+            // $this->makeModel($request);
             // $this->makeRule($request);
-            // $this->makeRequest($request);
+            $this->makeRequest($request);
             // $this->makeRepository($request);
             // $this->makeService($request);
             // $this->makeController($request);
@@ -142,9 +142,6 @@ class GenerateService implements GenerateServiceInterface
         try {
             $this->generateRepository->updateStatus($payload);
 
-            // $this->generateRepository->updateByWhereIn($payload['modelId'], $payload['value']);
-
-
             DB::commit();
 
             return true;
@@ -162,7 +159,6 @@ class GenerateService implements GenerateServiceInterface
         DB::beginTransaction();
         try {
             $this->generateRepository->updateStatusAll($payload);
-            // $this->generateRepository->updateByWhereIn($payload['ids'], $payload['value']);
             DB::commit();
 
             return true;
@@ -269,22 +265,92 @@ class GenerateService implements GenerateServiceInterface
 
             $catalougePath =  base_path('app\\templates\\models\\moduleCatalouge.php');
             $modelCatalougePath = base_path('app\\Models\\' . $option['ModuleCatalougeName'] . '.php');
-            $this->createModel($option, $catalougePath, $modelCatalougePath);
+            $this->createFile($option, $catalougePath, $modelCatalougePath);
 
 
             $modulePath = base_path('app\\templates\\models\\module.php');
             $modelModulePath =  base_path('app\\Models\\' . $option['ModuleName'] . '.php');
-            $this->createModel($option, $modulePath, $modelModulePath);
+            $this->createFile($option, $modulePath, $modelModulePath);
 
 
             $catalougeLanguagePath =  base_path('app\\templates\\models\\moduleCatalougeLanguage.php');
             $modelCatalougeLanguagePath = base_path('app\\Models\\' . $option['ModuleCatalougeName'] . 'Language.php');
-            $this->createModel($option, $catalougeLanguagePath, $modelCatalougeLanguagePath);
+            $this->createFile($option, $catalougeLanguagePath, $modelCatalougeLanguagePath);
 
             $moduleLanguagePath =  base_path('app\\templates\\models\\moduleLanguage.php');
             $modelModuleLanguagePath = base_path('app\\Models\\' . $option['ModuleName'] . 'Language.php');
-            $this->createModel($option, $moduleLanguagePath, $modelModuleLanguagePath);
+            $this->createFile($option, $moduleLanguagePath, $modelModuleLanguagePath);
 
+            return true;
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+
+            return false;
+        }
+    }
+
+    private function makeRule($request)
+    {
+        try {
+            $ModuleName = ucfirst($request->input('name'));
+            $option = [
+                'ModuleCatalougeName' => $ModuleName.'Catalouge',
+            ];
+            $templatepath = base_path("app\\templates\\rules\\moduleChildrenRule.php");
+            $modulePath = base_path("app\\Rules\\Check{$ModuleName}ChildrenRule.php");
+            $this->createFile($option,$templatepath, $modulePath);
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+
+            return false;
+        }
+    }
+
+    private function makeRequest($request)
+    {
+        try {
+            $moduleName = lcfirst($request->input('name'));
+            $ModuleName = ucfirst($request->input('name'));
+
+
+            $optionModule = [
+                'ModuleName' => $ModuleName,
+                'moduleTableName' => $moduleName,
+            ];
+
+            $optionCatalouge = [
+                'ModuleName' => $ModuleName.'Catalouge',
+                'moduleTableName' => $moduleName.'_catalouge',
+            ];
+
+            $fileRequestName = [
+                "Store{$ModuleName}Request.php",
+                "Update{$ModuleName}Request.php",
+            ];
+
+            $fileCatalougeRequestName = [
+                "Store{$ModuleName}CatalougeRequest.php",
+                "Update{$ModuleName}CatalougeRequest.php",
+                "Delete{$ModuleName}CatalougeRequest.php",
+            ];
+
+            $fileTemplateName = [
+                "StoreTemplateRequest.php",
+                "UpdateTemplateRequest.php",
+                "DeleteTemplateRequest.php",
+            ];
+
+            foreach ($fileRequestName as $key => $val) {
+                $templatePath = base_path("app\\templates\\requests\\$fileTemplateName[$key]");
+                $modulePath = base_path("app\\Http\\Requests\\$val");
+                $this->createFile($optionModule, $templatePath, $modulePath);
+            }
+
+            foreach ($fileCatalougeRequestName as $key => $val) {
+                $templatePath = base_path("app\\templates\\requests\\$fileTemplateName[$key]");
+                $modulePath = base_path("app\\Http\\Requests\\$val");
+                $this->createFile($optionCatalouge, $templatePath, $modulePath);
+            }
             return true;
         } catch (\Exception $e) {
             echo $e->getMessage();
@@ -341,77 +407,6 @@ class GenerateService implements GenerateServiceInterface
                 break;
             default:
                 break;
-        }
-    }
-
-    private function makeRequest($request)
-    {
-        try {
-            $payload = $request->only('name', 'module_type');
-            $moduleName = lcfirst($payload['name']);
-            $ModuleName = ucfirst($payload['name']);
-            $moduleTableName = $this->convertToDashBetween($moduleName);
-
-            $fileRequestName = [
-                "Store{$ModuleName}Request.php",
-                "Update{$ModuleName}Request.php",
-                "Delete{$ModuleName}Request.php",
-            ];
-
-            $fileTemplateName = [
-                "StoreTemplateRequest.php",
-                "UpdateTemplateRequest.php",
-                "DeleteTemplateRequest.php",
-            ];
-
-            if ($payload['module_type'] != 1) {
-                unset($fileRequestName[2]);
-                unset($fileTemplateName[2]);
-            }
-            $option = [
-                'ModuleName' => $ModuleName,
-                'moduleTableName' => $moduleTableName,
-            ];
-
-            foreach ($fileRequestName as $key => $val) {
-                $templatePath = base_path("app\\templates\\$fileTemplateName[$key]");
-                $templateContent = file_get_contents($templatePath);
-
-                if (empty($templateContent)) return false;
-
-                $newContent = $this->replaceTemplateContent($option, $templateContent);
-                $modulePath = base_path("app\\Http\\Requests\\$val");
-
-                File::put($modulePath, $newContent);
-            }
-            return true;
-        } catch (\Exception $e) {
-            echo $e->getMessage();
-
-            return false;
-        }
-    }
-
-    private function makeRule($request)
-    {
-        try {
-            $payload = $request->only('name', 'module_type');
-            if ($payload['module_type'] != 1) return false;
-            $ModuleName = ucfirst($payload['name']);
-            $templatepath = base_path("app\\templates\\TemplateRule.php");
-            $templateContent = file_get_contents($templatepath);
-            $option = [
-                'ModuleName' => $ModuleName,
-            ];
-
-            $newContent = $this->replaceTemplateContent($option, $templateContent);
-            $modulePath = base_path("app\\Rules\\Check{$ModuleName}ChildrenRule.php");
-
-            File::put($modulePath, $newContent);
-        } catch (\Exception $e) {
-            echo $e->getMessage();
-
-            return false;
         }
     }
 
@@ -762,11 +757,11 @@ class GenerateService implements GenerateServiceInterface
         return $newContent;
     }
 
-    private function createModel($option, $templatePath, $modelPath)
+    private function createFile($option, $templatePath, $modulePath)
     {
         $content = file_get_contents($templatePath);
         $newContent = $this->replaceTemplateContent($option, $content);
-        if(!File::put($modelPath, $newContent)) return false;
+        if(!File::put($modulePath, $newContent)) return false;
 
         return $newContent;
     }
