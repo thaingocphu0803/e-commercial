@@ -63,8 +63,8 @@ class GenerateService implements GenerateServiceInterface
             // $this->makeModel($request);
             // $this->makeRule($request);
             // $this->makeRequest($request);
-            $this->makeRepository($request);
-            // $this->makeService($request);
+            // $this->makeRepository($request);
+            $this->makeService($request);
             // $this->makeController($request);
             // $this->makeRoute($request);
             // $this->makeView($request);
@@ -362,10 +362,19 @@ class GenerateService implements GenerateServiceInterface
     private function makeRepository($request)
     {
         $moduleName = lcfirst($request->input('name'));
-        $moduleCatalougeName = $moduleName.'Catalouge';
+        $moduleCatalougeName = $moduleName . 'Catalouge';
 
         $this->createTemplatePattern($moduleCatalougeName, self::TEMPLATE_CATALOUGE, self::REPOSITORY);
         $this->createTemplatePattern($moduleName, self::TEMPLATE, self::REPOSITORY);
+    }
+
+    private function makeService($request)
+    {
+        $moduleName = lcfirst($request->input('name'));
+        $moduleCatalougeName = $moduleName . 'Catalouge';
+
+        $this->createTemplatePattern($moduleCatalougeName, self::TEMPLATE_CATALOUGE, self::SERVICE);
+        $this->createTemplatePattern($moduleName, self::TEMPLATE, self::SERVICE);
     }
 
     private function makeController($request)
@@ -379,23 +388,6 @@ class GenerateService implements GenerateServiceInterface
                 break;
             case 2:
                 $this->createTemplateController($name, self::TEMPLATE);
-                break;
-            default:
-                break;
-        }
-    }
-
-    private function makeService($request)
-    {
-        $payload = $request->only('name', 'module_type');
-        $name = lcfirst($payload['name']);
-
-        switch ($payload['module_type']) {
-            case 1:
-                $this->createTemplatePattern($name, self::TEMPLATE_CATALOUGE, self::SERVICE);
-                break;
-            case 2:
-                $this->createTemplatePattern($name, self::TEMPLATE, self::SERVICE);
                 break;
             default:
                 break;
@@ -560,11 +552,11 @@ class GenerateService implements GenerateServiceInterface
                 'moduleName' => $name,
                 'moduleTableName' => $moduleTableName
             ];
-            $templateInterfacePath = base_path('app\\templates\\'.$folderPattern.'\\interfaces\\' . $templateName . $pattern . 'Interface.php');
+            $templateInterfacePath = base_path('app\\templates\\' . $folderPattern . '\\interfaces\\' . $templateName . $pattern . 'Interface.php');
             $patternInterfacePath = base_path('app\\' . $folderPattern . '\\Interfaces\\' . $ModuleName . $pattern . 'Interface.php');
             $this->createFile($option, $templateInterfacePath, $patternInterfacePath);
 
-            $templatePath = base_path('app\\templates\\'.$folderPattern.'\\' . $templateName . $pattern . '.php');
+            $templatePath = base_path('app\\templates\\' . $folderPattern . '\\' . $templateName . $pattern . '.php');
             $patternPath = base_path('app\\' . $folderPattern . '\\' . $ModuleName . $pattern . '.php');
             $this->createFile($option, $templatePath, $patternPath);
 
