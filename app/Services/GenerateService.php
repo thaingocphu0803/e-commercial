@@ -20,8 +20,8 @@ class GenerateService implements GenerateServiceInterface
     protected $generateRepository;
     protected $permissionRepository;
     protected $userCatalougeRepository;
-    private const TEMPLATE_CATALOUGE = "TemplateCatalouge";
-    private const TEMPLATE = "Template";
+    private const TEMPLATE_CATALOUGE = "moduleCatalouge";
+    private const TEMPLATE = "module";
     private const SERVICE = "Service";
     private const REPOSITORY = "Repository";
 
@@ -62,8 +62,8 @@ class GenerateService implements GenerateServiceInterface
             // $this->makeDatabase($request);
             // $this->makeModel($request);
             // $this->makeRule($request);
-            $this->makeRequest($request);
-            // $this->makeRepository($request);
+            // $this->makeRequest($request);
+            $this->makeRepository($request);
             // $this->makeService($request);
             // $this->makeController($request);
             // $this->makeRoute($request);
@@ -192,7 +192,7 @@ class GenerateService implements GenerateServiceInterface
     {
         try {
             $payload = $request->only('name', 'schema_detail', 'schema_catalouge', 'module_type');
-            $moduleName =lcfirst($payload['name']);
+            $moduleName = lcfirst($payload['name']);
             $tableCatalougeName = $moduleName . '_catalouge';
             $schemaPath = base_path('app\\templates\\migrations\\schema.php');
             $shemaContent = file_get_contents($schemaPath);
@@ -250,9 +250,9 @@ class GenerateService implements GenerateServiceInterface
     private function makeModel($request)
     {
         try {
-            $moduleName =lcfirst($request->input('name'));
-            $moduleCatalougeName = $moduleName.'Catalouge';
-            $tableCatalougeName = $moduleName.'_catalouge';
+            $moduleName = lcfirst($request->input('name'));
+            $moduleCatalougeName = $moduleName . 'Catalouge';
+            $tableCatalougeName = $moduleName . '_catalouge';
 
             $option = [
                 'moduleName' => $moduleName,
@@ -294,11 +294,11 @@ class GenerateService implements GenerateServiceInterface
         try {
             $ModuleName = ucfirst($request->input('name'));
             $option = [
-                'ModuleCatalougeName' => $ModuleName.'Catalouge',
+                'ModuleCatalougeName' => $ModuleName . 'Catalouge',
             ];
             $templatepath = base_path("app\\templates\\rules\\moduleChildrenRule.php");
             $modulePath = base_path("app\\Rules\\Check{$ModuleName}ChildrenRule.php");
-            $this->createFile($option,$templatepath, $modulePath);
+            $this->createFile($option, $templatepath, $modulePath);
         } catch (\Exception $e) {
             echo $e->getMessage();
 
@@ -319,8 +319,8 @@ class GenerateService implements GenerateServiceInterface
             ];
 
             $optionCatalouge = [
-                'ModuleName' => $ModuleName.'Catalouge',
-                'moduleTableName' => $moduleName.'_catalouge',
+                'ModuleName' => $ModuleName . 'Catalouge',
+                'moduleTableName' => $moduleName . '_catalouge',
             ];
 
             $fileRequestName = [
@@ -359,6 +359,15 @@ class GenerateService implements GenerateServiceInterface
         }
     }
 
+    private function makeRepository($request)
+    {
+        $moduleName = lcfirst($request->input('name'));
+        $moduleCatalougeName = $moduleName.'Catalouge';
+
+        $this->createTemplatePattern($moduleCatalougeName, self::TEMPLATE_CATALOUGE, self::REPOSITORY);
+        $this->createTemplatePattern($moduleName, self::TEMPLATE, self::REPOSITORY);
+    }
+
     private function makeController($request)
     {
         $payload = $request->only('name', 'module_type');
@@ -387,23 +396,6 @@ class GenerateService implements GenerateServiceInterface
                 break;
             case 2:
                 $this->createTemplatePattern($name, self::TEMPLATE, self::SERVICE);
-                break;
-            default:
-                break;
-        }
-    }
-
-    private function makeRepository($request)
-    {
-        $payload = $request->only('name', 'module_type');
-        $name = lcfirst($payload['name']);
-
-        switch ($payload['module_type']) {
-            case 1:
-                $this->createTemplatePattern($name, self::TEMPLATE_CATALOUGE, self::REPOSITORY);
-                break;
-            case 2:
-                $this->createTemplatePattern($name, self::TEMPLATE, self::REPOSITORY);
                 break;
             default:
                 break;
@@ -559,16 +551,7 @@ class GenerateService implements GenerateServiceInterface
     private function createTemplatePattern($name, $templateName, $pattern)
     {
         try {
-            $templateInterfacePath = base_path('app\\templates\\' . $templateName . $pattern . 'Interface.php');
-            $templatePath = base_path('app\\templates\\' . $templateName . $pattern . '.php');
-            $folderPattern = ($pattern == 'Repository') ? 'Repositories' : 'Services';
-
-            $templateInterfaceContent = file_get_contents($templateInterfacePath);
-            if (!$templateInterfaceContent) return false;
-
-            $templateContent = file_get_contents($templatePath);
-            if (!$templateContent) return false;
-
+            $folderPattern = ($pattern == 'Repository') ? 'repositories' : 'services';
             $ModuleName = ucfirst($name);
             $moduleTableName  = $this->convertToDashBetween($name);
 
@@ -577,20 +560,13 @@ class GenerateService implements GenerateServiceInterface
                 'moduleName' => $name,
                 'moduleTableName' => $moduleTableName
             ];
-
-            $newInterfaceContent = $this->replaceTemplateContent($option, $templateInterfaceContent);
-            $newContent = $this->replaceTemplateContent($option, $templateContent);
-
+            $templateInterfacePath = base_path('app\\templates\\'.$folderPattern.'\\interfaces\\' . $templateName . $pattern . 'Interface.php');
             $patternInterfacePath = base_path('app\\' . $folderPattern . '\\Interfaces\\' . $ModuleName . $pattern . 'Interface.php');
+            $this->createFile($option, $templateInterfacePath, $patternInterfacePath);
+
+            $templatePath = base_path('app\\templates\\'.$folderPattern.'\\' . $templateName . $pattern . '.php');
             $patternPath = base_path('app\\' . $folderPattern . '\\' . $ModuleName . $pattern . '.php');
-
-            $putPatternInterFace = File::put($patternInterfacePath, $newInterfaceContent);
-
-            if (!$putPatternInterFace) return false;
-
-            $putPattern = File::put($patternPath, $newContent);
-
-            if (!$putPattern) return false;
+            $this->createFile($option, $templatePath, $patternPath);
 
             if ($pattern == 'Repository') {
                 $insertAppProvider = "\t\"App\\Repositories\\Interfaces\\{$ModuleName}RepositoryInterface\" => \"App\\Repositories\\{$ModuleName}Repository\",\n\t";
@@ -761,7 +737,8 @@ class GenerateService implements GenerateServiceInterface
     {
         $content = file_get_contents($templatePath);
         $newContent = $this->replaceTemplateContent($option, $content);
-        if(!File::put($modulePath, $newContent)) return false;
+
+        if (!File::put($modulePath, $newContent)) return false;
 
         return $newContent;
     }
