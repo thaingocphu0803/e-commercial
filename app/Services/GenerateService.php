@@ -268,11 +268,23 @@ class GenerateService implements GenerateServiceInterface
             ];
 
             $catalougePath =  base_path('app\\templates\\models\\moduleCatalouge.php');
-            $catalougeContent = file_get_contents($catalougePath);
+            $modelCatalougePath = base_path('app\\Models\\' . $option['ModuleCatalougeName'] . '.php');
+            $this->createModel($option, $catalougePath, $modelCatalougePath);
 
-            $moduleCatalougeContent = $this->replaceTemplateContent($option, $catalougeContent);
-            $moduleCatalougePath = base_path('app\\Models\\' . $option['ModuleCatalougeName'] . '.php');
-            File::put($moduleCatalougePath, $moduleCatalougeContent);
+
+            $modulePath = base_path('app\\templates\\models\\module.php');
+            $modelModulePath =  base_path('app\\Models\\' . $option['ModuleName'] . '.php');
+            $this->createModel($option, $modulePath, $modelModulePath);
+
+
+            $catalougeLanguagePath =  base_path('app\\templates\\models\\moduleCatalougeLanguage.php');
+            $modelCatalougeLanguagePath = base_path('app\\Models\\' . $option['ModuleCatalougeName'] . 'Language.php');
+            $this->createModel($option, $catalougeLanguagePath, $modelCatalougeLanguagePath);
+
+            $moduleLanguagePath =  base_path('app\\templates\\models\\moduleLanguage.php');
+            $modelModuleLanguagePath = base_path('app\\Models\\' . $option['ModuleName'] . 'Language.php');
+            $this->createModel($option, $moduleLanguagePath, $modelModuleLanguagePath);
+
             return true;
         } catch (\Exception $e) {
             echo $e->getMessage();
@@ -746,6 +758,15 @@ class GenerateService implements GenerateServiceInterface
         $newContent = $this->replaceTemplateContent($option, $template);
 
         if (!File::put($path, $newContent)) return false;
+
+        return $newContent;
+    }
+
+    private function createModel($option, $templatePath, $modelPath)
+    {
+        $content = file_get_contents($templatePath);
+        $newContent = $this->replaceTemplateContent($option, $content);
+        if(!File::put($modelPath, $newContent)) return false;
 
         return $newContent;
     }

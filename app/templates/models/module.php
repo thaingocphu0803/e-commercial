@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
-class {ModuleTemplate} extends Model
+class {ModuleName} extends Model
 {
     use HasFactory, Notifiable, SoftDeletes, QueryScope;
 
     protected $fillable = [
-        '{moduleTemplate}_catalouge_id',
+        '{moduleName}_catalouge_id',
         'image',
         'icon',
         'album',
@@ -24,12 +24,12 @@ class {ModuleTemplate} extends Model
     ];
 
     public function languages(){
-        return $this->belongsToMany(Language::class, '{moduleTemplate}_language', '{moduleTemplate}_id', 'language_id')
+        return $this->belongsToMany(Language::class, '{moduleName}_language', '{moduleName}_id', 'language_id')
         ->withPivot(['name', 'canonical', 'description', 'content', 'meta_title', 'meta_keyword', 'meta_description'])
         ->withTimestamps();
     }
 
-    public function {moduleTemplate}Catalouges(){
-        return $this->belongsToMany({ModuleTemplate}Catalouge::class, '{moduleTemplate}_catalouge_{moduleTemplate}',  '{moduleTemplate}_id' ,'{moduleTemplate}_catalouge_id'  );
+    public function {moduleName}Catalouges(){
+        return $this->belongsToMany({ModuleName}Catalouge::class, '{moduleName}_catalouge_{moduleName}',  '{moduleName}_id' ,'{moduleName}_catalouge_id'  );
     }
 }
