@@ -65,8 +65,8 @@ class GenerateService implements GenerateServiceInterface
             // $this->makeRequest($request);
             // $this->makeRepository($request);
             // $this->makeService($request);
-            $this->makeController($request);
-            // $this->makeRoute($request);
+            // $this->makeController($request);
+            $this->makeRoute($request);
             // $this->makeView($request);
             // $this->makeNavModule($request);
 
@@ -470,20 +470,18 @@ class GenerateService implements GenerateServiceInterface
     {
 
         try {
-            $name = $request->input('name');
-            $ModuleName = ucfirst($name);
-            $moduleRouterName = $this->convertToSlashBetween($name);
-            $moduleViewName = $this->convertToPeriodBetween($name);
-
-            $templatePath = base_path('app\\templates\\TemplateRouter.php');
+            $moduleName = $request->input('name');
+            $ModuleName = ucfirst($moduleName);
+            $templatePath = base_path('app\\templates\\routes\\moduleRouter.php');
             $templateContent = file_get_contents($templatePath);
-            $option = [
+            $optionModule = [
                 'ModuleName' => $ModuleName,
-                'moduleRouterName' => $moduleRouterName,
-                'moduleViewName' => $moduleViewName
+                'moduleRouterName' => $moduleName,
+                'moduleViewName' => $moduleName
             ];
-            $newTemplateContent = $this->replaceTemplateContent($option, $templateContent);
-            $useController = 'use App\\Http\\Controllers\\Backend\\' . $ModuleName . 'Controller;' . "\n";
+
+            $newTemplateContent = $this->replaceTemplateContent($optionModule, $templateContent);
+            $useController = 'use App\\Http\\Controllers\\Backend\\' . $optionModule['ModuleName'] . 'Controller;' . "\n";
             $routerPath = base_path('routes\\web.php');
             $routerContent = file_get_contents($routerPath);
             $useControllerPosition = strpos($routerContent, '//@use-controller@');
@@ -493,8 +491,28 @@ class GenerateService implements GenerateServiceInterface
             if ($newControllerContent) {
                 $newModulePosition =  strpos($newControllerContent, '//@new-module@');
                 $putRouter  = $this->insertFile($newControllerContent, $routerPath, $newTemplateContent, $newModulePosition);
+
                 if (!$putRouter) return false;
+
+                $optionCatalouge = [
+                    'ModuleName' => $ModuleName. 'Catalouge',
+                    'moduleRouterName' => $moduleName.'/catalouge',
+                    'moduleViewName' => $moduleName.'.catalouge'
+                ];
+
+                $useCatalougeController = 'use App\\Http\\Controllers\\Backend\\' . $optionCatalouge['ModuleName'] . 'Controller;' . "\n";
+                $useCatalougeControllerPosition = strpos($putRouter, '//@use-controller@');
+                $newControllerContent  = $this->insertFile($putRouter, $routerPath, $useCatalougeController, $useCatalougeControllerPosition);
+
+                if($newControllerContent){
+                    $newTemplateContent = $this->replaceTemplateContent($optionCatalouge, $templateContent);
+                    $newModulePosition =  strpos($newControllerContent, '//@new-module@');
+                    $putRouter  = $this->insertFile($newControllerContent, $routerPath, $newTemplateContent, $newModulePosition);
+                    if (!$putRouter) return false;
+                }
+
             }
+
             return true;
         } catch (\Exception $e) {
             echo $e->getMessage();
