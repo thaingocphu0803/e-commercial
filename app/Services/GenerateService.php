@@ -64,8 +64,8 @@ class GenerateService implements GenerateServiceInterface
             // $this->makeRule($request);
             // $this->makeRequest($request);
             // $this->makeRepository($request);
-            $this->makeService($request);
-            // $this->makeController($request);
+            // $this->makeService($request);
+            $this->makeController($request);
             // $this->makeRoute($request);
             // $this->makeView($request);
             // $this->makeNavModule($request);
@@ -379,19 +379,10 @@ class GenerateService implements GenerateServiceInterface
 
     private function makeController($request)
     {
-        $payload = $request->only('name', 'module_type');
-        $name = lcfirst($payload['name']);
-
-        switch ($payload['module_type']) {
-            case 1:
-                $this->createTemplateController($name, self::TEMPLATE_CATALOUGE);
-                break;
-            case 2:
-                $this->createTemplateController($name, self::TEMPLATE);
-                break;
-            default:
-                break;
-        }
+        $moduleName = lcfirst($request->input('name'));
+        $moduleCatalougeName = $moduleName.'Catalouge';
+        $this->createTemplateController($moduleCatalougeName, self::TEMPLATE_CATALOUGE);
+        $this->createTemplateController($moduleName, self::TEMPLATE);
     }
 
     private function makeView($request)
@@ -519,18 +510,15 @@ class GenerateService implements GenerateServiceInterface
             $moduleTemplate = $name;
             $moduleView = $this->convertToPeriodBetween($name);
 
-            $templatePath = base_path('app\\templates\\' . $templateName . 'Controller.php');
-            $templateContent = file_get_contents($templatePath);
-
             $option = [
                 'ModuleTemplate' => $ModuleTemplate,
                 'moduleTemplate' => $moduleTemplate,
                 'moduleView' => $moduleView
             ];
-            $newContent = $this->replaceTemplateContent($option, $templateContent);
-            $controllerPath = base_path('app\\Http\\Controllers\\Backend\\' . $ModuleTemplate . 'Controller.php');
 
-            File::put($controllerPath, $newContent);
+            $templatePath = base_path('app\\templates\\controllers\\' . $templateName . 'Controller.php');
+            $controllerPath = base_path('app\\Http\\Controllers\\Backend\\' . $ModuleTemplate . 'Controller.php');
+            $this->createFile($option, $templatePath, $controllerPath);
 
             return true;
         } catch (\Exception $e) {
