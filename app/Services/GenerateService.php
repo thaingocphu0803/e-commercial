@@ -25,8 +25,6 @@ class GenerateService implements GenerateServiceInterface
     private const SERVICE = "Service";
     private const REPOSITORY = "Repository";
 
-
-
     public function __construct(
         GenerateRepository $generateRepository,
         PermissionRepository $permissionRepository,
@@ -54,21 +52,21 @@ class GenerateService implements GenerateServiceInterface
         DB::beginTransaction();
         try {
             $payload = $request->except(['_token']);
-
-            // $this->insertPermission($request);
-            // $this->generateRepository->create($payload);
+            dd($payload);
+            $this->insertPermission($request);
+            $this->generateRepository->create($payload);
             DB::commit();
 
-            // $this->makeDatabase($request);
-            // $this->makeModel($request);
-            // $this->makeRule($request);
-            // $this->makeRequest($request);
-            // $this->makeRepository($request);
-            // $this->makeService($request);
-            // $this->makeController($request);
+            $this->makeDatabase($request);
+            $this->makeModel($request);
+            $this->makeRule($request);
+            $this->makeRequest($request);
+            $this->makeRepository($request);
+            $this->makeService($request);
+            $this->makeController($request);
             $this->makeRoute($request);
-            // $this->makeView($request);
-            // $this->makeNavModule($request);
+            $this->makeView($request);
+            $this->makeNavModule($request);
 
             return true;
         } catch (\Exception $e) {
@@ -388,75 +386,47 @@ class GenerateService implements GenerateServiceInterface
     private function makeView($request)
     {
         try {
-            $moduleType = $request->input('module_type');
             $moduleName = lcfirst($request->input('name'));
-            $moduleTableName = $this->convertToDashBetween($moduleName);
-            $extractModule = explode('_', $moduleTableName);
-            $baseViewPath = resource_path("views\\Backend\\$extractModule[0]");
-            $baseComponentPath = resource_path("views\\components\\backend\\$extractModule[0]");
-            $exactFolder = (count($extractModule) == 2) ? $extractModule[1] : $extractModule[0];
-            $exactViewPath =  "$baseViewPath\\$exactFolder";
-            $exactComponentPath = "$baseComponentPath\\$exactFolder";
-            $routerPath = (count($extractModule) == 2) ? $extractModule[0] . '.' . $extractModule[1] : $extractModule[0];
-            $componentPath = (count($extractModule) == 2) ? $extractModule[0] . '.' . $extractModule[1] : $extractModule[0] . "." . $extractModule[0];
-
-            $module  = (count($extractModule) == 2) ? $extractModule[0] . 'Group' : $extractModule[0];
+            //base module path
+            $baseViewPath = resource_path("views\\Backend\\$moduleName");
+            $baseComponentPath = resource_path("views\\components\\backend\\$moduleName");
+            //view module path
+            $viewModulePath =  "$baseViewPath\\$moduleName";
+            $viewCatalougePath =  "$baseViewPath\\catalouge";
+            //component path
+            $moduleComponentPath = "$baseComponentPath\\$moduleName";
+            $catalougeComponentPath =  "$baseComponentPath\\catalouge";
+            //component tag
+            $catalougeComponentTag = $moduleName.'.catalouge';
+            $moduleComponentTag = $moduleName . "." . $moduleName;
 
             if (!$this->makeDirectory($baseViewPath)) return false;
-
             if (!$this->makeDirectory($baseComponentPath)) return false;
+            if (!$this->makeDirectory($viewModulePath)) return false;
+            if (!$this->makeDirectory($viewCatalougePath)) return false;
+            if (!$this->makeDirectory($moduleComponentPath)) return false;
+            if (!$this->makeDirectory($catalougeComponentPath)) return false;
 
-            if (!$this->makeDirectory($exactViewPath)) return false;
-            if (!$this->makeDirectory($exactComponentPath)) return false;
-
-
-            $componentFile = [
-                'filter.blade.php',
-                'table.blade.php'
-            ];
-
-            $templateFile = [
-                'create.blade.php',
-                'delete.blade.php',
-                'index.blade.php',
-            ];
-
-            if ($moduleType == 2) {
-                $templateFile[0] = 'createdetail.blade.php';
-            }
-
-            $option = [
-                'routerPath' => $routerPath,
-                'componentPath' => $componentPath,
-                'module' => $module,
+            $optionModule = [
+                'routerPath' => $moduleName,
+                'componentPath' => $moduleComponentTag,
+                'module' => $moduleName,
                 'moduleName' => $moduleName,
-                'moduleTableName' => $moduleTableName
+                'moduleTableName' => $moduleName
             ];
 
-            foreach ($componentFile as $fileName) {
-                $templateComponentPath = base_path("app\\templates\\views\\component\\$fileName");
-                $templateComponentContent  = file_get_contents($templateComponentPath);
-                $newContent = $this->replaceTemplateContent($option, $templateComponentContent);
+            $optionCatalouge = [
+                'routerPath' => $catalougeComponentTag,
+                'componentPath' => $catalougeComponentTag,
+                'module' => $moduleName.'Group',
+                'moduleName' => $moduleName.'Catalouge',
+                'moduleTableName' => $moduleName.'_catalouge'
+            ];
 
-                if (File::exists($exactComponentPath)) {
-                    $componentPath = "$exactComponentPath\\$fileName";
-                    File::put($componentPath, $newContent);
-                }
-            }
-
-            foreach ($templateFile as $fileName) {
-                if ($fileName == 'createdetail.blade.php') {
-                    $fileName = 'create.blade.php';
-                }
-                $templatePath = base_path("app\\templates\\views\\template\\$fileName");
-                $templateContent  = file_get_contents($templatePath);
-                $newContent = $this->replaceTemplateContent($option, $templateContent);
-
-                if (File::exists($exactViewPath)) {
-                    $viewPath = "$exactViewPath\\$fileName";
-                    File::put($viewPath, $newContent);
-                }
-            }
+            $this->createModuleComponent($optionModule, $moduleComponentPath);
+            $this->createModuleView($optionModule, $viewModulePath);
+            $this->createModuleComponent($optionCatalouge, $catalougeComponentPath);
+            $this->createModuleView($optionCatalouge, $viewCatalougePath);
 
             return true;
         } catch (\Exception $e) {
@@ -519,6 +489,54 @@ class GenerateService implements GenerateServiceInterface
 
             return false;
         }
+    }
+
+    private function createModuleComponent($option, $path)
+    {
+        $componentFile = [
+            'filter.blade.php',
+            'table.blade.php'
+        ];
+
+        foreach ($componentFile as $fileName) {
+            $templateComponentPath = base_path("app\\templates\\views\\component\\$fileName");
+            $templateComponentContent  = file_get_contents($templateComponentPath);
+            $newContent = $this->replaceTemplateContent($option, $templateComponentContent);
+
+            if (File::exists($path)) {
+                $componentPath = "$path\\$fileName";
+                if(!File::put($componentPath, $newContent)) return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function createModuleView($option, $path)
+    {
+        $templateFile = [
+            'create.blade.php',
+            'delete.blade.php',
+            'index.blade.php',
+        ];
+
+        $extraRoutePath = explode('.',$option['routerPath']);
+
+        (count($extraRoutePath) > 1) && $templateFile[0] = 'createdetail.blade.php';
+
+        foreach ($templateFile as $fileName) {
+            $templatePath = base_path("app\\templates\\views\\template\\$fileName");
+            $templateContent  = file_get_contents($templatePath);
+            $newContent = $this->replaceTemplateContent($option, $templateContent);
+
+            if (File::exists($path)) {
+                ($fileName == 'createdetail.blade.php') && $fileName = 'create.blade.php';
+                $viewPath = "$path\\$fileName";
+                if(!File::put($viewPath, $newContent)) return false;
+            }
+        }
+
+        return true;
     }
 
     private function createTemplateController($name, $templateName)
@@ -597,18 +615,6 @@ class GenerateService implements GenerateServiceInterface
         return $temp;
     }
 
-    private function convertToSlashBetween($name)
-    {
-        $temp = strtolower(preg_replace('/(?<!^)[A-Z]/', '/$0', $name));
-        return $temp;
-    }
-
-    private function convertToSpaceBetween($name)
-    {
-        $temp = strtolower(preg_replace('/(?<!^)[A-Z]/', ' $0', $name));
-        return $temp;
-    }
-
     private function replaceTemplateContent($dataArray, $templateContent)
     {
         foreach ($dataArray as $key => $val) {
@@ -638,21 +644,27 @@ class GenerateService implements GenerateServiceInterface
 
     private function insertPermission($request)
     {
-        $name = lcfirst($request->input('name'));
-        $module  = $this->convertToSpaceBetween($name);
-        $canonical = $this->convertToPeriodBetween($name);
+        $module = lcfirst($request->input('name'));
         $namePermission = [
             "Xem danh sách $module",
             "Tạo $module",
             "Sửa $module",
-            "Xóa $module"
+            "Xóa $module",
+            "Xem danh sách Nhóm $module",
+            "Tạo Nhóm $module",
+            "Sửa Nhóm $module",
+            "Xóa Nhóm $module"
         ];
 
         $canonicalPermission = [
-            "$canonical.index",
-            "$canonical.create",
-            "$canonical.update",
-            "$canonical.delete",
+            "$module.index",
+            "$module.create",
+            "$module.update",
+            "$module.delete",
+            "$module.catalouge.index",
+            "$module.catalouge.create",
+            "$module.catalouge.update",
+            "$module.catalouge.delete",
         ];
 
         $payloadPermission = [];
@@ -675,10 +687,8 @@ class GenerateService implements GenerateServiceInterface
 
     private function makeNavModule($request)
     {
-        $name = lcfirst($request->input('name'));
-        $name = $this->convertToDashBetween($name);
+        $moduleName = lcfirst($request->input('name'));
         $moduleIcon = $request->input('module_icon');
-        $moduleName = explode('_', $name)[0];
         $templatePath = base_path('app\\templates\\views\\component\\module.blade.php');
         $templateContent = file_get_contents($templatePath);
         $option = [
