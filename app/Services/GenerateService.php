@@ -521,7 +521,7 @@ class GenerateService implements GenerateServiceInterface
 
         $extraRoutePath = explode('.',$option['routerPath']);
 
-        (count($extraRoutePath) > 1) && $templateFile[0] = 'createdetail.blade.php';
+        (count($extraRoutePath) < 2) && $templateFile[0] = 'createdetail.blade.php';
 
         foreach ($templateFile as $fileName) {
             $templatePath = base_path("app\\templates\\views\\template\\$fileName");
