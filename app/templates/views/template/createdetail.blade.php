@@ -7,7 +7,7 @@
 
     @php
         $url = isset(${moduleName})
-            ? route('{routerPath}.update', ${moduleName}->post_id)
+            ? route('{routerPath}.update', ${moduleName}->{moduleTableName}_id)
             : route('{routerPath}.store');
 
         $title = isset(${moduleName}) ? __('form.editObject', ['attribute' => __('dashboard.{module}')]) : __('form.addObject', ['attribute' => __('dashboard.{module}')]);

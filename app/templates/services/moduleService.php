@@ -125,7 +125,7 @@ class {ModuleName}Service implements {ModuleName}ServiceInterface
 
                 $payloadPivot['canonical'] = Str::slug($payloadPivot['canonical']);
 
-                $this->{moduleName}Repository->updatePostLanguage($id, $payloadPivot);
+                $this->{moduleName}Repository->update{moduleName}Language($id, $payloadPivot);
 
                 $catalouges = $request->input('catalouge') ?? [];
                 array_push( $catalouges, $payload{ModuleName}['{moduleName}_catalouge_id'] );
