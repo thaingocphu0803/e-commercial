@@ -52,7 +52,6 @@ class GenerateService implements GenerateServiceInterface
         DB::beginTransaction();
         try {
             $payload = $request->except(['_token']);
-            dd($payload);
             $this->insertPermission($request);
             $this->generateRepository->create($payload);
             DB::commit();
