@@ -4,14 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Kalnoy\Nestedset\NodeTrait;
 
 
 class PostCatalougeLanguage extends Model
 {
-    use HasFactory, Notifiable, SoftDeletes,NodeTrait;
+    use HasFactory, Notifiable,NodeTrait;
 
     protected $table = 'post_catalouge_language';
     public $incrementing = false;

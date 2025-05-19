@@ -11,20 +11,52 @@ const width = 300;
 const height = 300;
 
 const tinyPlugins = [
-    'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link',
-    'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount','checklist',
-    'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed','a11ychecker',
-    'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable','advcode', 'editimage',
-    'advtemplate', 'mentions', 'tinycomments', 'tableofcontents','footnotes', 'mergetags',
-    'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
-  ]
+    "anchor",
+    "autolink",
+    "charmap",
+    "codesample",
+    "emoticons",
+    "image",
+    "link",
+    "lists",
+    "media",
+    "searchreplace",
+    "table",
+    "visualblocks",
+    "wordcount",
+    "checklist",
+    "mediaembed",
+    "casechange",
+    "export",
+    "formatpainter",
+    "pageembed",
+    "a11ychecker",
+    "tinymcespellchecker",
+    "permanentpen",
+    "powerpaste",
+    "advtable",
+    "advcode",
+    "editimage",
+    "advtemplate",
+    "mentions",
+    "tinycomments",
+    "tableofcontents",
+    "footnotes",
+    "mergetags",
+    "autocorrect",
+    "typography",
+    "inlinecss",
+    "markdown",
+    "importword",
+    "exportword",
+    "exportpdf",
+];
 
 const tinyToolBar = `
         undo redo | blocks fontfamily fontsize | bold italic underline strikethrough |
         link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography |
         align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat
     `;
-
 
 // get district api
 $(document).on("change", "#province_id", async function () {
@@ -222,16 +254,14 @@ $(() => {
         $("#district_id").val(districtId).trigger("change");
     }
 
-    let img_url = $('#img_url').text().trim();
+    let img_url = $("#img_url").text().trim();
 
     if (img_url) {
-        let _this = $('#img_show');
-        _this.attr('src', img_url);
-        _this.removeClass('hidden');
-
+        let _this = $("#img_show");
+        _this.attr("src", img_url);
+        _this.removeClass("hidden");
     }
 });
-
 
 // select2 widget
 $(".select2").select2();
@@ -272,7 +302,7 @@ const ImageUpload = cloudinary.createUploadWidget(
     {
         cloudName,
         uploadPreset,
-        folder: 'album',
+        folder: "album",
         multiple: true,
         transformation: [{ width, height, crop: "thumb" }],
         sources: ["local", "url", "image_search"],
@@ -282,8 +312,7 @@ const ImageUpload = cloudinary.createUploadWidget(
     },
     (error, result) => {
         if (!error && result && result.event === "success") {
-
-            $('#sortable').append(`
+            $("#sortable").append(`
                 <li class="ui-state-default">
                     <div class="thumb">
                         <span class="span image image-scaledown">
@@ -294,58 +323,55 @@ const ImageUpload = cloudinary.createUploadWidget(
                         </button>
                     </div>
                 </li>
-            `)
+            `);
 
-            $('.click-to-upload').addClass('hidden');
-            $('.upload-list').removeClass('hidden');
+            $(".click-to-upload").addClass("hidden");
+            $(".upload-list").removeClass("hidden");
 
             album.push(result.info.url);
         }
     }
-
 );
 
 $(document).on("click", ".upload-picture", function (e) {
     e.preventDefault();
     ImageUpload.open();
-
 });
 
 //delete picture
-$(document).on("click", '.delete-image', function () {
+$(document).on("click", ".delete-image", function () {
     let _this = $(this);
 
-    let item = _this.parents('.ui-state-default');
-    let itemUrl = item.find("img[src]").attr('src');
+    let item = _this.parents(".ui-state-default");
+    let itemUrl = item.find("img[src]").attr("src");
     item.remove();
 
-    album = album.filter((url)=>{
-        return url != itemUrl
-    } )
+    album = album.filter((url) => {
+        return url != itemUrl;
+    });
 
-if($(`.ui-state-default`).length == 0 ){
-        $('.click-to-upload').removeClass('hidden');
-        $('.upload-list').addClass('hidden');
+    if ($(`.ui-state-default`).length == 0) {
+        $(".click-to-upload").removeClass("hidden");
+        $(".upload-list").addClass("hidden");
     }
-})
+});
 //add album to input value
-$(document).on('submit', '#post_catalouge_form', function(e){
+$(document).on("submit", "#post_catalouge_form", function (e) {
     e.preventDefault();
 
-    if(album.length > 0){
-        $('#album').val(JSON.stringify(album));
-    }else{
-        $('#album').val(null);
+    if (album.length > 0) {
+        $("#album").val(JSON.stringify(album));
+    } else {
+        $("#album").val(null);
     }
 
-
     this.submit();
-})
+});
 
 //get postCatalouge Album
 
-$('.img_album').each(function(){
-    let src = $(this).attr('src');
+$(".img_album").each(function () {
+    let src = $(this).attr("src");
     album.push(src);
 });
 
@@ -358,28 +384,27 @@ $(".tiny-editor").each(function () {
         selector: `#${editorId}`,
         height: height,
         menubar: false,
-        plugins: tinyPlugins,
-          toolbar: tinyToolBar,
-          tinycomments_mode: 'embedded',
-          tinycomments_author: 'Author name',
-          mergetags_list: [
-            { value: 'First.Name', title: 'First Name' },
-            { value: 'Email', title: 'Email' },
-          ],
+        // plugins: tinyPlugins,
+        // toolbar: tinyToolBar,
+        tinycomments_mode: "embedded",
+        tinycomments_author: "Author name",
+        mergetags_list: [
+            { value: "First.Name", title: "First Name" },
+            { value: "Email", title: "Email" },
+        ],
 
-          image_title: true,
-          image_caption: true,
-          automatic_uploads: true,
-          file_picker_types: 'image',
-          images_upload_url: `/ajax/dashboard/upload/image?_token=${_token}`,
-          images_reuse_filename: true,
+        image_title: true,
+        image_caption: true,
+        automatic_uploads: true,
+        file_picker_types: "image",
+        images_upload_url: `/ajax/dashboard/upload/image?_token=${_token}`,
+        images_reuse_filename: true,
 
-          content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
+        content_style:
+            "body { font-family:Helvetica,Arial,sans-serif; font-size:16px }",
     });
-
 });
 
-$('#sortable').sortable();
+$("#sortable").sortable();
 
 $("#sortable").disableSelection();
-

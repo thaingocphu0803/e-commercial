@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductCatalougeController;
+use App\Http\Controllers\Backend\AttrController;
+use App\Http\Controllers\Backend\AttrCatalougeController;
 //@use-controller@
 
 Route::get('/', function () {
@@ -135,6 +137,26 @@ Route::controller(ProductCatalougeController::class)->middleware(['admin', 'loca
     Route::post('update/{id}', 'update')->name('product.catalouge.update');
     Route::get('delete/{id}', 'delete')->name('product.catalouge.delete');
     Route::delete('destroy/{id}', 'destroy')->name('product.catalouge.destroy');
+});
+//AttrController
+Route::controller(AttrController::class)->middleware(['admin', 'locale'])->prefix('attr')->group(function () {
+    Route::get('index',  'index')->name('attr.index');
+    Route::get('create', 'create')->name('attr.create');
+    Route::post('store', 'store')->name('attr.store');
+    Route::get('edit/{id}', 'edit')->name('attr.edit');
+    Route::post('update/{id}', 'update')->name('attr.update');
+    Route::get('delete/{id}', 'delete')->name('attr.delete');
+    Route::delete('destroy/{id}', 'destroy')->name('attr.destroy');
+});
+//AttrCatalougeController
+Route::controller(AttrCatalougeController::class)->middleware(['admin', 'locale'])->prefix('attr/catalouge')->group(function () {
+    Route::get('index',  'index')->name('attr.catalouge.index');
+    Route::get('create', 'create')->name('attr.catalouge.create');
+    Route::post('store', 'store')->name('attr.catalouge.store');
+    Route::get('edit/{id}', 'edit')->name('attr.catalouge.edit');
+    Route::post('update/{id}', 'update')->name('attr.catalouge.update');
+    Route::get('delete/{id}', 'delete')->name('attr.catalouge.delete');
+    Route::delete('destroy/{id}', 'destroy')->name('attr.catalouge.destroy');
 });
 //@new-module@
 

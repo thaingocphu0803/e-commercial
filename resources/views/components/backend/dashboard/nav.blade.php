@@ -69,6 +69,25 @@
                     </li>
                 @endcan
             </x-backend.dashboard.nav.module>
+            <x-backend.dashboard.nav.module icon='fa-cubes' :title="__('dashboard.managerObject', ['object' => __('dashboard.attr')])">
+                @can('modules', 'attr.index')
+                    <li>
+                        <a class="text-capitalize"
+                            href="/attr/index">
+                            {{ __('dashboard.attr') }}
+                        </a>
+                    </li>
+                @endcan
+
+                @can('modules', 'attr.catalouge.index')
+                    <li>
+                        <a class="text-capitalize"
+                            href="/attr/catalouge/index">
+                            {{ __('dashboard.objectGroup', ['object' => __('dashboard.attr')]) }}
+                        </a>
+                    </li>
+                @endcan
+            </x-backend.dashboard.nav.module>
 {{-- @new-module --}}
 
 

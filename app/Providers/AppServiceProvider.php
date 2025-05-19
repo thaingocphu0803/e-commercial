@@ -32,6 +32,8 @@ class AppServiceProvider extends ServiceProvider
 
     	"App\Repositories\Interfaces\ProductCatalougeRepositoryInterface" => "App\Repositories\ProductCatalougeRepository",
 		"App\Repositories\Interfaces\ProductRepositoryInterface" => "App\Repositories\ProductRepository",
+		"App\Repositories\Interfaces\AttrCatalougeRepositoryInterface" => "App\Repositories\AttrCatalougeRepository",
+		"App\Repositories\Interfaces\AttrRepositoryInterface" => "App\Repositories\AttrRepository",
 	];
 
     /**
