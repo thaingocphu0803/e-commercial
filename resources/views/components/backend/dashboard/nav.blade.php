@@ -50,7 +50,26 @@
 
             </x-backend.dashboard.nav.module>
 
-            {{-- @new-module --}}
+                        <x-backend.dashboard.nav.module icon='fa-cubes' :title="__('dashboard.managerObject', ['object' => __('dashboard.product')])">
+                @can('modules', 'product.index')
+                    <li>
+                        <a class="text-capitalize"
+                            href="/product/index">
+                            {{ __('dashboard.product') }}
+                        </a>
+                    </li>
+                @endcan
+
+                @can('modules', 'product.catalouge.index')
+                    <li>
+                        <a class="text-capitalize"
+                            href="/product/catalouge/index">
+                            {{ __('dashboard.objectGroup', ['object' => __('dashboard.product')]) }}
+                        </a>
+                    </li>
+                @endcan
+            </x-backend.dashboard.nav.module>
+{{-- @new-module --}}
 
 
             <x-backend.dashboard.nav.module icon='fa-file' :title="__('dashboard.managerObject', ['object' => __('dashboard.post')])">

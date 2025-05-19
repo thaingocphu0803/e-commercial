@@ -13,6 +13,8 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\PermissionController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\ProductCatalougeController;
 //@use-controller@
 
 Route::get('/', function () {
@@ -114,6 +116,26 @@ Route::controller(PostCatalougeController::class)->middleware(['admin', 'locale'
     Route::delete('destroy/{id}', 'destroy')->name('post.catalouge.destroy');
 });
 
+//ProductController
+Route::controller(ProductController::class)->middleware(['admin', 'locale'])->prefix('product')->group(function () {
+    Route::get('index',  'index')->name('product.index');
+    Route::get('create', 'create')->name('product.create');
+    Route::post('store', 'store')->name('product.store');
+    Route::get('edit/{id}', 'edit')->name('product.edit');
+    Route::post('update/{id}', 'update')->name('product.update');
+    Route::get('delete/{id}', 'delete')->name('product.delete');
+    Route::delete('destroy/{id}', 'destroy')->name('product.destroy');
+});
+//ProductCatalougeController
+Route::controller(ProductCatalougeController::class)->middleware(['admin', 'locale'])->prefix('product/catalouge')->group(function () {
+    Route::get('index',  'index')->name('product.catalouge.index');
+    Route::get('create', 'create')->name('product.catalouge.create');
+    Route::post('store', 'store')->name('product.catalouge.store');
+    Route::get('edit/{id}', 'edit')->name('product.catalouge.edit');
+    Route::post('update/{id}', 'update')->name('product.catalouge.update');
+    Route::get('delete/{id}', 'delete')->name('product.catalouge.delete');
+    Route::delete('destroy/{id}', 'destroy')->name('product.catalouge.destroy');
+});
 //@new-module@
 
 //DashboardController

@@ -30,7 +30,9 @@ class AppServiceProvider extends ServiceProvider
 
         'App\Repositories\Interfaces\GenerateRepositoryInterface' => 'App\Repositories\GenerateRepository',
 
-    ];
+    	"App\Repositories\Interfaces\ProductCatalougeRepositoryInterface" => "App\Repositories\ProductCatalougeRepository",
+		"App\Repositories\Interfaces\ProductRepositoryInterface" => "App\Repositories\ProductRepository",
+	];
 
     /**
      * Register any application services.
