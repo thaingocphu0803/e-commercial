@@ -1,4 +1,4 @@
-<form action="{{ route('product.index') }}">
+<form action="{{ route('attr.catalouge.index') }}">
     @csrf
 
     @php
@@ -22,7 +22,7 @@
                 <div class="flex gap-10">
                     <select name="publish" class="form-control  select2">
                         <option value="0" selected>
-                            {{ __('table.chooseObject', ['attribute' => __('table.productStatus')]) }}
+                            {{ __('form.chooseObject', ['attribute' => __('table.attrGroupStatus')]) }}
                         </option>
                         <option value="1" @selected(request('publish') == 1)>
                             {{ __('table.published') }}
@@ -30,18 +30,6 @@
                         <option value="2" @selected(request('publish') == 2)>
                             {{ __('table.private') }}
                         </option>
-                    </select>
-                </div>
-
-                <div class="flex gap-10">
-                    <select name="product_catalouge_id" class="form-control  select2">
-                        <option value="0" selected>
-                            {{ __('table.chooseObject', ['attribute' => __('table.parentSection')]) }}
-                        </option>
-                        @foreach ($listNode as $item)
-                            <option value="{{ $item->id }}" @selected(request('product_catalouge_id') == $item->id)>{{ $item->name }}
-                            </option>
-                        @endforeach
                     </select>
                 </div>
 
@@ -60,14 +48,13 @@
                 </div>
             </div>
 
-            @can('modules', 'product.create')
-                <a href="{{ route('product.create') }}" class="btn btn-danger">
+            @can('modules', 'attr.catalouge.create')
+                <a href="{{ route('attr.catalouge.create') }}" class="btn btn-danger">
                     <i class="fa fa-plus">
-                        {{ __('table.addObject', ['attribute' => __('dashboard.product')]) }}
+                        {{ __('table.addObject', ['attribute' => __('dashboard.attrGroup')]) }}
                     </i>
                 </a>
             @endcan
-
         </div>
     </div>
 

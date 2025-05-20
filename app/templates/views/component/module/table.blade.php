@@ -28,20 +28,20 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($products as $product)
-                <tr id="{{ $product->id }}">
+            @foreach (${moduleName}s as ${moduleName})
+                <tr id="{{ ${moduleName}->id }}">
 
                     <td>
                         <input type="checkbox" name="input" class="checkItem check-table"
-                            value="{{ $product->id }}" />
+                            value="{{ ${moduleName}->id }}" />
                     </td>
 
                     <td class="text-capitalize">
                         <div class="flex flex-middle gap-10">
-                            @if (!empty($product->image))
+                            @if (!empty(${moduleName}->image))
                                 <div class="image">
                                     <div class="image-cover">
-                                        <img src="{{ base64_decode($product->image) }}" alt="country's flag"
+                                        <img src="{{ base64_decode(${moduleName}->image) }}" alt="country's flag"
                                             class="table-img">
                                     </div>
                                 </div>
@@ -49,15 +49,15 @@
                             <div class="main-info">
                                 <div class="name">
                                     <span class="main-title">
-                                        {{ $product->name }}
+                                        {{ ${moduleName}->name }}
                                     </span>
                                 </div>
                                 <div class="catalouge flex gap-10">
                                     <span
                                         class="text-danger">{{ __('dashboard.objectGroup', ['object' => __('table.catalouge')]) }}:</span>
-                                    @foreach ($product->productCatalouges as $productCatalouge)
+                                    @foreach (${moduleName}->{moduleName}Catalouges as ${moduleName}Catalouge)
                                         <a href="#"
-                                            title="">{{ $productCatalouge->languages->pluck('pivot.name')->implode(',') }}</a>
+                                            title="">{{ ${moduleName}Catalouge->languages->pluck('pivot.name')->implode(',') }}</a>
                                     @endforeach
                                 </div>
                             </div>
@@ -65,27 +65,27 @@
                     </td>
 
                     <td>
-                        <input type="text" name="order" value="{{ $product->order }}"
-                            class="form-control sort-sorder text-center" data-id="{{ $product->id }}"
-                            data-model="product">
+                        <input type="text" name="order" value="{{ ${moduleName}->order }}"
+                            class="form-control sort-sorder text-center" data-id="{{ ${moduleName}->id }}"
+                            data-model="{moduleName}">
                     </td>
 
-                    <td class="js-switch-{{ $product->id }} text-center">
-                        <input type="checkbox" class="js-switch status" data-model="product" data-field="publish"
-                            data-modelId="{{ $product->id }}" value="{{ $product->publish }}"
-                            @checked($product->publish == 1) />
+                    <td class="js-switch-{{ ${moduleName}->id }} text-center">
+                        <input type="checkbox" class="js-switch status" data-model="{moduleName}" data-field="publish"
+                            data-modelId="{{ ${moduleName}->id }}" value="{{ ${moduleName}->publish }}"
+                            @checked(${moduleName}->publish == 1) />
                     </td>
 
                     <td class="text-center">
 
-                        @can('modules', 'product.update')
-                            <a href="{{ route('product.edit', $product->id) }}" class="btn btn-success">
+                        @can('modules', '{routerPath}.update')
+                            <a href="{{ route('{routerPath}.edit', ${moduleName}->id) }}" class="btn btn-success">
                                 <i class="fa fa-edit"></i>
                             </a>
                         @endcan
 
-                        @can('modules', 'product.delete')
-                            <a href="{{ route('product.delete', $product->id) }}" class="btn btn-danger">
+                        @can('modules', '{routerPath}.delete')
+                            <a href="{{ route('{routerPath}.delete', ${moduleName}->id) }}" class="btn btn-danger">
                                 <i class="fa fa-trash"></i>
                             </a>
                         @endcan
@@ -96,6 +96,6 @@
             @endforeach
         </tbody>
     </table>
-    {{ $products->links('pagination::bootstrap-4') }}
+    {{ ${moduleName}s->links('pagination::bootstrap-4') }}
 
 </div>

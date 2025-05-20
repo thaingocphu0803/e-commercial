@@ -11,7 +11,7 @@
                     <x-backend.dashboard.toolbox model="product" object="product"/>
                 </div>
                 <div class="ibox-content">
-                    <x-backend.product.product.filter/>
+                    <x-backend.product.product.filter :listNode="$listNode"/>
                     <x-backend.product.product.table :products="$products" />
                 </div>
             </div>

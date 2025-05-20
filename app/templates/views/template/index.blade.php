@@ -11,7 +11,7 @@
                     <x-backend.dashboard.toolbox model="{moduleName}" object="{moduleName}"/>
                 </div>
                 <div class="ibox-content">
-                    <x-backend.{componentPath}.filter/>
+                    <x-backend.{componentPath}.filter :listNode="$listNode"/>
                     <x-backend.{componentPath}.table :{moduleName}s="${moduleName}s" />
                 </div>
             </div>

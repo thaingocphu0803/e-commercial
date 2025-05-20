@@ -1,4 +1,4 @@
-<form action="{{ route('product.index') }}">
+<form action="{{ route('{routerPath}.index') }}">
     @csrf
 
     @php
@@ -22,7 +22,7 @@
                 <div class="flex gap-10">
                     <select name="publish" class="form-control  select2">
                         <option value="0" selected>
-                            {{ __('table.chooseObject', ['attribute' => __('table.productStatus')]) }}
+                            {{ __('table.chooseObject', ['attribute' => __('table.{module}Status')]) }}
                         </option>
                         <option value="1" @selected(request('publish') == 1)>
                             {{ __('table.published') }}
@@ -34,12 +34,12 @@
                 </div>
 
                 <div class="flex gap-10">
-                    <select name="product_catalouge_id" class="form-control  select2">
+                    <select name="{module}_catalouge_id" class="form-control  select2">
                         <option value="0" selected>
                             {{ __('table.chooseObject', ['attribute' => __('table.parentSection')]) }}
                         </option>
                         @foreach ($listNode as $item)
-                            <option value="{{ $item->id }}" @selected(request('product_catalouge_id') == $item->id)>{{ $item->name }}
+                            <option value="{{ $item->id }}" @selected(request('{module}_catalouge_id') == $item->id)>{{ $item->name }}
                             </option>
                         @endforeach
                     </select>
@@ -60,10 +60,10 @@
                 </div>
             </div>
 
-            @can('modules', 'product.create')
-                <a href="{{ route('product.create') }}" class="btn btn-danger">
+            @can('modules', '{routerPath}.create')
+                <a href="{{ route('{routerPath}.create') }}" class="btn btn-danger">
                     <i class="fa fa-plus">
-                        {{ __('table.addObject', ['attribute' => __('dashboard.product')]) }}
+                        {{ __('table.addObject', ['attribute' => __('dashboard.{module}')]) }}
                     </i>
                 </a>
             @endcan

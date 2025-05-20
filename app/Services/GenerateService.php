@@ -377,7 +377,7 @@ class GenerateService implements GenerateServiceInterface
     private function makeController($request)
     {
         $moduleName = lcfirst($request->input('name'));
-        $moduleCatalougeName = $moduleName.'Catalouge';
+        $moduleCatalougeName = $moduleName . 'Catalouge';
         $this->createTemplateController($moduleCatalougeName, self::TEMPLATE_CATALOUGE);
         $this->createTemplateController($moduleName, self::TEMPLATE);
     }
@@ -396,7 +396,7 @@ class GenerateService implements GenerateServiceInterface
             $moduleComponentPath = "$baseComponentPath\\$moduleName";
             $catalougeComponentPath =  "$baseComponentPath\\catalouge";
             //component tag
-            $catalougeComponentTag = $moduleName.'.catalouge';
+            $catalougeComponentTag = $moduleName . '.catalouge';
             $moduleComponentTag = $moduleName . "." . $moduleName;
 
             if (!$this->makeDirectory($baseViewPath)) return false;
@@ -417,14 +417,14 @@ class GenerateService implements GenerateServiceInterface
             $optionCatalouge = [
                 'routerPath' => $catalougeComponentTag,
                 'componentPath' => $catalougeComponentTag,
-                'module' => $moduleName.'Group',
-                'moduleName' => $moduleName.'Catalouge',
-                'moduleTableName' => $moduleName.'_catalouge'
+                'module' => $moduleName . 'Group',
+                'moduleName' => $moduleName . 'Catalouge',
+                'moduleTableName' => $moduleName . '_catalouge'
             ];
 
             $this->createModuleComponent($optionModule, $moduleComponentPath);
             $this->createModuleView($optionModule, $viewModulePath);
-            $this->createModuleComponent($optionCatalouge, $catalougeComponentPath);
+            $this->createModuleCatalougeComponent($optionCatalouge, $catalougeComponentPath);
             $this->createModuleView($optionCatalouge, $viewCatalougePath);
 
             return true;
@@ -464,22 +464,21 @@ class GenerateService implements GenerateServiceInterface
                 if (!$putRouter) return false;
 
                 $optionCatalouge = [
-                    'ModuleName' => $ModuleName. 'Catalouge',
-                    'moduleRouterName' => $moduleName.'/catalouge',
-                    'moduleViewName' => $moduleName.'.catalouge'
+                    'ModuleName' => $ModuleName . 'Catalouge',
+                    'moduleRouterName' => $moduleName . '/catalouge',
+                    'moduleViewName' => $moduleName . '.catalouge'
                 ];
 
                 $useCatalougeController = 'use App\\Http\\Controllers\\Backend\\' . $optionCatalouge['ModuleName'] . 'Controller;' . "\n";
                 $useCatalougeControllerPosition = strpos($putRouter, '//@use-controller@');
                 $newControllerContent  = $this->insertFile($putRouter, $routerPath, $useCatalougeController, $useCatalougeControllerPosition);
 
-                if($newControllerContent){
+                if ($newControllerContent) {
                     $newTemplateContent = $this->replaceTemplateContent($optionCatalouge, $templateContent);
                     $newModulePosition =  strpos($newControllerContent, '//@new-module@');
                     $putRouter  = $this->insertFile($newControllerContent, $routerPath, $newTemplateContent, $newModulePosition);
                     if (!$putRouter) return false;
                 }
-
             }
 
             return true;
@@ -490,7 +489,7 @@ class GenerateService implements GenerateServiceInterface
         }
     }
 
-    private function createModuleComponent($option, $path)
+    private function createModuleCatalougeComponent($option, $path)
     {
         $componentFile = [
             'filter.blade.php',
@@ -504,13 +503,33 @@ class GenerateService implements GenerateServiceInterface
 
             if (File::exists($path)) {
                 $componentPath = "$path\\$fileName";
-                if(!File::put($componentPath, $newContent)) return false;
+                if (!File::put($componentPath, $newContent)) return false;
             }
         }
 
         return true;
     }
 
+    private function createModuleComponent($option, $path)
+    {
+        $componentFile = [
+            'filter.blade.php',
+            'table.blade.php'
+        ];
+
+        foreach ($componentFile as $fileName) {
+            $templateComponentPath = base_path("app\\templates\\views\\component\\module\\$fileName");
+            $templateComponentContent  = file_get_contents($templateComponentPath);
+            $newContent = $this->replaceTemplateContent($option, $templateComponentContent);
+
+            if (File::exists($path)) {
+                $componentPath = "$path\\$fileName";
+                if (!File::put($componentPath, $newContent)) return false;
+            }
+        }
+
+        return true;
+    }
     private function createModuleView($option, $path)
     {
         $templateFile = [
@@ -519,7 +538,7 @@ class GenerateService implements GenerateServiceInterface
             'index.blade.php',
         ];
 
-        $extraRoutePath = explode('.',$option['routerPath']);
+        $extraRoutePath = explode('.', $option['routerPath']);
 
         (count($extraRoutePath) < 2) && $templateFile[0] = 'createdetail.blade.php';
 
@@ -531,7 +550,7 @@ class GenerateService implements GenerateServiceInterface
             if (File::exists($path)) {
                 ($fileName == 'createdetail.blade.php') && $fileName = 'create.blade.php';
                 $viewPath = "$path\\$fileName";
-                if(!File::put($viewPath, $newContent)) return false;
+                if (!File::put($viewPath, $newContent)) return false;
             }
         }
 

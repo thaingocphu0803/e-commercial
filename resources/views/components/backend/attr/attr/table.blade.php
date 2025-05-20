@@ -28,20 +28,20 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($products as $product)
-                <tr id="{{ $product->id }}">
+            @foreach ($attrs as $attr)
+                <tr id="{{ $attr->id }}">
 
                     <td>
                         <input type="checkbox" name="input" class="checkItem check-table"
-                            value="{{ $product->id }}" />
+                            value="{{ $attr->id }}" />
                     </td>
 
                     <td class="text-capitalize">
                         <div class="flex flex-middle gap-10">
-                            @if (!empty($product->image))
+                            @if (!empty($attr->image))
                                 <div class="image">
                                     <div class="image-cover">
-                                        <img src="{{ base64_decode($product->image) }}" alt="country's flag"
+                                        <img src="{{ base64_decode($attr->image) }}" alt="country's flag"
                                             class="table-img">
                                     </div>
                                 </div>
@@ -49,15 +49,15 @@
                             <div class="main-info">
                                 <div class="name">
                                     <span class="main-title">
-                                        {{ $product->name }}
+                                        {{ $attr->name }}
                                     </span>
                                 </div>
                                 <div class="catalouge flex gap-10">
                                     <span
                                         class="text-danger">{{ __('dashboard.objectGroup', ['object' => __('table.catalouge')]) }}:</span>
-                                    @foreach ($product->productCatalouges as $productCatalouge)
+                                    @foreach ($attr->attrCatalouges as $attrCatalouge)
                                         <a href="#"
-                                            title="">{{ $productCatalouge->languages->pluck('pivot.name')->implode(',') }}</a>
+                                            title="">{{ $attrCatalouge->languages->pluck('pivot.name')->implode(',') }}</a>
                                     @endforeach
                                 </div>
                             </div>
@@ -65,27 +65,27 @@
                     </td>
 
                     <td>
-                        <input type="text" name="order" value="{{ $product->order }}"
-                            class="form-control sort-sorder text-center" data-id="{{ $product->id }}"
-                            data-model="product">
+                        <input type="text" name="order" value="{{ $attr->order }}"
+                            class="form-control sort-sorder text-center" data-id="{{ $attr->id }}"
+                            data-model="attr">
                     </td>
 
-                    <td class="js-switch-{{ $product->id }} text-center">
-                        <input type="checkbox" class="js-switch status" data-model="product" data-field="publish"
-                            data-modelId="{{ $product->id }}" value="{{ $product->publish }}"
-                            @checked($product->publish == 1) />
+                    <td class="js-switch-{{ $attr->id }} text-center">
+                        <input type="checkbox" class="js-switch status" data-model="attr" data-field="publish"
+                            data-modelId="{{ $attr->id }}" value="{{ $attr->publish }}"
+                            @checked($attr->publish == 1) />
                     </td>
 
                     <td class="text-center">
 
-                        @can('modules', 'product.update')
-                            <a href="{{ route('product.edit', $product->id) }}" class="btn btn-success">
+                        @can('modules', 'attr.update')
+                            <a href="{{ route('attr.edit', $attr->id) }}" class="btn btn-success">
                                 <i class="fa fa-edit"></i>
                             </a>
                         @endcan
 
-                        @can('modules', 'product.delete')
-                            <a href="{{ route('product.delete', $product->id) }}" class="btn btn-danger">
+                        @can('modules', 'attr.delete')
+                            <a href="{{ route('attr.delete', $attr->id) }}" class="btn btn-danger">
                                 <i class="fa fa-trash"></i>
                             </a>
                         @endcan
@@ -96,6 +96,6 @@
             @endforeach
         </tbody>
     </table>
-    {{ $products->links('pagination::bootstrap-4') }}
+    {{ $attrs->links('pagination::bootstrap-4') }}
 
 </div>
