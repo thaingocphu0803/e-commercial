@@ -36,6 +36,8 @@ interface AttrRepositoryInterface
 
     public function updateCatalougePivot($id, $payload = []);
 
+    public function searchAttr($search, $option);
+
     // public function updateByWhereIn($ids, $value);
 
 }

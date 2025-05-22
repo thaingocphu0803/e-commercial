@@ -226,6 +226,11 @@ class AttrService implements AttrServiceInterface
         }
     }
 
+    public function searchAttr($search, $option){
+        $attrs = $this->attrRepository->searchAttr($search, $option);
+        return $attrs;
+    }
+
     public function getRequestPost()
     {
         return [

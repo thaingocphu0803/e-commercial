@@ -43,8 +43,8 @@ class AttrRepository implements AttrRepositoryInterface
         $pivot['image'] = $attr->image;
         $pivot['album'] = $attr->album;
         $pivot['catalouges'] = $attr->attrCatalouges
-                                ->pluck('pivot.attr_catalouge_id')
-                                ->toArray();
+            ->pluck('pivot.attr_catalouge_id')
+            ->toArray();
         return  $pivot;
     }
 
@@ -63,14 +63,14 @@ class AttrRepository implements AttrRepositoryInterface
             'attrs.publish as publish',
             'attrs.order as order'
         )
-        ->join('attr_language as pl', 'pl.attr_id', '=', 'attrs.id')
-        ->join('attr_catalouge_attr as pcp', 'pcp.attr_id', '=', 'attrs.id')
-        ->keyword($keyword ?? null)
-        ->publish($publish ?? null);
+            ->join('attr_language as pl', 'pl.attr_id', '=', 'attrs.id')
+            ->join('attr_catalouge_attr as pcp', 'pcp.attr_id', '=', 'attrs.id')
+            ->keyword($keyword ?? null)
+            ->publish($publish ?? null);
 
-        if(!empty($attr_catalouge_id)){
+        if (!empty($attr_catalouge_id)) {
             $catalouges = $this->getDescendantsAndSelf($attr_catalouge_id);
-            if(!empty($catalouges)){
+            if (!empty($catalouges)) {
                 $query->WhereIn('attrs.attr_catalouge_id', $catalouges);
             }
         }
@@ -85,7 +85,7 @@ class AttrRepository implements AttrRepositoryInterface
 
     public function create($payload)
     {
-            return Attr::create($payload);
+        return Attr::create($payload);
     }
 
     public function createLanguagePivot($model, $payload = [])
@@ -143,6 +143,16 @@ class AttrRepository implements AttrRepositoryInterface
         $columm = [$payload['field'] => $value];
 
         return Attr::whereIn('id', $ids)->update($columm);
+    }
+
+    public function searchAttr($search, $option)
+    {
+        return Attr::select('attrs.id', 'al.name as attr_name')
+            ->join('attr_catalouge_language as acl', 'attrs.attr_catalouge_id', '=', 'acl.attr_catalouge_id')
+            ->join('attr_language as al', 'attrs.id', '=', 'al.attr_id')
+            ->where('acl.attr_catalouge_id', $option['attrCatalougeId'])
+            ->where('al.name', 'like', '%' . $search . '%')
+            ->get();
     }
 
     // public function updateByWhereIn($ids, $value)

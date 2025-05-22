@@ -137,6 +137,11 @@ table strong {
     padding-left: 0;
 }
 
+#sortable-variant{
+    list-style: none;
+    padding-left: 0;
+}
+
 .sortui .ui-state-default{
     width: calc(20% - 2px);
     float: left;
@@ -173,6 +178,11 @@ table strong {
     padding: 20px;
     border: 1px dashed #b8b2b2;
 }
+.click-to-upload-variant{
+    text-align: center;
+    padding: 20px;
+    border: 1px dashed #b8b2b2;
+}
 
 #sortable .thumb{
     position: relative;
@@ -192,6 +202,28 @@ table strong {
 }
 
 #sortable .delete-image:hover{
+    background: red;
+    color: #fff;
+}
+
+#sortable-variant .thumb{
+    position: relative;
+}
+
+#sortable-variant .delete-image{
+    position: absolute;
+    background: linear-gradient(to bottom, #fff, #f9fafb);
+    color: red;
+    right: 0;
+    top: 0;
+    border: unset;
+    display: inline-block;
+    padding: 8px;
+    border-radius: 5px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+#sortable-variant .delete-image:hover{
     background: red;
     color: #fff;
 }
@@ -227,4 +259,35 @@ a, .main-title{
 
 a.active{
     background-color: #99d69d;
+}
+
+.variantCheckbox-input{
+    margin-top: 0 !important
+}
+.variantCheckbox-label{
+    margin-bottom: 0 !important
+}
+
+.attribute-title {
+    font-size: 14px;
+    color: #1791f2
+}
+
+.b-radius-4{
+    border-radius: 4px !important
+}
+
+.add-variant-btn{
+    border:1px dashed #1791f2;
+    color: #1791f2;
+    padding: 5px 10px;
+    width: 127px;
+}
+
+.add-variant-btn:hover{
+    border:2px dashed #1791f2;
+}
+
+.variant-select{
+    width: 100%;
 }

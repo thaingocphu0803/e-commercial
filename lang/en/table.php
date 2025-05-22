@@ -36,5 +36,10 @@ return [
     'postGroupStatus' => 'Post Group Status',
     'parentSection' => 'parent section',
     'catalouge' => 'catalouge',
-    'PermissionAssignment' => 'Permission Assignment'
+    'PermissionAssignment' => 'Permission Assignment',
+    'moduleStatus' => 'Module Status',
+    'productStatus' => 'Product Status',
+    'productGroupStatus' => 'Product Group Status',
+    'attrStatus' => 'Attribute Status',
+    'attrGroupStatus' => 'Attribute Group Status',
 ];

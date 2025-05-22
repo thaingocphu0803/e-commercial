@@ -2,6 +2,7 @@ let ward_select = $("#ward_id");
 let district_select = $("#district_id");
 const _token = $('meta[name="csrf-token"]').attr("content");
 let album = [];
+let ids = [];
 
 const cloudName = "my-could-api";
 const uploadPreset = "laravel_app";
@@ -10,58 +11,14 @@ const maxFiles = 1;
 const width = 300;
 const height = 300;
 
-const tinyPlugins = [
-    "anchor",
-    "autolink",
-    "charmap",
-    "codesample",
-    "emoticons",
-    "image",
-    "link",
-    "lists",
-    "media",
-    "searchreplace",
-    "table",
-    "visualblocks",
-    "wordcount",
-    "checklist",
-    "mediaembed",
-    "casechange",
-    "export",
-    "formatpainter",
-    "pageembed",
-    "a11ychecker",
-    "tinymcespellchecker",
-    "permanentpen",
-    "powerpaste",
-    "advtable",
-    "advcode",
-    "editimage",
-    "advtemplate",
-    "mentions",
-    "tinycomments",
-    "tableofcontents",
-    "footnotes",
-    "mergetags",
-    "autocorrect",
-    "typography",
-    "inlinecss",
-    "markdown",
-    "importword",
-    "exportword",
-    "exportpdf",
-];
+const tinyPlugins = ['link image table'];
 
-const tinyToolBar = `
-        undo redo | blocks fontfamily fontsize | bold italic underline strikethrough |
-        link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography |
-        align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat
-    `;
+const tinyToolBar = 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image table';
 
 // get district api
 $(document).on("change", "#province_id", async function () {
     let _this = $(this);
-    let province_id = _this.val();
+    let province_id = currentId;
 
     try {
         const districts = await $.ajax({
@@ -95,7 +52,7 @@ $(document).on("change", "#district_id", async function () {
     let district_id = null;
 
     if (typeof districtId !== "undefined") {
-        district_id = _this.val() ?? districtId;
+        district_id = currentId ?? districtId;
     }
 
     try {
@@ -125,7 +82,7 @@ $(document).on("change", ".status", async function (e) {
     e.preventDefault();
     let _this = $(this);
     let requestData = {
-        value: _this.val(),
+        value: currentId,
         modelId: _this.attr("data-modelId"),
         model: _this.attr("data-model"),
         field: _this.attr("data-field"),
@@ -187,7 +144,6 @@ $(document).on("click", ".changeStatusAll", async function (e) {
         let checkItem = $(this);
         ids.push(checkItem.val());
     });
-    console.log(ids);
 
     let requestData = {
         value: _this.attr("data-value"),
@@ -287,8 +243,6 @@ const ImageWidget = cloudinary.createUploadWidget(
             $("#img_show")?.attr("src", `${result.info.url}`);
             $("#img_show")?.removeClass("hidden");
             $("#image").val(btoa(result.info.url));
-
-            console.log(result.info);
         }
     }
 );
@@ -333,9 +287,51 @@ const ImageUpload = cloudinary.createUploadWidget(
     }
 );
 
+// cloudinary upload variant Image
+const variantImageUpload = cloudinary.createUploadWidget(
+    {
+        cloudName,
+        uploadPreset,
+        folder: "album/variant",
+        multiple: true,
+        transformation: [{ width, height, crop: "thumb" }],
+        sources: ["local", "url", "image_search"],
+        googleApiKey: "AIzaSyBMnZuJmBV2_6QHMYDOleTyxe67M6RplNg",
+        searchBySites: ["all", "cloudinary.com"],
+        searchByRights: true,
+    },
+    (error, result) => {
+        if (!error && result && result.event === "success") {
+            $("#sortable-variant").append(`
+                <li class="ui-state-default">
+                    <div class="thumb">
+                        <span class="span image image-scaledown">
+                            <img src="${result.info.url}" alt="${result.info.asset_folder} image">
+                        </span>
+                        <button type="button" class="delete-image">
+                            <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </li>
+            `);
+
+            $(".click-to-upload-variant").addClass("hidden");
+            $(".upload-list-variant").removeClass("hidden");
+
+            album.push(result.info.url);
+        }
+    }
+);
+
+
 $(document).on("click", ".upload-picture", function (e) {
     e.preventDefault();
     ImageUpload.open();
+});
+
+$(document).on("click", ".upload-variant-picture", function (e) {
+    e.preventDefault();
+    variantImageUpload.open();
 });
 
 //delete picture
@@ -353,6 +349,24 @@ $(document).on("click", ".delete-image", function () {
     if ($(`.ui-state-default`).length == 0) {
         $(".click-to-upload").removeClass("hidden");
         $(".upload-list").addClass("hidden");
+    }
+});
+
+//delete variant picture
+$(document).on("click", ".delete-image", function () {
+    let _this = $(this);
+
+    let item = _this.parents(".ui-state-default");
+    let itemUrl = item.find("img[src]").attr("src");
+    item.remove();
+
+    album = album.filter((url) => {
+        return url != itemUrl;
+    });
+
+    if ($(`.ui-state-default`).length == 0) {
+        $(".click-to-upload-variant").removeClass("hidden");
+        $(".upload-list-variant").addClass("hidden");
     }
 });
 //add album to input value
@@ -384,15 +398,8 @@ $(".tiny-editor").each(function () {
         selector: `#${editorId}`,
         height: height,
         menubar: false,
-        // plugins: tinyPlugins,
-        // toolbar: tinyToolBar,
-        tinycomments_mode: "embedded",
-        tinycomments_author: "Author name",
-        mergetags_list: [
-            { value: "First.Name", title: "First Name" },
-            { value: "Email", title: "Email" },
-        ],
-
+        plugins: tinyPlugins,
+        toolbar: tinyToolBar,
         image_title: true,
         image_caption: true,
         automatic_uploads: true,
@@ -408,3 +415,269 @@ $(".tiny-editor").each(function () {
 $("#sortable").sortable();
 
 $("#sortable").disableSelection();
+
+$("#sortable-variant").sortable();
+
+$("#sortable-variant").disableSelection();
+
+//toggle variant checked
+$("#variantCheckbox").on("change", function () {
+    let _this = $(this);
+    if (_this.is(":checked")) {
+        $("#variant-wrapper").removeClass("hidden");
+    } else {
+        $("#variant-wrapper").addClass("hidden");
+    }
+});
+
+//add variant event
+$(document).on("click", "#add-variant-btn", function () {
+    const variantExisted = $(".variant-item");
+    const variantItem = getVariantItem();
+
+    if (variantExisted.length < listAttr.length) {
+        $("#variant-body").append(variantItem);
+    }
+
+    $(".select2-play").select2();
+});
+
+// select attribute
+$(document).on("change", ".choose-attribute", function () {
+    let _this = $(this);
+    let previousId = parseInt(_this.data("prev"));
+    let currentId = parseInt(_this.val());
+    let parent = _this.parents(".col-lg-3");
+
+    let htmlSelect = ajaxSelectElement(currentId);
+
+    if (previousId > 0 && previousId !== currentId) {
+        ids = ids.filter((id) => id !== previousId);
+
+        $(".choose-attribute")
+            .find(`option[value="${previousId}"]`)
+            .prop("disabled", false);
+    }
+
+    _this.data("prev", currentId);
+
+    parent.siblings(".col-lg-8").html(htmlSelect);
+    thisSelect = parent.find(".variant-select");
+
+    $(".variant-select").each(function (key, index) {
+        if (!$(this).hasClass("select2-hidden-accessible")) {
+            initAjaxSelect($(this));
+        }
+    });
+
+    if (!ids.includes(currentId)) {
+        ids.push(currentId);
+    }
+
+    ids.forEach((id) => {
+        $(".choose-attribute")
+            .find(`option[value="${id}"]`)
+            .prop("disabled", true);
+    });
+});
+
+//init ajax Select
+const initAjaxSelect = (object) => {
+    const placeholder = {
+        en: "Please enter at least 2 characters to searching",
+        vi: "Vui lòng nhập ít nhất 2 ký tự để tìm kiếm",
+        ja: "検索するには2文字以上入力してください。",
+        zh: "请输入至少两个字符进行搜索。",
+    };
+    let option = {
+        attrCatalougeId: object.data("catid"),
+    };
+    $(object).select2({
+        minimumInputLength: 2,
+        placeholder: placeholder[lang],
+        ajax: {
+            url: "/ajax/attr/getAttr",
+            type: "GET",
+            dataType: "json",
+            delay: 250,
+            data: function (params) {
+                return {
+                    search: params.term,
+                    option: option,
+                };
+            },
+            processResults: function (data) {
+                return {
+                    results: $.map(data, function (obj, i) {
+                        return obj;
+                    }),
+                };
+            },
+            cache: true,
+        },
+    });
+};
+
+// remove attribute
+$(document).on("click", ".remove-attribute", function () {
+    let _this = $(this);
+    let parent = _this.parents(".variant-item");
+
+    let optionId = parent.find(`option:selected`).val();
+    ids = ids.filter((id) => id !== parseInt(optionId));
+    parent.remove();
+    $(".choose-attribute")
+        .find(`option[value="${optionId}"]`)
+        .prop("disabled", false);
+});
+
+// ajax select variant function
+$(document).on("change", ".variant-select", function () {
+    let attrs = [];
+    let attrTitle = [];
+    $(".variant-item").each(function () {
+        let _this = $(this);
+        let arr = [];
+        let attrCatalougeId = _this
+            .find(".choose-attribute option:selected")
+            .val();
+        let attributes = _this
+            .find(`.variant-select-${attrCatalougeId}`)
+            .select2("data");
+        let optionContent = _this
+            .find(".choose-attribute option:selected")
+            .text();
+        optionContent = optionContent.replace("- ", "");
+
+        if (attributes) {
+            for (let i = 0; i < attributes.length; i++) {
+                let item = {};
+                item[optionContent] = attributes[i].text;
+                arr.push(item);
+            }
+            attrTitle.push(optionContent);
+            attrs.push(arr);
+        }
+    });
+
+    attrs = attrs.reduce((acc, curr) =>
+        acc.flatMap((d) => curr.map((e) => ({ ...d, ...e })))
+    );
+
+    $(".variant-table").html(renderVariantTable(attrs, attrTitle));
+});
+
+// disable or active js-switch variant
+$(document).on("change",".js-switch", function(){
+    let _this =$(this);
+    let isChecked = _this.prop('checked');
+
+    if(isChecked == true){
+        _this.parents('.col-lg-2').siblings('.col-lg-10').find('.disabled').attr('disabled', false)
+    }else{
+        _this.parents('.col-lg-2').siblings('.col-lg-10').find('.disabled').attr('disabled', true)
+    }
+});
+
+const ajaxSelectElement = (attrCatalougeId) => {
+    let html = `<select name="attr[${attrCatalougeId}][]" class="variant-select  variant-select-${attrCatalougeId}" data-catid="${attrCatalougeId}" multiple></select>`;
+    return html;
+};
+
+const getVariantItem = () => {
+    const title = {
+        en: "Choose Attribute",
+        vi: "Chọn thuộc tính",
+        ja: "属性を選択",
+        zh: "选择属性",
+    };
+
+    let options = "";
+    listAttr.forEach((item) => {
+        const disabled = ids.includes(item.id) ? "disabled" : "";
+        options += `<option ${disabled} value="${item.id}">${item.name}</option>`;
+    });
+
+    return `
+        <div class="row mt-20 variant-item flex flex-middle">
+            <div class="col-lg-3">
+                <div class="attribute-catalouge">
+                    <select data-prev="0" name="attr" class="choose-attribute select2-play">
+                        <option value="" disabled selected>${title[lang]}</option>
+                        ${options}
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-8 ajax-select">
+                <input type="text" name="" disabled class="b-radius-4 form-control">
+            </div>
+            <div class="col-lg-1">
+                <button type="button" class="remove-attribute btn btn-danger b-radius-4">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </div>
+        </div>
+    `;
+};
+
+const renderVariantTable = (attrs, attrTitle) => {
+    const title = {
+        quantiy: {
+            en: "Quantity",
+            vi: "Số lượng",
+            ja: "数量",
+            zh: "数量",
+        },
+        price: {
+            en: "Price",
+            vi: "Giá tiền",
+            ja: "",
+            zh: "价格",
+        },
+        img: {
+            en: "Image",
+            vi: "Ảnh",
+            ja: "画像",
+            zh: "图片",
+        },
+    };
+
+    let thead = "";
+    let body = "";
+
+    for(let i = 0; i < attrTitle.length;i++){
+        thead += `<td>${attrTitle[i]}</td>`;
+    }
+
+    for(let i = 0; i < attrs.length; i++){
+        let tdbody = ""
+        $.each(attrs[i], (index, value)=>{
+
+            console.log(index, value);
+            tdbody += `<td>${value}</td>`
+        })
+        body += `
+            <tr class="variant-row">
+                <td><img class="product-img" src=""/></td>
+                ${tdbody}
+                <td>---</td>
+                <td>---</td>
+                <td>---</td>
+            </tr>
+        `
+    }
+
+    return `
+        <thead>
+            <td>${title.img[lang]}</td>
+            ${thead}
+            <td>${title.quantiy[lang]}</td>
+            <td>${title.price[lang]}</td>
+            <td>SKU</td>
+         </thead>
+        <tbody>
+            ${body}
+        </tbody>
+    `;
+};
+

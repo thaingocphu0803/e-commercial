@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Ajax\AttrController as AjaxAttrController;
 use App\Http\Controllers\Ajax\DashboardController as AjaxDashboardController;
 use App\Http\Controllers\Ajax\LocationController;
 use App\Http\Controllers\Backend\AuthenController;
@@ -166,6 +167,11 @@ Route::controller(AjaxDashboardController::class)->prefix('ajax/dashboard')->mid
     Route::post('changeStatusAll', 'changeStatusAll')->name('dashboard.changeStatus');
     Route::post('upload/image', 'uploadImage')->name('dashboard.upload.image');
 
+});
+
+//Ajax AttrController
+Route::controller(AjaxAttrController::class)->prefix('ajax/attr')->group(function(){
+    Route::get('getAttr', 'getAttr')->name('attr.getAttr');
 });
 
 // DashboardController

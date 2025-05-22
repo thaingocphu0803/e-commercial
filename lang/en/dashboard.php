@@ -23,9 +23,16 @@ return [
     'toUpload' => 'to upload',
     'postGroup' => 'Post Group',
     'memberGroup' => 'member Group',
+    'attrGroup' => 'Attribute Group',
+    'productGroup' => 'Product Group',
+
     'canonical' => 'canonical',
     'name' => 'name',
     'flag' => 'flag',
     'description' => 'description',
-    'permission' => 'permission'
+    'permission' => 'permission',
+    'product' => 'product',
+    'attr' => 'attribute',
+    'setting' => 'setting',
+    'generate' => 'module'
 ];

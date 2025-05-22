@@ -7,17 +7,23 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Language;
 use App\Services\ProductService;
+use App\Services\AttrCatalougeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
 {
     protected $productService;
+    protected $attrCatalougeService;
+
 
     public function __construct(
         ProductService $productService,
+        AttrCatalougeService $attrCatalougeService,
     ) {
         $this->productService = $productService;
+        $this->attrCatalougeService = $attrCatalougeService;
+
     }
 
     public function index(Request $request)
@@ -36,10 +42,12 @@ class ProductController extends Controller
     {
         Gate::authorize('modules', 'product.create');
         $listNode = $this->productService->getToTree();
+        $listAttr = $this->attrCatalougeService->getToTree();
         $languages = Language::select('id', 'name')->get();
 
         return view('Backend.product.product.create', [
             'listNode' => $listNode,
+            'listAttr' => $listAttr,
             'languages' => $languages
         ]);
     }

@@ -28,4 +28,6 @@ interface AttrServiceInterface
 
     public function updateStatusAll($payload);
 
+    public function searchAttr($searh, $option);
+
 }

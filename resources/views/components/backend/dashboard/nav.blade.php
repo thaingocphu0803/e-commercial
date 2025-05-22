@@ -109,7 +109,7 @@
                 @endcan
             </x-backend.dashboard.nav.module>
 
-            <x-backend.dashboard.nav.module icon='fa-cog' :title="__('dashboard.managerObject', ['object' => __('dashboard.language')])">
+            <x-backend.dashboard.nav.module icon='fa-cog' :title="__('dashboard.managerObject', ['object' => __('dashboard.setting')])">
                 @can('modules', 'language.index')
                     <li>
                         <a class="text-capitalize" href="{{ route('language.index') }}">
