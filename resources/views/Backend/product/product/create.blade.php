@@ -7,15 +7,6 @@
     </x-slot:heading>
     <x-slot:script>
         <script src="../../../backend/js/plugins/switchery/switchery.js"></script>
-
-
-        <script>
-            $('.js-switch').each((index, element) => {
-                var switchery = new Switchery(element, {
-                    color: '#1AB394'
-                });
-            });
-        </script>
     </x-slot:script>
 
     @php
