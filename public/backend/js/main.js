@@ -2,8 +2,13 @@ let ward_select = $("#ward_id");
 let district_select = $("#district_id");
 const _token = $('meta[name="csrf-token"]').attr("content");
 let album = [];
-let variantAlbum =[];
+let variantAlbum = [];
 let ids = [];
+let currentTitle = [];
+let curentVariant = 0;
+let curentTypeVariant = [];
+let prevAttrId = [];
+let deletedId = null;
 
 const cloudName = "my-could-api";
 const uploadPreset = "laravel_app";
@@ -525,6 +530,50 @@ $(document).on("click", ".remove-attribute", function () {
     let parent = _this.parents(".variant-item");
 
     let optionId = parent.find(`option:selected`).val();
+    let optionContent = parent.find(`select[name="attr"] option:selected`).text();
+    optionContent =  optionContent.replace("- ", "")
+
+    $(".attr-catalogue-thead").each(function(){
+        let _this = $(this);
+        if(_this.text() == optionContent){
+            _this.remove();
+        }
+    })
+
+    $(".attr-catalogue-td").each(function(){
+        let _this = $(this);
+        let dataAttrName = _this.data('attrname');
+        let content  = _this.text();
+
+        console.log(dataAttrName);
+        console.log(content);
+
+        // if(dataAttrName == optionContent){
+        //     _this.remove();
+        // }
+        let variantAttrName = _this.siblings('.td-variant').find('input[name="attr[name][]"]').val();
+        variantAttrName = String(variantAttrName).split('-');
+
+        let variantAttrId = _this.siblings('.td-variant').find('input[name="attr[id][]"]').val();
+        variantAttrId = String(variantAttrId).split('-');
+
+        console.log(variantAttrName)
+                console.log(variantAttrId)
+
+        for(let i = 0; i < variantAttrName.length; i++){
+            if(variantAttrName[i] == content){
+                variantAttrName.splice(i, 1);
+                variantAttrName = variantAttrName.join('-');
+                _this.siblings('.td-variant').find('input[name="attr[name][]"]').attr('value', variantAttrName);
+
+                variantAttrId.splice(i, 1);
+                variantAttrId = variantAttrId.join('-');
+                _this.siblings('.td-variant').find('input[name="attr[id][]"]').attr('value', variantAttrId);
+            }
+        }
+
+    })
+
     ids = ids.filter((id) => id !== parseInt(optionId));
     parent.remove();
     $(".choose-attribute")
@@ -537,6 +586,7 @@ $(document).on("change", ".variant-select", function () {
     let attrs = [];
     let attrIds = [];
     let attrTitle = [];
+    let curAttrId = [];
     $(".variant-item").each(function () {
         let _this = $(this);
         let arr = [];
@@ -560,12 +610,21 @@ $(document).on("change", ".variant-select", function () {
                 arr.push(item);
                 id[attrCatalougeId] = attributes[i].id;
                 arrId.push(id);
+                curAttrId.push(attributes[i].id);
             }
             attrTitle.push(optionContent);
             attrs.push(arr);
             attrIds.push(arrId);
         }
     });
+
+    deletedId = prevAttrId.find(id =>!curAttrId.includes(id));
+    prevAttrId = curAttrId;
+    if(deletedId){
+        deleteVarianTableItem(deletedId);
+        return
+    }
+
 
     attrs = attrs.reduce((acc, curr) =>
         acc.flatMap((d) => curr.map((e) => ({ ...d, ...e })))
@@ -575,7 +634,17 @@ $(document).on("change", ".variant-select", function () {
         acc.flatMap((d) => curr.map((e) => ({ ...d, ...e })))
     );
 
-    $(".variant-table").html(renderVariantTable(attrs, attrIds, attrTitle));
+    let newAttrTitle = attrTitle.filter(
+        (value) => !currentTitle.includes(value)
+    );
+
+    currentTitle = attrTitle;
+
+    if ($(".variant-table-body").length == 0) {
+        $(".variant-table").html(renderVariantTable());
+    }
+
+    appendProductVersion(attrs, attrIds, newAttrTitle);
 });
 
 // disable or active js-switch variant
@@ -597,6 +666,17 @@ $(document).on("change", ".js-switch", function () {
             .attr("disabled", true);
     }
 });
+
+const deleteVarianTableItem = (id) => {
+    $(".variant-row").each(function(){
+        let _this = $(this);
+        let ids = String(_this.data('attrid'));
+        ids = ids.split('-') ?? [ids];
+        if(ids.includes(id)){
+            _this.remove();
+        }
+    })
+}
 
 const ajaxSelectElement = (attrCatalougeId) => {
     let html = `<select name="attr[${attrCatalougeId}][]" class="variant-select  variant-select-${attrCatalougeId}" data-catid="${attrCatalougeId}" multiple></select>`;
@@ -639,7 +719,77 @@ const getVariantItem = () => {
     `;
 };
 
-const renderVariantTable = (attrs, attrIds, attrTitle) => {
+const appendProductVersion = (attrs, attrIds, attrTitle) => {
+    if ($(".variant-table-body").length === 0) return;
+
+    let thead = "";
+    let body = "";
+
+
+
+    for (let i = 0; i < attrTitle.length; i++) {
+        thead += `<td class="attr-catalogue-thead">${attrTitle[i]}</td>`;
+    }
+
+    for (let i = 0; i < attrs.length; i++) {
+        let tdbody = "";
+        let attrName = [];
+        let variantAttrId = [];
+        let numberVariant = Object.keys(attrs[i]).length;
+
+        $.each(attrs[i], (index, value) => {
+            tdbody += `<td class="attr-catalogue-td" data-attrname="${index}">${value}</td>`;
+            attrName.push(value);
+            curentTypeVariant.push(value);
+        });
+
+        $.each(attrIds[i], (index, value) => {
+            variantAttrId.push(value);
+        });
+
+        let strAttrName = attrName.join("-");
+        let strAttrId = variantAttrId.sort().join("-");
+
+        let tdHidden = `
+            <td class="hidden td-variant">
+                <input type="text" name="variant[quantity][]" class="variant-quantity">
+                <input type="text" name="variant[sku][]" class="variant-sku">
+                <input type="text" name="variant[price][]" class="variant-price">
+                <input type="text" name="variant[barcode][]" class="variant-barcode">
+                <input type="text" name="variant[filename][]" class="variant-filename">
+                <input type="text" name="variant[url][]" class="variant-url">
+                <input type="text" name="variant[album][]" class="variant-album">
+                <input type="text" name="attr[name][]" class="attr-name" value="${strAttrName}">
+                <input type="text" name="attr[id][]" class="attr-id" value="${strAttrId}">
+            </td>
+        `;
+
+        if (curentVariant != numberVariant) {
+            $(".variant-table-body").html('');
+        }
+
+        if($(`.row-${strAttrId}`).length === 0){
+            body += `
+                <tr class="variant-row row-${strAttrId}" data-attrid="${strAttrId}">
+                    <td><img class="variant-img" src="/backend/img/no-image.svg" alt=""/></td>
+                    ${tdbody}
+                    <td class="variant-quantity" >---</td>
+                    <td class="variant-price">---</td>
+                    <td class="variant-sku">---</td>
+                    ${tdHidden}
+                </tr>
+            `;
+        }
+
+        curentVariant = numberVariant;
+    }
+
+    $(".variant-table-body").append(body);
+
+    $(".thead-lang").before(thead);
+};
+
+const renderVariantTable = () => {
     const title = {
         quantiy: {
             en: "Quantity",
@@ -661,80 +811,27 @@ const renderVariantTable = (attrs, attrIds, attrTitle) => {
         },
     };
 
-    let thead = "";
-    let body = "";
-
-    for (let i = 0; i < attrTitle.length; i++) {
-        thead += `<td>${attrTitle[i]}</td>`;
-    }
-
-    for (let i = 0; i < attrs.length; i++) {
-        let tdbody = "";
-        let attrName = [];
-        let variantAttrId = []
-
-        $.each(attrs[i], (index, value) => {
-            tdbody += `<td>${value}</td>`;
-            attrName.push(value);
-        });
-
-        $.each(attrIds[i], (index, value) => {
-            variantAttrId.push(value);
-        });
-        let strAttrName = attrName.join(',');
-        let strAttrId = variantAttrId.join(',');
-
-        let tdHidden =`
-            <td class="hidden td-variant">
-                <input type="text" name="variant[quantity][]" class="variant-quantity">
-                <input type="text" name="variant[sku][]" class="variant-sku">
-                <input type="text" name="variant[price][]" class="variant-price">
-                <input type="text" name="variant[barcode][]" class="variant-barcode">
-                <input type="text" name="variant[filename][]" class="variant-filename">
-                <input type="text" name="variant[url][]" class="variant-url">
-                <input type="text" name="variant[album][]" class="variant-album">
-                <input type="text" name="attr[name][]" class="attr-name" value="${strAttrName}">
-                <input type="text" name="attr[id][]" class="attr-id" value="${strAttrId}">
-            </td>
-        `;
-
-        body += `
-            <tr class="variant-row">
-                <td><img class="variant-img" src="/backend/img/no-image.svg" alt=""/></td>
-                ${tdbody}
-                <td class="variant-quantity" >---</td>
-                <td class="variant-price">---</td>
-                <td class="variant-sku">---</td>
-                ${tdHidden}
-            </tr>
-        `;
-
-    }
-
     return `
-        <thead>
+        <thead class="variant-table-thead">
             <td>${title.img[lang]}</td>
-            ${thead}
-            <td>${title.quantiy[lang]}</td>
+            <td class="thead-lang">${title.quantiy[lang]}</td>
             <td>${title.price[lang]}</td>
             <td>SKU</td>
          </thead>
         <tbody class="variant-table-body">
-            ${body}
         </tbody>
     `;
 };
 
-$(document).on('click', '.cancel-variant-update', function(){
+$(document).on("click", ".cancel-variant-update", function () {
     let _this = $(this);
-    _this.parents('.update-variant-box').remove();
-})
-
+    _this.parents(".update-variant-box").remove();
+});
 
 // save variant event
-$(document).on('click', '.save-variant-update', function(){
+$(document).on("click", ".save-variant-update", function () {
     let _this = $(this);
-    let parent = _this.parents('.update-variant-box');
+    let parent = _this.parents(".update-variant-box");
 
     const variant = {
         quantity: $("input[name='variant-quantity']").val(),
@@ -743,28 +840,36 @@ $(document).on('click', '.save-variant-update', function(){
         barcode: $("input[name='variant-barcode']").val(),
         filename: $("input[name='variant-filename']").val(),
         url: $("input[name='variant-url']").val(),
-        album: variantAlbum
-    }
+        album: variantAlbum,
+    };
 
-    $.each(variant, function(key,value){
-        parent.prev('.variant-row').find(`input[name='variant[${key}][]']`).val(value);
-        parent.prev('.variant-row').find(`td[class='variant-${key}']`).text(value)
-    })
+    $.each(variant, function (key, value) {
+        parent
+            .prev(".variant-row")
+            .find(`input[name='variant[${key}][]']`)
+            .val(value);
+        parent
+            .prev(".variant-row")
+            .find(`td[class='variant-${key}']`)
+            .text(value);
+    });
 
-    parent.prev('.variant-row').find(`img[class='variant-img']`).attr('src', variantAlbum[0] ?? '/backend/img/no-image.svg');
+    parent
+        .prev(".variant-row")
+        .find(`img[class='variant-img']`)
+        .attr("src", variantAlbum[0] ?? "/backend/img/no-image.svg");
 
-    _this.parents('.update-variant-box').remove();
-})
-
+    _this.parents(".update-variant-box").remove();
+});
 
 $(document).on("click", ".variant-row", function () {
     let _this = $(this);
     let inputVariant = _this.find("input[name^='variant[']");
     let variants = {};
 
-    for(let input of inputVariant){
+    for (let input of inputVariant) {
         let _input = $(input);
-        let key =  _input.attr('class').replace('variant-', '')
+        let key = _input.attr("class").replace("variant-", "");
         variants[key] = _input.val();
     }
 
@@ -778,7 +883,6 @@ $(document).on("click", ".variant-row", function () {
         });
     }
 });
-
 
 const renderVariantUpdateTable = (variants) => {
     const title = {
@@ -850,10 +954,10 @@ const renderVariantUpdateTable = (variants) => {
         },
     };
 
-    let img = '';
-    if(variants.album !== ''){
-    const album = variants.album.split(',');
-        for(item of album){
+    let img = "";
+    if (variants.album !== "") {
+        const album = variants.album.split(",");
+        for (item of album) {
             img += `
                 <li class="ui-state-default">
                     <div class="thumb">
@@ -865,7 +969,7 @@ const renderVariantUpdateTable = (variants) => {
                         </button>
                     </div>
                 </li>
-            `
+            `;
         }
     }
 
@@ -879,15 +983,21 @@ const renderVariantUpdateTable = (variants) => {
                                 <div class="button-group">
                                     <div class="flex flex-middle gap-10">
                                         <button type="button"
-                                            class="btn btn-danger cancel-variant-update">${title.cancel[lang]}</button>
+                                            class="btn btn-danger cancel-variant-update">${
+                                                title.cancel[lang]
+                                            }</button>
                                         <button type="button"
-                                            class="btn btn-success save-variant-update">${title.save[lang]}</button>
+                                            class="btn btn-success save-variant-update">${
+                                                title.save[lang]
+                                            }</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="ibox-content">
-                            <div class="click-to-upload-variant ${(img !== '') ? 'hidden' : ''}">
+                            <div class="click-to-upload-variant ${
+                                img !== "" ? "hidden" : ""
+                            }">
                                 <div class="icon">
                                     <a href="#" class="upload-variant-picture">
                                         <svg width="100px" height="100px" viewBox="0 0 48 48" id="a"
@@ -922,7 +1032,9 @@ const renderVariantUpdateTable = (variants) => {
                                         </svg>
                                     </a>
                                 </div>
-                                <div class="small-text">${title.clickToUpload[lang]}</div>
+                                <div class="small-text">${
+                                    title.clickToUpload[lang]
+                                }</div>
                             </div>
                             <div class="upload-list-variant">
                                 <div class="row">
@@ -935,67 +1047,126 @@ const renderVariantUpdateTable = (variants) => {
                             </div>
                             <div class="row mt-20">
                                 <div class="col-lg-2 flex flex-col flex-middle">
-                                    <label for="" class="control-label">${title.manageStock[lang]}</label>
+                                    <label for="" class="control-label">${
+                                        title.manageStock[lang]
+                                    }</label>
                                     <input type="checkbox" class="js-switch"
-                                        ${(variants.quantity == '') || (variants.quantity == 0)  ? '' : 'checked'}
+                                        ${
+                                            variants.quantity == "" ||
+                                            variants.quantity == 0
+                                                ? ""
+                                                : "checked"
+                                        }
                                     >
                                 </div>
                                 <div class="col-lg-10">
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <label for="variant-quantity"
-                                                class="control-label">${title.quantiy[lang]}</label>
+                                                class="control-label">${
+                                                    title.quantiy[lang]
+                                                }</label>
                                             <input class="form-control text-right disabled"
-                                                ${(variants.quantity == '') || (variants.quantity == 0)  ? 'disabled' : ''}
+                                                ${
+                                                    variants.quantity == "" ||
+                                                    variants.quantity == 0
+                                                        ? "disabled"
+                                                        : ""
+                                                }
                                                 type="text" id="variant-quantity"
-                                                name="variant-quantity" value="${(variants.quantity !== '')? variants.quantity : 0}"
+                                                name="variant-quantity" value="${
+                                                    variants.quantity !== ""
+                                                        ? variants.quantity
+                                                        : 0
+                                                }"
                                             >
                                         </div>
                                         <div class="col-lg-3">
                                             <label for="variant-sku" class="control-label">SKU</label>
                                             <input class="form-control text-right" type="text" id="variant-sku"
-                                                name="variant-sku" value="${(variants.sku !== '')? variants.sku : 0}">
+                                                name="variant-sku" value="${
+                                                    variants.sku !== ""
+                                                        ? variants.sku
+                                                        : 0
+                                                }">
                                         </div>
                                         <div class="col-lg-3">
                                             <label for="variant-price"
-                                                class="control-label">${title.price[lang]}</label>
+                                                class="control-label">${
+                                                    title.price[lang]
+                                                }</label>
                                             <input class="form-control text-right" type="text" id="variant-price"
-                                                name="variant-price" value="${(variants.price !== '')? variants.price : 0}">
+                                                name="variant-price" value="${
+                                                    variants.price !== ""
+                                                        ? variants.price
+                                                        : 0
+                                                }">
                                         </div>
                                         <div class="col-lg-3">
                                             <label for="variant-barcode"
-                                                class="control-label">${title.barcode[lang]}</label>
+                                                class="control-label">${
+                                                    title.barcode[lang]
+                                                }</label>
                                             <input class="form-control text-right" type="text" id="variant-barcode"
-                                                name="variant-barcode" value="${(variants.barcode !== '')? variants.barcode : 0}">
+                                                name="variant-barcode" value="${
+                                                    variants.barcode !== ""
+                                                        ? variants.barcode
+                                                        : 0
+                                                }">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mt-20">
                                 <div class="col-lg-2 flex flex-col flex-middle">
-                                    <label for="" class="control-label">${title.manageFile[lang]}</label>
+                                    <label for="" class="control-label">${
+                                        title.manageFile[lang]
+                                    }</label>
                                     <input type="checkbox" class="js-switch"
-                                        ${(variants.filename == '') && (variants.url == '') ? '' : 'checked'}
+                                        ${
+                                            variants.filename == "" &&
+                                            variants.url == ""
+                                                ? ""
+                                                : "checked"
+                                        }
                                     >
                                 </div>
                                 <div class="col-lg-10">
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <label for="variant-filename"
-                                                class="control-label">${title.fileName[lang]}</label>
+                                                class="control-label">${
+                                                    title.fileName[lang]
+                                                }</label>
                                             <input class="form-control text-right disabled"
-                                                ${(variants.filename == '') && (variants.url == '') ? 'disabled' : ''}
+                                                ${
+                                                    variants.filename == "" &&
+                                                    variants.url == ""
+                                                        ? "disabled"
+                                                        : ""
+                                                }
                                                 type="text" id="variant-filename"
-                                                name="variant-filename" value="${variants.filename }"
+                                                name="variant-filename" value="${
+                                                    variants.filename
+                                                }"
                                             >
                                         </div>
                                         <div class="col-lg-6">
                                             <label for="variant-url"
-                                                class="control-label">${title.link[lang]}</label>
+                                                class="control-label">${
+                                                    title.link[lang]
+                                                }</label>
                                             <input class="form-control text-right disabled"
-                                                ${(variants.filename == '') && (variants.url == '') ? 'disabled' : ''}
+                                                ${
+                                                    variants.filename == "" &&
+                                                    variants.url == ""
+                                                        ? "disabled"
+                                                        : ""
+                                                }
                                                 type="text" id="variant-url"
-                                                name="variant-url" value="${variants.url}"
+                                                name="variant-url" value="${
+                                                    variants.url
+                                                }"
                                             >
                                         </div>
                                     </div>
