@@ -2,13 +2,7 @@ let ward_select = $("#ward_id");
 let district_select = $("#district_id");
 const _token = $('meta[name="csrf-token"]').attr("content");
 let album = [];
-let variantAlbum = [];
 let ids = [];
-let currentTitle = [];
-let curentVariant = 0;
-let curentTypeVariant = [];
-let prevAttrId = [];
-let deletedId = null;
 
 const cloudName = "my-could-api";
 const uploadPreset = "laravel_app";

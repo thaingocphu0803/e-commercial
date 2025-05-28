@@ -35,7 +35,7 @@
     </div>
 </div>
 
-<div class="ibox product-variant">
+<div class="ibox product-variant hidden" id="variant-setting">
     <div class="ibox-title">
         <h5>{{ __('form.versions') }}</h5>
     </div>

@@ -110,6 +110,42 @@
                     <div class="ibox">
                         <div class="ibox-title">
                             <h5>
+                                {{ __('form.ObjectInfor', ['attribute' => __('form.common')]) }}
+                            </h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row flex flex-col gap-10">
+                                <x-backend.dashboard.form.input
+                                    inputName="code"
+                                    rowLength="12"
+                                    type="text"
+                                    :labelName="__('form.code')"
+                                    {{-- :must="true" --}}
+                                    :value="time()"
+                                />
+                                <x-backend.dashboard.form.input
+                                    inputName="price"
+                                    rowLength="12"
+                                    type="text"
+                                    :labelName="__('form.price')"
+                                    {{-- :must="true" --}}
+                                    {{-- :value="$user->email ?? ''" --}}
+                                />
+                                <x-backend.dashboard.form.input
+                                    inputName="origin"
+                                    rowLength="12"
+                                    type="text"
+                                    :labelName="__('form.origin')"
+                                    {{-- :must="true" --}}
+                                    {{-- :value="$user->email ?? ''" --}}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>
                                 {{ __('form.chooseObject', ['attribute' => __('dashboard.language')]) }}
                             </h5>
                         </div>

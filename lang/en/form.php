@@ -61,5 +61,8 @@ return [
     'variant' => 'Variant',
     'versions' => 'versions',
     'updateVersions' => 'Update Versions',
-    'manageStock' => 'Manage Stock'
+    'manageStock' => 'Manage Stock',
+    'origin' => 'Origin',
+    'code' => 'Code',
+    'price' => 'Price'
 ];
