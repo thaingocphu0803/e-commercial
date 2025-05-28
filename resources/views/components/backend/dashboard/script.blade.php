@@ -39,5 +39,8 @@
  {{-- main.js --}}
  <script src="../../../backend/js/main.js" defer></script>
 
+  {{-- variant.js --}}
+ <script src="../../../backend/js/variant.js" defer></script>
+
  {{ $slot }}
 
