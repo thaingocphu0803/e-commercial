@@ -64,5 +64,6 @@ return [
     'manageStock' => 'Manage Stock',
     'origin' => 'Origin',
     'code' => 'Code',
-    'price' => 'Price'
+    'price' => 'Price',
+    'chooseAttribute' => 'Choose attribute'
 ];

@@ -38,6 +38,8 @@ interface AttrRepositoryInterface
 
     public function searchAttr($search, $option);
 
+    public function findAttrByIdArr($attributesArray);
+
     // public function updateByWhereIn($ids, $value);
 
 }

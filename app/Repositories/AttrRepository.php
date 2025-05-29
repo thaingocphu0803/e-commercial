@@ -154,6 +154,12 @@ class AttrRepository implements AttrRepositoryInterface
             ->where('al.name', 'like', '%' . $search . '%')
             ->get();
     }
+    public function findAttrByIdArr($attributesArray){
+        return Attr::select('attrs.id', 'al.name as attr_name')
+            ->join('attr_language as al', 'attrs.id', '=', 'al.attr_id')
+            ->whereIn('attrs.id', $attributesArray)
+            ->get();
+    }
 
     // public function updateByWhereIn($ids, $value)
     // {

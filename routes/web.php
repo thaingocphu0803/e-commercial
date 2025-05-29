@@ -172,6 +172,8 @@ Route::controller(AjaxDashboardController::class)->prefix('ajax/dashboard')->mid
 //Ajax AttrController
 Route::controller(AjaxAttrController::class)->prefix('ajax/attr')->group(function(){
     Route::get('getAttr', 'getAttr')->name('attr.getAttr');
+    Route::get('loadAttr', 'loadAttr')->name('attr.loadAttr');
+
 });
 
 // DashboardController

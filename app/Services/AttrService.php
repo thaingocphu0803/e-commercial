@@ -243,6 +243,11 @@ class AttrService implements AttrServiceInterface
         ];
     }
 
+    public function findAttrByIdArr($attributesArray){
+        $attributes = $this->attrRepository->findAttrByIdArr($attributesArray);
+        return $attributes;
+    }
+
     public function getRequestPivot()
     {
         return [
@@ -265,4 +270,5 @@ class AttrService implements AttrServiceInterface
             'controllers' => 'App\\Http\\Controllers\\Frontend\\AttrController'
         ];
     }
+
 }

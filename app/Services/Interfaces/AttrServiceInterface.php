@@ -30,4 +30,6 @@ interface AttrServiceInterface
 
     public function searchAttr($searh, $option);
 
+    public function findAttrByIdArr($attributesArray);
+
 }
