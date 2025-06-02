@@ -24,7 +24,8 @@ class Store{ModuleName}Request extends FormRequest
         return [
             'name' => 'required|unique:{moduleTableName}_language,name',
             'canonical' => 'required|unique:routers,canonical',
-            'language_id' => 'required|integer'
+            'language_id' => 'required|integer',
+            //@'{moduleTableName}_catalouge_id' => 'required'
         ];
     }
 

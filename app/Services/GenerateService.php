@@ -207,7 +207,6 @@ class GenerateService implements GenerateServiceInterface
                 'schema' => $payload['schema_detail'],
                 'tableName' => $moduleName,
                 'moduleName' => $moduleName,
-
             ];
 
             $shemaContent = str_replace('//@', '', $shemaContent);
@@ -340,7 +339,7 @@ class GenerateService implements GenerateServiceInterface
             foreach ($fileRequestName as $key => $val) {
                 $templatePath = base_path("app\\templates\\requests\\$fileTemplateName[$key]");
                 $modulePath = base_path("app\\Http\\Requests\\$val");
-                $this->createFile($optionModule, $templatePath, $modulePath);
+                $this->createFile($optionModule, $templatePath, $modulePath, true);
             }
 
             foreach ($fileCatalougeRequestName as $key => $val) {
@@ -759,9 +758,12 @@ class GenerateService implements GenerateServiceInterface
         return $newContent;
     }
 
-    private function createFile($option, $templatePath, $modulePath)
+    private function createFile($option, $templatePath, $modulePath, $requestFile = false)
     {
         $content = file_get_contents($templatePath);
+        if($requestFile === true){
+            $content = str_replace('//@', '', $content);
+        }
         $newContent = $this->replaceTemplateContent($option, $content);
 
         if (!File::put($modulePath, $newContent)) return false;

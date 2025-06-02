@@ -25,7 +25,9 @@ class Update{ModuleName}Request extends FormRequest
         return [
             'name' => 'required|unique:{moduleTableName}_language,name,' . $this->id . ',{moduleTableName}_id',
             'canonical' => 'required|unique:routers,canonical,' . $this->id . ',module_id',
-            'language_id' => 'required|integer'
+            'language_id' => 'required|integer',
+            //@'{moduleTableName}_catalouge_id' => 'required'
+
         ];
     }
 
