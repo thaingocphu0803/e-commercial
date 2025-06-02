@@ -11,7 +11,7 @@
             ? route('post.catalouge.update', $postCatalouge->post_catalouge_id)
             : route('post.catalouge.store');
 
-        $title = isset($postCatalouge) ? __('form.editObject', ['attribute' => __('dashboard.postGroup')]) : __('form.addObject', ['attribute' => __('dashboard.postGroup')]);
+        $title = isset($postCatalouge) ? __('custom.editObject', ['attribute' => __('custom.postGroup')]) : __('custom.addObject', ['attribute' => __('custom.postGroup')]);
 
         $publish = $postCatalouge->publish ?? '';
         $follow = $postCatalouge->follow ?? '';
@@ -39,7 +39,7 @@
                 <div class="col-lg-9">
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5>{{__('form.ObjectInfor', ['attribute'=> __('form.common')])}}</h5>
+                            <h5>{{__('custom.ObjectInfor', ['attribute'=> __('custom.common')])}}</h5>
                             <div class="ibox-content">
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -47,7 +47,7 @@
                                             <x-backend.dashboard.form.input
                                                 inputName="name"
                                                 type="text"
-                                                :labelName="__('dashboard.name')"
+                                                :labelName="__('custom.name')"
                                                 :must="true" rowLength="12"
                                                 :value="$postCatalouge->name ?? ''"
                                             />
@@ -55,7 +55,7 @@
                                             <x-backend.dashboard.form.input
                                                 inputName="description"
                                                 type="text"
-                                                :labelName="__('dashboard.description')"
+                                                :labelName="__('custom.description')"
                                                 rowLength="12"
                                                 :value="$postCatalouge->description ?? ''"
                                                 tag='textarea'
@@ -65,7 +65,7 @@
                                             <x-backend.dashboard.form.input
                                                 inputName="content"
                                                 type="text"
-                                                :labelName="__('form.content')"
+                                                :labelName="__('custom.content')"
                                                 rowLength="12"
                                                 :value="$postCatalouge->content ?? ''"
                                                 tag='textarea'
@@ -83,28 +83,28 @@
 
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5>{{__('form.seoSet')}}</h5>
+                            <h5>{{__('custom.seoSet')}}</h5>
                         </div>
                         <div class="ibox-content">
                             <div class="seo-wrapper flex flex-col gap-10">
                                 <x-backend.dashboard.form.seo
-                                    :labelName="__('form.title')"
+                                    :labelName="__('custom.title')"
                                     inputName='meta_title'
                                     :value="$postCatalouge->meta_title ?? ''"
                                 />
                                 <x-backend.dashboard.form.seo
-                                    :labelName="__('form.keyword')"
+                                    :labelName="__('custom.keyword')"
                                     inputName='meta_keyword'
                                     :value="$postCatalouge->meta_keyword ?? ''"
                                 />
                                 <x-backend.dashboard.form.seo
-                                    :labelName="__('dashboard.description')"
+                                    :labelName="__('custom.description')"
                                     inputName='meta_description'
                                     tag='textarea'
                                     :value="$postCatalouge->meta_description ?? ''"
                                     />
                                 <x-backend.dashboard.form.seo
-                                    :labelName="__('dashboard.canonical')"
+                                    :labelName="__('custom.canonical')"
                                     inputName='canonical'
                                     :must="true"
                                     :value="$postCatalouge->canonical ?? ''"
@@ -117,13 +117,13 @@
                     <div class="ibox">
                         <div class="ibox-title">
                             <h5>
-                                {{__('form.chooseObject', ['attribute' => __('form.parentSection')])}}
+                                {{__('custom.chooseObject', ['attribute' => __('custom.parentSection')])}}
                             </h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
                                 <x-backend.dashboard.form.select
-                                    :labelName="__('form.parentSection')"
+                                    :labelName="__('custom.parentSection')"
                                     name="parent_id"
                                     rowLength="12"
                                     :data="$listNode"
@@ -136,7 +136,7 @@
                     <div class="ibox">
                         <div class="ibox-title">
                             <h5>
-                                {{__('form.chooseObject', ['attribute' => __('dashboard.language')])}}
+                                {{__('custom.chooseObject', ['attribute' => __('custom.language')])}}
                             </h5>
                         </div>
                         <div class="ibox-content">
@@ -144,7 +144,7 @@
                                 <div class="col-lg-12">
                                     <div class="row">
                                         <x-backend.dashboard.form.select
-                                            :labelName="__('dashboard.language')"
+                                            :labelName="__('custom.language')"
                                             name="language_id"
                                             rowLength="12"
                                             :data="$languages"
@@ -160,7 +160,7 @@
                     <div class="ibox">
                         <div class="ibox-title">
                             <h5>
-                                {{__('form.chooseObject', ['attribute' => __('form.postGroupImage')])}}
+                                {{__('custom.chooseObject', ['attribute' => __('custom.postGroupImage')])}}
                             </h5>
                         </div>
                         <div class="ibox-content">
@@ -168,13 +168,13 @@
                                 <div class="col-lg-12">
                                     <x-backend.dashboard.form.upload
                                         rowLength="12"
-                                        :labelName="__('form.postGroupImage')"
+                                        :labelName="__('custom.postGroupImage')"
                                         :value="$postCatalouge->image ?? '' "
                                     />
                                     <img
                                         class="col-lg-12 hidden"
                                         id="img_show"
-                                        :alt="__('form.postGroupImage')"
+                                        :alt="__('custom.postGroupImage')"
                                         height="250px"
                                     >
                                 </div>
@@ -185,7 +185,7 @@
                     <div class="ibox">
                         <div class="ibox-title">
                             <h5>
-                                {{__('form.advanceSet')}}
+                                {{__('custom.advanceSet')}}
                             </h5>
                         </div>
                         <div class="ibox-content">
@@ -194,13 +194,13 @@
                                     <div class="flex gap-10">
                                         <select name="publish" class="form-control  select2">
                                             <option disabled selected>
-                                                {{__('form.chooseObject', ['attribute' => __('table.postGroupStatus')])}}
+                                                {{__('custom.chooseObject', ['attribute' => __('custom.postGroupStatus')])}}
                                             </option>
                                             <option value="1" @selected(old('publish', $publish) == 1)>
-                                                {{__('form.published')}}
+                                                {{__('custom.published')}}
                                             </option>
                                             <option value="2" @selected(old('publish', $publish) == 2)>
-                                                {{__('form.private')}}
+                                                {{__('custom.private')}}
                                             </option>
                                         </select>
                                     </div>
@@ -208,13 +208,13 @@
                                     <div class="flex gap-10">
                                         <select name="follow" class="form-control  select2">
                                             <option disabled selected>
-                                                 {{__('form.chooseObject', ['attribute' => __('form.postGroupVision')])}}
+                                                 {{__('custom.chooseObject', ['attribute' => __('custom.postGroupVision')])}}
                                             </option>
                                             <option value="1" @selected(old('follow', $follow) == 1)>
-                                                {{__('form.follow')}}
+                                                {{__('custom.follow')}}
                                             </option>
                                             <option value="2" @selected(old('follow', $follow) == 2)>
-                                                {{__('form.unfollow')}}
+                                                {{__('custom.unfollow')}}
                                             </option>
                                         </select>
                                     </div>
@@ -226,10 +226,10 @@
             </div>
             <div class="flex flex-space-between">
                 <a href="{{ route('post.catalouge.index') }}" class="btn btn-success mb-20 ">
-                    {{__('form.cancel')}}
+                    {{__('custom.cancel')}}
                 </a>
                 <button type="submit" class="btn btn-primary mb-20 ">
-                    {{__('form.save')}}
+                    {{__('custom.save')}}
                 </button>
             </div>
     </form>

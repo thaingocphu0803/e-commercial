@@ -4,7 +4,7 @@
     <h2 class="text-capitalize">{{$title}}</h2>
     <ol class="breadcrumb text-capitalize">
         <li>
-            <a href="{{ route('dashboard.index') }}">{{__('dashboard.dashboard')}}</a>
+            <a href="{{ route('dashboard.index') }}">{{__('custom.dashboard')}}</a>
         </li>
         <li class="active">
             <strong>{{$title}}</strong>

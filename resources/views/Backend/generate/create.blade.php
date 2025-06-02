@@ -2,8 +2,8 @@
 
     @php
         $url = isset($generate) ? route('generate.update', $generate->id) : route('generate.store');
-        $title = isset($generate) ? __('form.editObject', ['attribute' => __('dashboard.generate')]) : __('form.addObject', ['attribute' => __('dashboard.generate')]);
-        $action = isset($generate) ? __('form.edit') : __('form.create');
+        $title = isset($generate) ? __('custom.editObject', ['attribute' => __('custom.generate')]) : __('custom.addObject', ['attribute' => __('custom.generate')]);
+        $action = isset($generate) ? __('custom.edit') : __('custom.create');
     @endphp
 
     <x-backend.dashboard.breadcrumb :title="$title" />
@@ -27,10 +27,10 @@
             <div class="row">
                 <div class="col-lg-5">
                     <h3 class="panel-title">
-                        {{__('form.ObjectInfor', ['attribute'=> __('form.common')])}}
+                        {{__('custom.ObjectInfor', ['attribute'=> __('custom.common')])}}
                     </h3>
                     <div class="pannel-description">
-                        {{__('form.enterLanguage', ['attribute' => $action]) }}
+                        {{__('custom.enterLanguage', ['attribute' => $action]) }}
                     </div>
 
                 </div>
@@ -38,7 +38,7 @@
                     <div class="ibox">
                         <div class="ibox-title">
                             <h5>
-                                {{__('form.ObjectInfor', ['attribute'=> __('form.common')])}}
+                                {{__('custom.ObjectInfor', ['attribute'=> __('custom.common')])}}
                             </h5>
                         </div>
                         <div class="ibox-content">
@@ -46,7 +46,7 @@
                                 <x-backend.dashboard.form.input
                                     inputName="name"
                                     type="text"
-                                    :labelName="__('dashboard.modelName')"
+                                    :labelName="__('custom.modelName')"
                                     :must="true"
                                     :value="$generate->name ?? ''"
                                     placeholder="example: product"
@@ -55,7 +55,7 @@
                                 <x-backend.dashboard.form.input
                                 inputName="module_icon"
                                 type="text"
-                                :labelName="__('dashboard.moduleIcon')"
+                                :labelName="__('custom.moduleIcon')"
                                 :must="true"
                                 :value="$generate->module ?? ''"
                                 placeholder="example: fa-icon"
@@ -65,15 +65,15 @@
                                 <div class="col-lg-6">
                                     <div class="form-row">
                                         <label for="module_type" class="control-label text-left">
-                                            {{__('form.typeModule')}}
+                                            {{__('custom.typeModule')}}
                                             <span class="text-danger">*</span>
                                         </label>
 
                                         <select name="module_type" id="module_type" class="select2 form-control">
-                                            <option disabled selected>{{__('form.chooseObject', ['attribute' => __('form.module')])}}</option>
-                                            <option value="1" @selected(old('module_type') == 1)>{{__('form.moduleSection')}}</option>
-                                            <option value="2" @selected(old('module_type') == 2)>{{__('form.moduleDetail')}}</option>
-                                            <option value="3" @selected(old('module_type') == 3)>{{__('form.moduleOther')}}</option>
+                                            <option disabled selected>{{__('custom.chooseObject', ['attribute' => __('custom.module')])}}</option>
+                                            <option value="1" @selected(old('module_type') == 1)>{{__('custom.moduleSection')}}</option>
+                                            <option value="2" @selected(old('module_type') == 2)>{{__('custom.moduleDetail')}}</option>
+                                            <option value="3" @selected(old('module_type') == 3)>{{__('custom.moduleOther')}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -87,10 +87,10 @@
             <div class="row">
                 <div class="col-lg-5">
                     <h3 class="panel-title">
-                        {{__('form.ObjectInfor', ['attribute'=> __('form.common')])}}
+                        {{__('custom.ObjectInfor', ['attribute'=> __('custom.common')])}}
                     </h3>
                     <div class="pannel-description">
-                        {{__('form.enterLanguage', ['attribute' => $action]) }}
+                        {{__('custom.enterLanguage', ['attribute' => $action]) }}
                     </div>
 
                 </div>
@@ -98,7 +98,7 @@
                     <div class="ibox">
                         <div class="ibox-title">
                             <h5>
-                                {{__('form.ObjectInfor', ['attribute'=> __('form.schemaCatalouge')])}}
+                                {{__('custom.ObjectInfor', ['attribute'=> __('custom.schemaCatalouge')])}}
                             </h5>
                         </div>
                         <div class="ibox-content">
@@ -106,7 +106,7 @@
                                 <x-backend.dashboard.form.input
                                     inputName="schema_catalouge"
                                     type="text"
-                                    :labelName="__('dashboard.schemaCatalouge')"
+                                    :labelName="__('custom.schemaCatalouge')"
                                     :must="true"
                                     :value="$generate->name ?? ''"
                                     rowLength="12"
@@ -119,7 +119,7 @@
                     <div class="ibox">
                         <div class="ibox-title">
                             <h5>
-                                {{__('form.ObjectInfor', ['attribute'=> __('form.schemaDetail')])}}
+                                {{__('custom.ObjectInfor', ['attribute'=> __('custom.schemaDetail')])}}
                             </h5>
                         </div>
                         <div class="ibox-content">
@@ -127,7 +127,7 @@
                                 <x-backend.dashboard.form.input
                                     inputName="schema_detail"
                                     type="text"
-                                    :labelName="__('dashboard.schemaDetail')"
+                                    :labelName="__('custom.schemaDetail')"
                                     :must="true"
                                     :value="$generate->name ?? ''"
                                     rowLength="12"
@@ -139,10 +139,10 @@
                     </div>
                     <div class="flex flex-space-between">
                         <a href="{{route('generate.index')}}" class="btn btn-success mb-20 ">
-                            {{__('form.cancel')}}
+                            {{__('custom.cancel')}}
                         </a>
                         <button type="submit" class="btn btn-primary mb-20 ">
-                            {{__('form.save')}}
+                            {{__('custom.save')}}
                         </button>
                     </div>
                 </div>

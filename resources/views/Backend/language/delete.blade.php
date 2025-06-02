@@ -2,7 +2,7 @@
 
 
     <x-backend.dashboard.breadcrumb
-        :title="__('form.delObject', ['attribute' => __('dashboard.language')])"
+        :title="__('custom.delObject', ['attribute' => __('custom.language')])"
     />
 
     <form action="{{ route('language.destroy', $language->id) }}" method="POST" class="box">
@@ -13,14 +13,14 @@
             <div class="row">
                 <div class="col-lg-5">
                     <h3 class="panel-title text-capitalize">
-                        {{ __('form.ObjectInfor', ['attribute' => __('dashboard.language')]) }}
+                        {{ __('custom.ObjectInfor', ['attribute' => __('custom.language')]) }}
                     </h3>
                     <div class="pannel-description">
-                        {{ __('form.DelQuestion', ['attribute' => __('dashboard.language')]) }}
+                        {{ __('custom.DelQuestion', ['attribute' => __('custom.language')]) }}
                         <span class="text-danger">{{ ' ' . $language->name }}</span>
                     </div>
                     <div class="pannel-description">
-                        {{ __('form.DelNote') }}
+                        {{ __('custom.DelNote') }}
                     </div>
 
                 </div>
@@ -28,10 +28,10 @@
                     <div class="ibox">
                         <div class="ibox-content">
                             <div class="row">
-                                <x-backend.dashboard.form.input inputName="name" type="text" :labelName="__('dashboard.name')"
+                                <x-backend.dashboard.form.input inputName="name" type="text" :labelName="__('custom.name')"
                                     :value="$language->name ?? ''" :disabled="true" />
 
-                                <x-backend.dashboard.form.input inputName="canonical" type="text" :labelName="__('dashboard.canonical')"
+                                <x-backend.dashboard.form.input inputName="canonical" type="text" :labelName="__('custom.canonical')"
                                     :value="$language->canonical ?? ''" :disabled="true" />
 
                             </div>
@@ -41,10 +41,10 @@
                     </div>
                     <div class="flex flex-space-between">
                         <a href="{{ route('language.index') }}" class="btn btn-success mb-20 ">
-                            {{ __('form.cancel') }}
+                            {{ __('custom.cancel') }}
                         </a>
                         <button type="submit" class="btn btn-danger mb-20 ">
-                            {{ __('form.delete') }}
+                            {{ __('custom.delete') }}
                         </button>
                     </div>
 

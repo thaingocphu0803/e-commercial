@@ -21,10 +21,10 @@
             <tr>
 
                 <th><input type="checkbox" class="checkAll check-table" name="input"></th>
-                <th>{{ __('table.name') }}</th>
-                <th class="text-center w-80">{{ __('table.order') }}</th>
-                <th class="text-center">{{ __('table.active') }}</th>
-                <th class="text-center">{{ __('table.action') }}</th>
+                <th>{{ __('custom.name') }}</th>
+                <th class="text-center w-80">{{ __('custom.order') }}</th>
+                <th class="text-center">{{ __('custom.active') }}</th>
+                <th class="text-center">{{ __('custom.action') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="catalouge flex gap-10">
                                     <span
-                                        class="text-danger">{{ __('dashboard.objectGroup', ['object' => __('table.catalouge')]) }}:</span>
+                                        class="text-danger">{{ __('custom.objectGroup', ['attribute' => __('custom.catalouge')]) }}:</span>
                                     @foreach ($product->productCatalouges as $productCatalouge)
                                         <a href="#"
                                             title="">{{ $productCatalouge->languages->pluck('pivot.name')->implode(',') }}</a>

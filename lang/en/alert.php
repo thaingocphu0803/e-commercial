@@ -12,5 +12,4 @@ return [
     'deleteError' => 'Failed to delete :attribute!',
     'permitSuccess' => 'Permited Successfully!',
     'permitError'   => 'Failed to permitted',
-
 ];

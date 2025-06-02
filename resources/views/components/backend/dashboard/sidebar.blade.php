@@ -70,7 +70,7 @@
                     <li>
                         <div class="text-center link-block">
                             <a href="mailbox.html">
-                                <i class="fa fa-envelope"></i> <strong>{{__('dashboard.readAll', [ 'attribute' => 'Message'])}}</strong>
+                                <i class="fa fa-envelope"></i> <strong>{{__('custom.readAll', [ 'attribute' => 'Message'])}}</strong>
                             </a>
                         </div>
                     </li>
@@ -111,7 +111,7 @@
                     <li>
                         <div class="text-center link-block">
                             <a href="notifications.html">
-                                <strong>{{__('dashboard.seeAll', [ 'attribute' => 'Alerts'])}}</strong>
+                                <strong>{{__('custom.seeAll', [ 'attribute' => 'Alerts'])}}</strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </div>
@@ -123,7 +123,7 @@
             <li>
                 <a href="{{ route('auth.logout') }}">
                     <i class="fa fa-sign-out"></i>
-                    {{__('dashboard.logout')}}
+                    {{__('custom.logout')}}
                 </a>
             </li>
             {{-- <li>

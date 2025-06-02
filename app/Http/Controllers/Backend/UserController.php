@@ -56,10 +56,10 @@ class UserController extends Controller
     public function store(StoreUserRequest $request){
         Gate::authorize('modules', 'user.create');
         if($this->userService->create($request)){
-            return redirect()->route('user.index')->with('success', __('alert.addSuccess', ['attribute'=> __('dashboard.member')]));
+            return redirect()->route('user.index')->with('success', __('alert.addSuccess', ['attribute'=> __('custom.member')]));
         }
 
-        return redirect()->route('user.index')->with('error', __('alert.addError', ['attribute'=> __('dashboard.member')]));
+        return redirect()->route('user.index')->with('error', __('alert.addError', ['attribute'=> __('custom.member')]));
     }
 
     public function edit(User $user){
@@ -77,10 +77,10 @@ class UserController extends Controller
     public function update($id, UpdateUserRequest $request){
         Gate::authorize('modules', 'user.update');
         if($this->userService->update($id, $request)){
-            return redirect()->route('user.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('dashboard.member')]));
+            return redirect()->route('user.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('custom.member')]));
         }
 
-        return redirect()->route('user.index')->with('error', __('alert.updateError', ['attribute'=> __('dashboard.member')]));
+        return redirect()->route('user.index')->with('error', __('alert.updateError', ['attribute'=> __('custom.member')]));
     }
 
     public function delete(User $user){
@@ -93,10 +93,10 @@ class UserController extends Controller
     public function destroy($id){
         Gate::authorize('modules', 'user.delete');
         if($this->userService->destroy($id)){
-            return redirect()->route('user.index')->with('success', __('alert.deleteSuccess', ['attribute'=> __('dashboard.member')]));
+            return redirect()->route('user.index')->with('success', __('alert.deleteSuccess', ['attribute'=> __('custom.member')]));
         }
 
-        return redirect()->route('user.index')->with('error', __('alert.deleteError', ['attribute'=> __('dashboard.member')]));
+        return redirect()->route('user.index')->with('error', __('alert.deleteError', ['attribute'=> __('custom.member')]));
     }
 
 }

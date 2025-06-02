@@ -48,9 +48,9 @@ class PostController extends Controller
     {
         Gate::authorize('modules', 'post.create');
         if ($this->postService->create($request)) {
-            return redirect()->route('post.index')->with('success',  __('alert.addSuccess', ['attribute'=> __('dashboard.post')]));
+            return redirect()->route('post.index')->with('success',  __('alert.addSuccess', ['attribute'=> __('custom.post')]));
         }
-        return redirect()->route('post.index')->with('error',  __('alert.addError', ['attribute'=> __('dashboard.post')]));
+        return redirect()->route('post.index')->with('error',  __('alert.addError', ['attribute'=> __('custom.post')]));
     }
 
     public function edit($id)
@@ -72,10 +72,10 @@ class PostController extends Controller
     {
         Gate::authorize('modules', 'post.update');
         if ($this->postService->update($id, $request)) {
-            return redirect()->route('post.index')->with('success',  __('alert.updateSuccess', ['attribute'=> __('dashboard.post')]));
+            return redirect()->route('post.index')->with('success',  __('alert.updateSuccess', ['attribute'=> __('custom.post')]));
         }
 
-        return redirect()->route('post.index')->with('error',  __('alert.updateError', ['attribute'=> __('dashboard.post')]));
+        return redirect()->route('post.index')->with('error',  __('alert.updateError', ['attribute'=> __('custom.post')]));
     }
 
     public function delete($id)
@@ -92,9 +92,9 @@ class PostController extends Controller
     {
         Gate::authorize('modules', 'post.delete');
         if ($this->postService->destroy($id)) {
-            return redirect()->route('post.index')->with('success',  __('alert.deleteSuccess', ['attribute'=> __('dashboard.post')]));
+            return redirect()->route('post.index')->with('success',  __('alert.deleteSuccess', ['attribute'=> __('custom.post')]));
         }
 
-        return redirect()->route('post.index')->with('error',  __('alert.deleteError', ['attribute'=> __('dashboard.post')]));
+        return redirect()->route('post.index')->with('error',  __('alert.deleteError', ['attribute'=> __('custom.post')]));
     }
 }

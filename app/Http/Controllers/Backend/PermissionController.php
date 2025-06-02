@@ -40,9 +40,9 @@ class PermissionController extends Controller
     {
         Gate::authorize('modules', 'permission.create');
         if ($this->permissionService->create($request)) {
-            return redirect()->route('permission.index')->with('success', __('alert.addSuccess', ['attribute'=> __('dashboard.permission')]));
+            return redirect()->route('permission.index')->with('success', __('alert.addSuccess', ['attribute'=> __('custom.permission')]));
         }
-        return redirect()->route('permission.index')->with('error', __('alert.addError', ['attribute'=> __('dashboard.permission')]));
+        return redirect()->route('permission.index')->with('error', __('alert.addError', ['attribute'=> __('custom.permission')]));
     }
 
     public function edit(Permission $permission)
@@ -57,10 +57,10 @@ class PermissionController extends Controller
     {
         Gate::authorize('modules', 'permission.update');
         if ($this->permissionService->update($id, $request)) {
-            return redirect()->route('permission.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('dashboard.permission')]));
+            return redirect()->route('permission.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('custom.permission')]));
         }
 
-        return redirect()->route('permission.index')->with('error', __('alert.updateError', ['attribute'=> __('dashboard.permission')]));
+        return redirect()->route('permission.index')->with('error', __('alert.updateError', ['attribute'=> __('custom.permission')]));
     }
 
     public function delete(Permission $permission)
@@ -75,9 +75,9 @@ class PermissionController extends Controller
     {
         Gate::authorize('modules', 'permission.delete');
         if ($this->permissionService->destroy($id)) {
-            return redirect()->route('permission.index')->with('success', __('alert.deleteSuccess', ['attribute'=> __('dashboard.permission')]));
+            return redirect()->route('permission.index')->with('success', __('alert.deleteSuccess', ['attribute'=> __('custom.permission')]));
         }
 
-        return redirect()->route('permission.index')->with('error', __('alert.deleteError', ['attribute'=> __('dashboard.permission')]));
+        return redirect()->route('permission.index')->with('error', __('alert.deleteError', ['attribute'=> __('custom.permission')]));
     }
 }

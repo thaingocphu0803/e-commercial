@@ -43,9 +43,9 @@ class UserCatalougeController extends Controller
     {
         Gate::authorize('modules', 'user.catalouge.create');
         if ($this->userCatalougeService->create($request)) {
-            return redirect()->route('user.catalouge.index')->with('success', __('alert.addSuccess', ['attribute' => __('dashboard.memberGroup')]));
+            return redirect()->route('user.catalouge.index')->with('success', __('alert.addSuccess', ['attribute' => __('custom.memberGroup')]));
         }
-        return redirect()->route('user.catalouge.index')->with('error', __('alert.addError', ['attribute' => __('dashboard.memberGroup')]));
+        return redirect()->route('user.catalouge.index')->with('error', __('alert.addError', ['attribute' => __('custom.memberGroup')]));
     }
 
     public function edit(UserCatalouge $userCatalouge)
@@ -60,10 +60,10 @@ class UserCatalougeController extends Controller
     {
         Gate::authorize('modules', 'user.catalouge.update');
         if ($this->userCatalougeService->update($id, $request)) {
-            return redirect()->route('user.catalouge.index')->with('success', __('alert.updateSuccess', ['attribute' => __('dashboard.memberGroup')]));
+            return redirect()->route('user.catalouge.index')->with('success', __('alert.updateSuccess', ['attribute' => __('custom.memberGroup')]));
         }
 
-        return redirect()->route('user.catalouge.index')->with('error', __('alert.updateError', ['attribute' => __('dashboard.memberGroup')]));
+        return redirect()->route('user.catalouge.index')->with('error', __('alert.updateError', ['attribute' => __('custom.memberGroup')]));
     }
 
     public function delete(UserCatalouge $userCatalouge)
@@ -78,10 +78,10 @@ class UserCatalougeController extends Controller
     {
         Gate::authorize('modules', 'user.catalouge.delete');
         if ($this->userCatalougeService->destroy($id)) {
-            return redirect()->route('user.catalouge.index')->with('success', __('alert.deleteSuccess', ['attribute' => __('dashboard.memberGroup')]));
+            return redirect()->route('user.catalouge.index')->with('success', __('alert.deleteSuccess', ['attribute' => __('custom.memberGroup')]));
         }
 
-        return redirect()->route('user.catalouge.index')->with('error', __('alert.deleteError', ['attribute' => __('dashboard.memberGroup')]));
+        return redirect()->route('user.catalouge.index')->with('error', __('alert.deleteError', ['attribute' => __('custom.memberGroup')]));
     }
 
     public function permission()

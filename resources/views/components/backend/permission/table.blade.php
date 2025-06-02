@@ -21,9 +21,9 @@
             <tr>
 
                 <th><input type="checkbox" class="checkAll check-table" name="input"></th>
-                <th>{{ __('table.name') }}</th>
-                <th>{{ __('table.canonical') }}</th>
-                <th class="text-center">{{ __('table.action') }}</th>
+                <th>{{ __('custom.name') }}</th>
+                <th>{{ __('custom.canonical') }}</th>
+                <th class="text-center">{{ __('custom.action') }}</th>
             </tr>
         </thead>
         <tbody>

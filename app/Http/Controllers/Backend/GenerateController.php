@@ -40,9 +40,9 @@ class GenerateController extends Controller
     {
         Gate::authorize('modules', 'generate.create');
         if ($this->generateService->create($request)) {
-            return redirect()->route('generate.index')->with('success', __('alert.addSuccess', ['attribute'=> __('dashboard.Generate')]));
+            return redirect()->route('generate.index')->with('success', __('alert.addSuccess', ['attribute'=> __('custom.Generate')]));
         }
-        return redirect()->route('generate.index')->with('error', __('alert.addError', ['attribute'=> __('dashboard.Generate')]));
+        return redirect()->route('generate.index')->with('error', __('alert.addError', ['attribute'=> __('custom.Generate')]));
     }
 
     public function edit(Generate $generate)
@@ -57,10 +57,10 @@ class GenerateController extends Controller
     {
         Gate::authorize('modules', 'generate.update');
         if ($this->generateService->update($id, $request)) {
-            return redirect()->route('generate.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('dashboard.Generate')]));
+            return redirect()->route('generate.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('custom.Generate')]));
         }
 
-        return redirect()->route('generate.index')->with('error', __('alert.updateError', ['attribute'=> __('dashboard.Generate')]));
+        return redirect()->route('generate.index')->with('error', __('alert.updateError', ['attribute'=> __('custom.Generate')]));
     }
 
     public function delete(Generate $generate)
@@ -75,9 +75,9 @@ class GenerateController extends Controller
     {
         Gate::authorize('modules', 'generate.delete');
         if ($this->generateService->destroy($id)) {
-            return redirect()->route('generate.index')->with('success', __('alert.deleteSuccess', ['attribute'=> __('dashboard.Generate')]));
+            return redirect()->route('generate.index')->with('success', __('alert.deleteSuccess', ['attribute'=> __('custom.Generate')]));
         }
 
-        return redirect()->route('generate.index')->with('error', __('alert.deleteError', ['attribute'=> __('dashboard.Generate')]));
+        return redirect()->route('generate.index')->with('error', __('alert.deleteError', ['attribute'=> __('custom.Generate')]));
     }
 }

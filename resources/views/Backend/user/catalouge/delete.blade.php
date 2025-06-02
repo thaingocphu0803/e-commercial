@@ -2,7 +2,7 @@
 
 
     <x-backend.dashboard.breadcrumb
-        :title="__('form.delObject', ['attribute'=>__('dashboard.memberGroup')])"
+        :title="__('custom.delObject', ['attribute'=>__('custom.memberGroup')])"
     />
 
     <form action="{{ route('user.catalouge.destroy', $userCatalouge->id) }}" method="POST" class="box">
@@ -13,14 +13,14 @@
             <div class="row">
                 <div class="col-lg-5">
                     <h3 class="panel-title">
-                        {{__('form.ObjectInfor', ['attribute' =>__('dashboard.memberGroup')])}}
+                        {{__('custom.ObjectInfor', ['attribute' =>__('custom.memberGroup')])}}
                     </h3>
                     <div class="pannel-description">
-                        {{__('form.DelQuestion', ['attribute' => __('dashboard.memberGroup')])}}
+                        {{__('custom.DelQuestion', ['attribute' => __('custom.memberGroup')])}}
                         <span class="text-danger">{{ $userCatalouge->name }}</span>
                     </div>
                     <div class="pannel-description">
-                        {{__('form.DelNote')}}
+                        {{__('custom.DelNote')}}
                     </div>
 
                 </div>
@@ -41,10 +41,10 @@
                     </div>
                     <div class="flex flex-space-between">
                         <a href="{{ route('user.catalouge.index') }}" class="btn btn-success mb-20 ">
-                            {{__('form.cancel')}}
+                            {{__('custom.cancel')}}
                         </a>
                         <button type="submit" class="btn btn-danger mb-20 ">
-                            {{__('form.save')}}
+                            {{__('custom.save')}}
                         </button>
                     </div>
 

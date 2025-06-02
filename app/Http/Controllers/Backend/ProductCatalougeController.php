@@ -46,9 +46,9 @@ class ProductCatalougeController extends Controller
     {
         Gate::authorize('modules', 'product.catalouge.create');
         if ($this->productCatalougeService->create($request)) {
-            return redirect()->route('product.catalouge.index')->with('success', __('alert.addSuccess', ['attribute'=> __('dashboard.productCatalouge')]));
+            return redirect()->route('product.catalouge.index')->with('success', __('alert.addSuccess', ['attribute'=> __('custom.productCatalouge')]));
         }
-        return redirect()->route('product.catalouge.index')->with('error', __('alert.addError', ['attribute'=> __('dashboard.productCatalouge')]));
+        return redirect()->route('product.catalouge.index')->with('error', __('alert.addError', ['attribute'=> __('custom.productCatalouge')]));
     }
 
     public function edit($id)
@@ -70,10 +70,10 @@ class ProductCatalougeController extends Controller
     {
         Gate::authorize('modules', 'product.catalouge.update');
         if ($this->productCatalougeService->update($id, $request)) {
-            return redirect()->route('product.catalouge.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('dashboard.productCatalouge')]));
+            return redirect()->route('product.catalouge.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('custom.productCatalouge')]));
         }
 
-        return redirect()->route('product.catalouge.index')->with('error', __('alert.updateError', ['attribute'=> __('dashboard.productCatalouge')]));
+        return redirect()->route('product.catalouge.index')->with('error', __('alert.updateError', ['attribute'=> __('custom.productCatalouge')]));
     }
 
     public function delete($id)
@@ -90,9 +90,9 @@ class ProductCatalougeController extends Controller
     {
         Gate::authorize('modules', 'product.catalouge.delete');
         if ($this->productCatalougeService->destroy($id)) {
-            return redirect()->route('product.catalouge.index')->with('success', __('alert.deleteSuccess', ['attribute'=> __('dashboard.productCatalouge')]));
+            return redirect()->route('product.catalouge.index')->with('success', __('alert.deleteSuccess', ['attribute'=> __('custom.productCatalouge')]));
         }
 
-        return redirect()->route('product.catalouge.index')->with('error', __('alert.deleteError', ['attribute'=> __('dashboard.productCatalouge')]));
+        return redirect()->route('product.catalouge.index')->with('error', __('alert.deleteError', ['attribute'=> __('custom.productCatalouge')]));
     }
 }
