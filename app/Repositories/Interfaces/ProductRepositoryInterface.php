@@ -36,6 +36,8 @@ interface ProductRepositoryInterface
 
     public function updateCatalougePivot($id, $payload = []);
 
+    public function findPivotById($id);
+
     // public function updateByWhereIn($ids, $value);
 
 }

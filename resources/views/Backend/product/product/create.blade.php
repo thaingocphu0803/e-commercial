@@ -68,7 +68,7 @@
 
                     <x-backend.dashboard.album :album="$product->album ?? ''" />
 
-                    <x-backend.dashboard.variant :list-attr="$listAttr" />
+                    <x-backend.dashboard.variant :list-attr="$listAttr" :product="$product ?? ''" />
                     <div class="ibox">
                         <div class="ibox-title">
                             <h5>

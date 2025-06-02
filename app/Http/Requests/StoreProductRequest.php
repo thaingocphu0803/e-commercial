@@ -24,7 +24,8 @@ class StoreProductRequest extends FormRequest
         return [
             'name' => 'required|unique:product_language,name',
             'canonical' => 'required|unique:routers,canonical',
-            'language_id' => 'required|integer'
+            'language_id' => 'required|integer',
+            'product_catalouge_id' => 'required',
         ];
     }
 

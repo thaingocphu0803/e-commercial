@@ -25,7 +25,8 @@ class UpdateProductRequest extends FormRequest
         return [
             'name' => 'required|unique:product_language,name,' . $this->id . ',product_id',
             'canonical' => 'required|unique:routers,canonical,' . $this->id . ',module_id',
-            'language_id' => 'required|integer'
+            'language_id' => 'required|integer',
+            'product_catalouge_id' => 'required',
         ];
     }
 

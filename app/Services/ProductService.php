@@ -4,8 +4,11 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
 use App\Repositories\ProductRepository;
+use App\Repositories\ProductVariantAttrRepository;
+use App\Repositories\ProductVariantRepository;
 use App\Repositories\RouterRepository;
 use App\Services\Interfaces\ProductServiceInterface;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use  Illuminate\Support\Str;
 
@@ -17,11 +20,19 @@ class ProductService implements ProductServiceInterface
 {
     protected   $productRepository;
     protected   $routerRepository;
+    protected   $productVariantRepository;
+    protected   $productVariantAttrRepository;
 
-    public function __construct(ProductRepository $productRepository, RouterRepository $routerRepository)
-    {
+    public function __construct(
+        ProductRepository $productRepository,
+        RouterRepository $routerRepository,
+        ProductVariantRepository $productVariantRepository,
+        ProductVariantAttrRepository $productVariantAttrRepository
+    ) {
         $this->productRepository = $productRepository;
         $this->routerRepository = $routerRepository;
+        $this->productVariantAttrRepository = $productVariantAttrRepository;
+        $this->productVariantRepository = $productVariantRepository;
     }
 
     public function getAll()
@@ -87,15 +98,16 @@ class ProductService implements ProductServiceInterface
 
                 $catalouges = $request->input('catalouge') ?? [];
 
-                array_push( $catalouges, $payloadProduct['product_catalouge_id'] ?? [] );
+                array_push($catalouges, $payloadProduct['product_catalouge_id'] ?? []);
 
-                $payloadCatalouge= array_unique($catalouges);
+                $payloadCatalouge = array_unique($catalouges);
 
                 $this->productRepository->createCatalougePivot($product, $payloadCatalouge);
 
                 $router = $this->getRouterPayload($payloadPivot['canonical'], $product->id);
                 $this->routerRepository->create($router);
 
+                $this->createVariant($product, $request);
             }
 
             DB::commit();
@@ -119,7 +131,7 @@ class ProductService implements ProductServiceInterface
 
             $updated = $this->productRepository->update($id, $payloadProduct);
 
-             if($updated > 0){
+            if ($updated > 0) {
                 $payloadPivot = $request->only($this->getRequestPivot());
 
 
@@ -128,16 +140,24 @@ class ProductService implements ProductServiceInterface
                 $this->productRepository->updateproductLanguage($id, $payloadPivot);
 
                 $catalouges = $request->input('catalouge') ?? [];
-                array_push( $catalouges, $payloadProduct['product_catalouge_id'] );
+                array_push($catalouges, $payloadProduct['product_catalouge_id']);
 
-                $payloadCatalouge= array_unique($catalouges);
+                $payloadCatalouge = array_unique($catalouges);
 
 
                 $this->productRepository->updateCatalougePivot($id, $payloadCatalouge);
 
                 $router = $this->getRouterPayload($payloadPivot['canonical'], $id);
                 $this->routerRepository->update($router);
-             }
+
+                $product = $this->productRepository->findPivotById($id);
+                $product->productVariants->each(function($variant){
+                    $variant->delete();
+                    $variant->attrs()->detach();
+                });
+
+                $this->createVariant($product, $request);
+            }
 
             DB::commit();
 
@@ -224,6 +244,80 @@ class ProductService implements ProductServiceInterface
 
             return false;
         }
+    }
+
+    private function combineAttributes($attributes = [], $index = 0)
+    {
+        if ($index == count($attributes)) return [[]];
+
+        $subCombines = $this->combineAttributes($attributes, $index + 1);
+
+        $combines = [];
+
+        foreach ($attributes[$index] as $key => $val) {
+            foreach ($subCombines as $keySub => $valSub) {
+                $combines[] = array_merge([$val], $valSub);
+            }
+        }
+
+        return $combines;
+    }
+
+    public function createVariant($product, $request)
+    {
+        $payload = $request->only(['variant', 'attr', 'attributes', 'attr-catalouge']);
+        $variant = $this->createVariantArray($payload);
+        $variants = $product->productVariants()->createMany($variant);
+        $variantIds = $variants->pluck('id');
+        $variantAttr = $this->createProductVariantAttrArray($variantIds, $payload['attributes']);
+
+        $this->productVariantAttrRepository->createBash($variantAttr);
+    }
+
+    public function createVariantArray($payload = []): array
+    {
+        $attrCatalouge = implode('-', $payload['attr-catalouge']);
+
+        if (isset($payload['variant']['sku']) && count($payload['variant']['sku'])) {
+            foreach ($payload['variant']['sku'] as $key => $val) {
+                $variant[] = [
+                    'user_id' => Auth::id(),
+                    'code' => ($payload['attr']['id'][$key]) ?? '',
+                    'name' => $payload['attr']['name'][$key],
+                    'quantity' => ($payload['variant']['quantity'][$key]) ?? '',
+                    'sku' => $val,
+                    'price' => ($payload['variant']['price'][$key]) ?? '',
+                    'barcode' => ($payload['variant']['barcode'][$key]) ?? '',
+                    'filename' => ($payload['variant']['filename'][$key]) ?? '',
+                    'url' => ($payload['variant']['url'][$key]) ?? '',
+                    'album' => ($payload['variant']['album'][$key]) ?? '',
+                    'attr_catalouge' => $attrCatalouge,
+                ];
+            }
+        }
+
+        return $variant;
+    }
+
+    public function createProductVariantAttrArray($variantIds, $payload): array
+    {
+
+        $attributeCombines = $this->combineAttributes(array_values($payload));
+        $variantAttr = [];
+        if (count($variantIds) && count($attributeCombines)) {
+            foreach ($variantIds as $key => $id) {
+                foreach ($attributeCombines[$key] as $attr) {
+                    $variantAttr[] = [
+                        'product_variant_id' => $id,
+                        'attr_id' => $attr,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                    ];
+                }
+            }
+        }
+
+        return $variantAttr;
     }
 
     public function getRequestPost()

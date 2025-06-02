@@ -32,10 +32,40 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function findById($id)
     {
-        $product = Product::with('languages', 'productCatalouges')->findOrFail($id);
+        $product = Product::with([
+            'languages',
+            'productCatalouges',
+            'productVariants' => function ($q) {
+                $q->with(['attrs' => function ($q) {
+                    $q->with(['attrLanguage']);
+                }]);
+            }
+        ])->findOrFail($id);
+
+
         if ($product->languages->isEmpty()) {
             return false;
         }
+
+        $attr_catalouge = explode('-', $product->productVariants->first()->attr_catalouge);
+        foreach ($product->productVariants as $variant) {
+            $attr = explode('-', $variant->code);
+            foreach($attr_catalouge as $key => $val){
+                $attributes[$val][] = $attr[$key];
+            }
+            $detail['quantity'][] = $variant->quantity;
+            $detail['sku'][] = $variant->sku;
+            $detail['price'][] = $variant->price;
+            $detail['barcode'][] = $variant->barcode;
+            $detail['filename'][] = $variant->filename;
+            $detail['url'][] = $variant->url;
+            $detail['album'][] = $variant->album;
+        }
+
+        foreach ($attributes as $key => $val){
+            $attributes[$key] = array_values((array_unique($val)));
+        }
+
         $pivot = $product->languages->first()->pivot;
         $pivot['product_catalouge_id'] = $product->product_catalouge_id;
         $pivot['publish'] = $product->publish;
@@ -43,9 +73,29 @@ class ProductRepository implements ProductRepositoryInterface
         $pivot['image'] = $product->image;
         $pivot['album'] = $product->album;
         $pivot['catalouges'] = $product->productCatalouges
-                                ->pluck('pivot.product_catalouge_id')
-                                ->toArray();
+            ->pluck('pivot.product_catalouge_id')
+            ->toArray();
+
+        $pivot['variants'] = [
+            'attr_catalouge' => $attr_catalouge,
+            'attributes' => $attributes,
+            'detail' => $detail,
+
+        ];
+
         return  $pivot;
+    }
+
+    public function findPivotById($id){
+        return Product::with([
+            'languages',
+            'productCatalouges',
+            'productVariants' => function ($q) {
+                $q->with(['attrs' => function ($q) {
+                    $q->with(['attrLanguage']);
+                }]);
+            }
+        ])->findOrFail($id);
     }
 
 
@@ -63,14 +113,14 @@ class ProductRepository implements ProductRepositoryInterface
             'products.publish as publish',
             'products.order as order'
         )
-        ->join('product_language as pl', 'pl.product_id', '=', 'products.id')
-        ->join('product_catalouge_product as pcp', 'pcp.product_id', '=', 'products.id')
-        ->keyword($keyword ?? null)
-        ->publish($publish ?? null);
+            ->join('product_language as pl', 'pl.product_id', '=', 'products.id')
+            ->join('product_catalouge_product as pcp', 'pcp.product_id', '=', 'products.id')
+            ->keyword($keyword ?? null)
+            ->publish($publish ?? null);
 
-        if(!empty($product_catalouge_id)){
+        if (!empty($product_catalouge_id)) {
             $catalouges = $this->getDescendantsAndSelf($product_catalouge_id);
-            if(!empty($catalouges)){
+            if (!empty($catalouges)) {
                 $query->WhereIn('products.product_catalouge_id', $catalouges);
             }
         }
@@ -85,7 +135,7 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function create($payload)
     {
-            return Product::create($payload);
+        return Product::create($payload);
     }
 
     public function createLanguagePivot($model, $payload = [])
