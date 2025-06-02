@@ -1,9 +1,9 @@
-            <x-backend.dashboard.nav.module icon='{moduleIcon}' :title="__('dashboard.managerObject', ['object' => __('dashboard.{moduleName}')])">
+            <x-backend.dashboard.nav.module icon='{moduleIcon}' :title="__('custom.managerObject', ['attribute' => __('custom.{moduleName}')])">
                 @can('modules', '{moduleName}.index')
                     <li>
                         <a class="text-capitalize"
                             href="/{moduleName}/index">
-                            {{ __('dashboard.{moduleName}') }}
+                            {{ __('custom.{moduleName}') }}
                         </a>
                     </li>
                 @endcan
@@ -12,7 +12,7 @@
                     <li>
                         <a class="text-capitalize"
                             href="/{moduleName}/catalouge/index">
-                            {{ __('dashboard.objectGroup', ['object' => __('dashboard.{moduleName}')]) }}
+                            {{ __('custom.objectGroup', ['attribute' => __('custom.{moduleName}')]) }}
                         </a>
                     </li>
                 @endcan

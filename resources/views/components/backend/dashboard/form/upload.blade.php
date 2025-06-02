@@ -10,7 +10,7 @@
             {{ $labelName }}
         </label>
         <button class="btn form-control bg-silver text-capitalize" type="button" id="upload_widget">
-            {{__('dashboard.choose') .' '.$labelName .' '. __('dashboard.toUpload')}}</button>
+            {{__('custom.choose') .' '.$labelName .' '. __('custom.toUpload')}}</button>
         <input type="text" class="hidden" name="image" id="image" value="{{ old('image', $value) }}">
         <p class="form-controll">
             <a href="{{ old('image', $value) ? base64_decode(old('image', $value)) : '' }}"

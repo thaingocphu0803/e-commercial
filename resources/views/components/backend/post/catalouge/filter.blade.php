@@ -13,7 +13,7 @@
                     <select name="perpage" class="form-control perpage filter ">
                         @for ($i = 10; $i <= 100; $i += 10)
                             <option value={{ $i }} @selected($perpage == $i)>
-                                {{ $i . ' ' . __('table.records') }}
+                                {{ $i . ' ' . __('custom.records') }}
                             </option>
                         @endfor
                     </select>
@@ -22,13 +22,13 @@
                 <div class="flex gap-10">
                     <select name="publish" class="form-control  select2">
                         <option value="0" selected>
-                            {{ __('form.chooseObject', ['attribute' => __('table.postGroupStatus')]) }}
+                            {{ __('custom.chooseObject', ['attribute' => __('custom.postGroupStatus')]) }}
                         </option>
                         <option value="1" @selected(request('publish') == 1)>
-                            {{ __('table.published') }}
+                            {{ __('custom.published') }}
                         </option>
                         <option value="2" @selected(request('publish') == 2)>
-                            {{ __('table.private') }}
+                            {{ __('custom.private') }}
                         </option>
                     </select>
                 </div>
@@ -37,11 +37,11 @@
                     <div class="input-group">
                         <input class="form-control" type="text" name="keyword"
                             value="{{ request('keyword') ?? old('keyword') }}"
-                            placeholder="{{ __('table.searchBy', ['attribute' => __('table.name')]) }}...">
+                            placeholder="{{ __('custom.searchBy', ['attribute' => __('custom.name')]) }}...">
 
                         <span class="input-group-btn">
                             <button class="btn btn-primary search-btn" type="submit">
-                                {{ __('table.search') }}
+                                {{ __('custom.search') }}
                             </button>
                         </span>
                     </div>
@@ -51,7 +51,7 @@
             @can('modules', 'post.catalouge.create')
                 <a href="{{ route('post.catalouge.create') }}" class="btn btn-danger">
                     <i class="fa fa-plus">
-                        {{ __('table.addObject', ['attribute' => __('dashboard.postGroup')]) }}
+                        {{ __('custom.addObject', ['attribute' => __('custom.postGroup')]) }}
                     </i>
                 </a>
             @endcan

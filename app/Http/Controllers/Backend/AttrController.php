@@ -49,9 +49,9 @@ class AttrController extends Controller
     {
         Gate::authorize('modules', 'attr.create');
         if ($this->attrService->create($request)) {
-            return redirect()->route('attr.index')->with('success',  __('alert.addSuccess', ['attribute'=> __('dashboard.attr')]));
+            return redirect()->route('attr.index')->with('success',  __('alert.addSuccess', ['attribute'=> __('custom.attr')]));
         }
-        return redirect()->route('attr.index')->with('error',  __('alert.addError', ['attribute'=> __('dashboard.attr')]));
+        return redirect()->route('attr.index')->with('error',  __('alert.addError', ['attribute'=> __('custom.attr')]));
     }
 
     public function edit($id)
@@ -73,10 +73,10 @@ class AttrController extends Controller
     {
         Gate::authorize('modules', 'attr.update');
         if ($this->attrService->update($id, $request)) {
-            return redirect()->route('attr.index')->with('success',  __('alert.updateSuccess', ['attribute'=> __('dashboard.attr')]));
+            return redirect()->route('attr.index')->with('success',  __('alert.updateSuccess', ['attribute'=> __('custom.attr')]));
         }
 
-        return redirect()->route('attr.index')->with('error',  __('alert.updateError', ['attribute'=> __('dashboard.attr')]));
+        return redirect()->route('attr.index')->with('error',  __('alert.updateError', ['attribute'=> __('custom.attr')]));
     }
 
     public function delete($id)
@@ -93,9 +93,9 @@ class AttrController extends Controller
     {
         Gate::authorize('modules', 'attr.delete');
         if ($this->attrService->destroy($id)) {
-            return redirect()->route('attr.index')->with('success',  __('alert.deleteSuccess', ['attribute'=> __('dashboard.attr')]));
+            return redirect()->route('attr.index')->with('success',  __('alert.deleteSuccess', ['attribute'=> __('custom.attr')]));
         }
 
-        return redirect()->route('attr.index')->with('error',  __('alert.deleteError', ['attribute'=> __('dashboard.attr')]));
+        return redirect()->route('attr.index')->with('error',  __('alert.deleteError', ['attribute'=> __('custom.attr')]));
     }
 }

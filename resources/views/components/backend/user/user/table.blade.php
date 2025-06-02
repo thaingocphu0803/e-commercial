@@ -21,12 +21,12 @@
             <tr>
 
                 <th><input type="checkbox" class="checkAll check-table" name="input"></th>
-                <th class="avt-col">{{ __('table.avatar') }}</th>
-                <th>{{ __('table.information') }}</th>
-                <th>{{ __('table.address') }}</th>
-                <th class="text-center">{{ __('table.group') }}</th>
-                <th class="text-center">{{ __('table.active') }}</th>
-                <th class="text-center">{{ __('table.action') }}</th>
+                <th class="avt-col">{{ __('custom.avatar') }}</th>
+                <th>{{ __('custom.information') }}</th>
+                <th>{{ __('custom.address') }}</th>
+                <th class="text-center">{{ __('custom.group') }}</th>
+                <th class="text-center">{{ __('custom.active') }}</th>
+                <th class="text-center">{{ __('custom.action') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -40,36 +40,36 @@
                         @endif
                     </td>
                     <td>
-                        <div class="user-information text-capitalize"><strong>{{ __('table.fullname') }}</strong>:
+                        <div class="user-information text-capitalize"><strong>{{ __('custom.fullname') }}</strong>:
                             {{ $user->name }}
                         </div>
-                        <div class="user-information"><strong>{{ __('table.email') }}</strong>: {{ $user->email }}
+                        <div class="user-information"><strong>{{ __('custom.email') }}</strong>: {{ $user->email }}
                         </div>
-                        <div class="user-information"><strong>{{ __('table.phone') }}</strong>: {{ $user->phone }}
+                        <div class="user-information"><strong>{{ __('custom.phone') }}</strong>: {{ $user->phone }}
                         </div>
                     </td>
                     <td>
                         @if (optional($user->province)->name)
                             <div class="user-address">
-                                <strong>{{ __('table.city') }}</strong>{{ $user->province->name }}
+                                <strong>{{ __('custom.city') }}</strong>{{ $user->province->name }}
                             </div>
                         @endif
 
                         @if (optional($user->district)->name)
                             <div class="user-address">
-                                <strong>{{ __('table.district') }}</strong>{{ $user->district->name }}
+                                <strong>{{ __('custom.district') }}</strong>{{ $user->district->name }}
                             </div>
                         @endif
 
                         @if (optional($user->ward)->name)
                             <div class="user-address">
-                                <strong>{{ __('table.ward') }}</strong>{{ $user->ward->name }}
+                                <strong>{{ __('custom.ward') }}</strong>{{ $user->ward->name }}
                             </div>
                         @endif
 
                         @if ($user->address)
                             <div class="user-address">
-                                <strong>{{ __('table.address') }}</strong>{{ $user->address }}
+                                <strong>{{ __('custom.address') }}</strong>{{ $user->address }}
                             </div>
                         @endif
                     </td>

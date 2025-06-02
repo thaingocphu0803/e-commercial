@@ -18,7 +18,7 @@
         <select name="{{ $name }}[]" id="{{ $name }}" class="form-control select2" multiple>
 
             @if (empty(old($name, $value)))
-                <option selected disabled>{{__('dashboard.choose').' '.$labelName }}</option>
+                <option selected disabled>{{__('custom.choose').' '.$labelName }}</option>
             @endif
 
             @if (!empty($data))

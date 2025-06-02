@@ -47,9 +47,9 @@ class PostCatalougeController extends Controller
     {
         Gate::authorize('modules', 'post.catalouge.create');
         if ($this->postCatalougeService->create($request)) {
-            return redirect()->route('post.catalouge.index')->with('success', __('alert.addSuccess', ['attribute'=> __('dashboard.postGroup')]));
+            return redirect()->route('post.catalouge.index')->with('success', __('alert.addSuccess', ['attribute'=> __('custom.postGroup')]));
         }
-        return redirect()->route('post.catalouge.index')->with('error', __('alert.addError', ['attribute'=> __('dashboard.postGroup')]));
+        return redirect()->route('post.catalouge.index')->with('error', __('alert.addError', ['attribute'=> __('custom.postGroup')]));
     }
 
     public function edit($id)
@@ -71,10 +71,10 @@ class PostCatalougeController extends Controller
     {
         Gate::authorize('modules', 'post.catalouge.update');
         if ($this->postCatalougeService->update($id, $request)) {
-            return redirect()->route('post.catalouge.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('dashboard.postGroup')]));
+            return redirect()->route('post.catalouge.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('custom.postGroup')]));
         }
 
-        return redirect()->route('post.catalouge.index')->with('error', __('alert.updateError', ['attribute'=> __('dashboard.postGroup')]));
+        return redirect()->route('post.catalouge.index')->with('error', __('alert.updateError', ['attribute'=> __('custom.postGroup')]));
     }
 
     public function delete($id)
@@ -91,9 +91,9 @@ class PostCatalougeController extends Controller
     {
         Gate::authorize('modules', 'post.catalouge.delete');
         if ($this->postCatalougeService->destroy($id)) {
-            return redirect()->route('post.catalouge.index')->with('success', __('alert.deleteSuccess', ['attribute'=> __('dashboard.postGroup')]));
+            return redirect()->route('post.catalouge.index')->with('success', __('alert.deleteSuccess', ['attribute'=> __('custom.postGroup')]));
         }
 
-        return redirect()->route('post.catalouge.index')->with('error', __('alert.deleteError', ['attribute'=> __('dashboard.postGroup')]));
+        return redirect()->route('post.catalouge.index')->with('error', __('alert.deleteError', ['attribute'=> __('custom.postGroup')]));
     }
 }

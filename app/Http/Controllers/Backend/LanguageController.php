@@ -40,9 +40,9 @@ class LanguageController extends Controller
     {
         Gate::authorize('modules', 'language.create');
         if ($this->languageService->create($request)) {
-            return redirect()->route('language.index')->with('success', __('alert.addSuccess', ['attribute'=> __('dashboard.language')]));
+            return redirect()->route('language.index')->with('success', __('alert.addSuccess', ['attribute'=> __('custom.language')]));
         }
-        return redirect()->route('language.index')->with('error', __('alert.addError', ['attribute'=> __('dashboard.language')]));
+        return redirect()->route('language.index')->with('error', __('alert.addError', ['attribute'=> __('custom.language')]));
     }
 
     public function edit(Language $language)
@@ -57,10 +57,10 @@ class LanguageController extends Controller
     {
         Gate::authorize('modules', 'language.update');
         if ($this->languageService->update($id, $request)) {
-            return redirect()->route('language.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('dashboard.language')]));
+            return redirect()->route('language.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('custom.language')]));
         }
 
-        return redirect()->route('language.index')->with('error', __('alert.updateError', ['attribute'=> __('dashboard.language')]));
+        return redirect()->route('language.index')->with('error', __('alert.updateError', ['attribute'=> __('custom.language')]));
     }
 
     public function delete(Language $language)
@@ -75,10 +75,10 @@ class LanguageController extends Controller
     {
         Gate::authorize('modules', 'language.delete');
         if ($this->languageService->destroy($id)) {
-            return redirect()->route('language.index')->with('success', __('alert.deleteSuccess', ['attribute'=> __('dashboard.language')]));
+            return redirect()->route('language.index')->with('success', __('alert.deleteSuccess', ['attribute'=> __('custom.language')]));
         }
 
-        return redirect()->route('language.index')->with('error', __('alert.deleteError', ['attribute'=> __('dashboard.language')]));
+        return redirect()->route('language.index')->with('error', __('alert.deleteError', ['attribute'=> __('custom.language')]));
     }
 
     public function changeCurrent($canonical){

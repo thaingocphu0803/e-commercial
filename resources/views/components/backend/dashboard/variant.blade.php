@@ -1,7 +1,7 @@
 {{-- @dd($product->variants['attributes']) --}}
 <div class="ibox variant-box">
     <div class="ibox-title">
-        <h5>{{ __('form.variant') }}</h5>
+        <h5>{{ __('custom.variant') }}</h5>
     </div>
     <div class="ibox-content">
         <div class="row">
@@ -10,7 +10,7 @@
                     <input class="variantCheckbox-input" type="checkbox" value="1" name="accept" id="variantCheckbox"
                         {{ (old('accept') == 1) || (isset($product->variants) && count($product->variants['attributes']) > 0) ? 'checked' : '' }}>
                     <label class="variantCheckbox-label" for="variantCheckbox">
-                        {{ __('form.objectMoreVarian', ['attribute' => __('dashboard.product')]) }}
+                        {{ __('custom.objectMoreVarian', ['attribute' => __('custom.product')]) }}
                     </label>
                 </div>
             </div>
@@ -18,10 +18,10 @@
         <div id="variant-wrapper" class="{{ (old('accept') == 1) || (isset($product->variants) && count($product->variants['attributes']) > 0) ? '' : 'hidden' }}">
             <div class="row mt-20">
                 <div class="col-lg-3">
-                    <div class="attribute-title">{{ __('form.chooseAttr') }}</div>
+                    <div class="attribute-title">{{ __('custom.chooseAttr') }}</div>
                 </div>
                 <div class="col-lg-9">
-                    <div class="attribute-title">{{ __('form.chooseAttrVal') }}</div>
+                    <div class="attribute-title">{{ __('custom.chooseAttrVal') }}</div>
                 </div>
             </div>
             <div id="variant-body">
@@ -32,7 +32,7 @@
                                 <div class="attribute-catalouge">
                                     <select data-prev="0" name="attr-catalouge[]"
                                         class="choose-attribute select2-play">
-                                        <option value="" disabled selected>{{ __('form.chooseAttribute') }}
+                                        <option value="" disabled selected>{{ __('custom.chooseAttribute') }}
                                         </option>
                                         @foreach ($listAttr as $attr)
                                             <option {{ $attrId == $attr->id ? 'selected' : '' }}
@@ -62,7 +62,7 @@
             <div class="mt-20">
                 <button id="add-variant-btn" type="button" class="btn btn-white add-variant-btn">
                     <i class="fa fa-plus"></i>
-                    <span>{{ __('form.addVariant') }}</span>
+                    <span>{{ __('custom.addVariant') }}</span>
                 </button>
             </div>
         </div>
@@ -71,7 +71,7 @@
 
 <div class="ibox product-variant {{ (old('accept') == 1) || (isset($product->variants) && count($product->variants['attributes']) > 0) ? '' : 'hidden' }}" id="variant-setting">
     <div class="ibox-title">
-        <h5>{{ __('form.versions') }}</h5>
+        <h5>{{ __('custom.versions') }}</h5>
     </div>
     <div class="ibox-content">
         <div class="table-responsive">

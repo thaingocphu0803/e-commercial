@@ -1,6 +1,6 @@
 <x-backend.dashboard.layout>
 
-    <x-backend.dashboard.breadcrumb :title="__('table.PermissionAssignment')" />
+    <x-backend.dashboard.breadcrumb :title="__('custom.PermissionAssignment')" />
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -22,7 +22,7 @@
                 <div class="col-lg-12">
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5>{{__('table.PermissionAssignment')}}</h5>
+                            <h5>{{__('custom.PermissionAssignment')}}</h5>
                         </div>
                         <div class="ibox-content">
                             <div class="table-responsive">
@@ -65,10 +65,10 @@
                         </div>
                         <div class="flex flex-space-between mt-20">
                             <a href="{{ route('user.catalouge.index') }}" class="btn btn-success mb-20 ">
-                                {{ __('form.cancel') }}
+                                {{ __('custom.cancel') }}
                             </a>
                             <button type="submit" class="btn btn-primary mb-20 ">
-                                {{ __('form.save') }}
+                                {{ __('custom.save') }}
                             </button>
                         </div>
                     </div>

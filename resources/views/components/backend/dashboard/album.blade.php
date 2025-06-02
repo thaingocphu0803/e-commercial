@@ -11,10 +11,10 @@
 <div class="ibox">
     <div class="ibox-title">
         <div class="flex flex-middle flex-space-between">
-            <h5>{{__('dashboard.album')}}</h5>
+            <h5>{{__('custom.album')}}</h5>
             <div class="upload-album">
                 <a href="#" class="upload-picture">
-                    {{__('dashboard.upload')}}
+                    {{__('custom.upload')}}
                 </a>
             </div>
         </div>
@@ -56,7 +56,7 @@
                                 </g>
                             </svg> </a>
                     </div>
-                    <div class="small-text">{{__('dashboard.clickToUpload', [ 'attribute' => __('form.button')])}}</div>
+                    <div class="small-text">{{__('custom.clickToUpload', [ 'attribute' => __('custom.button')])}}</div>
                 </div>
                 <div class="upload-list {{ !empty($album) ? '' : 'hidden' }}">
                     <div class="row">

@@ -48,9 +48,9 @@ class {ModuleTemplate}Controller extends Controller
     {
         Gate::authorize('modules', '{moduleTemplate}.create');
         if ($this->{moduleTemplate}Service->create($request)) {
-            return redirect()->route('{moduleTemplate}.index')->with('success',  __('alert.addSuccess', ['attribute'=> __('dashboard.{moduleTemplate}')]));
+            return redirect()->route('{moduleTemplate}.index')->with('success',  __('alert.addSuccess', ['attribute'=> __('custom.{moduleTemplate}')]));
         }
-        return redirect()->route('{moduleTemplate}.index')->with('error',  __('alert.addError', ['attribute'=> __('dashboard.{moduleTemplate}')]));
+        return redirect()->route('{moduleTemplate}.index')->with('error',  __('alert.addError', ['attribute'=> __('custom.{moduleTemplate}')]));
     }
 
     public function edit($id)
@@ -72,10 +72,10 @@ class {ModuleTemplate}Controller extends Controller
     {
         Gate::authorize('modules', '{moduleTemplate}.update');
         if ($this->{moduleTemplate}Service->update($id, $request)) {
-            return redirect()->route('{moduleTemplate}.index')->with('success',  __('alert.updateSuccess', ['attribute'=> __('dashboard.{moduleTemplate}')]));
+            return redirect()->route('{moduleTemplate}.index')->with('success',  __('alert.updateSuccess', ['attribute'=> __('custom.{moduleTemplate}')]));
         }
 
-        return redirect()->route('{moduleTemplate}.index')->with('error',  __('alert.updateError', ['attribute'=> __('dashboard.{moduleTemplate}')]));
+        return redirect()->route('{moduleTemplate}.index')->with('error',  __('alert.updateError', ['attribute'=> __('custom.{moduleTemplate}')]));
     }
 
     public function delete($id)
@@ -92,9 +92,9 @@ class {ModuleTemplate}Controller extends Controller
     {
         Gate::authorize('modules', '{moduleTemplate}.delete');
         if ($this->{moduleTemplate}Service->destroy($id)) {
-            return redirect()->route('{moduleTemplate}.index')->with('success',  __('alert.deleteSuccess', ['attribute'=> __('dashboard.{moduleTemplate}')]));
+            return redirect()->route('{moduleTemplate}.index')->with('success',  __('alert.deleteSuccess', ['attribute'=> __('custom.{moduleTemplate}')]));
         }
 
-        return redirect()->route('{moduleTemplate}.index')->with('error',  __('alert.deleteError', ['attribute'=> __('dashboard.{moduleTemplate}')]));
+        return redirect()->route('{moduleTemplate}.index')->with('error',  __('alert.deleteError', ['attribute'=> __('custom.{moduleTemplate}')]));
     }
 }

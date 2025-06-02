@@ -2,7 +2,7 @@
 
 
     <x-backend.dashboard.breadcrumb
-        :title="__('form.delObject', ['attribute' => __('dashboard.generate')])"
+        :title="__('custom.delObject', ['attribute' => __('custom.generate')])"
     />
 
     <form action="{{ route('generate.destroy', $generate->id) }}" method="POST" class="box">
@@ -13,14 +13,14 @@
             <div class="row">
                 <div class="col-lg-5">
                     <h3 class="panel-title text-capitalize">
-                        {{ __('form.ObjectInfor', ['attribute' => __('dashboard.generate')]) }}
+                        {{ __('custom.ObjectInfor', ['attribute' => __('custom.generate')]) }}
                     </h3>
                     <div class="pannel-description">
-                        {{ __('form.DelQuestion', ['attribute' => __('dashboard.generate')]) }}
+                        {{ __('custom.DelQuestion', ['attribute' => __('custom.generate')]) }}
                         <span class="text-danger">{{ ' ' . $generate->name }}</span>
                     </div>
                     <div class="pannel-description">
-                        {{ __('form.DelNote') }}
+                        {{ __('custom.DelNote') }}
                     </div>
 
                 </div>
@@ -31,7 +31,7 @@
                                 <x-backend.dashboard.form.input
                                     inputName="name"
                                     type="text"
-                                    :labelName="__('dashboard.name')"
+                                    :labelName="__('custom.name')"
                                     :value="$generate->name ?? ''"
                                     :disabled="true"
                                     rowLength="12"
@@ -43,10 +43,10 @@
                     </div>
                     <div class="flex flex-space-between">
                         <a href="{{ route('generate.index') }}" class="btn btn-success mb-20 ">
-                            {{ __('form.cancel') }}
+                            {{ __('custom.cancel') }}
                         </a>
                         <button type="submit" class="btn btn-danger mb-20 ">
-                            {{ __('form.delete') }}
+                            {{ __('custom.delete') }}
                         </button>
                     </div>
 

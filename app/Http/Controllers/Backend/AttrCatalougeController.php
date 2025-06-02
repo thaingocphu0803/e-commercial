@@ -46,9 +46,9 @@ class AttrCatalougeController extends Controller
     {
         Gate::authorize('modules', 'attr.catalouge.create');
         if ($this->attrCatalougeService->create($request)) {
-            return redirect()->route('attr.catalouge.index')->with('success', __('alert.addSuccess', ['attribute'=> __('dashboard.attrCatalouge')]));
+            return redirect()->route('attr.catalouge.index')->with('success', __('alert.addSuccess', ['attribute'=> __('custom.attrCatalouge')]));
         }
-        return redirect()->route('attr.catalouge.index')->with('error', __('alert.addError', ['attribute'=> __('dashboard.attrCatalouge')]));
+        return redirect()->route('attr.catalouge.index')->with('error', __('alert.addError', ['attribute'=> __('custom.attrCatalouge')]));
     }
 
     public function edit($id)
@@ -70,10 +70,10 @@ class AttrCatalougeController extends Controller
     {
         Gate::authorize('modules', 'attr.catalouge.update');
         if ($this->attrCatalougeService->update($id, $request)) {
-            return redirect()->route('attr.catalouge.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('dashboard.attrCatalouge')]));
+            return redirect()->route('attr.catalouge.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('custom.attrCatalouge')]));
         }
 
-        return redirect()->route('attr.catalouge.index')->with('error', __('alert.updateError', ['attribute'=> __('dashboard.attrCatalouge')]));
+        return redirect()->route('attr.catalouge.index')->with('error', __('alert.updateError', ['attribute'=> __('custom.attrCatalouge')]));
     }
 
     public function delete($id)
@@ -90,9 +90,9 @@ class AttrCatalougeController extends Controller
     {
         Gate::authorize('modules', 'attr.catalouge.delete');
         if ($this->attrCatalougeService->destroy($id)) {
-            return redirect()->route('attr.catalouge.index')->with('success', __('alert.deleteSuccess', ['attribute'=> __('dashboard.attrCatalouge')]));
+            return redirect()->route('attr.catalouge.index')->with('success', __('alert.deleteSuccess', ['attribute'=> __('custom.attrCatalouge')]));
         }
 
-        return redirect()->route('attr.catalouge.index')->with('error', __('alert.deleteError', ['attribute'=> __('dashboard.attrCatalouge')]));
+        return redirect()->route('attr.catalouge.index')->with('error', __('alert.deleteError', ['attribute'=> __('custom.attrCatalouge')]));
     }
 }

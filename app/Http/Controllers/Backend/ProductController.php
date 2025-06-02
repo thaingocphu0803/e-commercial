@@ -56,9 +56,9 @@ class ProductController extends Controller
     {
         Gate::authorize('modules', 'product.create');
         if ($this->productService->create($request)) {
-            return redirect()->route('product.index')->with('success',  __('alert.addSuccess', ['attribute'=> __('dashboard.product')]));
+            return redirect()->route('product.index')->with('success',  __('alert.addSuccess', ['attribute'=> __('custom.product')]));
         }
-        return redirect()->route('product.index')->with('error',  __('alert.addError', ['attribute'=> __('dashboard.product')]));
+        return redirect()->route('product.index')->with('error',  __('alert.addError', ['attribute'=> __('custom.product')]));
     }
 
     public function edit($id)
@@ -82,10 +82,10 @@ class ProductController extends Controller
     {
         Gate::authorize('modules', 'product.update');
         if ($this->productService->update($id, $request)) {
-            return redirect()->route('product.index')->with('success',  __('alert.updateSuccess', ['attribute'=> __('dashboard.product')]));
+            return redirect()->route('product.index')->with('success',  __('alert.updateSuccess', ['attribute'=> __('custom.product')]));
         }
 
-        return redirect()->route('product.index')->with('error',  __('alert.updateError', ['attribute'=> __('dashboard.product')]));
+        return redirect()->route('product.index')->with('error',  __('alert.updateError', ['attribute'=> __('custom.product')]));
     }
 
     public function delete($id)
@@ -102,9 +102,9 @@ class ProductController extends Controller
     {
         Gate::authorize('modules', 'product.delete');
         if ($this->productService->destroy($id)) {
-            return redirect()->route('product.index')->with('success',  __('alert.deleteSuccess', ['attribute'=> __('dashboard.product')]));
+            return redirect()->route('product.index')->with('success',  __('alert.deleteSuccess', ['attribute'=> __('custom.product')]));
         }
 
-        return redirect()->route('product.index')->with('error',  __('alert.deleteError', ['attribute'=> __('dashboard.product')]));
+        return redirect()->route('product.index')->with('error',  __('alert.deleteError', ['attribute'=> __('custom.product')]));
     }
 }
