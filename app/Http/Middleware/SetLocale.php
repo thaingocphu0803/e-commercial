@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Language;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -16,9 +17,10 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $locale = session('app_locale', config('app.locale'));
-
-        App::setLocale($locale);
+        // $locale = session('app_locale', config('app.locale'));
+        $locale = Language::select('canonical')->where('current', 1)->first();
+        // dd($locale->canonical);
+        App::setLocale($locale->canonical);
 
         return $next($request);
     }
