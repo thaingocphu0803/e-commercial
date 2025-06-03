@@ -50,11 +50,10 @@
 
             </x-backend.dashboard.nav.module>
 
-                        <x-backend.dashboard.nav.module icon='fa-cubes' :title="__('custom.managerObject', ['attribute' => __('custom.product')])">
+            <x-backend.dashboard.nav.module icon='fa-cubes' :title="__('custom.managerObject', ['attribute' => __('custom.product')])">
                 @can('modules', 'product.index')
                     <li>
-                        <a class="text-capitalize"
-                            href="/product/index">
+                        <a class="text-capitalize" href="/product/index">
                             {{ __('custom.product') }}
                         </a>
                     </li>
@@ -62,8 +61,7 @@
 
                 @can('modules', 'product.catalouge.index')
                     <li>
-                        <a class="text-capitalize"
-                            href="/product/catalouge/index">
+                        <a class="text-capitalize" href="/product/catalouge/index">
                             {{ __('custom.objectGroup', ['attribute' => __('custom.product')]) }}
                         </a>
                     </li>
@@ -72,8 +70,7 @@
             <x-backend.dashboard.nav.module icon='fa-cubes' :title="__('custom.managerObject', ['attribute' => __('custom.attr')])">
                 @can('modules', 'attr.index')
                     <li>
-                        <a class="text-capitalize"
-                            href="/attr/index">
+                        <a class="text-capitalize" href="/attr/index">
                             {{ __('custom.attr') }}
                         </a>
                     </li>
@@ -81,14 +78,13 @@
 
                 @can('modules', 'attr.catalouge.index')
                     <li>
-                        <a class="text-capitalize"
-                            href="/attr/catalouge/index">
+                        <a class="text-capitalize" href="/attr/catalouge/index">
                             {{ __('custom.objectGroup', ['attribute' => __('custom.attr')]) }}
                         </a>
                     </li>
                 @endcan
             </x-backend.dashboard.nav.module>
-{{-- @new-module --}}
+            {{-- @new-module --}}
 
 
             <x-backend.dashboard.nav.module icon='fa-file' :title="__('custom.managerObject', ['attribute' => __('custom.post')])">
@@ -119,12 +115,19 @@
                 @endcan
 
                 @can('modules', 'generate.index')
-                <li>
-                    <a class="text-capitalize" href="{{ route('generate.index') }}">
-                        {{ __('custom.generate') }}
-                    </a>
-                </li>
+                    <li>
+                        <a class="text-capitalize" href="{{ route('generate.index') }}">
+                            {{ __('custom.generate') }}
+                        </a>
+                    </li>
                 @endcan
+                {{-- @can('modules', 'generate.index') --}}
+                    <li>
+                        <a class="text-capitalize" href="{{ route('system.index') }}">
+                            {{ __('custom.system') }}
+                        </a>
+                    </li>
+                {{-- @endcan --}}
             </x-backend.dashboard.nav.module>
         </ul>
     </div>

@@ -18,6 +18,8 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductCatalougeController;
 use App\Http\Controllers\Backend\AttrController;
 use App\Http\Controllers\Backend\AttrCatalougeController;
+use App\Http\Controllers\Backend\SystemController;
+
 //@use-controller@
 
 Route::get('/', function () {
@@ -95,6 +97,17 @@ Route::controller(GenerateController::class)->middleware(['admin', 'locale'])->p
     Route::post('update/{id}', 'update')->name('generate.update');
     Route::get('delete/{generate}', 'delete')->name('generate.delete');
     Route::delete('destroy/{id}', 'destroy')->name('generate.destroy');
+});
+
+//SystemController
+Route::controller(SystemController::class)->middleware(['admin', 'locale'])->prefix('system')->group(function () {
+    Route::get('index',  'index')->name('system.index');
+    // Route::get('create', 'create')->name('system.create');
+    Route::post('store', 'store')->name('system.store');
+    // Route::get('edit/{system}', 'edit')->name('system.edit');
+    // Route::post('update/{id}', 'update')->name('system.update');
+    // Route::get('delete/{system}', 'delete')->name('system.delete');
+    // Route::delete('destroy/{id}', 'destroy')->name('system.destroy');
 });
 
 //PostController

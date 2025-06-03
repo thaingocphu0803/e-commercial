@@ -4,6 +4,9 @@ const _token = $('meta[name="csrf-token"]').attr("content");
 let album = [];
 let ids = [];
 
+let inputImage = null;
+let urlImage = null;
+
 const cloudName = "my-could-api";
 const uploadPreset = "laravel_app";
 const folder = "ImageFolder";
@@ -97,7 +100,6 @@ $(document).on("change", ".status", async function (e) {
             dataType: "json",
         });
 
-        console.log(response);
     } catch (err) {
         console.log(err);
     }
@@ -238,17 +240,23 @@ const ImageWidget = cloudinary.createUploadWidget(
         searchByRights: true,
     },
     (error, result) => {
+
         if (!error && result && result.event === "success") {
-            $("#img_url").text(`${result.info.url}`);
-            $("#img_url").attr("href", `${result.info.url}`);
+            urlImage.text(`${result.info.url}`);
+            urlImage.attr("href", `${result.info.url}`);
             $("#img_show")?.attr("src", `${result.info.url}`);
             $("#img_show")?.removeClass("hidden");
-            $("#image").val(btoa(result.info.url));
+            inputImage.val(btoa(result.info.url));
         }
     }
 );
 
-$(document).on("click", "#upload_widget", function () {
+$(document).on("click", ".upload_widget_btn", function () {
+    let _this = $(this);
+    let parent =  _this.parents('.form-row');
+    inputImage = parent.find('.img_input');
+    urlImage = parent.find('.img_url');
+
     ImageWidget.open();
 });
 
