@@ -173,6 +173,7 @@ return [
     'keySeo' => 'Keyword SEO',
     'descSeo' => 'Description SEO',
     'imgSeo' => 'Image SEO',
-    'favicon' => 'favicon'
+    'favicon' => 'Favicon',
+    'shortIntro' => 'Short Introduction'
 
 ];

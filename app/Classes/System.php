@@ -24,6 +24,7 @@ class System
                 ],
                 'logo' => ['type' => 'image', 'label' => 'custom.logo'],
                 'favicon' => ['type' => 'image', 'label' => 'custom.favicon'],
+                'short_intro' => ['type' => 'textarea', 'label' => 'custom.shortIntro']
 
 
             ]
