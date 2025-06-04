@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSystemRequest;
 use App\Models\Language;
 use App\Services\SystemService;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class SystemController extends Controller
 {
@@ -30,7 +30,7 @@ class SystemController extends Controller
     }
 
     public function store(StoreSystemRequest $request){
-        // Gate::authorize('modules', 'product.catalouge.create');
+        Gate::authorize('modules', 'system.create');
         $locale = app()->getLocale();
         $language = Language::where('canonical', $locale)->first();
         $this->languageId =$language->id;

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Ajax\AttrController as AjaxAttrController;
 use App\Http\Controllers\Ajax\DashboardController as AjaxDashboardController;
 use App\Http\Controllers\Ajax\LocationController;
+use App\Http\Controllers\Ajax\MenuController as AjaxMenuController;
 use App\Http\Controllers\Backend\AuthenController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\GenerateController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductCatalougeController;
 use App\Http\Controllers\Backend\AttrController;
 use App\Http\Controllers\Backend\AttrCatalougeController;
+use App\Http\Controllers\Backend\MenuController;
 use App\Http\Controllers\Backend\SystemController;
 
 //@use-controller@
@@ -102,12 +104,21 @@ Route::controller(GenerateController::class)->middleware(['admin', 'locale'])->p
 //SystemController
 Route::controller(SystemController::class)->middleware(['admin', 'locale'])->prefix('system')->group(function () {
     Route::get('index',  'index')->name('system.index');
-    // Route::get('create', 'create')->name('system.create');
     Route::post('store', 'store')->name('system.store');
-    // Route::get('edit/{system}', 'edit')->name('system.edit');
-    // Route::post('update/{id}', 'update')->name('system.update');
-    // Route::get('delete/{system}', 'delete')->name('system.delete');
-    // Route::delete('destroy/{id}', 'destroy')->name('system.destroy');
+});
+
+//MenuController
+Route::controller(MenuController::class)->middleware(['admin', 'locale'])->prefix('menu')->group(function () {
+    Route::get('index',  'index')->name('menu.index');
+    Route::get('create', 'create')->name('menu.create');
+    Route::post('store', 'store')->name('menu.store');
+    Route::get('edit/{id}', 'edit')->name('menu.edit');
+    Route::post('update/{id}', 'update')->name('menu.update');
+    Route::get('delete/{id}', 'delete')->name('menu.delete');
+    Route::delete('destroy/{id}', 'destroy')->name('menu.destroy');
+    Route::get('{id}/child', 'childIndex')->name('menu.child.index');
+    Route::post('{parent_id}/childSave', 'childSave')->name('menu.child.save');
+
 });
 
 //PostController
@@ -179,6 +190,8 @@ Route::controller(AjaxDashboardController::class)->prefix('ajax/dashboard')->mid
     Route::post('changeStatus', 'changeStatus')->name('dashboard.changeStatus');
     Route::post('changeStatusAll', 'changeStatusAll')->name('dashboard.changeStatus');
     Route::post('upload/image', 'uploadImage')->name('dashboard.upload.image');
+    Route::get('getMenu', 'getMenu')->name('dashboard.getMenu');
+
 
 });
 
@@ -187,6 +200,11 @@ Route::controller(AjaxAttrController::class)->prefix('ajax/attr')->middleware(['
     Route::get('getAttr', 'getAttr')->name('attr.getAttr');
     Route::get('loadAttr', 'loadAttr')->name('attr.loadAttr');
 
+});
+
+//Ajax AttrController
+Route::controller(AjaxMenuController::class)->prefix('ajax/menu')->middleware(['admin', 'locale'])->group(function(){
+    Route::post('createCatalouge', 'createCatalouge')->name('attr.createCatalouge');
 });
 
 // DashboardController

@@ -12,6 +12,7 @@ return [
     'deleteError' => '删除 :attribute 失败！',
     'permitSuccess' => '授权成功！',
     'permitError'   => '授权失败！',
-
+    'menuCatalougeNotFound' => '未找到菜单目录！',
+    'saveSuccess' => '成功保存 :attribute！',
+    'saveError' => '保存 :attribute 失败！',
 ];
-

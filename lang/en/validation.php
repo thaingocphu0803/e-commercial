@@ -191,5 +191,9 @@ return [
 
     'attributes' => [],
     'requireLanguage' => 'The language is required.',
-    'requireParentCatalouge' => 'The parent catalouge is required'
+    'requireMenuPosition' => 'The menu position must be selected',
+
+    //2025/06/09
+    'requireParentCatalouge' => 'The parent catalouge is required',
+    'menuRequired' => 'Must be at least one menu'
 ];

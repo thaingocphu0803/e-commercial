@@ -60,6 +60,7 @@ class AttrRepository implements AttrRepositoryInterface
             'attrs.id as id',
             'attrs.image as image',
             'pl.name as name',
+            'pl.canonical as canonical',
             'attrs.publish as publish',
             'attrs.order as order'
         )

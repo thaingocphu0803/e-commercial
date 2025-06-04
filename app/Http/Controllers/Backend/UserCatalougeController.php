@@ -99,7 +99,6 @@ class UserCatalougeController extends Controller
     public function updatePermission(Request $request)
     {
         Gate::authorize('modules', 'user.catalouge.permission');
-        // dd($this->userCatalougeService->setPermission($request));
         if ($this->userCatalougeService->setPermission($request)) {
             return redirect()->route('user.catalouge.index')->with('success', __('alert.permitSuccess'));
         }

@@ -12,4 +12,8 @@ return [
     'deleteError' => 'Failed to delete :attribute!',
     'permitSuccess' => 'Permited Successfully!',
     'permitError'   => 'Failed to permitted',
+    //2025/06/09
+    'menuCatalougeNotFound' => 'Menu Catalouge not found!',
+    'saveSuccess' => 'Saved :attribute successfully!',
+    'saveError' => 'Failed to save :attribute!',
 ];

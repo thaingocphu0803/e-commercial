@@ -110,6 +110,7 @@ class ProductRepository implements ProductRepositoryInterface
             'products.id as id',
             'products.image as image',
             'pl.name as name',
+            'pl.canonical as canonical',
             'products.publish as publish',
             'products.order as order'
         )

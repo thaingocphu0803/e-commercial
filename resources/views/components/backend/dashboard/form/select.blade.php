@@ -13,14 +13,16 @@
 
 <div class="col-lg-{{ $rowLength ?? 6 }}">
     <div class="form-row">
-        <label for="{{ $name }}" class="control-label text-right text-capitalize">{{ $labelName }}
-            @if ($must)
-
-                <span class="text-danger">*</span>
-            @endif
-        </label>
-        <select name="{{ $name }}" id="{{ $name }}" class="form-control select2" {{$attributes}}>
-            <option selected disabled> {{__('custom.choose') .' '. $labelName }}</option>
+        <div class="flex flex-space-between flex-middle {{$slot->isNotEmpty() ? 'mb-10' : ''}}">
+            <label for="{{ $name }}" class="control-label text-right text-capitalize">{{ $labelName }}
+                @if ($must)
+                    <span class="text-danger">*</span>
+                @endif
+            </label>
+            {{$slot}}
+        </div>
+        <select name="{{ $name }}" id="{{ $name }}" class="form-control select2" {{ $attributes }}>
+            <option selected disabled> {{ __('custom.choose') . ' ' . $labelName }}</option>
             @if (!empty($data))
                 @foreach ($data as $item)
                     @php

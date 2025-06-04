@@ -69,5 +69,7 @@ return [
     'attributes' => [],
 
     'requireLanguage' => '必须选择语言。',
-    'requireParentCatalouge' => '父目录是必需的'
+    'requireParentCatalouge' => '父目录是必需的',
+    'requireParentCatalouge' => '父目录为必填项',
+    'menuRequired' => '至少需要一个菜单',
 ];

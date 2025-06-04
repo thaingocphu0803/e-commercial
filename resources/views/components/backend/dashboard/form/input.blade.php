@@ -38,5 +38,6 @@
             {{$attributes}}
         >
         @endif
+        {{$slot}}
     </div>
 </div>

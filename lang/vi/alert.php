@@ -12,5 +12,7 @@ return [
     'deleteError' => 'Xóa :attribute thất bại!',
     'permitSuccess' => 'Cấp quyền thành công!',
     'permitError'   => 'Cấp quyền thất bại!',
-
+    'menuCatalougeNotFound' => 'Không tìm thấy danh mục Menu!',
+    'saveSuccess' => 'Lưu :attribute thành công!',
+    'saveError' => 'Lưu :attribute thất bại!',
 ];

@@ -34,13 +34,19 @@
 
  {{-- cloudinary widget --}}
 
-    <script src="https://upload-widget.cloudinary.com/latest/global/all.js" type="text/javascript"></script>
+<script src="https://upload-widget.cloudinary.com/latest/global/all.js" type="text/javascript"></script>
+
+{{-- nestable --}}
+<script src="../../../backend/js/plugins/nestable/jquery.nestable.js"></script>
 
  {{-- main.js --}}
  <script src="../../../backend/js/main.js" defer></script>
 
-  {{-- variant.js --}}
+{{-- variant.js --}}
  <script src="../../../backend/js/variant.js" defer></script>
 
- {{ $slot }}
+{{-- menu.js --}}
+ <script src="../../../backend/js/menu.js" defer></script>
+
+{{ $slot }}
 

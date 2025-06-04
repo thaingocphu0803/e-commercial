@@ -105,6 +105,16 @@
                 @endcan
             </x-backend.dashboard.nav.module>
 
+            <x-backend.dashboard.nav.module icon='fa-th-large' :title="__('custom.managerObject', ['attribute' => __('custom.menu')])">
+                @can('modules', 'menu.index')
+                    <li>
+                        <a class="text-capitalize" href="{{ route('menu.index') }}">
+                            {{ __('custom.menu') }}
+                        </a>
+                    </li>
+                @endcan
+            </x-backend.dashboard.nav.module>
+
             <x-backend.dashboard.nav.module icon='fa-cog' :title="__('custom.managerObject', ['attribute' => __('custom.setting')])">
                 @can('modules', 'language.index')
                     <li>
@@ -121,13 +131,13 @@
                         </a>
                     </li>
                 @endcan
-                {{-- @can('modules', 'generate.index') --}}
+                @can('modules', 'system.index')
                     <li>
                         <a class="text-capitalize" href="{{ route('system.index') }}">
                             {{ __('custom.system') }}
                         </a>
                     </li>
-                {{-- @endcan --}}
+                @endcan
             </x-backend.dashboard.nav.module>
         </ul>
     </div>

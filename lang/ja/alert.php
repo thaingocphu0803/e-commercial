@@ -12,6 +12,8 @@ return [
     'deleteError' => ':attribute の削除に失敗しました！',
     'permitSuccess' => '権限付与に成功しました！',
     'permitError'   => '権限付与に失敗しました。',
+    'menuCatalougeNotFound' => 'メニューカタログが見つかりません！',
+    'saveSuccess' => ':attribute を正常に保存しました！',
+    'saveError' => ':attribute の保存に失敗しました！',
 
 ];
-

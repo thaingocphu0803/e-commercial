@@ -17,9 +17,7 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // $locale = session('app_locale', config('app.locale'));
         $locale = Language::select('canonical')->where('current', 1)->first();
-        // dd($locale->canonical);
         App::setLocale($locale->canonical);
 
         return $next($request);

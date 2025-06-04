@@ -10,8 +10,16 @@
     margin-bottom: 20px;
 }
 
+.mb-10{
+    margin-bottom: 10px;
+}
+
 .mt-20{
     margin-top:20px;
+}
+
+.mt-10{
+    margin-top:10px;
 }
 
 .mr-10{
@@ -61,6 +69,10 @@ table strong {
 
 .flex-end{
     justify-content: end;
+}
+
+.flex-center{
+    justify-content: center;
 }
 
 .search-btn{
@@ -297,9 +309,35 @@ a.active{
 }
 
 .italic{
-    font-style: italic
+    font-style: italic;
 }
 
 .text-bold{
     font-weight: bold;
+}
+
+.text-sm{
+    font-size:14px !important;
+}
+
+.text-center{
+    text-align:center;
+}
+
+.text-right{
+    text-align:right;
+}
+
+.m-0{
+    margin: 0;
+}
+
+.text-500 {
+    font-weight: 500;
+}
+
+.to-child-menu{
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }

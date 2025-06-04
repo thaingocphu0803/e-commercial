@@ -60,6 +60,7 @@ class {ModuleName}Repository implements {ModuleName}RepositoryInterface
             '{moduleName}s.id as id',
             '{moduleName}s.image as image',
             'pl.name as name',
+            'pl.canonical as canonical',
             '{moduleName}s.publish as publish',
             '{moduleName}s.order as order'
         )

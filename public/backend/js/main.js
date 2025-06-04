@@ -2,10 +2,10 @@ let ward_select = $("#ward_id");
 let district_select = $("#district_id");
 const _token = $('meta[name="csrf-token"]').attr("content");
 let album = [];
-let ids = [];
 
 let inputImage = null;
 let urlImage = null;
+
 
 const cloudName = "my-could-api";
 const uploadPreset = "laravel_app";
@@ -22,7 +22,7 @@ const tinyToolBar =
 // get district api
 $(document).on("change", "#province_id", async function () {
     let _this = $(this);
-    let province_id = currentId;
+    let province_id = _this.val();
 
     try {
         const districts = await $.ajax({
@@ -56,7 +56,7 @@ $(document).on("change", "#district_id", async function () {
     let district_id = null;
 
     if (typeof districtId !== "undefined") {
-        district_id = currentId ?? districtId;
+        district_id = _this.val() ?? districtId;
     }
 
     try {
@@ -85,8 +85,9 @@ $(document).on("change", "#district_id", async function () {
 $(document).on("change", ".status", async function (e) {
     e.preventDefault();
     let _this = $(this);
+    let value = _this.val();
     let requestData = {
-        value: currentId,
+        value: value,
         modelId: _this.attr("data-modelId"),
         model: _this.attr("data-model"),
         field: _this.attr("data-field"),
@@ -142,6 +143,7 @@ $(document).on("click", ".changeStatusAll", async function (e) {
 
     let _this = $(this);
     let ids = [];
+
 
     $(".checkItem:checked").each(function () {
         let checkItem = $(this);

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Ajax;
 
 use App\Http\Controllers\Controller;
+use App\Models\Menu;
 use App\Services\UserService;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Laravel\Pail\ValueObjects\Origin\Console;
 
@@ -48,7 +50,7 @@ class DashboardController extends Controller
     public function uploadImage(Request $request)
     {
         $uploadedFile = $request->file('file');
-        $response = cloudinary()->upload( $uploadedFile->getRealPath());
+        $response = cloudinary()->upload($uploadedFile->getRealPath());
 
 
         return response()->json([
@@ -56,4 +58,27 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function getMenu(Request $request)
+    {
+        $model = ucfirst($request->input('model'));
+        $serviceNamespace = "App\\Services\\" . $model . "Service";
+        if (class_exists($serviceNamespace)) {
+            $serviceInstance = app($serviceNamespace);
+        }
+
+        $modelMenu  = $serviceInstance->paginate($request);
+        if ($modelMenu) {
+
+            return response()->json([
+                'code' => 0,
+                'status' => 'ok',
+                'data' => $modelMenu,
+            ]);
+        } else {
+            return response()->json([
+                'code' => 1,
+                'status' => 'ng',
+            ]);
+        }
+    }
 }

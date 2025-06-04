@@ -60,6 +60,7 @@ class PostRepository implements PostRepositoryInterface
             'posts.id as id',
             'posts.image as image',
             'pl.name as name',
+            'pl.canonical as canonical',
             'posts.publish as publish',
             'posts.order as order'
         )
