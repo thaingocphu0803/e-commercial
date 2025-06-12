@@ -16,11 +16,7 @@ interface MenuCatalougeServiceInterface
 
     public function findById($id);
 
-    // public function update($id, $request);
-
-    // public function destroy($id);
-
-    // public function forceDestroy($id);
+    public function forceDestroy($id);
 
     public function updateStatus($payload);
 

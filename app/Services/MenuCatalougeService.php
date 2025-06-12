@@ -57,57 +57,21 @@ class MenuCatalougeService implements MenuCatalougeServiceInterface
         }
     }
 
-    // public function update($id, $request){
-    //     DB::beginTransaction();
-    //     try{
-    //         $payload = $request->except(['_token']);
+    public function forceDestroy($id){
+        DB::beginTransaction();
+        try{
+            $this->menuCatalougeRepository->forceDestroy($id);
 
-    //         $this->menuCatalougeRepository->update($id, $payload);
+            DB::commit();
 
-    //         DB::commit();
+            return true;
+        }catch(\Exception $e){
+            DB::rollBack();
+            echo $e->getMessage();
 
-    //         return true;
-    //     }catch(\Exception $e){
-    //         DB::rollBack();
-    //         echo $e->getMessage();
-
-    //         return false;
-    //     }
-    // }
-
-
-    // public function destroy($id){
-    //     DB::beginTransaction();
-    //     try{
-    //         $this->menuCatalougeRepository->destroy($id);
-
-    //         DB::commit();
-
-    //         return true;
-    //     }catch(\Exception $e){
-    //         DB::rollBack();
-    //         echo $e->getMessage();
-
-    //         return false;
-    //     }
-    // }
-
-
-    // public function forceDestroy($id){
-    //     DB::beginTransaction();
-    //     try{
-    //         $this->menuCatalougeRepository->forceDestroy($id);
-
-    //         DB::commit();
-
-    //         return true;
-    //     }catch(\Exception $e){
-    //         DB::rollBack();
-    //         echo $e->getMessage();
-
-    //         return false;
-    //     }
-    // }
+            return false;
+        }
+    }
 
     public function updateStatus($payload){
         DB::beginTransaction();

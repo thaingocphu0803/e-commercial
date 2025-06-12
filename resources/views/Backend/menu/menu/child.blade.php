@@ -12,10 +12,46 @@
         </div>
     @endif
 
-    <form action="{{ route('menu.child.save', $parentId) }}" method="POST" class="box">
+    @php
+
+        $route = isset($parentId)
+            ? route('menu.child.save', $parentId)
+            : route('menu.parent.save', $parent_menu_catalouge_id);
+    @endphp
+
+    <form action="{{ $route }}" method="POST" class="box">
         @csrf
 
         <div class="wrapper wrapper-content animated fadeInRight">
+            @if (!isset($parentId))
+                <div class="row">
+                    <div class="col-lg-5">
+                        <h3 class="panel-title">
+                            {{ __('custom.ObjectInfor', ['attribute' => __('custom.posMenu')]) }}
+                        </h3>
+                        <div class="pannel-description">
+                            {{ __('custom.notePosMenu') }}
+                        </div>
+
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="ibox">
+                            <div class="ibox-title">
+                                <h5>
+                                    {{ __('custom.ObjectInfor', ['attribute' => __('custom.posMenu')]) }}
+                                </h5>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="row">
+                                    <x-backend.dashboard.form.select :labelName="__('custom.posMenu')" name="menu_catalouge_id"
+                                        :data="$menuCatalouges" :must="true" :value="$parent_menu_catalouge_id ?? ''" rowLength="12">
+                                    </x-backend.dashboard.form.select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
 
             <div class="row">
                 <div class="col-lg-5">
@@ -37,8 +73,8 @@
                                                     <li>{{ __('custom.noteAddMenu2') }}</li>
                                                     <li>{{ __('custom.noteAddMenu3') }}</li>
                                                 </ul>
-                                                <button id="menu_row_add_btn" type="button"
-                                                    class="text-capitalize btn btn-secondary">
+                                                <button type="button"
+                                                    class="text-capitalize btn btn-secondary menu_row_add_btn">
                                                     {{ __('custom.addLink') }}
                                                 </button>
 
@@ -91,8 +127,8 @@
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
-                            <div class="menu-wrapper {{ old('menu') ? 'hidden' : '' }}">
-                                <div id="menu_row_notification" class="text-center">
+                            <div class="menu-wrapper">
+                                <div class="text-center menu_row_notification {{ old('menu', $menuArr) ? 'hidden' : '' }}">
                                     <h4>{{ __('custom.descLinkList') }}</h4>
                                     <span>{{ __('custom.guideLinkList') }}</span>
                                 </div>
@@ -107,7 +143,8 @@
                                             'id' => old('menu', $menuArr)['id'][$key],
                                         ];
                                     @endphp
-                                    <div class="row mt-20 menu-row menu-row-{{ old('menu', $menuArr)['canonical'][$key] }}">
+                                    <div
+                                        class="row mt-20 menu-row menu-row-{{ old('menu', $menuArr)['canonical'][$key] }}">
                                         <div class="col-lg-4">
                                             <input type="text" class="form-control" value="{{ $data['name'] }}"
                                                 name="menu[name][]">
@@ -124,7 +161,8 @@
                                             <a href="#" class="delete-menu-row text-danger">
                                                 <i class="fa fa-times fa-2x"></i>
                                             </a>
-                                            <input type="" name="menu[id][]" value="{{$data['id']}}" hidden>
+                                            <input type="" name="menu[id][]" value="{{ $data['id'] }}"
+                                                hidden>
                                         </div>
                                     </div>
                                 @endforeach
@@ -135,54 +173,12 @@
             </div>
 
             <div class="flex flex-space-between">
-                <a href="{{ route('menu.edit', $parent_menu_catalouge_id) }}" class="btn btn-success mb-20 ">{{ __('custom.cancel') }}</a>
-                <button id="create_menu_catalouge_btn" type="submit"
-                    class="btn btn-primary mb-20 ">{{ __('custom.save') }}</button>
+                <a href="{{ route('menu.edit', $parent_menu_catalouge_id) }}"
+                    class="btn btn-success mb-20 ">{{ __('custom.cancel') }}</a>
+                <button type="submit"
+                    class="btn btn-primary mb-20">{{ __('custom.save') }}</button>
             </div>
     </form>
-
-    {{-- modal --}}
-    <div id="createMenuCatalouge" class="modal fade in">
-        <form action="" method="POST" class="form create-menu-catalouge">
-
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">
-                            <span aria-hidden="true">×</span>
-                            <span class="sr-only">Close</span>
-                        </button>
-                        <h4 class="modal-title">
-                            {{ __('custom.attributePosDisplay', ['attribute' => __('custom.create')]) }}
-                        </h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <x-backend.dashboard.form.input :labelName="__('custom.posMenu')" inputName="menu_catalouge_name"
-                                type="text" :value="''" rowLength="12" :must="true">
-                                <span class="error-message" id="error_menu_catalouge_name"></span>
-                            </x-backend.dashboard.form.input>
-                        </div>
-                        <div class="row mt-20">
-                            <x-backend.dashboard.form.input :labelName="__('custom.keyword')" inputName="menu_catalouge_keyword"
-                                type="text" :value="''" rowLength="12" :must="true">
-                                <span class="error-message" id="error_menu_catalouge_keyword"></span>
-                            </x-backend.dashboard.form.input>
-                        </div>
-                        <div class="row mt-10 text-center">
-                            <span id="create_menu_catalouge_message" class="italic text-bold text-sm"></span>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-white"
-                            data-dismiss="modal">{{ __('custom.cancel') }}</button>
-                        <button type="submit" class="btn btn-primary">{{ __('custom.save') }}</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>{{-- !end modal --}}
     <script>
         const lang = "{{ app()->getLocale() }}";
         const listChoosenMenu = @json(old('menu', $menuArr)['canonical'] ?? []);

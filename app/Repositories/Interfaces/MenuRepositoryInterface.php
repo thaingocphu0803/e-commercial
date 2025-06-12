@@ -16,12 +16,12 @@ interface MenuRepositoryInterface
 
     public function update($id, $payload);
 
-    public function destroy($id);
-
-    public function forceDestroy($id);
-
     public function updateStatus($payload);
 
     public function updateStatusAll($payload);
+
+    public function toTreeById($id);
+
+    public function reBuildTree($newTree);
 
 }

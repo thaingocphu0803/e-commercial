@@ -5,7 +5,7 @@
         :title="__('custom.delObject', ['attribute'=>__('custom.menu')])"
     />
 
-    <form action="{{ route('menu.destroy', $menu->id) }}" method="POST" class="box">
+    <form action="{{ route('menu.destroy', $menuCatalouge->id) }}" method="POST" class="box">
         @csrf
         @method('delete')
 
@@ -17,7 +17,7 @@
                     </h3>
                     <div class="pannel-description">
                         {{__('custom.DelQuestion', ['attribute' => __('custom.menu')])}}
-                        <span class="text-danger">{{ $menu->name }}</span>
+                        <span class="text-danger">{{ $menuCatalouge->name }}</span>
                     </div>
                     <div class="pannel-description">{{__('custom.DelNote')}}</div>
 
@@ -27,10 +27,10 @@
                         <div class="ibox-content">
                             <div class="row">
                                 <x-backend.dashboard.form.input inputName="email" type="text" :labelName="__('custom.name')"
-                                    :value="$menu->email ?? ''" :disabled="true" />
+                                    :value="$menuCatalouge->name ?? ''" :disabled="true" />
 
-                                <x-backend.dashboard.form.input inputName="name" type="text" :labelName="__('custom.fullname')"
-                                    :value="$menu->name ?? ''" :disabled="true" />
+                                <x-backend.dashboard.form.input inputName="name" type="text" :labelName="__('custom.keyword')"
+                                    :value="$menuCatalouge->keyword ?? ''" :disabled="true" />
 
                             </div>
 
@@ -50,11 +50,5 @@
             </div>
         </div>
     </form>
-
-    <script>
-        var provinceId = '{{ !empty($menu->province_id) ? $menu->province_id : old('province_id') }}';
-        var districtId = '{{ !empty($menu->district_id) ? $menu->district_id : old('district_id') }}';
-        var wardId = '{{ !empty($menu->ward_id) ? $menu->ward_id : old('ward_id') }}';
-    </script>
 
 </x-backend.dashboard.layout>

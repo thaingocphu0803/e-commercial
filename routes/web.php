@@ -113,11 +113,13 @@ Route::controller(MenuController::class)->middleware(['admin', 'locale'])->prefi
     Route::get('create', 'create')->name('menu.create');
     Route::post('store', 'store')->name('menu.store');
     Route::get('edit/{id}', 'edit')->name('menu.edit');
-    Route::post('update/{id}', 'update')->name('menu.update');
-    Route::get('delete/{id}', 'delete')->name('menu.delete');
+    Route::get('delete/{menuCatalouge}', 'delete')->name('menu.delete');
     Route::delete('destroy/{id}', 'destroy')->name('menu.destroy');
     Route::get('{id}/child', 'childIndex')->name('menu.child.index');
+    Route::get('edit/{id}/parentMenu', 'editParentMenu')->name('menu.edit.parentMenu');
     Route::post('{parent_id}/childSave', 'childSave')->name('menu.child.save');
+    Route::post('{menu_catalouge_id}/parentSave', 'parentSave')->name('menu.parent.save');
+
 
 });
 
@@ -202,9 +204,10 @@ Route::controller(AjaxAttrController::class)->prefix('ajax/attr')->middleware(['
 
 });
 
-//Ajax AttrController
+//Ajax MenuController
 Route::controller(AjaxMenuController::class)->prefix('ajax/menu')->middleware(['admin', 'locale'])->group(function(){
-    Route::post('createCatalouge', 'createCatalouge')->name('attr.createCatalouge');
+    Route::post('createCatalouge', 'createCatalouge')->name('menu.createCatalouge');
+    Route::post('dragDrop', 'dragDrop')->name('menu.dragDrop');
 });
 
 // DashboardController

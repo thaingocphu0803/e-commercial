@@ -38,21 +38,10 @@ class MenuCatalougeRepository implements MenuCatalougeRepositoryInterface {
         return MenuCatalouge::create($payload);
     }
 
-    // public function update($id, $payload)
-    // {
-    //     return User::find($id)->update($payload);
-    // }
-
-    // public function destroy($id)
-    // {
-    //     return User::destroy($id);
-    // }
-
-
-    // public function forceDestroy($id)
-    // {
-    //     return User::forceDestroy($id);
-    // }
+    public function forceDestroy($id)
+    {
+        return MenuCatalouge::forceDestroy($id);
+    }
 
     public function updateStatus($payload)
     {
