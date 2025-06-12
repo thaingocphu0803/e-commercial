@@ -20,6 +20,7 @@ use App\Http\Controllers\Backend\ProductCatalougeController;
 use App\Http\Controllers\Backend\AttrController;
 use App\Http\Controllers\Backend\AttrCatalougeController;
 use App\Http\Controllers\Backend\MenuController;
+use App\Http\Controllers\Backend\SlideController;
 use App\Http\Controllers\Backend\SystemController;
 
 //@use-controller@
@@ -113,12 +114,25 @@ Route::controller(MenuController::class)->middleware(['admin', 'locale'])->prefi
     Route::get('create', 'create')->name('menu.create');
     Route::post('store', 'store')->name('menu.store');
     Route::get('edit/{id}', 'edit')->name('menu.edit');
-    Route::post('update/{id}', 'update')->name('menu.update');
-    Route::get('delete/{id}', 'delete')->name('menu.delete');
+    Route::get('delete/{menuCatalouge}', 'delete')->name('menu.delete');
     Route::delete('destroy/{id}', 'destroy')->name('menu.destroy');
     Route::get('{id}/child', 'childIndex')->name('menu.child.index');
+    Route::get('edit/{id}/parentMenu', 'editParentMenu')->name('menu.edit.parentMenu');
     Route::post('{parent_id}/childSave', 'childSave')->name('menu.child.save');
+    Route::post('{menu_catalouge_id}/parentSave', 'parentSave')->name('menu.parent.save');
 
+
+});
+
+//SlideController
+Route::controller(SlideController::class)->middleware(['admin', 'locale'])->prefix('slide')->group(function () {
+    Route::get('index',  'index')->name('slide.index');
+    Route::get('create', 'create')->name('slide.create');
+    Route::post('store', 'store')->name('slide.store');
+    Route::get('edit/{id}', 'edit')->name('slide.edit');
+    Route::post('update/{id}', 'update')->name('slide.update');
+    Route::get('delete/{id}', 'delete')->name('slide.delete');
+    Route::delete('destroy/{id}', 'destroy')->name('slide.destroy');
 });
 
 //PostController
@@ -202,9 +216,10 @@ Route::controller(AjaxAttrController::class)->prefix('ajax/attr')->middleware(['
 
 });
 
-//Ajax AttrController
+//Ajax MenuController
 Route::controller(AjaxMenuController::class)->prefix('ajax/menu')->middleware(['admin', 'locale'])->group(function(){
-    Route::post('createCatalouge', 'createCatalouge')->name('attr.createCatalouge');
+    Route::post('createCatalouge', 'createCatalouge')->name('menu.createCatalouge');
+    Route::post('dragDrop', 'dragDrop')->name('menu.dragDrop');
 });
 
 // DashboardController

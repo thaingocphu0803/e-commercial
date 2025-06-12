@@ -11,5 +11,17 @@ return [
     'type' => [
         'menu-dropdown' => 'Menu Dropdown',
         'menu-mega' => 'Menu Mega'
+    ],
+    'effect' => [
+        'fade' => 'Fade',
+        'cards' => 'Cards',
+        'cube' => 'Cube',
+        'flip' => 'Flip',
+        'creative' => 'Creative'
+    ],
+    'navigate' => [
+        'hide' => 'hidden',
+        'dots' => 'Dot',
+        'thumbnails' => 'Thumbnails'
     ]
 ];

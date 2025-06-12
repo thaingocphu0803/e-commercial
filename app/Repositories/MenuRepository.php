@@ -5,6 +5,8 @@ namespace App\Repositories;
 use App\Models\Menu;
 use App\Models\User;
 use App\Repositories\Interfaces\MenuRepositoryInterface;
+use Illuminate\Support\Collection;
+
 
 class MenuRepository implements MenuRepositoryInterface
 {
@@ -60,17 +62,6 @@ class MenuRepository implements MenuRepositoryInterface
        return false;
     }
 
-    public function destroy($id)
-    {
-        return Menu::destroy($id);
-    }
-
-
-    public function forceDestroy($id)
-    {
-        return Menu::forceDestroy($id);
-    }
-
     public function updateStatus($payload)
     {
         $modelId = $payload['modelId'];
@@ -80,7 +71,6 @@ class MenuRepository implements MenuRepositoryInterface
         return Menu::find($modelId)->update($columm);
     }
 
-
     public function updateStatusAll($payload)
     {
         $ids = $payload['ids'];
@@ -88,5 +78,26 @@ class MenuRepository implements MenuRepositoryInterface
         $columm = [$payload['field'] => $value];
 
         return Menu::whereIn('id', $ids)->update($columm);
+    }
+
+    public function toTreeById($id) : Collection
+    {
+        return Menu::with('menuLanguage')->where('menu_catalouge_id', $id)->orderBy('order')->get()->toTree();
+    }
+
+    public function reBuildTree($newTree)
+    {
+        $this->updateNodeOrder($newTree);
+        return Menu::rebuildTree($newTree);
+    }
+
+    public function updateNodeOrder($newTree){
+        foreach($newTree as $key=>$val){
+            $payload['order'] = $key;
+            $this->update($val['id'], $payload);
+            if(isset($val['children']) && count($val['children'])){
+                $this->updateNodeOrder($val['children']);
+            }
+        }
     }
 }

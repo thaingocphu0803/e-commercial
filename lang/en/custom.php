@@ -1,7 +1,6 @@
 <?php
 
 return [
-    // 2025/06/02
     'profile' => 'Profile',
     'contacts' => 'Contacts',
     'mailbox' => 'Mailbox',
@@ -141,8 +140,6 @@ return [
     'productGroupStatus' => 'Product Group Status',
     'attrStatus' => 'Attribute Status',
     'attrGroupStatus' => 'Attribute Group Status',
-
-    //2025/06/03
     'system' => 'System',
     'systemConf' => 'System Config',
     'systemcofig' => 'Common config for the system',
@@ -175,8 +172,6 @@ return [
     'imgSeo' => 'Image SEO',
     'favicon' => 'Favicon',
     'shortIntro' => 'Short Introduction',
-
-    // 2025/06/04
     'menu' => 'Menu',
     'createdAt' => 'Created at',
     'createdUser' => 'Created user',
@@ -203,4 +198,36 @@ return [
     'manageChildMenu' => 'Manage Child Menu',
     'saveChildMenu' => 'Save Child Menu',
     'childMenu' => 'Child Menu',
+    //2025/06/12
+    'slideBanner' => 'slides & Banners',
+    'slides' => 'slides',
+    'slide' => 'slide',
+    'catalougeName' => 'Catalouge Name',
+    'listImage' => 'List Image',
+    'width' => 'Width',
+    'height' => 'Height',
+    'basicConfig' => 'Basic Config',
+    'effect' => 'Effect',
+    'arrow' => 'Arrow',
+    'hidden' => 'Hidden',
+    'displayDash' => 'Display Dash style',
+    'displayThumb' => 'Display Thumbnail Style',
+    'advanceConfig' => 'Advance Config',
+    'autoPlay' => 'Auto Play',
+    'hoverPause' => 'Hover Pause',
+    'durationSlide' => 'Duration Slide',
+    'speedEffect' => 'Speed Effect',
+    'shortcode' => 'Shortcode',
+    'listSlide' => 'List Slide',
+    'addSlide' => 'Add Slide',
+    'openNewTab' => 'Open New Tab',
+    'titleImage' => 'Title Image',
+    'descImage' => 'Description Image',
+    // 2025/07/07
+    'navigate' => 'Navigate',
+    'slideImageAlert' => 'You must choose at least one image for this slides.',
+    'commonInf' => 'Common Information',
+    'opNewTab' => 'Open in New Tab',
+    'iTitle' => 'image Title',
+    'iDesc' => 'image Description'
 ];

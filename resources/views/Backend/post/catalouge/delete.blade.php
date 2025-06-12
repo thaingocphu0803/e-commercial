@@ -14,7 +14,7 @@
             </ul>
         </div>
     @endif
-
+<div class="row">
     <form action="{{ route('post.catalouge.destroy', $postCatalouge->post_catalouge_id) }}" method="POST" class="box">
         @csrf
         @method('delete')
@@ -60,5 +60,5 @@
             </div>
         </div>
     </form>
-
+</div>
 </x-backend.dashboard.layout>

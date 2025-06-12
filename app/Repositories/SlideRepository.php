@@ -2,45 +2,54 @@
 
 namespace App\Repositories;
 
-use App\Models\MenuCatalouge;
-use App\Repositories\Interfaces\MenuCatalougeRepositoryInterface;
+use App\Models\User;
+use App\Repositories\Interfaces\SlideRepositoryInterface;
 
-class MenuCatalougeRepository implements MenuCatalougeRepositoryInterface {
+class SlideRepository implements SlideRepositoryInterface {
     public function paginate($request)
     {
         $perpage = $request->input('perpage') ?? 10;
         $keywork = $request->input('keyword');
         $publish = $request->input('publish');
+        $userCatalougeId = $request->input('user_catalouge_id');
 
-        $query = MenuCatalouge::select(
-            'id',
-            'publish',
-            'name',
-            'keyword',
+        $query = User::with(
+            'province',
+            'district',
+            'ward',
+            'userCatalouge'
         )
         ->keyword($keywork ?? null)
         ->publish($publish ?? null);
 
+
+        if((!empty($userCatalougeId))){
+            $query->where('user_catalouge_id', $userCatalougeId);
+        }
+
+
         return $query ->orderBy('id', 'desc')->paginate($perpage)->withQueryString();
-    }
-
-    public function getAll(){
-        return MenuCatalouge::all();
-    }
-
-    public function findById($id)
-    {
-        return MenuCatalouge::with('menus.menuLanguage')->findOrFail($id);
     }
 
     public function create($payload){
 
-        return MenuCatalouge::create($payload);
+        return User::create($payload);
     }
+
+    public function update($id, $payload)
+    {
+        return User::find($id)->update($payload);
+    }
+
+    public function destroy($id)
+    {
+        return User::destroy($id);
+    }
+
 
     public function forceDestroy($id)
     {
-        return MenuCatalouge::forceDestroy($id);
+        return User::forceDestroy($id);
     }
 
     public function updateStatus($payload)
@@ -49,7 +58,7 @@ class MenuCatalougeRepository implements MenuCatalougeRepositoryInterface {
         $value = $payload['value'] == 1 ? 2 : 1;
         $columm = [ $payload['field'] => $value];
 
-        return MenuCatalouge::find($modelId)->update($columm);
+        return User::find($modelId)->update($columm);
     }
 
 
@@ -59,6 +68,6 @@ class MenuCatalougeRepository implements MenuCatalougeRepositoryInterface {
         $value = $payload['value'];
         $columm = [ $payload['field'] => $value];
 
-        return MenuCatalouge::whereIn('id', $ids)->update($columm);
+        return User::whereIn('id', $ids)->update($columm);
     }
 }

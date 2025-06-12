@@ -17,7 +17,7 @@
             </ul>
         </div>
     @endif
-
+<div class="row">
     <form action="{{ $url }}" method="POST" class="box">
         @csrf
 
@@ -181,7 +181,7 @@
             </div>
         </div>
     </form>
-
+</div>
     <script>
         var provinceId = '{{ !empty($user->province_id) ? $user->province_id : old('province_id') }}';
         var districtId = '{{ !empty($user->district_id) ? $user->district_id : old('district_id') }}';

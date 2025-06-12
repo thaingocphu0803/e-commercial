@@ -63,58 +63,6 @@ class MenuService implements MenuServiceInterface
         }
     }
 
-    public function update($id, $request){
-        DB::beginTransaction();
-        try{
-            $payload = $request->except(['_token']);
-
-            $this->menuRepository->update($id, $payload);
-
-            DB::commit();
-
-            return true;
-        }catch(\Exception $e){
-            DB::rollBack();
-            echo $e->getMessage();
-
-            return false;
-        }
-    }
-
-
-    public function destroy($id){
-        DB::beginTransaction();
-        try{
-            $this->menuRepository->destroy($id);
-
-            DB::commit();
-
-            return true;
-        }catch(\Exception $e){
-            DB::rollBack();
-            echo $e->getMessage();
-
-            return false;
-        }
-    }
-
-
-    public function forceDestroy($id){
-        DB::beginTransaction();
-        try{
-            $this->menuRepository->forceDestroy($id);
-
-            DB::commit();
-
-            return true;
-        }catch(\Exception $e){
-            DB::rollBack();
-            echo $e->getMessage();
-
-            return false;
-        }
-    }
-
     public function updateStatus($payload){
         DB::beginTransaction();
         try{
@@ -153,12 +101,17 @@ class MenuService implements MenuServiceInterface
             $payload = $request->except(['_token', 'keyword']);
             if(!empty($payload['menu']['name'])){
                 foreach($payload['menu']['name'] as $key => $value){
+
                     $menuArr =[
-                        'menu_catalouge_id' => $parent_menu_catalouge_id,
+                        'menu_catalouge_id' => isset($payload['menu_catalouge_id']) ? $payload['menu_catalouge_id'] : $parent_menu_catalouge_id,
                         'parent_id' => $parent_id,
                         'order' => $payload['menu']['position'][$key],
                         'user_id' => Auth::id(),
                     ];
+
+                    if(!$parent_id){
+                        unset($menuArr['parent_id']);
+                    }
 
                     $id = null;
 
@@ -196,7 +149,24 @@ class MenuService implements MenuServiceInterface
         }
     }
 
+    public function toTreeById($id)
+    {
+        return $this->menuRepository->toTreeById($id);
+    }
 
+    public function reBuildTree($newTree)
+    {
+        DB::beginTransaction();
+        try {
+            $this->menuRepository->reBuildTree($newTree);
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            echo $e->getMessage();
+            return false;
+        }
+    }
 }
 
 

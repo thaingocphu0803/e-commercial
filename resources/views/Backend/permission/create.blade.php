@@ -18,8 +18,7 @@
         </div>
     @endif
 
-
-
+<div class="row">
     <form action="{{ $url }}" method="POST" class="box">
         @csrf
 
@@ -64,5 +63,5 @@
             </div>
         </div>
     </form>
-
+</div>
 </x-backend.dashboard.layout>

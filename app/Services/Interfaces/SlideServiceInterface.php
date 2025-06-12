@@ -3,18 +3,18 @@
 namespace App\Services\Interfaces;
 
 /**
- * Interface MenuCatalougeServiceInterface
+ * Interface SlideServiceInterface
  * @package App\Services\Interfaces
  */
-interface MenuCatalougeServiceInterface
+interface SlideServiceInterface
 {
-    public function paginate($request);
+    public function paginate($number);
 
     public function create($request);
 
-    public function getAll();
+    public function update($id, $request);
 
-    public function findById($id);
+    public function destroy($id);
 
     public function forceDestroy($id);
 

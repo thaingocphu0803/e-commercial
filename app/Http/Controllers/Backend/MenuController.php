@@ -8,6 +8,7 @@ use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
 use App\Models\Language;
 use App\Models\Menu;
+use App\Models\MenuCatalouge;
 use App\Services\MenuCatalougeService;
 use App\Services\MenuService;
 use Illuminate\Http\Request;
@@ -59,38 +60,23 @@ class MenuController extends Controller
     public function edit($id)
     {
         Gate::authorize('modules', 'menu.update');
-        $menuCatalouge = $this->menuCatalougeService->findById($id);
-        if (!$menuCatalouge) {
-            abort(404, __('alert.menuCatalougeNotFound'));
-        }
 
-        $menus = $menuCatalouge->menus->pluck('menuLanguage.name', 'id')->toArray();
+        $trees = $this->menuService->toTreeById($id);
+        $menu_catalouge_id = $id;
 
-        return view('backend.menu.menu.list', compact('menus'));
+        return view('backend.menu.menu.list', compact('trees', 'menu_catalouge_id'));
     }
 
-    public function update($id, UpdateMenuRequest $request)
-    {
-        Gate::authorize('modules', 'menu.update');
-        if ($this->menuService->update($id, $request)) {
-            return redirect()->route('menu.index')->with('success', __('alert.updateSuccess', ['attribute' => __('custom.menu')]));
-        }
-
-        return redirect()->route('menu.index')->with('error', __('alert.updateError', ['attribute' => __('custom.menu')]));
-    }
-
-    public function delete(Menu $menu)
+    public function delete(MenuCatalouge $menuCatalouge)
     {
         Gate::authorize('modules', 'menu.delete');
-        return view('backend.menu.menu.delete', [
-            'menu' => $menu
-        ]);
+        return view('backend.menu.menu.delete', compact('menuCatalouge'));
     }
 
     public function destroy($id)
     {
         Gate::authorize('modules', 'menu.delete');
-        if ($this->menuService->destroy($id)) {
+        if ($this->menuCatalougeService->forceDestroy($id)) {
             return redirect()->route('menu.index')->with('success', __('alert.deleteSuccess', ['attribute' => __('custom.menu')]));
         }
 
@@ -99,18 +85,22 @@ class MenuController extends Controller
 
     public function childIndex($id)
     {
+        Gate::authorize('modules', 'menu.create');
+
         $parentId = $id;
-        $menus = Menu::with('menuLanguage')->where('parent_id', $id)->get();
+
+        $menus = Menu::with('menuLanguage')->where('parent_id', $id)->orderBy('order')->get();
         $parent_menu_catalouge_id = Menu::find($id)->menu_catalouge_id;
 
         $menuArr = [
             'name' => $menus->pluck('menuLanguage.name')->toArray(),
             'canonical' => $menus->pluck('menuLanguage.canonical')->toArray(),
-            'position' => $menus->pluck('order')->toArray(),
+            'position' => $menus->map(function ($menu, $index) {
+                return $index;
+            })->toArray(),
             'id' => $menus->pluck('id')->toArray(),
         ];
 
-        Gate::authorize('modules', 'menu.create');
         return view('Backend.menu.menu.child', compact('parentId', 'menuArr', 'parent_menu_catalouge_id'));
     }
 
@@ -125,5 +115,38 @@ class MenuController extends Controller
             return redirect()->route('menu.child.index', $parent_id)->with('success', __('alert.saveSuccess', ['attribute' => __('custom.childMenu')]));
         }
         return redirect()->route('menu.child.index', $parent_id)->with('error', __('alert.saveError', ['attribute' => __('custom.childMenu')]));
+    }
+
+    public function editParentMenu($id)
+    {
+        Gate::authorize('modules', 'menu.update');
+
+        $menus = Menu::with('menuLanguage')->where('menu_catalouge_id', $id)->whereNull('parent_id')->orderBy('order')->get();
+        $parent_menu_catalouge_id = $id;
+
+        $menuCatalouges = $this->menuCatalougeService->getALl();
+
+        $menuArr = [
+            'name' => $menus->pluck('menuLanguage.name')->toArray(),
+            'canonical' => $menus->pluck('menuLanguage.canonical')->toArray(),
+            'position' => $menus->map(function ($menu, $index) {
+                return $index;
+            })->toArray(),
+            'id' => $menus->pluck('id')->toArray(),
+        ];
+
+        return view('Backend.menu.menu.child', compact('menuArr', 'parent_menu_catalouge_id', 'menuCatalouges'));
+    }
+
+    public function parentSave(SaveChildMenuRequest $request, $menu_catalouge_id)
+    {
+        Gate::authorize('modules', 'menu.update');
+
+        $parent_id = null;
+
+        if ($this->menuService->childSave($request, $parent_id, $menu_catalouge_id, $this->languageId)) {
+            return redirect()->route('menu.edit.parentMenu', $menu_catalouge_id)->with('success', __('alert.saveSuccess', ['attribute' => __('custom.childMenu')]));
+        }
+        return redirect()->route('menu.edit.parentMenu', $menu_catalouge_id)->with('error', __('alert.saveError', ['attribute' => __('custom.childMenu')]));
     }
 }
