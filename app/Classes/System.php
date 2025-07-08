@@ -61,7 +61,7 @@ class System
             'description' => 'custom.seoHomeConfig',
             'value' => [
                 'title_seo' => ['type' => 'text', 'label' => 'custom.titleSeo'],
-                'keywork_seo' => ['type' => 'text', 'label' => 'custom.keySeo'],
+                'keyword_seo' => ['type' => 'text', 'label' => 'custom.keySeo'],
                 'desciption_seo' => ['type' => 'text', 'label' => 'custom.descSeo'],
                 'image_seo' => ['type' => 'image', 'label' => 'custom.imgSeo'],
             ]

@@ -18,11 +18,11 @@ class UserCatalougeRepository implements UserCatalougeRepositoryInterface
     public function paginate($request)
     {
         $perpage = $request->input('perpage') ?? 10;
-        $keywork = $request->input('keyword');
+        $keyword = $request->input('keyword');
         $publish = $request->input('publish');
 
         return  UserCatalouge::withCount('users')
-        ->keyword($keywork ?? null)
+        ->keyword($keyword ?? null)
         ->publish($publish ?? null)
         ->orderBy('id', 'desc')
         ->paginate($perpage)

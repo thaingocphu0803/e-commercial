@@ -47,28 +47,11 @@ class ProductRepository implements ProductRepositoryInterface
             return false;
         }
 
-        $attr_catalouge = explode('-', $product->productVariants->first()->attr_catalouge);
-        foreach ($product->productVariants as $variant) {
-            $attr = explode('-', $variant->code);
-            foreach($attr_catalouge as $key => $val){
-                $attributes[$val][] = $attr[$key];
-            }
-            $detail['quantity'][] = $variant->quantity;
-            $detail['sku'][] = $variant->sku;
-            $detail['price'][] = $variant->price;
-            $detail['barcode'][] = $variant->barcode;
-            $detail['filename'][] = $variant->filename;
-            $detail['url'][] = $variant->url;
-            $detail['album'][] = $variant->album;
-        }
-
-        foreach ($attributes as $key => $val){
-            $attributes[$key] = array_values((array_unique($val)));
-        }
-
         $pivot = $product->languages->first()->pivot;
         $pivot['product_catalouge_id'] = $product->product_catalouge_id;
         $pivot['publish'] = $product->publish;
+        $pivot['code'] = $product->code;
+        $pivot['price'] = $product->price;
         $pivot['follow'] = $product->follow;
         $pivot['image'] = $product->image;
         $pivot['album'] = $product->album;
@@ -76,17 +59,41 @@ class ProductRepository implements ProductRepositoryInterface
             ->pluck('pivot.product_catalouge_id')
             ->toArray();
 
-        $pivot['variants'] = [
-            'attr_catalouge' => $attr_catalouge,
-            'attributes' => $attributes,
-            'detail' => $detail,
+        if (count($product->productVariants)) {
+            $attr_catalouge = explode('-', $product->productVariants->first()->attr_catalouge);
+            foreach ($product->productVariants as $variant) {
+                $attr = explode('-', $variant->code);
 
-        ];
+                foreach ($attr_catalouge as $key => $val) {
+                    $attributes[$val][] = $attr[$key];
+                }
+
+                $detail['quantity'][] = $variant->quantity;
+                $detail['sku'][] = $variant->sku;
+                $detail['price'][] = $variant->price;
+                $detail['barcode'][] = $variant->barcode;
+                $detail['filename'][] = $variant->filename;
+                $detail['url'][] = $variant->url;
+                $detail['album'][] = $variant->album;
+            }
+
+            foreach ($attributes as $key => $val) {
+                $attributes[$key] = array_values((array_unique($val)));
+            }
+
+            $pivot['variants'] = [
+                'attr_catalouge' => $attr_catalouge,
+                'attributes' => $attributes,
+                'detail' => $detail,
+
+            ];
+        }
 
         return  $pivot;
     }
 
-    public function findPivotById($id){
+    public function findPivotById($id)
+    {
         return Product::with([
             'languages',
             'productCatalouges',
@@ -196,16 +203,23 @@ class ProductRepository implements ProductRepositoryInterface
         return Product::whereIn('id', $ids)->update($columm);
     }
 
-    // public function updateByWhereIn($ids, $value)
-    // {
+    public function loadProductWithVariant($request)
+    {
+        $keyword = $request->input('keyword');
 
-    //     if (is_array($ids)) {
-    //         return User::whereIn('user_catalouge_id', $ids)
-    //             ->update(['publish' => $value]);
-    //     } else {
-    //         $value = $value == 1 ? 2 : 1;
-    //         return User::where('user_catalouge_id', $ids)
-    //             ->update(['publish' => $value]);
-    //     }
-    // }
+        return Product::selectRaw(
+            "
+                products.id,
+                products.image,
+                tb3.uuid as variant_uuid,
+                CONCAT(tb2.name, ' | ', COALESCE(tb3.name, 'default')) as product_name,
+                COALESCE(tb3.sku, products.code) as sku,
+                COALESCE(tb3.price, products.price) as price
+            "
+        )
+        ->join('product_language as tb2', 'products.id', '=', 'tb2.product_id')
+        ->leftJoin('product_variants as tb3', 'products.id', '=', 'tb3.product_id')
+        ->where('tb2.name', 'like', '%'.$keyword.'%')
+        ->paginate(10)->withQueryString();
+    }
 }

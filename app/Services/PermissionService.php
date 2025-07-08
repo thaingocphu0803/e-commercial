@@ -95,10 +95,6 @@ class PermissionService implements PermissionServiceInterface
         DB::beginTransaction();
         try {
             $this->permissionRepository->updateStatus($payload);
-
-            // $this->permissionRepository->updateByWhereIn($payload['modelId'], $payload['value']);
-
-
             DB::commit();
 
             return true;
@@ -116,7 +112,6 @@ class PermissionService implements PermissionServiceInterface
         DB::beginTransaction();
         try {
             $this->permissionRepository->updateStatusAll($payload);
-            // $this->permissionRepository->updateByWhereIn($payload['ids'], $payload['value']);
             DB::commit();
 
             return true;

@@ -178,16 +178,6 @@
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-=======
-
-            <div class="flex flex-space-between">
-                <a href="{{ route('menu.index') }}" class="btn btn-success mb-20 ">{{ __('custom.cancel') }}</a>
-                <button type="submit"
-                    class="btn btn-primary mb-20">{{ __('custom.save') }}</button>
-            </div>
-    </form>
->>>>>>> main
 
             <div class="flex flex-space-between">
                 <a href="{{ route('menu.index') }}" class="btn btn-success mb-20 ">{{ __('custom.cancel') }}</a>
@@ -239,7 +229,6 @@
         </form>
     </div>{{-- !end modal --}}
     <script>
-        const lang = "{{ app()->getLocale() }}";
         const listChoosenMenu = @json(old('menu')['canonical'] ?? []);
     </script>
 

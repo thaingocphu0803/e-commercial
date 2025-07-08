@@ -4,6 +4,8 @@ use App\Http\Controllers\Ajax\AttrController as AjaxAttrController;
 use App\Http\Controllers\Ajax\DashboardController as AjaxDashboardController;
 use App\Http\Controllers\Ajax\LocationController;
 use App\Http\Controllers\Ajax\MenuController as AjaxMenuController;
+use App\Http\Controllers\Ajax\ProductController as AjaxProductController;
+use App\Http\Controllers\Ajax\PromotionController as AjaxPromotionController;
 use App\Http\Controllers\Backend\AuthenController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\GenerateController;
@@ -19,8 +21,13 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductCatalougeController;
 use App\Http\Controllers\Backend\AttrController;
 use App\Http\Controllers\Backend\AttrCatalougeController;
+use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\CustomerCatalougeController;
+use App\Http\Controllers\Backend\CustomerController;
 use App\Http\Controllers\Backend\MenuController;
+use App\Http\Controllers\Backend\PromotionController;
 use App\Http\Controllers\Backend\SlideController;
+use App\Http\Controllers\Backend\SourceController;
 use App\Http\Controllers\Backend\SystemController;
 
 //@use-controller@
@@ -35,7 +42,6 @@ Route::post('/login', [AuthenController::class, 'login'])->name('auth.login');
 Route::get('/logout', [AuthenController::class, 'logout'])->name('auth.logout');
 
 // UserController
-
 Route::controller(UserController::class)->middleware(['admin', 'locale'])->prefix('user')->group(function () {
     Route::get('index',  'index')->name('user.index');
     Route::get('create', 'create')->name('user.create');
@@ -59,6 +65,29 @@ Route::controller(UserCatalougeController::class)->middleware(['admin', 'locale'
     Route::get('permission', 'permission')->name('user.catalouge.permission');
     Route::post('updatePermission', 'updatePermission')->name('user.catalouge.updatePermission');
 
+});
+
+// CustomerController
+Route::controller(CustomerController::class)->middleware(['admin', 'locale'])->prefix('customer')->group(function () {
+    Route::get('index',  'index')->name('customer.index');
+    Route::get('create', 'create')->name('customer.create');
+    Route::post('store', 'store')->name('customer.store');
+    Route::get('edit/{customer}', 'edit')->name('customer.edit');
+    Route::post('update/{id}', 'update')->name('customer.update');
+    Route::get('delete/{customer}', 'delete')->name('customer.delete');
+    Route::delete('destroy/{id}', 'destroy')->name('customer.destroy');
+
+});
+
+//CustomerCatalougeController
+Route::controller(CustomerCatalougeController::class)->middleware(['admin', 'locale'])->prefix('customer/catalouge')->group(function () {
+    Route::get('index',  'index')->name('customer.catalouge.index');
+    Route::get('create', 'create')->name('customer.catalouge.create');
+    Route::post('store', 'store')->name('customer.catalouge.store');
+    Route::get('edit/{customerCatalouge}', 'edit')->name('customer.catalouge.edit');
+    Route::post('update/{id}', 'update')->name('customer.catalouge.update');
+    Route::get('delete/{customerCatalouge}', 'delete')->name('customer.catalouge.delete');
+    Route::delete('destroy/{id}', 'destroy')->name('customer.catalouge.destroy');
 });
 
 // LocationController
@@ -177,6 +206,38 @@ Route::controller(ProductCatalougeController::class)->middleware(['admin', 'loca
     Route::get('delete/{id}', 'delete')->name('product.catalouge.delete');
     Route::delete('destroy/{id}', 'destroy')->name('product.catalouge.destroy');
 });
+//PromotionController
+Route::controller(PromotionController::class)->middleware(['admin', 'locale'])->prefix('promotion')->group(function () {
+    Route::get('index',  'index')->name('promotion.index');
+    Route::get('create', 'create')->name('promotion.create');
+    Route::post('store', 'store')->name('promotion.store');
+    Route::get('edit/{id}', 'edit')->name('promotion.edit');
+    Route::post('update/{id}', 'update')->name('promotion.update');
+    Route::get('delete/{id}', 'delete')->name('promotion.delete');
+    Route::delete('destroy/{id}', 'destroy')->name('promotion.destroy');
+});
+//CouponController
+Route::controller(CouponController::class)->middleware(['admin', 'locale'])->prefix('coupon')->group(function () {
+    Route::get('index',  'index')->name('coupon.index');
+    Route::get('create', 'create')->name('coupon.create');
+    Route::post('store', 'store')->name('coupon.store');
+    Route::get('edit/{id}', 'edit')->name('coupon.edit');
+    Route::post('update/{id}', 'update')->name('coupon.update');
+    Route::get('delete/{id}', 'delete')->name('coupon.delete');
+    Route::delete('destroy/{id}', 'destroy')->name('coupon.destroy');
+});
+
+//SouceController
+Route::controller(SourceController::class)->middleware(['admin', 'locale'])->prefix('source')->group(function () {
+    Route::get('index',  'index')->name('source.index');
+    Route::get('create', 'create')->name('source.create');
+    Route::post('store', 'store')->name('source.store');
+    Route::get('edit/{id}', 'edit')->name('source.edit');
+    Route::post('update/{id}', 'update')->name('source.update');
+    Route::get('delete/{id}', 'delete')->name('source.delete');
+    Route::delete('destroy/{id}', 'destroy')->name('source.destroy');
+});
+
 //AttrController
 Route::controller(AttrController::class)->middleware(['admin', 'locale'])->prefix('attr')->group(function () {
     Route::get('index',  'index')->name('attr.index');
@@ -199,14 +260,23 @@ Route::controller(AttrCatalougeController::class)->middleware(['admin', 'locale'
 });
 //@new-module@
 
-//DashboardController
+//Ajax DashboardController
 Route::controller(AjaxDashboardController::class)->prefix('ajax/dashboard')->middleware(['admin', 'locale'])->group(function(){
     Route::post('changeStatus', 'changeStatus')->name('dashboard.changeStatus');
     Route::post('changeStatusAll', 'changeStatusAll')->name('dashboard.changeStatus');
     Route::post('upload/image', 'uploadImage')->name('dashboard.upload.image');
     Route::get('getMenu', 'getMenu')->name('dashboard.getMenu');
+});
 
+//Ajax ProductController
+Route::controller(AjaxProductController::class)->prefix('ajax/product')->middleware(['admin', 'locale'])->group(function(){
+    Route::get('loadProductPromotion', 'loadProductPromotion')->name('product.loadProductPromotion');
+    Route::get('loadProductCatalougePromotion', 'loadProductCatalougePromotion')->name('product.loadProductCatalougePromotion');
+});
 
+//Ajax PromotionController
+Route::controller(AjaxPromotionController::class)->prefix('ajax/promotion')->middleware(['admin', 'locale'])->group(function(){
+    Route::get('loadCustomerPromotionType', 'loadCustomerPromotionType')->name('product.loadCustomerPromotionType');
 });
 
 //Ajax AttrController

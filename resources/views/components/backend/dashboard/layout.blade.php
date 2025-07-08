@@ -25,4 +25,8 @@
     </x-backend.dashboard.script>
 </body>
 
+<script>
+    const lang = "{{ app()->getLocale() }}";
+</script>
+
 </html>

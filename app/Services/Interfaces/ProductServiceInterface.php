@@ -29,4 +29,6 @@ interface ProductServiceInterface
     public function updateStatusAll($payload);
 
     public function createVariant($product, $request);
+
+    public function loadProductWithVariant($request);
 }

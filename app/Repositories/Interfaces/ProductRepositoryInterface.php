@@ -38,6 +38,6 @@ interface ProductRepositoryInterface
 
     public function findPivotById($id);
 
-    // public function updateByWhereIn($ids, $value);
+    public function loadProductWithVariant($request);
 
 }

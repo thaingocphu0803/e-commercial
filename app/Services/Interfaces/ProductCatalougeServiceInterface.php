@@ -28,4 +28,7 @@ interface ProductCatalougeServiceInterface
 
     public function updateStatusAll($payload);
 
+    public function loadProductCatalouge($request);
+
+
 }

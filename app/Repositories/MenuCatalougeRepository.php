@@ -9,7 +9,7 @@ class MenuCatalougeRepository implements MenuCatalougeRepositoryInterface {
     public function paginate($request)
     {
         $perpage = $request->input('perpage') ?? 10;
-        $keywork = $request->input('keyword');
+        $keyword = $request->input('keyword');
         $publish = $request->input('publish');
 
         $query = MenuCatalouge::select(
@@ -18,7 +18,7 @@ class MenuCatalougeRepository implements MenuCatalougeRepositoryInterface {
             'name',
             'keyword',
         )
-        ->keyword($keywork ?? null)
+        ->keyword($keyword ?? null)
         ->publish($publish ?? null);
 
         return $query ->orderBy('id', 'desc')->paginate($perpage)->withQueryString();

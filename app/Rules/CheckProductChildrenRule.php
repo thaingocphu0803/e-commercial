@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-use App\Models\{ModuleName};
+use App\Models\ProductCatalouge;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 

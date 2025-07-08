@@ -179,7 +179,6 @@
             </div>
     </form>
     <script>
-        const lang = "{{ app()->getLocale() }}";
         const listChoosenMenu = @json(old('menu', $menuArr)['canonical'] ?? []);
     </script>
 </div>

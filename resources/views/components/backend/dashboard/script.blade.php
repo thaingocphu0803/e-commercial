@@ -51,5 +51,12 @@
  {{-- slide.js --}}
  <script src="../../../backend/js/slide.js" defer></script>
 
+  {{-- promotion.js --}}
+ <script src="../../../backend/js/promotion.js" defer></script>
+
+ {{-- datetimepicker --}}
+<script src="../../../backend/js/plugins/datetimepicker/build/jquery.datetimepicker.full.min.js" defer></script>
+
+
 {{ $slot }}
 

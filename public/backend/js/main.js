@@ -13,6 +13,12 @@ const folder = "ImageFolder";
 const maxFiles = 1;
 const width = 300;
 const height = 300;
+let select2Placeholder = {
+        vi: "click để chọn",
+        en: "click to select",
+        zh: "点击选择",
+        ja: "クリックして選択",
+}
 
 const tinyPlugins = ["link image table"];
 
@@ -225,7 +231,9 @@ $(() => {
 });
 
 // select2 widget
-$(".select2").select2();
+$(".select2").select2({
+    placeholder: select2Placeholder[lang],
+});
 
 // cloudinary upload widget
 const ImageWidget = cloudinary.createUploadWidget(

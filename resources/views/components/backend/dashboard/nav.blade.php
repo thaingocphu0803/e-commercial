@@ -22,7 +22,7 @@
                     IN+
                 </div>
             </li>
-
+            {{-- manage user --}}
             <x-backend.dashboard.nav.module icon='fa-user-circle-o' :title="__('custom.managerObject', ['attribute' => __('custom.member')])">
                 @can('modules', 'user.index')
                     <li>
@@ -50,6 +50,27 @@
 
             </x-backend.dashboard.nav.module>
 
+            {{-- manage customer --}}
+            <x-backend.dashboard.nav.module icon='fa-users' :title="__('custom.managerObject', ['attribute' => __('custom.customer')])">
+                @can('modules', 'customer.index')
+                    <li>
+                        <a class="text-capitalize" href="{{ route('customer.index') }}">
+                            {{ __('custom.customer') }}
+                        </a>
+                    </li>
+                @endcan
+
+                @can('modules', 'customer.catalouge.index')
+                    <li>
+                        <a class="text-capitalize" href="{{ route('customer.catalouge.index') }}">
+                            {{ __('custom.objectGroup', ['attribute' => __('custom.customer')]) }}
+                        </a>
+                    </li>
+                @endcan
+
+            </x-backend.dashboard.nav.module>
+
+            {{-- manage product --}}
             <x-backend.dashboard.nav.module icon='fa-cubes' :title="__('custom.managerObject', ['attribute' => __('custom.product')])">
                 @can('modules', 'product.index')
                     <li>
@@ -66,8 +87,7 @@
                         </a>
                     </li>
                 @endcan
-            </x-backend.dashboard.nav.module>
-            <x-backend.dashboard.nav.module icon='fa-cubes' :title="__('custom.managerObject', ['attribute' => __('custom.attr')])">
+
                 @can('modules', 'attr.index')
                     <li>
                         <a class="text-capitalize" href="/attr/index">
@@ -84,9 +104,38 @@
                     </li>
                 @endcan
             </x-backend.dashboard.nav.module>
+
+            {{-- manage marketing --}}
+            <x-backend.dashboard.nav.module icon='fa-money' :title="__('custom.managerObject', ['attribute' => __('custom.marketing')])">
+                @can('modules', 'promotion.index')
+                    <li>
+                        <a class="text-capitalize" href="/promotion/index">
+                            {{ __('custom.managerObject', ['attribute' => __('custom.promotion')]) }}
+                        </a>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('modules', 'coupon.index')
+                    <li>
+                        <a class="text-capitalize" href="/coupon/index">
+                            {{ __('custom.managerObject', ['attribute' => __('custom.coupon')]) }}
+                        </a>
+                    </li>
+                @endcan
+
+                @can('modules', 'source.index')
+                    <li>
+                        <a class="text-capitalize" href="/source/index">
+                            {{ __('custom.managerObject', ['attribute' => __('custom.source')]) }}
+                        </a>
+                    </li>
+                @endcan
+            </x-backend.dashboard.nav.module>
+
             {{-- @new-module --}}
 
-
+            {{-- manage post --}}
             <x-backend.dashboard.nav.module icon='fa-file' :title="__('custom.managerObject', ['attribute' => __('custom.post')])">
                 @can('modules', 'post.index')
                     <li>
@@ -105,6 +154,7 @@
                 @endcan
             </x-backend.dashboard.nav.module>
 
+            {{-- manage slide & banner --}}
             <x-backend.dashboard.nav.module icon='fa-picture-o' :title="__('custom.managerObject', ['attribute' => __('custom.slideBanner')])">
                 @can('modules', 'slide.index')
                     <li>
@@ -115,6 +165,7 @@
                 @endcan
             </x-backend.dashboard.nav.module>
 
+            {{-- manage menu --}}
             <x-backend.dashboard.nav.module icon='fa-th-large' :title="__('custom.managerObject', ['attribute' => __('custom.menu')])">
                 @can('modules', 'menu.index')
                     <li>
@@ -125,6 +176,7 @@
                 @endcan
             </x-backend.dashboard.nav.module>
 
+            {{-- manage setting --}}
             <x-backend.dashboard.nav.module icon='fa-cog' :title="__('custom.managerObject', ['attribute' => __('custom.setting')])">
                 @can('modules', 'language.index')
                     <li>

@@ -13,7 +13,7 @@ class MenuRepository implements MenuRepositoryInterface
     public function paginate($request)
     {
         $perpage = $request->input('perpage') ?? 10;
-        $keywork = $request->input('keyword');
+        $keyword = $request->input('keyword');
         $publish = $request->input('publish');
         $userCatalougeId = $request->input('user_catalouge_id');
 
@@ -23,7 +23,7 @@ class MenuRepository implements MenuRepositoryInterface
             'ward',
             'userCatalouge'
         )
-            ->keyword($keywork ?? null)
+            ->keyword($keyword ?? null)
             ->publish($publish ?? null);
 
 
