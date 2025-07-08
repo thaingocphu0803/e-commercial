@@ -29,7 +29,7 @@
     @endif
 
 
-
+<div class="row">
     <form action="{{ $url }}" method="POST" class="box" id="{moduleTableName}_form">
         @csrf
 
@@ -247,4 +247,5 @@
                </button>
             </div>
     </form>
+</div>
 </x-backend.dashboard.layout>

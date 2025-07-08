@@ -16,9 +16,8 @@
             {{-- start body --}}
             {{ $slot }}
             {{-- end body  --}}
-
+            <x-backend.dashboard.footer />
         </div>
-        <x-backend.dashboard.footer />
     </div>
 
     <x-backend.dashboard.script >

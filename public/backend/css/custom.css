@@ -22,6 +22,10 @@
     margin-top:10px;
 }
 
+.mt-5{
+    margin-top:5px;
+}
+
 .mr-10{
     margin-right:10px;
 }
@@ -329,7 +333,7 @@ a.active{
 }
 
 .m-0{
-    margin: 0;
+    margin: 0 !important;
 }
 
 .text-500 {
@@ -340,4 +344,25 @@ a.active{
     position: absolute;
     top: 10px;
     right: 10px;
+}
+
+#sortable {
+    padding-left: unset;
+}
+
+.slide-list > .ui-state-default{
+    width:100% !important;
+    float: unset !important;
+    padding-left: unset !important;
+    background: unset !important;
+}
+
+.relative{
+    position: relative;
+}
+
+.deleteSlide{
+    position: absolute;
+    top: 0;
+    right: 0;
 }

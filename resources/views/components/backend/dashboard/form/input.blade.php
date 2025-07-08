@@ -6,8 +6,15 @@
     'rowLength' => null,
     'must' => false,
     'readOnly' => false,
-    'tag' => null
+    'tag' => null,
+    'rows' => 5,
+    'inputArrName' => null
 ])
+
+@php
+    $old = $inputArrName ?? $inputName;
+@endphp
+
 <div class="col-lg-{{ $rowLength ?? 6 }}">
     <div class="form-row">
         <label for="{{$inputName}}" class="control-label text-right text-capitalize">{{{$labelName}}}
@@ -18,6 +25,7 @@
         </label>
         @if ($tag === 'textarea')
         <textarea
+            rows="{{$rows}}"
             type="{{$type}}"
             name="{{$inputName}}"
             id="{{$inputName}}"
@@ -25,14 +33,14 @@
             class="form-control tiny-editor"
             {{$attributes}}
         >
-            {{old($inputName, $value)}}
+            {{old($old, $value)}}
         </textarea>
         @else
         <input
             type="{{$type}}"
             name="{{$inputName}}"
             id="{{$inputName}}"
-            value="{{old($inputName, $value)}}"
+            value="{{old($old, $value)}}"
             @readonly($readOnly)
             class="form-control"
             {{$attributes}}

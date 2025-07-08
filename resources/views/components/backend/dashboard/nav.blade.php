@@ -105,6 +105,16 @@
                 @endcan
             </x-backend.dashboard.nav.module>
 
+            <x-backend.dashboard.nav.module icon='fa-picture-o' :title="__('custom.managerObject', ['attribute' => __('custom.slideBanner')])">
+                @can('modules', 'slide.index')
+                    <li>
+                        <a class="text-capitalize" href="{{ route('slide.index') }}">
+                            {{ __('custom.slides') }}
+                        </a>
+                    </li>
+                @endcan
+            </x-backend.dashboard.nav.module>
+
             <x-backend.dashboard.nav.module icon='fa-th-large' :title="__('custom.managerObject', ['attribute' => __('custom.menu')])">
                 @can('modules', 'menu.index')
                     <li>

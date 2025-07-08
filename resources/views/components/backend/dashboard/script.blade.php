@@ -48,5 +48,8 @@
 {{-- menu.js --}}
  <script src="../../../backend/js/menu.js" defer></script>
 
+ {{-- slide.js --}}
+ <script src="../../../backend/js/slide.js" defer></script>
+
 {{ $slot }}
 

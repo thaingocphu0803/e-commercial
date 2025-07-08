@@ -18,7 +18,6 @@
             ? route('menu.child.save', $parentId)
             : route('menu.parent.save', $parent_menu_catalouge_id);
     @endphp
-
     <form action="{{ $route }}" method="POST" class="box">
         @csrf
 
@@ -183,5 +182,5 @@
         const lang = "{{ app()->getLocale() }}";
         const listChoosenMenu = @json(old('menu', $menuArr)['canonical'] ?? []);
     </script>
-
+</div>
 </x-backend.dashboard.layout>

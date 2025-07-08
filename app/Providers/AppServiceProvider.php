@@ -48,6 +48,8 @@ class AppServiceProvider extends ServiceProvider
 
         "App\Repositories\Interfaces\MenuCatalougeRepositoryInterface" => "App\Repositories\MenuCatalougeRepository",
 
+        "App\Repositories\Interfaces\SlideRepositoryInterface" => "App\Repositories\SlideRepository",
+
 	];
 
     /**

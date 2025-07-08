@@ -11,7 +11,7 @@
             </ul>
         </div>
     @endif
-
+<div class="row">
     <form action="{{ route('menu.store') }}" method="POST" class="box">
         @csrf
 
@@ -178,6 +178,8 @@
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
+=======
 
             <div class="flex flex-space-between">
                 <a href="{{ route('menu.index') }}" class="btn btn-success mb-20 ">{{ __('custom.cancel') }}</a>
@@ -185,7 +187,15 @@
                     class="btn btn-primary mb-20">{{ __('custom.save') }}</button>
             </div>
     </form>
+>>>>>>> main
 
+            <div class="flex flex-space-between">
+                <a href="{{ route('menu.index') }}" class="btn btn-success mb-20 ">{{ __('custom.cancel') }}</a>
+                <button type="submit"
+                    class="btn btn-primary mb-20">{{ __('custom.save') }}</button>
+            </div>
+    </form>
+</div>
     {{-- modal --}}
     <div id="createMenuCatalouge" class="modal fade in">
         <form action="" method="POST" class="form create-menu-catalouge">

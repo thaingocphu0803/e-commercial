@@ -2,20 +2,10 @@
 
 
     <x-backend.dashboard.breadcrumb
-        :title="__('custom.delObject', ['attribute'=>__('custom.attrGroup')])"
+        :title="__('custom.delObject', ['attribute'=>__('custom.slide')])"
     />
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-<div class="row">
-    <form action="{{ route('attr.catalouge.destroy', $attrCatalouge->attr_catalouge_id) }}" method="POST" class="box">
+    <form action="{{ route('slide.destroy', $slide->id) }}" method="POST" class="box">
         @csrf
         @method('delete')
 
@@ -23,11 +13,11 @@
             <div class="row">
                 <div class="col-lg-5">
                     <h3 class="panel-title">
-                        {{__('custom.ObjectInfor', ['attribute' => __('custom.attrGroup')])}}
+                        {{__('custom.ObjectInfor', ['attribute' => __('custom.slide')])}}
                     </h3>
                     <div class="pannel-description">
-                        {{__('custom.DelQuestion', ['attribute' => __('custom.attrGroup')])}}
-                        <span class="text-danger">{{ $attrCatalouge->name }}</span>
+                        {{__('custom.DelQuestion', ['attribute' => __('custom.slide')])}}
+                        <span class="text-danger">{{ $slide->name }}</span>
                     </div>
                     <div class="pannel-description">{{__('custom.DelNote')}}</div>
 
@@ -37,10 +27,10 @@
                         <div class="ibox-content">
                             <div class="row">
                                 <x-backend.dashboard.form.input inputName="name" type="text" :labelName="__('custom.name')"
-                                    :value="$attrCatalouge->name ?? ''" :readOnly="true" />
+                                    :value="$slide->name ?? ''" :disabled="true" />
 
-                                <x-backend.dashboard.form.input inputName="canonical" type="text"
-                                :labelName="__('custom.canonical')"   :value="$attrCatalouge->canonical ?? ''" :readOnly="true" />
+                                <x-backend.dashboard.form.input inputName="keyword" type="text" :labelName="__('custom.keyword')"
+                                    :value="$slide->keyword ?? ''" :disabled="true" />
 
                             </div>
 
@@ -48,7 +38,7 @@
 
                     </div>
                     <div class="flex flex-space-between">
-                        <a href="{{ route('attr.catalouge.index') }}" class="btn btn-success mb-20 ">
+                        <a href="{{ route('slide.index') }}" class="btn btn-success mb-20 ">
                             {{__('custom.cancel')}}
                         </a>
                         <button type="submit" class="btn btn-danger mb-20 ">
@@ -60,5 +50,5 @@
             </div>
         </div>
     </form>
-</div>
+
 </x-backend.dashboard.layout>

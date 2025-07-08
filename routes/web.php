@@ -20,6 +20,7 @@ use App\Http\Controllers\Backend\ProductCatalougeController;
 use App\Http\Controllers\Backend\AttrController;
 use App\Http\Controllers\Backend\AttrCatalougeController;
 use App\Http\Controllers\Backend\MenuController;
+use App\Http\Controllers\Backend\SlideController;
 use App\Http\Controllers\Backend\SystemController;
 
 //@use-controller@
@@ -121,6 +122,17 @@ Route::controller(MenuController::class)->middleware(['admin', 'locale'])->prefi
     Route::post('{menu_catalouge_id}/parentSave', 'parentSave')->name('menu.parent.save');
 
 
+});
+
+//SlideController
+Route::controller(SlideController::class)->middleware(['admin', 'locale'])->prefix('slide')->group(function () {
+    Route::get('index',  'index')->name('slide.index');
+    Route::get('create', 'create')->name('slide.create');
+    Route::post('store', 'store')->name('slide.store');
+    Route::get('edit/{slide}', 'edit')->name('slide.edit');
+    Route::post('update/{id}', 'update')->name('slide.update');
+    Route::get('delete/{slide}', 'delete')->name('slide.delete');
+    Route::delete('destroy/{id}', 'destroy')->name('slide.destroy');
 });
 
 //PostController

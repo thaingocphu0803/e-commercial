@@ -14,7 +14,7 @@
             </ul>
         </div>
     @endif
-
+<div class="row">
     <form action="{{ route('{routerPath}.destroy', ${moduleName}->{moduleTableName}_id) }}" method="POST" class="box">
         @csrf
         @method('delete')
@@ -60,5 +60,5 @@
             </div>
         </div>
     </form>
-
+</div>
 </x-backend.dashboard.layout>
