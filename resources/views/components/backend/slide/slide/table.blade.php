@@ -21,9 +21,9 @@
             <tr>
 
                 <th><input type="checkbox" class="checkAll check-table" name="input"></th>
-                <th class="avt-col">{{ __('custom.catalougeName') }}</th>
-                <th>{{ __('custom.keyword') }}</th>
-                <th>{{ __('custom.listImage') }}</th>
+                <th class="text-center">{{ __('custom.catalougeName') }}</th>
+                <th class="text-center">{{ __('custom.keyword') }}</th>
+                <th class="text-center">{{ __('custom.listImage') }}</th>
                 <th class="text-center">{{ __('custom.active') }}</th>
                 <th class="text-center">{{ __('custom.action') }}</th>
             </tr>
@@ -33,23 +33,31 @@
                 <tr>
                     <td><input type="checkbox" name="input" class="checkItem check-table" value="{{ $slide->id }}">
                     </td>
-                    <td>{{ $slide->name }}</td>
-                    <td>{{ $slide->keyword}}</td>
-                    <td class="text-capitalize text-center">--</td>
+                    <td class="text-center">{{ $slide->name }}</td>
+                    <td class="text-center">{{ $slide->keyword }}</td>
+                    <td class="text-capitalize text-center">
+                        @php
+                            $item = json_decode($slide->item, true);
+                        @endphp
+
+                        @foreach ($item['image'] as $src)
+                                <img class="img-cover table-img" src="{{ $src }}" alt="">
+                        @endforeach
+                    </td>
                     <td class="js-switch-{{ $slide->id }} text-center">
-                        <input type="checkbox" class="js-switch status" data-model="user" data-field="publish"
+                        <input type="checkbox" class="js-switch status" data-model="slide" data-field="publish"
                             data-modelId="{{ $slide->id }}" value="{{ $slide->publish }}"
                             @checked($slide->publish == 1) />
                     </td>
                     <td class="text-center">
-                        @can('modules', 'user.update')
-                            <a href="{{ route('user.edit', $slide->id) }}" class="btn btn-success">
+                        @can('modules', 'slide.update')
+                            <a href="{{ route('slide.edit', $slide->id) }}" class="btn btn-success">
                                 <i class="fa fa-edit"></i>
                             </a>
                         @endcan
 
-                        @can('modules', 'user.delete')
-                            <a href="{{ route('user.delete', $slide->id) }}" class="btn btn-danger">
+                        @can('modules', 'slide.delete')
+                            <a href="{{ route('slide.delete', $slide->id) }}" class="btn btn-danger">
                                 <i class="fa fa-trash"></i>
                             </a>
                         @endcan

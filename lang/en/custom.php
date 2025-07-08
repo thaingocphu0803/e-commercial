@@ -228,6 +228,6 @@ return [
     'slideImageAlert' => 'You must choose at least one image for this slides.',
     'commonInf' => 'Common Information',
     'opNewTab' => 'Open in New Tab',
-    'iTitle' => 'image Title',
-    'iDesc' => 'image Description'
+    'iTitle' => 'Image Title',
+    'iDesc' => 'Image Description'
 ];

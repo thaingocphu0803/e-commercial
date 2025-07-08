@@ -17,6 +17,10 @@ return new class extends Migration
             $table->string('keyword')->unique();
             $table->text('description')->nullable();
             $table->longText('item');
+            $table->longText('settings');
+            $table->string('short_code');
+            $table->tinyInteger('publish')->default(0);
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

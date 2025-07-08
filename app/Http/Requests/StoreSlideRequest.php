@@ -23,15 +23,15 @@ class StoreSlideRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'keyword' => 'required|unique:slides,id,' . $this->id,
-            'slide.image' => 'required'
+            'keyword' => 'required|unique:slides',
+            'slides.image' => 'required'
         ];
     }
 
     public function messages()
     {
         return [
-            'slide.image.required' => __('custom.slideImageAlert')
+            'slides.image.required' => __('custom.slideImageAlert')
         ];
     }
 }

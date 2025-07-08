@@ -26,11 +26,11 @@
                     <div class="ibox">
                         <div class="ibox-content">
                             <div class="row">
-                                <x-backend.dashboard.form.input inputName="email" type="text" :labelName="__('custom.name')"
-                                    :value="$slide->email ?? ''" :disabled="true" />
-
-                                <x-backend.dashboard.form.input inputName="name" type="text" :labelName="__('custom.fullname')"
+                                <x-backend.dashboard.form.input inputName="name" type="text" :labelName="__('custom.name')"
                                     :value="$slide->name ?? ''" :disabled="true" />
+
+                                <x-backend.dashboard.form.input inputName="keyword" type="text" :labelName="__('custom.keyword')"
+                                    :value="$slide->keyword ?? ''" :disabled="true" />
 
                             </div>
 

@@ -6,6 +6,13 @@
             ? __('custom.editObject', ['attribute' => __('custom.slide')])
             : __('custom.addObject', ['attribute' => __('custom.slide')]);
         $action = isset($slide) ? __('custom.edit') : __('custom.create');
+
+        $item =  isset($slide) ? json_decode($slide['item'], true) : [];
+        $settings = isset($slide) ?  json_decode($slide['settings']) : [];
+
+        $arrow =  $settings->arrow ?? null;
+        $autoplay =  $settings->autoplay ?? null;
+        $pauseHover =  $settings->pauseHover ?? null;
     @endphp
 
     <x-backend.dashboard.breadcrumb :title="$title" />
@@ -37,7 +44,7 @@
                             </div>
                             <div id="sortable" class="ibox-content slide-list sortui ui-sortable">
                                 @php
-                                    $slides = old('slides') ?? [];
+                                    $slides = old('slides', $item) ?? [];
                                 @endphp
                                 @if (count($slides))
                                     @foreach ($slides['image'] as $key => $val)
@@ -163,9 +170,9 @@
 
                                     <div class="dimentions">
                                         <x-backend.dashboard.form.input inputName="settings[width]" type="text"
-                                            :labelName="__('custom.width') . ' (px)'" :value="$slide->width ?? 0" inputArrName="settings.width"/>
+                                            :labelName="__('custom.width') . ' (px)'" :value="$settings->width ?? 0" inputArrName="settings.width"/>
                                         <x-backend.dashboard.form.input inputName="settings[height]" type="text"
-                                            :labelName="__('custom.height') . ' (px)'" :value="$slide->height ?? 0" inputArrName="settings.height"/>
+                                            :labelName="__('custom.height') . ' (px)'" :value="$settings->height ?? 0" inputArrName="settings.height"/>
                                     </div>
 
                                     <div class="col-lg-12">
@@ -174,21 +181,21 @@
                                         <select name="settings[effect]" class="form-control select2"
                                             id="settings_effect">
                                             @foreach (__('module.effect') as $key => $value)
-                                                <option value="{{ $key }}" {{old('settings.effect') == $key ? 'selected' : '' }}>{{ $value }}</option>
+                                                <option value="{{ $key }}" {{old('settings.effect', $settings->effect ?? null) == $key ? 'selected' : '' }}>{{ $value }}</option>
                                             @endforeach
                                         </select>
                                     </div>
 
                                     <x-backend.dashboard.form.checkbox :labelName="__('custom.arrow')" value="accept"
-                                        name="settings[arrow]" rowLength="12" :old="old('settings.arrow') ?? 'unaccept' ">
+                                        name="settings[arrow]" rowLength="12" :checked="(!old() && empty($arrow))|| old('settings.arrow', $arrow) == 'accept' ? 'checked' : '' ">
                                     </x-backend.dashboard.form.checkbox>
 
                                     <div class="col-lg-12">
-                                        <label for="hiddenDirection">{{ __('custom.Navigate') }}</label>
+                                        <label for="hiddenDirection">{{ __('custom.navigate') }}</label>
                                         <div class='row flex flex-col gap-10'>
                                             @foreach (__('module.navigate') as $key => $val)
                                                 <x-backend.dashboard.form.radio :labelName="$val" :value="$key ?? ''"
-                                                    name="settings[navigate]" rowLength="12" :old="old('settings.navigate') ?? 'dots' ">
+                                                    name="settings[navigate]" rowLength="12" :old="old('settings.navigate', $settings->navigate ?? null) ?? 'dots' ">
                                                 </x-backend.dashboard.form.radio>
                                             @endforeach
                                         </div>
@@ -212,17 +219,17 @@
                             <div class="ibox-content">
                                 <div class="row flex flex-col gap-10">
                                     <x-backend.dashboard.form.checkbox :labelName="__('custom.autoPlay')" value="accept"
-                                        name="settings[autoplay]" rowLength="12" :old="old('settings.autoplay') ?? 'unaccept' ">
+                                        name="settings[autoplay]" rowLength="12" :checked="(!old() && empty($autoplay)) || old('settings.autoplay', $autoplay) == 'accept' ? 'checked' : ''">
                                     </x-backend.dashboard.form.checkbox>
                                     <x-backend.dashboard.form.checkbox :labelName="__('custom.hoverPause')" value="accept"
-                                        name="settings[pauseHover]" rowLength="12" :old="old('settings.pauseHover')">
+                                        name="settings[pauseHover]" rowLength="12" :checked="(!old() && empty($pauseHover)) || old('settings.pauseHover', $pauseHover) == 'accept' ? 'checked' : ''">
                                     </x-backend.dashboard.form.checkbox>
                                 </div>
                                 <div class="row mt-10">
                                     <x-backend.dashboard.form.input inputName="settings[duration_slide]"
-                                        type="text" :labelName="__('custom.durationSlide') . ' (s)'" value=""  inputArrName="settings.duration_slide"/>
+                                        type="text" :labelName="__('custom.durationSlide') . ' (s)'" :value="$settings->duration_slide ?? null"  inputArrName="settings.duration_slide"/>
                                     <x-backend.dashboard.form.input inputName="settings[speed_effect]" type="text"
-                                        :labelName="__('custom.speedEffect') . ' (ms)'" value="" inputArrName="settings.speed_effect"/>
+                                        :labelName="__('custom.speedEffect') . ' (ms)'" :value="$settings->speed_effect ?? null" inputArrName="settings.speed_effect"/>
                                 </div>
                             </div>
 
@@ -235,9 +242,9 @@
                             </div>
                             <div class="ibox-content">
                                 <div class="row">
-                                    <x-backend.dashboard.form.input inputName="settings[shortcode]" type="text"
-                                        tag="textarea" :labelName="__('custom.shortcode')" :value="$slide->keyword ?? ''" rowLength="12"
-                                        rows="10"  inputArrName="settings.shortcode"/>
+                                    <x-backend.dashboard.form.input inputName="short_code" type="text"
+                                        tag="textarea" :labelName="__('custom.shortcode')" :value="$slide->short_code ?? null" rowLength="12"
+                                        rows="10"/>
                                 </div>
                             </div>
                         </div>

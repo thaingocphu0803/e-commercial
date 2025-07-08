@@ -15,6 +15,10 @@ class Slide extends Model
         'keyword',
         'description',
         'item',
+        'settings',
+        'publish',
+        'user_id',
+        'short_code',
     ];
 
     // public function languages(){

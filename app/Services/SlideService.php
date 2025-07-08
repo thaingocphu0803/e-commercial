@@ -4,9 +4,11 @@ namespace App\Services;
 
 use App\Repositories\SlideRepository;
 use App\Services\Interfaces\SlideServiceInterface;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
+use function Pest\Laravel\json;
 
 /**
  * Class SlideService
@@ -21,24 +23,29 @@ class SlideService implements SlideServiceInterface
         $this->slideRepository = $slideRepository;
     }
 
-    public function paginate($request){
+    public function paginate($request)
+    {
         $users = $this->slideRepository->paginate($request);
         return $users;
     }
 
-    public function create($request){
+    public function create($request)
+    {
         DB::beginTransaction();
-        try{
-            $payload = $request->except(['_token', 'password_confirmation']);
-
-            $payload['password']  = Hash::make($payload['password']);
-
+        try {
+            $payload = $request->except(['_token', 'slides']);
+            $payload['settings']['arrow'] = $payload['settings']['arrow'] ?? 'unaccept';
+            $payload['settings']['autoplay'] = $payload['settings']['autoplay'] ?? 'unaccept';
+            $payload['settings']['pauseHover'] = $payload['settings']['pauseHover'] ?? 'unaccept';
+            $payload['settings'] = json_encode($payload['settings']);
+            $payload['item'] = $this->handleSlideItem($request->only(['slides']));
+            $payload['user_id'] = Auth::id();
             $this->slideRepository->create($payload);
 
             DB::commit();
 
             return true;
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             DB::rollBack();
             echo $e->getMessage();
 
@@ -46,17 +53,23 @@ class SlideService implements SlideServiceInterface
         }
     }
 
-    public function update($id, $request){
+    public function update($id, $request)
+    {
         DB::beginTransaction();
-        try{
-            $payload = $request->except(['_token']);
-
+        try {
+            $payload = $request->except(['_token', 'slides']);
+            $payload['settings']['arrow'] = $payload['settings']['arrow'] ?? 'unaccept';
+            $payload['settings']['autoplay'] = $payload['settings']['autoplay'] ?? 'unaccept';
+            $payload['settings']['pauseHover'] = $payload['settings']['pauseHover'] ?? 'unaccept';
+            $payload['settings'] = json_encode($payload['settings']);
+            $payload['item'] = $this->handleSlideItem($request->only(['slides']));
+            $payload['user_id'] = Auth::id();
             $this->slideRepository->update($id, $payload);
 
             DB::commit();
 
             return true;
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             DB::rollBack();
             echo $e->getMessage();
 
@@ -65,15 +78,16 @@ class SlideService implements SlideServiceInterface
     }
 
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         DB::beginTransaction();
-        try{
+        try {
             $this->slideRepository->destroy($id);
 
             DB::commit();
 
             return true;
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             DB::rollBack();
             echo $e->getMessage();
 
@@ -82,15 +96,16 @@ class SlideService implements SlideServiceInterface
     }
 
 
-    public function forceDestroy($id){
+    public function forceDestroy($id)
+    {
         DB::beginTransaction();
-        try{
+        try {
             $this->slideRepository->forceDestroy($id);
 
             DB::commit();
 
             return true;
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             DB::rollBack();
             echo $e->getMessage();
 
@@ -98,15 +113,16 @@ class SlideService implements SlideServiceInterface
         }
     }
 
-    public function updateStatus($payload){
+    public function updateStatus($payload)
+    {
         DB::beginTransaction();
-        try{
+        try {
             $this->slideRepository->updateStatus($payload);
 
             DB::commit();
 
             return true;
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             DB::rollBack();
             echo $e->getMessage();
 
@@ -114,15 +130,16 @@ class SlideService implements SlideServiceInterface
         }
     }
 
-    public function updateStatusAll($payload){
+    public function updateStatusAll($payload)
+    {
         DB::beginTransaction();
-        try{
+        try {
             $this->slideRepository->updateStatusAll($payload);
 
             DB::commit();
 
             return true;
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             DB::rollBack();
             echo $e->getMessage();
 
@@ -130,7 +147,12 @@ class SlideService implements SlideServiceInterface
         }
     }
 
-
+    private function handleSlideItem($item)
+    {
+        $temp = [];
+        foreach ($item['slides'] as $key => $val) {
+            $temp[$key] = $val ?? NUll;
+        }
+        return json_encode($temp);
+    }
 }
-
-

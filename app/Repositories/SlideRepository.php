@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\User;
+use App\Models\Slide;
 use App\Repositories\Interfaces\SlideRepositoryInterface;
 
 class SlideRepository implements SlideRepositoryInterface {
@@ -13,13 +13,7 @@ class SlideRepository implements SlideRepositoryInterface {
         $publish = $request->input('publish');
         $userCatalougeId = $request->input('user_catalouge_id');
 
-        $query = User::with(
-            'province',
-            'district',
-            'ward',
-            'userCatalouge'
-        )
-        ->keyword($keywork ?? null)
+        $query = Slide::keyword($keywork ?? null)
         ->publish($publish ?? null);
 
 
@@ -33,23 +27,23 @@ class SlideRepository implements SlideRepositoryInterface {
 
     public function create($payload){
 
-        return User::create($payload);
+        return Slide::create($payload);
     }
 
     public function update($id, $payload)
     {
-        return User::find($id)->update($payload);
+        return Slide::find($id)->update($payload);
     }
 
     public function destroy($id)
     {
-        return User::destroy($id);
+        return Slide::destroy($id);
     }
 
 
     public function forceDestroy($id)
     {
-        return User::forceDestroy($id);
+        return Slide::forceDestroy($id);
     }
 
     public function updateStatus($payload)
@@ -58,7 +52,7 @@ class SlideRepository implements SlideRepositoryInterface {
         $value = $payload['value'] == 1 ? 2 : 1;
         $columm = [ $payload['field'] => $value];
 
-        return User::find($modelId)->update($columm);
+        return Slide::find($modelId)->update($columm);
     }
 
 
@@ -68,6 +62,6 @@ class SlideRepository implements SlideRepositoryInterface {
         $value = $payload['value'];
         $columm = [ $payload['field'] => $value];
 
-        return User::whereIn('id', $ids)->update($columm);
+        return Slide::whereIn('id', $ids)->update($columm);
     }
 }

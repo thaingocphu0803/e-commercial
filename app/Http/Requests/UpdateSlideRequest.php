@@ -22,7 +22,16 @@ class UpdateSlideRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required',
+            'keyword' => 'required|unique:slides,id,' . $this->id,
+            'slides.image' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'slides.image.required' => __('custom.slideImageAlert')
         ];
     }
 }

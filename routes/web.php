@@ -129,9 +129,9 @@ Route::controller(SlideController::class)->middleware(['admin', 'locale'])->pref
     Route::get('index',  'index')->name('slide.index');
     Route::get('create', 'create')->name('slide.create');
     Route::post('store', 'store')->name('slide.store');
-    Route::get('edit/{id}', 'edit')->name('slide.edit');
+    Route::get('edit/{slide}', 'edit')->name('slide.edit');
     Route::post('update/{id}', 'update')->name('slide.update');
-    Route::get('delete/{id}', 'delete')->name('slide.delete');
+    Route::get('delete/{slide}', 'delete')->name('slide.delete');
     Route::delete('destroy/{id}', 'destroy')->name('slide.destroy');
 });
 
