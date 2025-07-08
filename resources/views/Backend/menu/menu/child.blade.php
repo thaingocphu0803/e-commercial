@@ -18,7 +18,6 @@
             ? route('menu.child.save', $parentId)
             : route('menu.parent.save', $parent_menu_catalouge_id);
     @endphp
-<div class="row">
     <form action="{{ $route }}" method="POST" class="box">
         @csrf
 
