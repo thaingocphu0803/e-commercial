@@ -8,6 +8,8 @@ namespace App\Repositories\Interfaces;
  */
 interface UserRepositoryInterface
 {
+    public function getAll();
+
     public function paginate($request);
 
     public function create($payload);

@@ -259,8 +259,4 @@
         </form>
     </div>
 
-    <script>
-        const lang = "{{ app()->getLocale() }}";
-    </script>
-
 </x-backend.dashboard.layout>

@@ -11,6 +11,7 @@ use App\Services\Interfaces\ProductServiceInterface;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use  Illuminate\Support\Str;
+use Ramsey\Uuid\Nonstandard\Uuid;
 
 /**
  * Class ProductService
@@ -266,7 +267,10 @@ class ProductService implements ProductServiceInterface
     public function createVariant($product, $request)
     {
         $payload = $request->only(['variant', 'attr', 'attributes', 'attr-catalouge']);
-        $variant = $this->createVariantArray($payload);
+        // if varinant is not existed, did not anything
+        if(!count($payload)) return;
+        $variant = $this->createVariantArray($product->id, $payload);
+
         $variants = $product->productVariants()->createMany($variant);
         $variantIds = $variants->pluck('id');
         $variantAttr = $this->createProductVariantAttrArray($variantIds, $payload['attributes']);
@@ -274,13 +278,14 @@ class ProductService implements ProductServiceInterface
         $this->productVariantAttrRepository->createBash($variantAttr);
     }
 
-    public function createVariantArray($payload = []): array
+    public function createVariantArray($product_id, $payload = []): array
     {
         $attrCatalouge = implode('-', $payload['attr-catalouge']);
 
         if (isset($payload['variant']['sku']) && count($payload['variant']['sku'])) {
             foreach ($payload['variant']['sku'] as $key => $val) {
                 $variant[] = [
+                    'uuid' => Uuid::uuid5(Uuid::NAMESPACE_DNS, $product_id. ", ". $payload['attr']['id'][$key]),
                     'user_id' => Auth::id(),
                     'code' => ($payload['attr']['id'][$key]) ?? '',
                     'name' => $payload['attr']['name'][$key],
@@ -320,6 +325,12 @@ class ProductService implements ProductServiceInterface
         return $variantAttr;
     }
 
+    public function loadProductWithVariant($request)
+    {
+       $products  = $this->productRepository->loadProductWithVariant($request);
+       return $products;
+    }
+
     public function getRequestPost()
     {
         return [
@@ -328,7 +339,9 @@ class ProductService implements ProductServiceInterface
             'publish',
             'image',
             'album',
-            'product_catalouge_id'
+            'product_catalouge_id',
+            'code',
+            'price'
         ];
     }
 

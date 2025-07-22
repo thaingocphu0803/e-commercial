@@ -17,10 +17,10 @@ class LanguageRepository implements LanguageRepositoryInterface
     public function paginate($request)
     {
         $perpage = $request->input('perpage') ?? 10;
-        $keywork = $request->input('keyword');
+        $keyword = $request->input('keyword');
         $publish = $request->input('publish');
 
-        return  Language::keyword($keywork ?? null)
+        return  Language::keyword($keyword ?? null)
             ->publish($publish ?? null)
             ->orderBy('id', 'desc')
             ->paginate($perpage)

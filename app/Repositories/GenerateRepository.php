@@ -17,10 +17,10 @@ class GenerateRepository implements GenerateRepositoryInterface
     public function paginate($request)
     {
         $perpage = $request->input('perpage') ?? 10;
-        $keywork = $request->input('keyword');
+        $keyword = $request->input('keyword');
         $publish = $request->input('publish');
 
-        return  Generate::keyword($keywork ?? null)
+        return  Generate::keyword($keyword ?? null)
             ->publish($publish ?? null)
             ->orderBy('id', 'desc')
             ->paginate($perpage)

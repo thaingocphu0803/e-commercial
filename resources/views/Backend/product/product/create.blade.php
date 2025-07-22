@@ -119,24 +119,20 @@
                                     rowLength="12"
                                     type="text"
                                     :labelName="__('custom.code')"
-                                    {{-- :must="true" --}}
-                                    :value="time()"
+                                    :value="$product->code ?? time()"
                                 />
                                 <x-backend.dashboard.form.input
                                     inputName="price"
                                     rowLength="12"
                                     type="text"
                                     :labelName="__('custom.price')"
-                                    {{-- :must="true" --}}
-                                    {{-- :value="$user->email ?? ''" --}}
+                                    :value="$product->price ?? ''"
                                 />
                                 <x-backend.dashboard.form.input
                                     inputName="origin"
                                     rowLength="12"
                                     type="text"
                                     :labelName="__('custom.origin')"
-                                    {{-- :must="true" --}}
-                                    {{-- :value="$user->email ?? ''" --}}
                                 />
                             </div>
                         </div>

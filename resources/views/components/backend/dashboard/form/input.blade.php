@@ -8,7 +8,8 @@
     'readOnly' => false,
     'tag' => null,
     'rows' => 5,
-    'inputArrName' => null
+    'inputArrName' => null,
+    'disabled' => false
 ])
 
 @php
@@ -30,8 +31,7 @@
             name="{{$inputName}}"
             id="{{$inputName}}"
             @readonly($readOnly)
-            class="form-control tiny-editor"
-            {{$attributes}}
+            {{$attributes->merge(['class' => 'form-control tiny-editor'])}}
         >
             {{old($old, $value)}}
         </textarea>
@@ -42,8 +42,8 @@
             id="{{$inputName}}"
             value="{{old($old, $value)}}"
             @readonly($readOnly)
-            class="form-control"
-            {{$attributes}}
+            @disabled($disabled)
+            {{$attributes->merge(['class' => 'form-control'])}}
         >
         @endif
         {{$slot}}

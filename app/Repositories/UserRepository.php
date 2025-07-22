@@ -5,11 +5,18 @@ namespace App\Repositories;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 
-class UserRepository implements UserRepositoryInterface {
+class UserRepository implements UserRepositoryInterface
+{
+    public function getAll()
+    {
+        return User::where('publish', 1)
+            ->get();
+    }
+
     public function paginate($request)
     {
         $perpage = $request->input('perpage') ?? 10;
-        $keywork = $request->input('keyword');
+        $keyword = $request->input('keyword');
         $publish = $request->input('publish');
         $userCatalougeId = $request->input('user_catalouge_id');
 
@@ -19,7 +26,7 @@ class UserRepository implements UserRepositoryInterface {
             'ward',
             'userCatalouge'
         )
-        ->keyword($keywork ?? null)
+        ->keyword($keyword ?? null)
         ->publish($publish ?? null);
 
 

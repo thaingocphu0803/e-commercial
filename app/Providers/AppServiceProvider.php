@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -30,19 +32,19 @@ class AppServiceProvider extends ServiceProvider
 
         'App\Repositories\Interfaces\GenerateRepositoryInterface' => 'App\Repositories\GenerateRepository',
 
-    	"App\Repositories\Interfaces\ProductCatalougeRepositoryInterface" => "App\Repositories\ProductCatalougeRepository",
+        "App\Repositories\Interfaces\ProductCatalougeRepositoryInterface" => "App\Repositories\ProductCatalougeRepository",
 
-		"App\Repositories\Interfaces\ProductRepositoryInterface" => "App\Repositories\ProductRepository",
+        "App\Repositories\Interfaces\ProductRepositoryInterface" => "App\Repositories\ProductRepository",
 
-		"App\Repositories\Interfaces\AttrCatalougeRepositoryInterface" => "App\Repositories\AttrCatalougeRepository",
+        "App\Repositories\Interfaces\AttrCatalougeRepositoryInterface" => "App\Repositories\AttrCatalougeRepository",
 
-		"App\Repositories\Interfaces\AttrRepositoryInterface" => "App\Repositories\AttrRepository",
+        "App\Repositories\Interfaces\AttrRepositoryInterface" => "App\Repositories\AttrRepository",
 
         "App\Repositories\Interfaces\ProductVariantAttrRepositoryInterface" => "App\Repositories\ProductVariantAttrRepository",
 
         "App\Repositories\Interfaces\ProductVariantRepositoryInterface" => "App\Repositories\ProductVariantRepository",
 
-		"App\Repositories\Interfaces\SystemRepositoryInterface" => "App\Repositories\SystemRepository",
+        "App\Repositories\Interfaces\SystemRepositoryInterface" => "App\Repositories\SystemRepository",
 
         "App\Repositories\Interfaces\MenuRepositoryInterface" => "App\Repositories\MenuRepository",
 
@@ -50,14 +52,21 @@ class AppServiceProvider extends ServiceProvider
 
         "App\Repositories\Interfaces\SlideRepositoryInterface" => "App\Repositories\SlideRepository",
 
-	];
+        "App\Repositories\Interfaces\PromotionRepositoryInterface" => "App\Repositories\PromotionRepository",
+
+        "App\Repositories\Interfaces\SourceRepositoryInterface" => "App\Repositories\SourceRepository",
+
+        'App\Repositories\Interfaces\CustomerRepositoryInterface' => 'App\Repositories\CustomerRepository',
+
+        'App\Repositories\Interfaces\CustomerCatalougeRepositoryInterface' => 'App\Repositories\CustomerCatalougeRepository',
+    ];
 
     /**
      * Register any application services.
      */
     public function register(): void
     {
-        foreach ($this->bindings as $interface => $implementation){
+        foreach ($this->bindings as $interface => $implementation) {
             $this->app->bind($interface, $implementation);
         }
     }
@@ -67,17 +76,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('modules', function($user, $permissionName){
-            if($user->publish == 2){
+        Gate::define('modules', function ($user, $permissionName) {
+            if ($user->publish == 2) {
                 return false;
             }
 
             $permission = $user->userCatalouge->permissions;
-            if ($permission->contains('canonical', $permissionName)){
+            if ($permission->contains('canonical', $permissionName)) {
                 return true;
             }
 
             return false;
         });
+
     }
 }

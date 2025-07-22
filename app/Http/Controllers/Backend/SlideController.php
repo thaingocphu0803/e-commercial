@@ -36,10 +36,10 @@ class SlideController extends Controller
     public function store(StoreSlideRequest $request){
         Gate::authorize('modules', 'slide.create');
         if($this->slideService->create($request)){
-            return redirect()->route('slide.index')->with('success', __('alert.addSuccess', ['attribute'=> __('custom.member')]));
+            return redirect()->route('slide.index')->with('success', __('alert.addSuccess', ['attribute'=> __('custom.slide')]));
         }
 
-        return redirect()->route('slide.index')->with('error', __('alert.addError', ['attribute'=> __('custom.member')]));
+        return redirect()->route('slide.index')->with('error', __('alert.addError', ['attribute'=> __('custom.slide')]));
     }
 
     public function edit(Slide $slide){
@@ -50,10 +50,10 @@ class SlideController extends Controller
     public function update($id, UpdateSlideRequest $request){
         Gate::authorize('modules', 'slide.update');
         if($this->slideService->update($id, $request)){
-            return redirect()->route('slide.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('custom.member')]));
+            return redirect()->route('slide.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('custom.slide')]));
         }
 
-        return redirect()->route('slide.index')->with('error', __('alert.updateError', ['attribute'=> __('custom.member')]));
+        return redirect()->route('slide.index')->with('error', __('alert.updateError', ['attribute'=> __('custom.slide')]));
     }
 
     public function delete(Slide $slide){
@@ -66,10 +66,10 @@ class SlideController extends Controller
     public function destroy($id){
         Gate::authorize('modules', 'slide.delete');
         if($this->slideService->destroy($id)){
-            return redirect()->route('slide.index')->with('success', __('alert.deleteSuccess', ['attribute'=> __('custom.member')]));
+            return redirect()->route('slide.index')->with('success', __('alert.deleteSuccess', ['attribute'=> __('custom.slide')]));
         }
 
-        return redirect()->route('slide.index')->with('error', __('alert.deleteError', ['attribute'=> __('custom.member')]));
+        return redirect()->route('slide.index')->with('error', __('alert.deleteError', ['attribute'=> __('custom.slide')]));
     }
 
 }

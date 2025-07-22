@@ -15,10 +15,10 @@ class PermissionRepository implements PermissionRepositoryInterface
     public function paginate($request)
     {
         $perpage = $request->input('perpage') ?? 10;
-        $keywork = $request->input('keyword');
+        $keyword = $request->input('keyword');
         $publish = $request->input('publish');
 
-        return  Permission::keyword($keywork ?? null)
+        return  Permission::keyword($keyword ?? null)
             ->publish($publish ?? null)
             ->orderBy('id', 'desc')
             ->paginate($perpage)

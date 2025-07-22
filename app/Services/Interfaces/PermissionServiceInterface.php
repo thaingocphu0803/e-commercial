@@ -22,5 +22,4 @@ interface PermissionServiceInterface
 
     public function updateStatusAll($payload);
 
-
 }

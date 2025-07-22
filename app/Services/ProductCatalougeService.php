@@ -206,6 +206,12 @@ class ProductCatalougeService implements ProductCatalougeServiceInterface
         }
     }
 
+    public function loadProductCatalouge($request)
+    {
+        $productCatalouges = $this->productCatalougeRepository->loadProductCatalouge($request);
+        return $productCatalouges;
+    }
+
     public function getRequestProductCatalouge()
     {
         return [

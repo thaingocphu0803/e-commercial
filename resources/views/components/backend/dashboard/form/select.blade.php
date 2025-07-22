@@ -26,6 +26,8 @@
             @if (!empty($data))
                 @foreach ($data as $item)
                     @php
+                        $item = (object) $item;
+                        // Use code if available, otherwise use id
                         $itemId = $item->code ?? $item->id;
                     @endphp
                     <option value="{{ $itemId }}" @selected($itemCodeDefault == $itemId)>{{ $item->name }}</option>

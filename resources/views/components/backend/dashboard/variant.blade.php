@@ -83,7 +83,6 @@
 </div>
 
 <script>
-    const lang = "{{ app()->getLocale() }}";
     const listAttr = @json($listAttr);
     const attributes = @json(old('attributes', $product->variants['attributes'] ?? ''));
     const OldVariants = @json(old('variant', $product->variants['detail'] ?? ''));

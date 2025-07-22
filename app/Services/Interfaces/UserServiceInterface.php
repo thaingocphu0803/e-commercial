@@ -8,6 +8,8 @@ namespace App\Services\Interfaces;
  */
 interface UserServiceInterface
 {
+    public function getAll();
+
     public function paginate($number);
 
     public function create($request);

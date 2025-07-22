@@ -20,8 +20,12 @@ class Product extends Model
         'order',
         'publish',
         'user_id',
-        'follow'
+        'follow',
+        'code',
+        'price'
     ];
+
+    protected $table = 'products';
 
     public function languages(){
         return $this->belongsToMany(Language::class, 'product_language', 'product_id', 'language_id')
@@ -35,5 +39,11 @@ class Product extends Model
 
     public function productVariants(){
         return $this->hasMany(ProductVariant::class, 'product_id', 'id');
+    }
+
+    public function promotions()
+    {
+        return $this->belongsToMany(Promotion::class, 'promotion_product_variant', 'product_id', 'promotion_id')
+                ->withPivot('product_variant_id', 'model');
     }
 }

@@ -32,6 +32,7 @@ interface ProductCatalougeRepositoryInterface
 
     public function updatePivot($model, $payload = []);
 
+    public function loadProductCatalouge($request);
 
     // public function updateByWhereIn($ids, $value);
 

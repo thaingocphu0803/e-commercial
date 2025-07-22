@@ -21,6 +21,12 @@ class UserService implements UserServiceInterface
         $this->userRepository = $userRepository;
     }
 
+    public function getAll()
+    {
+        $customerCatalouge = $this->userRepository->getAll();
+        return $customerCatalouge;
+    }
+
     public function paginate($request){
         $users = $this->userRepository->paginate($request);
         return $users;

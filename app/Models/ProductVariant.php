@@ -22,7 +22,8 @@ class ProductVariant extends Model
         "url",
         "album",
         "publish",
-        "attr_catalouge"
+        "attr_catalouge",
+        "uuid"
     ];
 
     public function products(){

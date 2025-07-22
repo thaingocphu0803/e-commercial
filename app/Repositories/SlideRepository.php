@@ -9,11 +9,11 @@ class SlideRepository implements SlideRepositoryInterface {
     public function paginate($request)
     {
         $perpage = $request->input('perpage') ?? 10;
-        $keywork = $request->input('keyword');
+        $keyword = $request->input('keyword');
         $publish = $request->input('publish');
         $userCatalougeId = $request->input('user_catalouge_id');
 
-        $query = Slide::keyword($keywork ?? null)
+        $query = Slide::keyword($keyword ?? null)
         ->publish($publish ?? null);
 
 
