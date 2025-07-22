@@ -68,7 +68,7 @@
                                 <x-backend.dashboard.form.select
                                     :labelName="__('custom.gender')"
                                     name="gender"
-                                    :data="__('module.gender')"
+                                    :data="__('module.customer_type.gender')"
                                     :must="true"
                                     :value="$customer->gender ?? ''"
                                 />

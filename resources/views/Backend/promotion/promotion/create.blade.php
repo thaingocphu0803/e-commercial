@@ -1,8 +1,6 @@
 <x-backend.dashboard.layout>
 
     <x-slot:heading>
-        <script src="https://cdn.tiny.cloud/1/45tp955r5rsk9zjmoshrh28werz7a8oc0urf8hnf0tnavqre/tinymce/7/tinymce.min.js"
-            referrerpolicy="origin"></script>
         <link href="../../../backend/css/plugins/switchery/switchery.css" rel="stylesheet">
         <link href="../../../backend/js/plugins/datetimepicker/jquery.datetimepicker.css" rel="stylesheet">
     </x-slot:heading>

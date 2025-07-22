@@ -4,6 +4,8 @@
  <script src="../../../backend/js/plugins/metisMenu/jquery.metisMenu.js"></script>
  <script src="../../../backend/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
+ {{-- summer note --}}
+ <script src="../../../Backend//js/plugins/summernote/summernote.min.js"></script>
 
  <!-- Peity -->
  <script src="../../../backend/js/plugins/peity/jquery.peity.min.js"></script>
@@ -33,7 +35,6 @@
  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
  {{-- cloudinary widget --}}
-
 <script src="https://upload-widget.cloudinary.com/latest/global/all.js" type="text/javascript"></script>
 
 {{-- nestable --}}
