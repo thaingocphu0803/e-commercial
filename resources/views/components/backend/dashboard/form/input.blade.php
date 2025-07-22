@@ -31,7 +31,7 @@
             name="{{$inputName}}"
             id="{{$inputName}}"
             @readonly($readOnly)
-            {{$attributes->merge(['class' => 'form-control tiny-editor'])}}
+            {{$attributes->merge(['class' => 'form-control summernote'])}}
         >
             {{old($old, $value)}}
         </textarea>

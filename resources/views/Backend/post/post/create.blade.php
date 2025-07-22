@@ -1,10 +1,5 @@
 <x-backend.dashboard.layout>
 
-    <x-slot:heading>
-        <script src="https://cdn.tiny.cloud/1/45tp955r5rsk9zjmoshrh28werz7a8oc0urf8hnf0tnavqre/tinymce/7/tinymce.min.js"
-            referrerpolicy="origin"></script>
-    </x-slot:heading>
-
     @php
         $url = isset($post)
             ? route('post.update', $post->post_id)

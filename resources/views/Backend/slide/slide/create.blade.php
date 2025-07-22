@@ -90,7 +90,7 @@
                                                                                 class="control-label text-right text-capitalize">
                                                                                 {{__('custom.description')}}
                                                                             </label>
-                                                                            <textarea class="form-control tiny-editor" type="text" rows="3" name="slides[desc][]" id="slide-desc-{{$id}}">
+                                                                            <textarea class="form-control summernote" type="text" rows="3" name="slides[desc][]" id="slide-desc-{{$id}}">
                                                                                 {{ $desc}}
                                                                             </textarea>
                                                                         </div>

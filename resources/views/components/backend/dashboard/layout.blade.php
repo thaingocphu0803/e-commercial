@@ -5,7 +5,9 @@
     {{ $heading  ?? ''}}
 </x-backend.dashboard.header>
 
-
+@php
+    // dd(config('cloudinary.cloud_name'));
+@endphp
 <body>
     <div id="wrapper">
         <x-backend.dashboard.nav />
@@ -27,6 +29,8 @@
 
 <script>
     const lang = "{{ app()->getLocale() }}";
+    const cloudName = "{{config('cloudinary.cloud_name')}}";
+    const uploadPreset = "{{config('cloudinary.upload_preset')}}";
 </script>
 
 </html>

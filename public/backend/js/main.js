@@ -6,9 +6,6 @@ let album = [];
 let inputImage = null;
 let urlImage = null;
 
-
-const cloudName = "my-could-api";
-const uploadPreset = "laravel_app";
 const folder = "ImageFolder";
 const maxFiles = 1;
 const width = 300;
@@ -19,11 +16,6 @@ let select2Placeholder = {
         zh: "点击选择",
         ja: "クリックして選択",
 }
-
-const tinyPlugins = ["link image table"];
-
-const tinyToolBar =
-    "undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image table";
 
 // get district api
 $(document).on("change", "#province_id", async function () {
@@ -244,8 +236,7 @@ const ImageWidget = cloudinary.createUploadWidget(
         cropping: true,
         maxFiles,
         transformation: [{ width, height, crop: "thumb" }],
-        sources: ["local", "url", "image_search"],
-        googleApiKey: "AIzaSyBMnZuJmBV2_6QHMYDOleTyxe67M6RplNg",
+        sources: ["local", "url"],
         searchBySites: ["all", "cloudinary.com"],
         searchByRights: true,
     },
@@ -278,8 +269,7 @@ const ImageUpload = cloudinary.createUploadWidget(
         folder: "album",
         multiple: true,
         transformation: [{ width, height, crop: "thumb" }],
-        sources: ["local", "url", "image_search"],
-        googleApiKey: "AIzaSyBMnZuJmBV2_6QHMYDOleTyxe67M6RplNg",
+        sources: ["local", "url"],
         searchBySites: ["all", "cloudinary.com"],
         searchByRights: true,
     },
@@ -349,29 +339,13 @@ $(".img_album").each(function () {
     album.push(src);
 });
 
-//TinyMCE
-
-$(".tiny-editor").each(function () {
-    let editorId = $(this).attr("id");
-
-    tinymce.init({
-        selector: `#${editorId}`,
-        height: height,
-        menubar: false,
-        plugins: tinyPlugins,
-        toolbar: tinyToolBar,
-        image_title: true,
-        image_caption: true,
-        automatic_uploads: true,
-        file_picker_types: "image",
-        images_upload_url: `/ajax/dashboard/upload/image?_token=${_token}`,
-        images_reuse_filename: true,
-
-        content_style:
-            "body { font-family:Helvetica,Arial,sans-serif; font-size:16px }",
-    });
-});
-
+// initial sort able
 $("#sortable").sortable();
-
 $("#sortable").disableSelection();
+
+// initial summer note
+$('.summernote').summernote({
+        tabsize: 2,
+        height: 250,
+          focus: true
+});

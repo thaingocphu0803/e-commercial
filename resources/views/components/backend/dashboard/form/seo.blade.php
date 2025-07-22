@@ -25,7 +25,7 @@
 
             @if ($tag === 'textarea')
                 <textarea
-                    class="form-control tiny-editor"
+                    class="form-control summernote"
                     type="text"
                     name="{{ $inputName }}"
                     id="{{ $inputName }}"
