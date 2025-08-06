@@ -1,10 +1,10 @@
 <x-backend.dashboard.layout>
 
     <x-slot:heading>
-        <link href="../../../backend/css/plugins/switchery/switchery.css" rel="stylesheet">
+        <link href="{{asset('backend/css/plugins/switchery/switchery.css')}}" rel="stylesheet">
     </x-slot:heading>
     <x-slot:script>
-        <script src="../../../backend/js/plugins/switchery/switchery.js"></script>
+        <script src="{{asset('backend/js/plugins/switchery/switchery.js')}}"></script>
     </x-slot:script>
 
     @php

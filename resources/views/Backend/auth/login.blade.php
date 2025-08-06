@@ -9,13 +9,12 @@
 
     <title>e-commercal | Login</title>
 
-    <link href="../../../backend/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../../backend/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="{{asset('backend/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('backend/font-awesome/css/font-awesome.css')}}" rel="stylesheet">
 
-    <link href="../../../backend/css/animate.css" rel="stylesheet">
-    <link href="../../../backend/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../../backend/css/custom.css">
-
+    <link href="{{asset('backend/css/animate.css')}}" rel="stylesheet">
+    <link href="{{asset('backend/css/style.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('backend/css/custom.css')}}">
 </head>
 
 <body class="gray-bg">
@@ -60,9 +59,8 @@
     </div>
 
     <!-- Mainly scripts -->
-    <script src="../../../backend/js/jquery-3.1.1.min.js"></script>
-    <script src="../../../backend/js/bootstrap.min.js"></script>
-
+    <script src="{{asset('backend/js/jquery-3.1.1.min.js')}}"></script>
+    <script src="{{asset('backend/js/bootstrap.min.js')}}"></script>
 </body>
 
 </html>

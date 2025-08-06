@@ -28,8 +28,9 @@
                     <li>
                         <div class="dropdown-messages-box">
                             <a href="profile.html" class="pull-left">
-                                <img alt="image" class="img-circle" src="../../../backend/img/a7.jpg">
+                                <img alt="image" class="img-circle" src="{{asset('backend/img/a7.jpg')}}">
                             </a>
+
                             <div>
                                 <small class="pull-right">46h ago</small>
                                 <strong>Mike Loreipsum</strong> started following <strong>Monica
@@ -42,7 +43,7 @@
                     <li>
                         <div class="dropdown-messages-box">
                             <a href="profile.html" class="pull-left">
-                                <img alt="image" class="img-circle" src="../../../backend/img/a4.jpg">
+                                <img alt="image" class="img-circle" src="{{asset('backend/img/a4.jpg')}}">
                             </a>
                             <div>
                                 <small class="pull-right text-navy">5h ago</small>
@@ -57,7 +58,7 @@
                         <div class="dropdown-messages-box">
                             <a href="profile.html" class="pull-left">
                                 <img alt="image" class="img-circle"
-                                    src="../../../backend/img/profile.jpg">
+                                    src="{{asset('backend/img/profile.jpg')}}">
                             </a>
                             <div>
                                 <small class="pull-right">23h ago</small>
@@ -126,11 +127,6 @@
                     {{__('custom.logout')}}
                 </a>
             </li>
-            {{-- <li>
-                <a class="right-sidebar-toggle">
-                    <i class="fa fa-tasks"></i>
-                </a>
-            </li> --}}
         </ul>
 
     </nav>

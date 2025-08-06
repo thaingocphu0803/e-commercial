@@ -29,12 +29,14 @@ use App\Http\Controllers\Backend\PromotionController;
 use App\Http\Controllers\Backend\SlideController;
 use App\Http\Controllers\Backend\SourceController;
 use App\Http\Controllers\Backend\SystemController;
+use App\Http\Controllers\Frontend\HomeController;
 
-//@use-controller@
+/** FONTEND ROUTES */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// HomeController
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
+/** BACKEND ROUTES */
 
 // AuthenController
 Route::get('/admin', [AuthenController::class, 'index'])->name('auth.admin')->middleware(['login', 'locale']);
