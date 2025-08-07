@@ -10,78 +10,40 @@
                     <div class="circle circle-2"></div>
                 </div>
                 <div class="quick-view-content">
-                    <link rel="stylesheet" href="https://nest.botble.com/themes/nest/css/plugins/magnific-popup.css">
-                    <script src="https://nest.botble.com/themes/nest/js/plugins/magnific-popup.js"></script>
+                    {{-- <link rel="stylesheet" href="https://nest.botble.com/themes/nest/css/plugins/magnific-popup.css"> --}}
+                    {{-- <script src="https://nest.botble.com/themes/nest/js/plugins/magnific-popup.js"></script> --}}
 
                     <div class="product-detail accordion-detail">
                         <div class="row">
                             <div class="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
                                 <div class="detail-gallery">
                                     <span class="zoom-icon"><i class="fi-rs-search"></i></span>
-                                    <div class="product-image-slider slick-initialized slick-slider">
-                                        <div class="slick-list draggable">
-                                            <div class="slick-track"
-                                                style="opacity: 1; width: 1865px; transform: translate3d(-373px, 0px, 0px);">
-                                                <figure class="border-radius-10 slick-slide slick-cloned"
-                                                    data-slick-index="-1" id="" aria-hidden="true"
-                                                    tabindex="-1" style="width: 373px;">
-                                                    <a href="https://nest.botble.com/storage/products/9-1.jpg"
-                                                        tabindex="-1"><img
-                                                            src="https://nest.botble.com/storage/products/9-1-800x800.jpg"
-                                                            alt="Gorton sườn bia đánh cá phi lê"></a>
-                                                </figure>
-                                                <figure class="border-radius-10 slick-slide slick-current slick-active"
-                                                    data-slick-index="0" aria-hidden="false" tabindex="0"
-                                                    style="width: 373px;">
-                                                    <a href="https://nest.botble.com/storage/products/9.jpg"
-                                                        tabindex="0"><img
-                                                            src="https://nest.botble.com/storage/products/9-800x800.jpg"
-                                                            alt="Gorton sườn bia đánh cá phi lê"></a>
-                                                </figure>
-                                                <figure class="border-radius-10 slick-slide" data-slick-index="1"
-                                                    aria-hidden="true" tabindex="-1" style="width: 373px;">
-                                                    <a href="https://nest.botble.com/storage/products/9-1.jpg"
-                                                        tabindex="-1"><img
-                                                            src="https://nest.botble.com/storage/products/9-1-800x800.jpg"
-                                                            alt="Gorton sườn bia đánh cá phi lê"></a>
-                                                </figure>
-                                                <figure class="border-radius-10 slick-slide slick-cloned"
-                                                    data-slick-index="2" id="" aria-hidden="true"
-                                                    tabindex="-1" style="width: 373px;">
-                                                    <a href="https://nest.botble.com/storage/products/9.jpg"
-                                                        tabindex="-1"><img
-                                                            src="https://nest.botble.com/storage/products/9-800x800.jpg"
-                                                            alt="Gorton sườn bia đánh cá phi lê"></a>
-                                                </figure>
-                                                <figure class="border-radius-10 slick-slide slick-cloned"
-                                                    data-slick-index="3" id="" aria-hidden="true"
-                                                    tabindex="-1" style="width: 373px;">
-                                                    <a href="https://nest.botble.com/storage/products/9-1.jpg"
-                                                        tabindex="-1"><img
-                                                            src="https://nest.botble.com/storage/products/9-1-800x800.jpg"
-                                                            alt="Gorton sườn bia đánh cá phi lê"></a>
-                                                </figure>
-                                            </div>
-                                        </div>
-
+                                    <div class="product-image-slider">
+                                        <figure class="border-radius-10">
+                                            <a href="https://nest.botble.com/storage/products/9.jpg">
+                                                <img src="https://nest.botble.com/storage/products/9-800x800.jpg"
+                                                    alt="Gorton sườn bia đánh cá phi lê">
+                                            </a>
+                                        </figure>
+                                        <figure class="border-radius-10">
+                                            <a href="https://nest.botble.com/storage/products/9-1.jpg">
+                                                <img src="https://nest.botble.com/storage/products/9-1-800x800.jpg"
+                                                    alt="Gorton sườn bia đánh cá phi lê">
+                                            </a>
+                                        </figure>
                                     </div>
-                                    <!-- THUMBNAILS -->
-                                    <div class="slider-nav-thumbnails slick-initialized slick-slider">
-                                        <div class="slick-list draggable">
-                                            <div class="slick-track"
-                                                style="opacity: 1; width: 158px; transform: translate3d(0px, 0px, 0px);">
-                                                <div class="slick-slide slick-current slick-active" data-slick-index="0"
-                                                    aria-hidden="false" tabindex="0" style="width: 59px;"><img
-                                                        src="https://nest.botble.com/storage/products/9-400x400.jpg"
-                                                        alt="Gorton sườn bia đánh cá phi lê"></div>
-                                                <div class="slick-slide slick-active" data-slick-index="1"
-                                                    aria-hidden="false" tabindex="0" style="width: 59px;"><img
-                                                        src="https://nest.botble.com/storage/products/9-1-400x400.jpg"
-                                                        alt="Gorton sườn bia đánh cá phi lê"></div>
-                                            </div>
-                                        </div>
 
+                                    <div class="slider-nav-thumbnails">
+                                        <div>
+                                            <img src="https://nest.botble.com/storage/products/9-400x400.jpg"
+                                                alt="Gorton sườn bia đánh cá phi lê">
+                                        </div>
+                                        <div>
+                                            <img src="https://nest.botble.com/storage/products/9-1-400x400.jpg"
+                                                alt="Gorton sườn bia đánh cá phi lê">
+                                        </div>
                                     </div>
+
                                 </div>
                                 <!-- End Gallery -->
                             </div>
@@ -122,8 +84,7 @@
 
                                         <p> Bộ lông ngắn có thân thẳng, túi lớn có nắp nút, lỗ khí thông gió và chuỗi
                                             Chi tiết dọc theo đường viền. </p>
-                                        <p> <img src=""
-                                                alt="p&gt; &lt;p&gt; &lt;p&gt; &lt;IMG SRC ="></p>
+                                        <p> <img src="" alt="p&gt; &lt;p&gt; &lt;p&gt; &lt;IMG SRC ="></p>
 
                                     </div>
 
@@ -142,8 +103,8 @@
                                                         <li data-slug="1kg" data-id="1"
                                                             class="bb-product-attribute-swatch-item attribute-swatch-item">
                                                             <label>
-                                                                <input name="attribute_weight_510168270"
-                                                                    data-slug="1kg" type="radio" value="1"
+                                                                <input name="attribute_weight_510168270" data-slug="1kg"
+                                                                    type="radio" value="1"
                                                                     class="product-filter-item">
                                                                 <span
                                                                     class="bb-product-attribute-text-display">1kg</span>
@@ -152,9 +113,9 @@
                                                         <li data-slug="3kg" data-id="3"
                                                             class="bb-product-attribute-swatch-item attribute-swatch-item">
                                                             <label>
-                                                                <input name="attribute_weight_510168270"
-                                                                    data-slug="3kg" type="radio" value="3"
-                                                                    checked="" class="product-filter-item">
+                                                                <input name="attribute_weight_510168270" data-slug="3kg"
+                                                                    type="radio" value="3" checked=""
+                                                                    class="product-filter-item">
                                                                 <span
                                                                     class="bb-product-attribute-text-display">3kg</span>
                                                             </label>
@@ -209,7 +170,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <script src="https://nest.botble.com/vendor/core/plugins/ecommerce/js/change-product-swatches.js"></script>
+                                            {{-- <script src="https://nest.botble.com/vendor/core/plugins/ecommerce/js/change-product-swatches.js"></script> --}}
                                         </div>
 
 

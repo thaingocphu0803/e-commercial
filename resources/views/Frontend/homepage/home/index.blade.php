@@ -5,100 +5,45 @@
                 <section class="home-slider position-relative mb-30 mt-30">
                     <div class="container">
                         <div class="home-slide-cover mt-30">
-                            <div
-                                class="hero-slider-1 dot-style-1 dot-style-1-position-1 style-4 slick-initialized slick-slider slick-dotted">
-                                <div class="slick-list draggable">
-                                    <div class="slick-track" style="opacity: 1; width: 1872px;">
-                                        <div data-original-image="https://nest.botble.com/storage/sliders/1-1.png"
-                                            data-tablet-image="https://nest.botble.com/storage/sliders/1-1.png"
-                                            data-mobile-image="https://nest.botble.com/storage/sliders/1-1.png"
-                                            class="single-hero-slider single-animation-wrap page_speed_2133874490 slick-slide slick-current slick-active"
-                                            data-slick-index="0" aria-hidden="false" tabindex="0" role="tabpanel"
-                                            id="slick-slide00" aria-describedby="slick-slide-control00"
-                                            style="width: 936px; position: relative; left: 0px; top: 0px; z-index: 999; opacity: 1; background-image: url(&quot;https://nest.botble.com/storage/sliders/1-1.png&quot;);">
-                                            <div class="slider-content">
-                                                <h1 class="display-2 mb-40"> Don’t miss amazing<br> grocery deals </h1>
-                                                <p class="mb-65">Sign up for the daily newsletter</p>
-                                                <div class="newsletter">
-                                                    <form method="POST"
-                                                        action="https://nest.botble.com/vi/newsletter/subscribe"
-                                                        accept-charset="UTF-8"
-                                                        id="botble-newsletter-forms-fronts-newsletter-form"
-                                                        class="newsletter-form dirty-check" novalidate="novalidate">
-                                                        <input name="_token" type="hidden"
-                                                            value="xGs4vbVM6Zrhld9bBK1u1cjQz0694OASy38qPyXE"
-                                                            tabindex="0">
-                                                        <div class="form-subscribe d-flex"><input class="form-control"
-                                                                placeholder="Nhập email của bạn" id="newsletter-email"
-                                                                required="required" name="email" type="email"
-                                                                tabindex="0" aria-required="true"><button
-                                                                class="btn" type="submit" tabindex="0">Đăng
-                                                                ký</button></div>
-                                                        <div
-                                                            class="newsletter-message newsletter-success-message page_speed_1541029914">
-                                                        </div>
-                                                        <div
-                                                            class="newsletter-message newsletter-error-message page_speed_1541029914">
-                                                        </div>
-                                                        <div class="captcha-render-section"></div>
-                                                    </form>
+                            <div class="hero-slider-1 dot-style-1 dot-style-1-position-1 style-4">
+                                <div class="single-hero-slider single-animation-wrap"
+                                    style="background-image: url('https://nest.botble.com/storage/sliders/1-1.png');">
+                                    <div class="slider-content">
+                                        <h1 class="display-2 mb-40">Don’t miss amazing<br>grocery deals</h1>
+                                        <p class="mb-65">Sign up for the daily newsletter</p>
+                                        <div class="newsletter">
+                                            <form method="POST" action="/newsletter/subscribe" class="newsletter-form">
+                                                <div class="form-subscribe d-flex">
+                                                    <input class="form-control" placeholder="Nhập email của bạn"
+                                                        name="email" type="email" required>
+                                                    <button class="btn" type="submit">Đăng ký</button>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div data-original-image="https://nest.botble.com/storage/sliders/1-2.png"
-                                            data-tablet-image="https://nest.botble.com/storage/sliders/1-2.png"
-                                            data-mobile-image="https://nest.botble.com/storage/sliders/1-2.png"
-                                            class="single-hero-slider single-animation-wrap page_speed_1792661716 slick-slide"
-                                            data-slick-index="1" aria-hidden="true" tabindex="-1" role="tabpanel"
-                                            id="slick-slide01" aria-describedby="slick-slide-control01"
-                                            style="width: 936px; position: relative; left: -936px; top: 0px; z-index: 998; opacity: 0; background-image: url(&quot;https://nest.botble.com/storage/sliders/1-2.png&quot;); transition: opacity 500ms;">
-                                            <div class="slider-content">
-                                                <h1 class="display-2 mb-40"> Fresh Vegetables<br>Big discount </h1>
-                                                <p class="mb-65">Save up to 50% off on your first order</p>
-                                                <div class="newsletter">
-                                                    <form method="POST"
-                                                        action="https://nest.botble.com/vi/newsletter/subscribe"
-                                                        accept-charset="UTF-8"
-                                                        id="botble-newsletter-forms-fronts-newsletter-form"
-                                                        class="newsletter-form dirty-check"><input name="_token"
-                                                            type="hidden"
-                                                            value="xGs4vbVM6Zrhld9bBK1u1cjQz0694OASy38qPyXE"
-                                                            tabindex="-1">
-                                                        <div class="form-subscribe d-flex"><input class="form-control"
-                                                                placeholder="Nhập email của bạn" id="newsletter-email"
-                                                                required="required" name="email" type="email"
-                                                                tabindex="-1"><button class="btn" type="submit"
-                                                                tabindex="-1">Đăng ký</button></div>
-                                                        <div
-                                                            class="newsletter-message newsletter-success-message page_speed_1541029914">
-                                                        </div>
-                                                        <div
-                                                            class="newsletter-message newsletter-error-message page_speed_1541029914">
-                                                        </div>
-                                                        <div class="captcha-render-section"></div>
-                                                    </form>
-                                                </div>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-                                <ul class="slick-dots" style="" role="tablist">
-                                    <li class="slick-active" role="presentation"><button type="button" role="tab"
-                                            id="slick-slide-control00" aria-controls="slick-slide00" aria-label="1 of 2"
-                                            tabindex="0" aria-selected="true">1</button></li>
-                                    <li role="presentation" class=""><button type="button" role="tab"
-                                            id="slick-slide-control01" aria-controls="slick-slide01"
-                                            aria-label="2 of 2" tabindex="-1">2</button></li>
-                                </ul>
+                                <div class="single-hero-slider single-animation-wrap"
+                                    style="background-image: url('https://nest.botble.com/storage/sliders/1-2.png');">
+                                    <div class="slider-content">
+                                        <h1 class="display-2 mb-40">Fresh Vegetables<br>Big discount</h1>
+                                        <p class="mb-65">Save up to 50% off on your first order</p>
+                                        <div class="newsletter">
+                                            <form method="POST" action="/newsletter/subscribe" class="newsletter-form">
+                                                <div class="form-subscribe d-flex">
+                                                    <input class="form-control" placeholder="Nhập email của bạn"
+                                                        name="email" type="email" required>
+                                                    <button class="btn" type="submit">Đăng ký</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="slider-arrow hero-slider-1-arrow"><span
-                                    class="slider-btn slider-prev slick-arrow" style=""><i
-                                        class="fi-rs-angle-left"></i></span><span
-                                    class="slider-btn slider-next slick-arrow" style=""><i
-                                        class="fi-rs-angle-right"></i></span></div>
+                            <div class="slider-arrow hero-slider-1-arrow"></div>
                         </div>
                     </div>
                 </section>
+
             </div>
             <div>
                 <section class="popular-categories section-padding">
@@ -109,190 +54,149 @@
                                 <h3>Danh mục nổi bật</h3>
                             </div>
                             <div class="slider-arrow slider-arrow-2 flex-right carousel-10-columns-arrow"
-                                id="carousel-10-columns-arrows"><span
-                                    class="slider-btn slider-prev slick-arrow slick-disabled" aria-disabled="true"
-                                    style=""><i class="fi-rs-arrow-small-left"></i></span><span
-                                    class="slider-btn slider-next slick-arrow" aria-disabled="false"
-                                    style=""><i class="fi-rs-arrow-small-right"></i></span></div>
+                                id="carousel-10-columns-arrows"></div>
                         </div>
                         <div class="carousel-10-columns-cover position-relative">
-                            <div class="carousel-slider-wrapper carousel-10-columns slick-initialized slick-slider"
-                                id="carousel-10-columns" title="Danh mục nổi bật"
-                                data-slick="{&quot;autoplay&quot;:false,&quot;infinite&quot;:false,&quot;autoplaySpeed&quot;:3000,&quot;speed&quot;:800}"
+                            <div class="carousel-slider-wrapper carousel-10-columns" id="carousel-10-columns"
+                                title="Danh mục nổi bật"
+                                data-slick='{"autoplay":false,"infinite":false,"autoplaySpeed":3000,"speed":800}'
                                 data-items-xxl="10" data-items-xl="6" data-items-lg="4" data-items-md="3"
                                 data-items-sm="2">
-                                <div class="slick-list draggable">
-                                    <div class="slick-track"
-                                        style="opacity: 1; width: 1920px; transform: translate3d(0px, 0px, 0px);">
-                                        <div data-wow-delay="0.1s"
-                                            class="card-2 wow animate__ animate__fadeInUp page_speed_1503507279 slick-slide slick-current slick-active"
-                                            style="width: 136px;" tabindex="0" data-slick-index="0"
-                                            aria-hidden="false">
-                                            <figure class="img-hover-scale overflow-hidden"><a
-                                                    href="https://nest.botble.com/vi/product-categories/milks-and-dairies"
-                                                    tabindex="0"><img
-                                                        src="https://nest.botble.com/storage/product-categories/image-1.png"
-                                                        alt="Sữa và sữa"></a></figure>
-                                            <p class="heading-card"><a
-                                                    href="https://nest.botble.com/vi/product-categories/milks-and-dairies"
-                                                    title="Sữa và sữa" tabindex="0">Sữa và sữa</a></p><span>3
-                                                mục</span>
-                                        </div>
-                                        <div data-wow-delay="0.2s"
-                                            class="card-2 wow animate__ animate__fadeInUp page_speed_1995255395 slick-slide slick-active"
-                                            style="width: 136px;" tabindex="0" data-slick-index="1"
-                                            aria-hidden="false">
-                                            <figure class="img-hover-scale overflow-hidden"><a
-                                                    href="https://nest.botble.com/vi/product-categories/clothing-beauty"
-                                                    tabindex="0"><img
-                                                        src="https://nest.botble.com/storage/product-categories/image-2.png"
-                                                        alt="Quần áo &amp; sắc đẹp"></a></figure>
-                                            <p class="heading-card"><a
-                                                    href="https://nest.botble.com/vi/product-categories/clothing-beauty"
-                                                    title="Quần áo &amp; sắc đẹp" tabindex="0">Quần áo &amp; sắc
-                                                    đẹp</a></p><span>12 mục</span>
-                                        </div>
-                                        <div data-wow-delay="0.3s"
-                                            class="card-2 wow animate__ animate__fadeInUp page_speed_1902124236 slick-slide slick-active"
-                                            style="width: 136px;" tabindex="0" data-slick-index="2"
-                                            aria-hidden="false">
-                                            <figure class="img-hover-scale overflow-hidden"><a
-                                                    href="https://nest.botble.com/vi/product-categories/pet-toy"
-                                                    tabindex="0"><img
-                                                        src="https://nest.botble.com/storage/product-categories/image-3.png"
-                                                        alt="Đồ chơi thú cưng"></a></figure>
-                                            <p class="heading-card"><a
-                                                    href="https://nest.botble.com/vi/product-categories/pet-toy"
-                                                    title="Đồ chơi thú cưng" tabindex="0">Đồ chơi thú cưng</a></p>
-                                            <span>8 mục</span>
-                                        </div>
-                                        <div data-wow-delay="0.4s"
-                                            class="card-2 wow animate__ animate__fadeInUp page_speed_1159193601 slick-slide slick-active"
-                                            style="width: 136px;" tabindex="0" data-slick-index="3"
-                                            aria-hidden="false">
-                                            <figure class="img-hover-scale overflow-hidden"><a
-                                                    href="https://nest.botble.com/vi/product-categories/baking-material"
-                                                    tabindex="0"><img
-                                                        src="https://nest.botble.com/storage/product-categories/image-4.png"
-                                                        alt="Vật liệu nướng"></a></figure>
-                                            <p class="heading-card"><a
-                                                    href="https://nest.botble.com/vi/product-categories/baking-material"
-                                                    title="Vật liệu nướng" tabindex="0">Vật liệu nướng</a></p>
-                                            <span>9 mục</span>
-                                        </div>
-                                        <div data-wow-delay="0.5s"
-                                            class="card-2 wow animate__ animate__fadeInUp page_speed_861973750 slick-slide slick-active"
-                                            style="width: 136px;" tabindex="0" data-slick-index="4"
-                                            aria-hidden="false">
-                                            <figure class="img-hover-scale overflow-hidden"><a
-                                                    href="https://nest.botble.com/vi/product-categories/fresh-fruit"
-                                                    tabindex="0"><img
-                                                        src="https://nest.botble.com/storage/product-categories/image-5.png"
-                                                        alt="Trái cây tươi"></a></figure>
-                                            <p class="heading-card"><a
-                                                    href="https://nest.botble.com/vi/product-categories/fresh-fruit"
-                                                    title="Trái cây tươi" tabindex="0">Trái cây tươi</a></p><span>4
-                                                mục</span>
-                                        </div>
-                                        <div data-wow-delay="0.6s"
-                                            class="card-2 wow animate__ animate__fadeInUp page_speed_1191870366 slick-slide slick-active"
-                                            style="width: 136px;" tabindex="0" data-slick-index="5"
-                                            aria-hidden="false">
-                                            <figure class="img-hover-scale overflow-hidden"><a
-                                                    href="https://nest.botble.com/vi/product-categories/wines-drinks"
-                                                    tabindex="0"><img
-                                                        src="https://nest.botble.com/storage/product-categories/image-6.png"
-                                                        alt="Rượu vang &amp; đồ uống"></a></figure>
-                                            <p class="heading-card"><a
-                                                    href="https://nest.botble.com/vi/product-categories/wines-drinks"
-                                                    title="Rượu vang &amp; đồ uống" tabindex="0">Rượu vang &amp; đồ
-                                                    uống</a></p><span>6 mục</span>
-                                        </div>
-                                        <div data-wow-delay="0.7s"
-                                            class="card-2 wow animate__ animate__fadeInUp page_speed_1503507279 slick-slide"
-                                            style="width: 136px;" tabindex="-1" data-slick-index="6"
-                                            aria-hidden="true">
-                                            <figure class="img-hover-scale overflow-hidden"><a
-                                                    href="https://nest.botble.com/vi/product-categories/fresh-seafood"
-                                                    tabindex="-1"><img
-                                                        src="https://nest.botble.com/storage/product-categories/image-7.png"
-                                                        alt="Hải sản tươi sống"></a></figure>
-                                            <p class="heading-card"><a
-                                                    href="https://nest.botble.com/vi/product-categories/fresh-seafood"
-                                                    title="Hải sản tươi sống" tabindex="-1">Hải sản tươi sống</a></p>
-                                            <span>5 mục</span>
-                                        </div>
-                                        <div data-wow-delay="0.8s"
-                                            class="card-2 wow animate__ animate__fadeInUp page_speed_1995255395 slick-slide"
-                                            style="width: 136px;" tabindex="-1" data-slick-index="7"
-                                            aria-hidden="true">
-                                            <figure class="img-hover-scale overflow-hidden"><a
-                                                    href="https://nest.botble.com/vi/product-categories/fast-food"
-                                                    tabindex="-1"><img
-                                                        src="https://nest.botble.com/storage/product-categories/image-8.png"
-                                                        alt="Thức ăn nhanh"></a></figure>
-                                            <p class="heading-card"><a
-                                                    href="https://nest.botble.com/vi/product-categories/fast-food"
-                                                    title="Thức ăn nhanh" tabindex="-1">Thức ăn nhanh</a></p><span>7
-                                                mục</span>
-                                        </div>
-                                        <div data-wow-delay="0.9s"
-                                            class="card-2 wow animate__ animate__fadeInUp page_speed_1902124236 slick-slide"
-                                            style="width: 136px;" tabindex="-1" data-slick-index="8"
-                                            aria-hidden="true">
-                                            <figure class="img-hover-scale overflow-hidden"><a
-                                                    href="https://nest.botble.com/vi/product-categories/vegetables"
-                                                    tabindex="-1"><img
-                                                        src="https://nest.botble.com/storage/product-categories/image-9.png"
-                                                        alt="Rau"></a></figure>
-                                            <p class="heading-card"><a
-                                                    href="https://nest.botble.com/vi/product-categories/vegetables"
-                                                    title="Rau" tabindex="-1">Rau</a></p><span>6 mục</span>
-                                        </div>
-                                        <div data-wow-delay="1s"
-                                            class="card-2 wow animate__ animate__fadeInUp page_speed_1159193601 slick-slide"
-                                            style="width: 136px;" tabindex="-1" data-slick-index="9"
-                                            aria-hidden="true">
-                                            <figure class="img-hover-scale overflow-hidden"><a
-                                                    href="https://nest.botble.com/vi/product-categories/bread-and-juice"
-                                                    tabindex="-1"><img
-                                                        src="https://nest.botble.com/storage/product-categories/image-10.png"
-                                                        alt="Bánh mì và nước trái cây"></a></figure>
-                                            <p class="heading-card"><a
-                                                    href="https://nest.botble.com/vi/product-categories/bread-and-juice"
-                                                    title="Bánh mì và nước trái cây" tabindex="-1">Bánh mì và nước
-                                                    trái cây</a></p><span>7 mục</span>
-                                        </div>
-                                        <div data-wow-delay="1.1s"
-                                            class="card-2 wow animate__ animate__fadeInUp page_speed_861973750 slick-slide"
-                                            style="width: 136px;" tabindex="-1" data-slick-index="10"
-                                            aria-hidden="true">
-                                            <figure class="img-hover-scale overflow-hidden"><a
-                                                    href="https://nest.botble.com/vi/product-categories/cake-milk"
-                                                    tabindex="-1"><img
-                                                        src="https://nest.botble.com/storage/product-categories/image-11.png"
-                                                        alt="Bánh &amp; sữa"></a></figure>
-                                            <p class="heading-card"><a
-                                                    href="https://nest.botble.com/vi/product-categories/cake-milk"
-                                                    title="Bánh &amp; sữa" tabindex="-1">Bánh &amp; sữa</a></p>
-                                            <span>5 mục</span>
-                                        </div>
-                                        <div data-wow-delay="1.2s"
-                                            class="card-2 wow animate__ animate__fadeInUp page_speed_1191870366 slick-slide"
-                                            style="width: 136px;" tabindex="-1" data-slick-index="11"
-                                            aria-hidden="true">
-                                            <figure class="img-hover-scale overflow-hidden"><a
-                                                    href="https://nest.botble.com/vi/product-categories/coffee-teas"
-                                                    tabindex="-1"><img
-                                                        src="https://nest.botble.com/storage/product-categories/image-12.png"
-                                                        alt="Cà phê &amp; trà"></a></figure>
-                                            <p class="heading-card"><a
-                                                    href="https://nest.botble.com/vi/product-categories/coffee-teas"
-                                                    title="Cà phê &amp; trà" tabindex="-1">Cà phê &amp; trà</a></p>
-                                            <span>8 mục</span>
-                                        </div>
-                                    </div>
+
+                                <div class="card-2 wow animate__ animate__fadeInUp" data-wow-delay="0.1s">
+                                    <figure class="img-hover-scale overflow-hidden">
+                                        <a href="/vi/product-categories/milks-and-dairies">
+                                            <img src="https://nest.botble.com/storage/product-categories/image-1.png"
+                                                alt="Sữa và sữa">
+                                        </a>
+                                    </figure>
+                                    <p class="heading-card"><a href="/vi/product-categories/milks-and-dairies"
+                                            title="Sữa và sữa">Sữa và sữa</a></p>
+                                    <span>3 mục</span>
                                 </div>
+
+                                <div class="card-2 wow animate__ animate__fadeInUp" data-wow-delay="0.2s">
+                                    <figure class="img-hover-scale overflow-hidden">
+                                        <a href="/vi/product-categories/clothing-beauty">
+                                            <img src="https://nest.botble.com/storage/product-categories/image-2.png"
+                                                alt="Quần áo &amp; sắc đẹp">
+                                        </a>
+                                    </figure>
+                                    <p class="heading-card"><a href="/vi/product-categories/clothing-beauty"
+                                            title="Quần áo &amp; sắc đẹp">Quần áo &amp; sắc đẹp</a></p>
+                                    <span>12 mục</span>
+                                </div>
+
+                                <div class="card-2 wow animate__ animate__fadeInUp" data-wow-delay="0.3s">
+                                    <figure class="img-hover-scale overflow-hidden">
+                                        <a href="/vi/product-categories/pet-toy">
+                                            <img src="https://nest.botble.com/storage/product-categories/image-3.png"
+                                                alt="Đồ chơi thú cưng">
+                                        </a>
+                                    </figure>
+                                    <p class="heading-card"><a href="/vi/product-categories/pet-toy"
+                                            title="Đồ chơi thú cưng">Đồ chơi thú cưng</a></p>
+                                    <span>8 mục</span>
+                                </div>
+
+                                <div class="card-2 wow animate__ animate__fadeInUp" data-wow-delay="0.3s">
+                                    <figure class="img-hover-scale overflow-hidden">
+                                        <a href="/vi/product-categories/pet-toy">
+                                            <img src="https://nest.botble.com/storage/product-categories/image-3.png"
+                                                alt="Đồ chơi thú cưng">
+                                        </a>
+                                    </figure>
+                                    <p class="heading-card"><a href="/vi/product-categories/pet-toy"
+                                            title="Đồ chơi thú cưng">Đồ chơi thú cưng</a></p>
+                                    <span>8 mục</span>
+                                </div>
+
+                                <div class="card-2 wow animate__ animate__fadeInUp" data-wow-delay="0.3s">
+                                    <figure class="img-hover-scale overflow-hidden">
+                                        <a href="/vi/product-categories/pet-toy">
+                                            <img src="https://nest.botble.com/storage/product-categories/image-3.png"
+                                                alt="Đồ chơi thú cưng">
+                                        </a>
+                                    </figure>
+                                    <p class="heading-card"><a href="/vi/product-categories/pet-toy"
+                                            title="Đồ chơi thú cưng">Đồ chơi thú cưng</a></p>
+                                    <span>8 mục</span>
+                                </div>
+
+                                <div class="card-2 wow animate__ animate__fadeInUp" data-wow-delay="0.3s">
+                                    <figure class="img-hover-scale overflow-hidden">
+                                        <a href="/vi/product-categories/pet-toy">
+                                            <img src="https://nest.botble.com/storage/product-categories/image-3.png"
+                                                alt="Đồ chơi thú cưng">
+                                        </a>
+                                    </figure>
+                                    <p class="heading-card"><a href="/vi/product-categories/pet-toy"
+                                            title="Đồ chơi thú cưng">Đồ chơi thú cưng</a></p>
+                                    <span>8 mục</span>
+                                </div>
+
+                                <div class="card-2 wow animate__ animate__fadeInUp" data-wow-delay="0.3s">
+                                    <figure class="img-hover-scale overflow-hidden">
+                                        <a href="/vi/product-categories/pet-toy">
+                                            <img src="https://nest.botble.com/storage/product-categories/image-3.png"
+                                                alt="Đồ chơi thú cưng">
+                                        </a>
+                                    </figure>
+                                    <p class="heading-card"><a href="/vi/product-categories/pet-toy"
+                                            title="Đồ chơi thú cưng">Đồ chơi thú cưng</a></p>
+                                    <span>8 mục</span>
+                                </div>
+
+                                <div class="card-2 wow animate__ animate__fadeInUp" data-wow-delay="0.3s">
+                                    <figure class="img-hover-scale overflow-hidden">
+                                        <a href="/vi/product-categories/pet-toy">
+                                            <img src="https://nest.botble.com/storage/product-categories/image-3.png"
+                                                alt="Đồ chơi thú cưng">
+                                        </a>
+                                    </figure>
+                                    <p class="heading-card"><a href="/vi/product-categories/pet-toy"
+                                            title="Đồ chơi thú cưng">Đồ chơi thú cưng</a></p>
+                                    <span>8 mục</span>
+                                </div>
+
+                                <div class="card-2 wow animate__ animate__fadeInUp" data-wow-delay="0.3s">
+                                    <figure class="img-hover-scale overflow-hidden">
+                                        <a href="/vi/product-categories/pet-toy">
+                                            <img src="https://nest.botble.com/storage/product-categories/image-3.png"
+                                                alt="Đồ chơi thú cưng">
+                                        </a>
+                                    </figure>
+                                    <p class="heading-card"><a href="/vi/product-categories/pet-toy"
+                                            title="Đồ chơi thú cưng">Đồ chơi thú cưng</a></p>
+                                    <span>8 mục</span>
+                                </div>
+
+                                <div class="card-2 wow animate__ animate__fadeInUp" data-wow-delay="0.3s">
+                                    <figure class="img-hover-scale overflow-hidden">
+                                        <a href="/vi/product-categories/pet-toy">
+                                            <img src="https://nest.botble.com/storage/product-categories/image-3.png"
+                                                alt="Đồ chơi thú cưng">
+                                        </a>
+                                    </figure>
+                                    <p class="heading-card"><a href="/vi/product-categories/pet-toy"
+                                            title="Đồ chơi thú cưng">Đồ chơi thú cưng</a></p>
+                                    <span>8 mục</span>
+                                </div>
+
+                                <div class="card-2 wow animate__ animate__fadeInUp" data-wow-delay="0.3s">
+                                    <figure class="img-hover-scale overflow-hidden">
+                                        <a href="/vi/product-categories/pet-toy">
+                                            <img src="https://nest.botble.com/storage/product-categories/image-3.png"
+                                                alt="Đồ chơi thú cưng">
+                                        </a>
+                                    </figure>
+                                    <p class="heading-card"><a href="/vi/product-categories/pet-toy"
+                                            title="Đồ chơi thú cưng">Đồ chơi thú cưng</a></p>
+                                    <span>8 mục</span>
+                                </div>
+
+                                <!-- (Tiếp tục thêm các .card-2 giống như trên cho các danh mục còn lại) -->
+
                             </div>
                         </div>
                     </div>
@@ -1387,8 +1291,7 @@
                                                 </div>
 
                                                 <div class="product-price">
-                                                    <span class=""
-                                                        data-bb-value="product-price">$287.00</span>
+                                                    <span class="" data-bb-value="product-price">$287.00</span>
 
                                                 </div>
                                             </div>
@@ -1417,8 +1320,7 @@
                                                 </div>
 
                                                 <div class="product-price">
-                                                    <span class=""
-                                                        data-bb-value="product-price">$488.00</span>
+                                                    <span class="" data-bb-value="product-price">$488.00</span>
 
                                                 </div>
                                             </div>
@@ -1484,8 +1386,7 @@
                                                 </div>
 
                                                 <div class="product-price">
-                                                    <span class=""
-                                                        data-bb-value="product-price">$764.00</span>
+                                                    <span class="" data-bb-value="product-price">$764.00</span>
 
                                                     <span class="">
                                                         <small>
@@ -1893,7 +1794,7 @@
             </div>
         </div>
     </main>
-</x-frontend.dashboard.layout>
 
-{{-- modal --}}
-<x-frontend.homepage.home.modal/>
+    {{-- modal --}}
+    <x-frontend.homepage.home.modal />
+</x-frontend.dashboard.layout>
