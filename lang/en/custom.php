@@ -278,6 +278,8 @@ return [
     'alertExistedRange' => 'Duplicated range price.',
     'alertProductGreaterThan0' => 'The quantity min, quantity max and discount value must be greater than 0. ',
     'alertAtLestOneProduct'=> 'at least one product is choosen.',
-    'expired' => 'expried'
-    //2025/07/22
+    'expired' => 'expried',
+    //2025/08/18
+    'contactTel' => 'Contact Telephone',
+    'supportCenter' => '24/7 Support Center'
 ];

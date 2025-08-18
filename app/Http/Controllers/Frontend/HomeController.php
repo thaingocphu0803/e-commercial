@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Services\SystemService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller

@@ -36,6 +36,12 @@ class MenuCatalougeService implements MenuCatalougeServiceInterface
         return $menuCatalouge;
     }
 
+
+    public function toTreeByKeyword($keyword){
+        return $this->menuCatalougeRepository->toTreeByKeyword($keyword);
+    }
+
+
     public function create($request){
         DB::beginTransaction();
         try{

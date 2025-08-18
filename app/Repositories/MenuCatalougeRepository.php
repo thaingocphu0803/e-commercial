@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\MenuCatalouge;
+use App\Models\MenuLanguage;
 use App\Repositories\Interfaces\MenuCatalougeRepositoryInterface;
 
 class MenuCatalougeRepository implements MenuCatalougeRepositoryInterface {
@@ -33,8 +34,18 @@ class MenuCatalougeRepository implements MenuCatalougeRepositoryInterface {
         return MenuCatalouge::with('menus.menuLanguage')->findOrFail($id);
     }
 
-    public function create($payload){
+    public function toTreeByKeyword($keyword)
+    {
+        return MenuCatalouge::where('keyword', $keyword)
+                ->first()
+                ->menus()
+                ->with('menuLanguage')
+                ->orderBy('order')
+                ->get()
+                ->toTree();
+    }
 
+    public function create($payload){
         return MenuCatalouge::create($payload);
     }
 

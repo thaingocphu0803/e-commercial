@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 
-<x-backend.dashboard.header >
+<x-backend.dashboard.head >
     {{ $heading  ?? ''}}
-</x-backend.dashboard.header>
+</x-backend.dashboard.head>
 
 @php
     // dd(config('cloudinary.cloud_name'));

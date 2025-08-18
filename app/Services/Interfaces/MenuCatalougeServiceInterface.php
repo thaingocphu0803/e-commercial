@@ -16,6 +16,8 @@ interface MenuCatalougeServiceInterface
 
     public function findById($id);
 
+    public function toTreeByKeyword($keyword);
+
     public function forceDestroy($id);
 
     public function updateStatus($payload);

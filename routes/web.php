@@ -34,7 +34,7 @@ use App\Http\Controllers\Frontend\HomeController;
 /** FONTEND ROUTES */
 
 // HomeController
-Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/', [HomeController::class, 'index'])->name('home.index')->middleware('locale');
 
 /** BACKEND ROUTES */
 
