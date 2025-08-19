@@ -3,5 +3,6 @@
 !public/backend/css/custom.css
 !public/backend/js/main.js
 !public/backend/js/variant.js
+!api/
 
 !.gitignore

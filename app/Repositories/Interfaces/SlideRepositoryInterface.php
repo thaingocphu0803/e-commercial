@@ -10,6 +10,8 @@ interface SlideRepositoryInterface
 {
     public function paginate($request);
 
+    public function findByKeyword($keywords);
+
     public function create($payload);
 
     public function update($id, $payload);

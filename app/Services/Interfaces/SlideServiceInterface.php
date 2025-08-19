@@ -10,6 +10,8 @@ interface SlideServiceInterface
 {
     public function paginate($number);
 
+    public function findByKeyword($keywords);
+
     public function create($request);
 
     public function update($id, $request);

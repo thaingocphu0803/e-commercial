@@ -1,0 +1,132 @@
+
+/* modal css */
+.modal {
+	width: 100%;
+	height: 100%;
+	z-index: 999;
+	position: fixed;
+	background-color: rgba(0,0,0,0.4);
+	padding-top: 5vh;
+	display:block;
+}
+
+.modal > .modal-container {
+	background: #fefefe;
+	border: 1px solid #888;
+	margin: auto;
+	width:80vw;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+    border-radius: 1em;
+}
+
+.modal > .modal-container > .close {
+  color: #aaaaaa;
+  align-self: end;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.modal > .modal-container > .close:hover, .modal > .modal-container > .close:focus {
+  color: 	#FF0000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal > .modal-container > .modal-title {
+	font-weight: bold;
+	font-size: 24px;
+	text-transform: capitalize;
+	padding-bottom: 10px;
+	border-bottom:1px solid #000;
+}
+
+.modal > .modal-container > .modal-content {
+	margin-top: 5px;
+	padding: 5px;
+}
+
+/* custom */
+
+.slide-img {
+    width: 100%;
+    height: 500px;
+    object-fit: "cover";
+}
+.text-silver-300 {
+    color: #d5dadd !important;
+}
+
+.product-cart-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.add-cart > .add-to-cart-button {
+    color: var(--color-brand);
+}
+
+.product-catalouge > .catalouge-list > .list-item {
+    font-size: 16px;
+    color:  var(--color-primary);
+    border: 1px solid var(--color-secondary);
+    padding:2px 5px;
+    border-radius: 10px;
+    min-width: 5em;
+    text-align: center;
+}
+
+.product-variant > .variant-list > .list-item {
+    font-size: 14px;
+    font-weight: 700;
+    color:  var(--color-grey-2);
+    border: 1px solid var(--color-muted);
+    padding:2px 5px;
+    border-radius: 10px;
+    min-width: 5em;
+    text-align: center;
+    cursor: pointer;
+}
+
+.product-variant > .variant-list > .list-item:hover {
+    color:  var(--color-grey-9);
+    background-color: var(--color-body);
+}
+
+.product-variant > .variant-list > .list-item.active {
+    color:  var(--color-grey-9);
+    background-color: var(--color-body);
+}
+
+.product-description > .description-content {
+    color: var(--color-text);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.product-image > .image-main {
+    width: 100%;
+    height: 450px;
+}
+
+.product-image > .image-list > .list-item {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+}
+
+.product-image > .image-list > .list-item:hover, .product-image > .image-list > .list-item.active{
+    border: 1px solid var(--color-secondary);
+    border-radius: 5px;
+}
+
+
+.img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+

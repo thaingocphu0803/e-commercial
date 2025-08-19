@@ -10,9 +10,16 @@ class ProductCatalougeRepository implements ProductCatalougeRepositoryInterface
 {
     public function getAll()
     {
-        return ProductCatalouge::select('name', 'id')
+         $productCatalouges = ProductCatalouge::with('products', 'languages')
             ->where('publish', 1)
             ->get();
+
+        foreach($productCatalouges as $productCatalouge){
+            $productCatalouge['name'] = $productCatalouge->languages->first()->pivot->name;
+            $productCatalouge['canonical'] = $productCatalouge->languages->first()->pivot->canonical;
+            $productCatalouge['product_quantity'] = count($productCatalouge->products);
+        }
+        return $productCatalouges;
     }
 
     public function getToTree($id = null)

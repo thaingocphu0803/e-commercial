@@ -42,6 +42,10 @@ class ProductService implements ProductServiceInterface
         return $userCatalouge;
     }
 
+    public function getWithPromotion(){
+        return $this->productRepository->getWithPromotion();
+    }
+
     public function paginate($request)
     {
         $languages = $this->productRepository->paginate($request);

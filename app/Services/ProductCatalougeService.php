@@ -26,8 +26,8 @@ class ProductCatalougeService implements ProductCatalougeServiceInterface
 
     public function getAll()
     {
-        $userCatalouge = $this->productCatalougeRepository->getAll();
-        return $userCatalouge;
+        $productCatalouge = $this->productCatalougeRepository->getAll();
+        return $productCatalouge;
     }
 
     public function paginate($request)

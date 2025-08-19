@@ -10,7 +10,8 @@
                         <ul>
                             @foreach ($topMenus as $menu)
                                 <li>
-                                    <a href="{{write_url($menu->menuLanguage->canonical, true, true)}}" title=">{{ $menu->menuLanguage->name }}">
+                                    <a href="{{ write_url($menu->menuLanguage->canonical, true, true) }}"
+                                        title=">{{ $menu->menuLanguage->name }}">
                                         <span>{{ $menu->menuLanguage->name }}</span>
                                     </a>
                                 </li>
@@ -42,7 +43,7 @@
                                     @foreach ($languages as $lang)
                                         @if ($lang->canonical !== app()->getLocale())
                                             <li>
-                                                <a href="{{route('language.change', $lang->canonical)}}">
+                                                <a href="{{ route('language.change', $lang->canonical) }}">
                                                     <span>{{ $lang->name }}</span>
                                                 </a>
                                             </li>
@@ -60,38 +61,32 @@
     <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
         <div class="container">
             <div class="header-wrap">
-                <div class="logo logo-width-1"><a href="https://nest.botble.com/vi"><img
-                            src="https://nest.botble.com/storage/general/logo.png" data-bb-lazy="false"
+                <div class="logo logo-width-1"><a href="{{route('home.index')}}"><img
+                            src="{{base64_decode($system['homepage_logo'])}}" data-bb-lazy="false" width="100px" height="100px"
                             class="page_speed_990213890"
-                            alt="Nest - Kịch bản thương mại điện tử đa năng của Laravel"></a></div>
+                            alt="tpro logo"></a></div>
                 <div class="header-right">
                     <div class="search-style-2">
                         <form action="https://nest.botble.com/vi/products" class="form--quick-search"
                             data-ajax-url="https://nest.botble.com/vi/ajax/search-products" method="GET">
                             <div class="form-group--icon position-relative">
-                                <div class="product-cat-label">Tất cả danh mục</div><select
-                                    class="product-category-select" name="categories[]" aria-label="Select category">
-                                    <option value="">Tất cả danh mục</option>
-                                    <option value="1">Sữa và sữa</option>
-                                    <option value="2">Quần áo &amp; sắc đẹp</option>
-                                    <option value="3">Đồ chơi thú cưng</option>
-                                    <option value="4">Vật liệu nướng</option>
-                                    <option value="5">Trái cây tươi</option>
-                                    <option value="6">Rượu vang &amp; đồ uống</option>
-                                    <option value="7">Hải sản tươi sống</option>
-                                    <option value="8">Thức ăn nhanh</option>
-                                    <option value="9">Rau</option>
-                                    <option value="10">Bánh mì và nước trái cây</option>
-                                    <option value="11">Bánh &amp; sữa</option>
-                                    <option value="12">Cà phê &amp; trà</option>
-                                    <option value="13">Thức ăn cho thú cưng</option>
-                                    <option value="14">Thực phẩm ăn kiêng</option>
+                                <div class="product-cat-label">{{ __('custom.allCatalouge') }}</div>
+                                <select class="product-category-select" name="categories[]"
+                                    aria-label="Select category">
+                                    <option value="" disabled selected>{{ __('custom.allCatalouge') }}</option>
+                                    @foreach ($allCatalouge as $catalouge)
+                                        <option value="{{ $catalouge->id }}">{{ $catalouge->MenuLanguage->name }}
+                                        </option>
+                                    @endforeach
                                 </select>
-                            </div><input type="text" class="input-search-product" name="q"
-                                placeholder="Tìm kiếm các mục..." value="" autocomplete="off"><button
-                                class="btn" type="submit" aria-label="Gửi"><svg class="icon svg-icon-ti-ti-search"
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            </div>
+                            <input type="text" class="input-search-product" name="q"
+                                placeholder="{{ __('custom.searchForCatalouge') }}" value=""
+                                autocomplete="off"><button class="btn" type="submit"
+                                aria-label="{{ __('custom.send') }}">
+                                <svg class="icon svg-icon-ti-ti-search" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round">
                                     <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
                                     <path d="M21 21l-6 -6"></path>
@@ -145,82 +140,49 @@
     <div class="header-bottom header-bottom-bg-color">
         <div class="container">
             <div class="header-wrap header-space-between position-relative">
-                <div class="logo logo-width-1 d-block d-lg-none"><a href="https://nest.botble.com/vi"><img
-                            src="https://nest.botble.com/storage/general/logo.png" data-bb-lazy="false"
+                <div class="logo logo-width-1 d-block d-lg-none"><a href="{{route('home.index')}}"><img
+                            src="{{base64_decode($system['homepage_logo'])}}" data-bb-lazy="false"  width="100px" height="100px"
                             class="page_speed_990213890"
-                            alt="Nest - Kịch bản thương mại điện tử đa năng của Laravel"></a></div>
+                            alt="tpro logo"></a></div>
                 <div class="header-nav d-none d-lg-flex">
-                    <div class="main-categories-wrap d-none d-lg-block"><a class="categories-button-active"
-                            href="#"><span class="fi-rs-apps"></span><span class="et">Duyệt</span> Tất cả
-                            danh mục <i class="fi-rs-angle-down"></i></a>
+                    <div class="main-categories-wrap d-none d-lg-block">
+                        <a class="categories-button-active" href="#">
+                            <span class="fi-rs-apps"></span>
+                            <span class="et">{{ __('custom.browseAllCategory') }}<i class="fi-rs-angle-down"></i>
+                        </a>
                         <div class="categories-dropdown-wrap categories-dropdown-active-large font-heading">
                             <div class="d-flex categories-dropdown-inner">
                                 <ul>
-                                    <li><a href="https://nest.botble.com/vi/product-categories/milks-and-dairies"><img
-                                                src="https://nest.botble.com/storage/product-categories/icon-1.png"
-                                                alt="Sữa và sữa" width="30" height="30"> Sữa và sữa </a></li>
-                                    <li><a href="https://nest.botble.com/vi/product-categories/clothing-beauty"><img
-                                                src="https://nest.botble.com/storage/product-categories/icon-2.png"
-                                                alt="Quần áo &amp; sắc đẹp" width="30" height="30"> Quần áo
-                                            &amp; sắc đẹp </a></li>
-                                    <li><a href="https://nest.botble.com/vi/product-categories/pet-toy"><img
-                                                src="https://nest.botble.com/storage/product-categories/icon-3.png"
-                                                alt="Đồ chơi thú cưng" width="30" height="30"> Đồ chơi thú
-                                            cưng </a></li>
-                                    <li><a href="https://nest.botble.com/vi/product-categories/baking-material"><img
-                                                src="https://nest.botble.com/storage/product-categories/icon-4.png"
-                                                alt="Vật liệu nướng" width="30" height="30"> Vật liệu nướng
-                                        </a></li>
-                                    <li><a href="https://nest.botble.com/vi/product-categories/fresh-fruit"><img
-                                                src="https://nest.botble.com/storage/product-categories/icon-5.png"
-                                                alt="Trái cây tươi" width="30" height="30"> Trái cây tươi </a>
-                                    </li>
-                                </ul>
-                                <ul class="end">
-                                    <li><a href="https://nest.botble.com/vi/product-categories/wines-drinks"><img
-                                                src="https://nest.botble.com/storage/product-categories/icon-6.png"
-                                                alt="Rượu vang &amp; đồ uống" width="30" height="30"> Rượu
-                                            vang &amp; đồ uống </a></li>
-                                    <li><a href="https://nest.botble.com/vi/product-categories/fresh-seafood"><img
-                                                src="https://nest.botble.com/storage/product-categories/icon-7.png"
-                                                alt="Hải sản tươi sống" width="30" height="30"> Hải sản tươi
-                                            sống </a></li>
-                                    <li><a href="https://nest.botble.com/vi/product-categories/fast-food"><img
-                                                src="https://nest.botble.com/storage/product-categories/icon-8.png"
-                                                alt="Thức ăn nhanh" width="30" height="30"> Thức ăn nhanh </a>
-                                    </li>
-                                    <li><a href="https://nest.botble.com/vi/product-categories/vegetables"><img
-                                                src="https://nest.botble.com/storage/product-categories/icon-9.png"
-                                                alt="Rau" width="30" height="30"> Rau </a></li>
-                                    <li><a href="https://nest.botble.com/vi/product-categories/bread-and-juice"><img
-                                                src="https://nest.botble.com/storage/product-categories/icon-10.png"
-                                                alt="Bánh mì và nước trái cây" width="30" height="30"> Bánh mì
-                                            và nước trái cây </a></li>
+                                    @foreach ($allCatalouge->take(3) as $val)
+                                            <li>
+                                                <a href="{{ write_url($val->MenuLanguage->canonical, true, true) }}">
+                                                    {{ $val->MenuLanguage->name }}
+                                                </a>
+                                            </li>
+                                    @endforeach
                                 </ul>
                             </div>
                             <div class="more_slide_open page_speed_648829015">
                                 <div class="d-flex categories-dropdown-inner">
                                     <ul>
-                                        <li><a href="https://nest.botble.com/vi/product-categories/cake-milk"><img
-                                                    src="https://nest.botble.com/storage/product-categories/icon-11.png"
-                                                    alt="Bánh &amp; sữa" width="30" height="30"> Bánh &amp;
-                                                sữa </a></li>
-                                    </ul>
-                                    <ul class="end">
-                                        <li><a href="https://nest.botble.com/vi/product-categories/coffee-teas"><img
-                                                    src="https://nest.botble.com/storage/product-categories/icon-12.png"
-                                                    alt="Cà phê &amp; trà" width="30" height="30"> Cà phê
-                                                &amp; trà </a></li>
+                                        @foreach ($allCatalouge->skip(3) as $val)
+                                                <li>
+                                                    <a href="{{ write_url($val->MenuLanguage->canonical, true, true) }}">
+                                                        {{ $val->MenuLanguage->name }}
+                                                    </a>
+                                                </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
                             <div class="more_categories" data-text-show-more="Cho xem nhiều hơn..."
-                                data-text-show-less="Hiện ít hơn..."><span class="icon"></span><span
-                                    class="heading-sm-1">Cho xem
-                                    nhiều hơn...</span></div>
+                                data-text-show-less="Hiện ít hơn...">
+                                <span class="icon"></span>
+                                <span class="heading-sm-1">{{__('custom.seeMore')}}</span>
+                            </div>
                         </div>
                     </div>
-                    {{--main menu --}}
+                    {{-- main menu --}}
                     <x-frontend.dashboard.header.mainmenu />
                 </div>
 
@@ -257,4 +219,4 @@
 </header>
 
 {{-- mobile screen --}}
-<x-frontend.dashboard.mobile.header />
+<x-frontend.dashboard.mobile.header :system="$system" />

@@ -16,6 +16,8 @@ interface MenuRepositoryInterface
 
     public function update($id, $payload);
 
+    public function destroy($ids = []);
+
     public function updateStatus($payload);
 
     public function updateStatusAll($payload);

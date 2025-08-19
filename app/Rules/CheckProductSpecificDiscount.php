@@ -36,7 +36,6 @@ class CheckProductSpecificDiscount implements ValidationRule
 
         if(
             ($productMin == 0) ||
-            ($productMax == 0) ||
             ($productDiscount == 0)
         ){
             $isConflict = 1;

@@ -2,7 +2,7 @@
     <div class="mobile-header-wrapper-inner">
         <div class="mobile-header-top">
             <div class="mobile-header-logo"><a href="https://nest.botble.com/vi"><img
-                        src="https://nest.botble.com/storage/general/logo.png" data-bb-lazy="false"
+                        src="{{base64_decode($system['homepage_logo'])}}" data-bb-lazy="false"  width="100px" height="100px"
                         class="page_speed_1952188303" alt="Nest - Kịch bản thương mại điện tử đa năng của Laravel"></a>
             </div>
             <div class="mobile-menu-close close-style-wrap close-style-position-inherit"><button

@@ -53,7 +53,7 @@ class PromotionRepository implements PromotionRepositoryInterface
     }
 
     public function update($id, $payload)
-    {
+    {  
         return Promotion::find($id)->update($payload);
     }
 

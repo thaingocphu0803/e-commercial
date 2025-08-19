@@ -166,6 +166,8 @@
                                     </div>
                                 @endforeach
                             @endif
+
+                            <input type="hidden" name="menu[delete_menu_ids]">
                         </div>
                     </div>
                 </div>

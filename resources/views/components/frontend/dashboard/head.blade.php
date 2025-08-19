@@ -48,16 +48,20 @@
     <link media="all" type="text/css" rel="stylesheet"
         href="{{asset('frontend/css/plugins/slick.css')}}">
 
-    {{-- font --}}
-    <link media="all" type="text/css" rel="stylesheet"
-        href="{{asset('frontend/css/plugins/front-ecommerce.css')}}">
-
     {{-- core --}}
     <link media="all" type="text/css" rel="stylesheet"
         href="{{asset('frontend/css/core.css')}}">
     {{-- style --}}
     <link media="all" type="text/css" rel="stylesheet"
         href="{{asset('frontend/css/style.css')}}">
+
+    {{-- custom --}}
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{asset('frontend/css/custom.css')}}">
+
+    {{-- swipper plugin --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     {{ $slot }}
 

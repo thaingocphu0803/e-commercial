@@ -84,10 +84,10 @@
             ja: "最小数量",
         },
         limit: {
-            vi: "giới hạn",
-            en: "Limit",
-            zh: "上限",
-            ja: "上限",
+            vi: "tối đa",
+            en: "Maximum",
+            zh: "最大值",
+            ja: "最大値",
         },
     };
     let addBtn = {
@@ -883,7 +883,7 @@
                 <thead>
                     <th class="text-center text-capitalize">${thead.product[lang]}</th>
                     <th class="text-center text-capitalize">${thead.atLeast[lang]}</th>
-                    <th class="text-center text-capitalize">${thead.limit[lang]}</th>
+                    <th class="text-center text-capitalize">${thead.limit[lang]} (${PriceValue[lang]})</th>
                     <th class="text-center text-capitalize">${thead.discount[lang]}</th>
                 </thead>
                 <tbody>

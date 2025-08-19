@@ -99,9 +99,13 @@ class MenuService implements MenuServiceInterface
         DB::beginTransaction();
         try{
             $payload = $request->except(['_token', 'keyword']);
+
+            if(!empty($payload['menu']['delete_menu_ids'])){
+                $deleteIds = explode(',', $payload['menu']['delete_menu_ids']);
+                $this->menuRepository->destroy($deleteIds);
+            }
             if(!empty($payload['menu']['name'])){
                 foreach($payload['menu']['name'] as $key => $value){
-
                     $menuArr =[
                         'menu_catalouge_id' => isset($payload['menu_catalouge_id']) ? $payload['menu_catalouge_id'] : $parent_menu_catalouge_id,
                         'parent_id' => $parent_id,

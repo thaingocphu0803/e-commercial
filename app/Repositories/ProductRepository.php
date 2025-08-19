@@ -5,7 +5,10 @@ namespace App\Repositories;
 use App\Models\Product;
 use App\Models\ProductCatalouge;
 use App\Models\ProductLanguage;
+use App\Models\ProductVariant;
+use App\Models\Promotion;
 use App\Repositories\Interfaces\ProductRepositoryInterface;
+use Illuminate\Support\Facades\DB;
 
 class ProductRepository implements ProductRepositoryInterface
 {
@@ -14,6 +17,101 @@ class ProductRepository implements ProductRepositoryInterface
         return Product::select('name', 'id')
             ->where('publish', 1)
             ->get();
+    }
+
+    public function getWithPromotion()
+    {
+
+        $publish = config('app.general.defaultPublish');
+
+        $promotionSub = Promotion::select(
+            'ppv.product_id',
+            'ppv.variant_uuid as uuid',
+            'promotions.discountValue',
+            'promotions.discountType',
+            'promotions.maxDisCountValue',
+        )
+            ->join('promotion_product_variant as ppv', 'promotions.id', '=', 'ppv.promotion_id')
+            ->where('ppv.model', 'product')
+            ->publish($publish)
+            ->where(function ($q) {
+                $q->whereNull('promotions.end_date')
+                    ->orWhere('promotions.end_date', '>', now());
+            });
+
+        // dd($promotionSub->get());
+
+        $products = DB::table(DB::raw(
+    "(
+            SELECT 
+                products.id,
+                pv.uuid,
+                products.image,
+                products.album,
+                products.code,
+                pl.name as product_name,
+                pcl.name as product_catalouge_name,
+                pcl.canonical as product_catalouge_canonical,
+                pl.canonical as product_canonical,
+                ps.discountValue,
+                ps.discountType,
+                ps.maxDiscountValue,
+                COALESCE(pv.price, products.price) as product_price,
+                (
+                    IF(
+                        ps.maxDiscountValue != 0,
+                        LEAST(
+                            CASE
+                                WHEN ps.discountType='amount' THEN ps.discountValue
+                                WHEN ps.discountType='percent' THEN COALESCE(pv.price, products.price) * (ps.discountValue/100)
+                                ELSE 0
+                            END,
+                            ps.maxDiscountValue
+                        ),
+                        CASE
+                            WHEN ps.discountType='amount' THEN ps.discountValue
+                            WHEN ps.discountType='percent' THEN COALESCE(pv.price, products.price) * (ps.discountValue/100)
+                            ELSE 0
+                        END
+                    )
+                ) as discount,
+                 
+                ROW_NUMBER() OVER (PARTITION BY products.id ORDER BY 
+                    (
+                        COALESCE(pv.price, products.price) - 
+                        IF(
+                            ps.maxDiscountValue != 0,
+                            LEAST(
+                                CASE
+                                    WHEN ps.discountType='amount' THEN ps.discountValue
+                                    WHEN ps.discountType='percent' THEN COALESCE(pv.price, products.price) * (ps.discountValue/100)
+                                    ELSE 0
+                                END,
+                                ps.maxDiscountValue
+                            ),
+                            CASE
+                                WHEN ps.discountType='amount' THEN ps.discountValue
+                                WHEN ps.discountType='percent' THEN COALESCE(pv.price, products.price) * (ps.discountValue/100)
+                                ELSE 0
+                            END
+                        )
+                    ) ASC
+                ) as rn
+
+                FROM products
+                JOIN product_language as pl ON products.id = pl.product_id
+                JOIN product_catalouge_language as pcl ON products.product_catalouge_id = pcl.product_catalouge_id
+                LEFT JOIN product_variants as pv ON products.id = pv.product_id
+                LEFT JOIN (
+                {$promotionSub->toSql()}
+                ) as ps ON ps.product_id = products.id
+                AND (ps.uuid = pv.uuid OR (ps.uuid IS NULL AND pv.uuid IS NULL))
+            ) as ranked"
+        ))
+        ->mergeBindings($promotionSub->getQuery())
+        ->where('rn', 1)
+        ->paginate(30);
+        return $products;
     }
 
     public function getToTree()
@@ -217,9 +315,9 @@ class ProductRepository implements ProductRepositoryInterface
                 COALESCE(tb3.price, products.price) as price
             "
         )
-        ->join('product_language as tb2', 'products.id', '=', 'tb2.product_id')
-        ->leftJoin('product_variants as tb3', 'products.id', '=', 'tb3.product_id')
-        ->where('tb2.name', 'like', '%'.$keyword.'%')
-        ->paginate(10)->withQueryString();
+            ->join('product_language as tb2', 'products.id', '=', 'tb2.product_id')
+            ->leftJoin('product_variants as tb3', 'products.id', '=', 'tb3.product_id')
+            ->where('tb2.name', 'like', '%' . $keyword . '%')
+            ->paginate(10)->withQueryString();
     }
 }

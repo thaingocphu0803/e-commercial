@@ -10,6 +10,8 @@ interface ProductRepositoryInterface
 {
     public function getAll();
 
+    public function getWithPromotion();
+
     public function getToTree();
 
     public function findById($id);

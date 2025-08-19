@@ -62,6 +62,10 @@ class MenuRepository implements MenuRepositoryInterface
        return false;
     }
 
+    public function destroy($ids = []){
+        return Menu::destroy($ids);
+    }
+
     public function updateStatus($payload)
     {
         $modelId = $payload['modelId'];

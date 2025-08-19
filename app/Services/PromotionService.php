@@ -20,6 +20,7 @@ class PromotionService implements PromotionServiceInterface
     {
         $this->promotionRepository = $promotionRepository;
     }
+
     public function paginate($request)
     {
         return $this->promotionRepository->paginate($request);
@@ -46,6 +47,9 @@ class PromotionService implements PromotionServiceInterface
                 'end_date',
             );
 
+            $payload['discountValue'] = $request['product']['discount'];
+            $payload['discountType'] = $request['product']['discount_type'];
+            $payload['maxDiscountValue'] =  $request['product']['max'];
 
             if (empty($payload['code'])) {
                 $payload['code'] = Str::upper(Str::random(10));
@@ -87,6 +91,7 @@ class PromotionService implements PromotionServiceInterface
     public function update($id, $request)
     {
         DB::beginTransaction();
+
         try {
             $payload = $request->only(
                 'name',
@@ -97,6 +102,11 @@ class PromotionService implements PromotionServiceInterface
                 'start_date',
                 'end_date',
             );
+
+            $payload['discountValue'] = $request['product']['discount'];
+            $payload['discountType'] = $request['product']['discount_type'];
+            $payload['maxDiscountValue'] =  $request['product']['max'];
+
             if(!isset($payload['not_end_time'])){
                $payload['not_end_time'] = null;
             }
@@ -243,6 +253,10 @@ class PromotionService implements PromotionServiceInterface
 
     private function getProductInforPayload($request)
     {
+        $request['product_checked']['variant'] = array_map(function($item){
+             return $item === 'null' ? null : $item;
+        },  $request['product_checked']['variant']);
+
         $payload = [
             'min_quantiy' => $request['product']['min'],
             'max_quantiy' => $request['product']['max'],

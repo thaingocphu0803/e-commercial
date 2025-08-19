@@ -501,3 +501,10 @@ a.active{
     padding: 0px 10px;
     border-radius: 5px;
 }
+
+.justify-self-end {
+    justify-self: end;
+}
+.w-50{
+    width: 50%;
+}
