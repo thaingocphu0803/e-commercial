@@ -3,17 +3,39 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Services\SystemService;
-use Illuminate\Http\Request;
+use App\Services\ProductCatalougeService;
+use App\Services\ProductService;
+use App\Services\SlideService;
 
 class HomeController extends Controller
 {
-    public function __construct()
-    {
+    private $slideService;
+    private $productCatalougeService;
+    private $productService;
 
+    public function __construct(
+        SlideService $slideService,
+        ProductCatalougeService $productCatalougeService,
+        ProductService $productService
+        )
+    {
+        $this->slideService = $slideService;
+        $this->productCatalougeService = $productCatalougeService;
+        $this->productService = $productService;
     }
 
     public function index(){
-        return view('Frontend.homepage.home.index');
+        // get slides
+        [$slides, $banners] =$this->slideService->findByKeyword(['main-slide', 'banner']);
+        $slideItems = json_decode($slides->item, true);
+        $bannerItems = json_decode($banners->item, true);
+        $slideSettings = $slides->settings;
+
+        $products = $this->productService->getWithPromotion();
+
+        // get product catalouge
+        $productCategories = $this->productCatalougeService->getAll();
+
+        return view('Frontend.homepage.home.index', compact('slideItems', 'bannerItems' ,'slideSettings', 'productCategories', 'products'));
     }
 }

@@ -40,5 +40,8 @@
 {{-- backend --}}
 <script src="{{asset('frontend/js/backend.js')}}"></script>
 
+{{-- core --}}
+<script src="{{asset('frontend/js/core.js')}}"></script>
+
 {{-- main --}}
 <script src="{{asset('frontend/js/main.js')}}"></script>

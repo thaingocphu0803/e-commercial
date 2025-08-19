@@ -20,6 +20,7 @@ class MenuComposer
     public function compose(View $view){
         $menus = $this->menuCatalougeService->toTreeByKeyword('main-menu');
         $topMenus = $this->menuCatalougeService->toTreeByKeyword('top-menu');
-        $view->with(compact('menus', 'topMenus'));
+        $allCatalouge = $this->menuCatalougeService->toTreeByKeyword('all-catalouge');
+        $view->with(compact('menus', 'topMenus', 'allCatalouge'));
     }
 }

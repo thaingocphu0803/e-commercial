@@ -14,4 +14,9 @@ class PromotionProductVariant extends Model
     ];
 
     protected $table = 'promotion_product_variant';
+
+    public function promotion() {
+        return $this->belongsTo(Promotion::class, 'promotion_id', 'id');
+    }
+
 }

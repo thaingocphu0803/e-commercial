@@ -14,6 +14,8 @@ interface ProductServiceInterface
 
     public function findById($id);
 
+    public function getWithPromotion();
+
     public function paginate($number);
 
     public function create($request);

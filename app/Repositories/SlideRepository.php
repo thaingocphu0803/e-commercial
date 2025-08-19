@@ -25,6 +25,11 @@ class SlideRepository implements SlideRepositoryInterface {
         return $query ->orderBy('id', 'desc')->paginate($perpage)->withQueryString();
     }
 
+    public function findByKeyword($keywords){
+        $publish =config('app.general.defaultPublish');
+        return Slide::whereIn('keyword', $keywords)->publish($publish)->get();
+    }
+
     public function create($payload){
 
         return Slide::create($payload);

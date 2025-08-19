@@ -6,10 +6,6 @@ use App\Repositories\SlideRepository;
 use App\Services\Interfaces\SlideServiceInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-
-use function Pest\Laravel\json;
-
 /**
  * Class SlideService
  * @package App\Services
@@ -27,6 +23,10 @@ class SlideService implements SlideServiceInterface
     {
         $users = $this->slideRepository->paginate($request);
         return $users;
+    }
+
+    public function findByKeyword($keywords){
+        return $this->slideRepository->findByKeyword($keywords);
     }
 
     public function create($request)

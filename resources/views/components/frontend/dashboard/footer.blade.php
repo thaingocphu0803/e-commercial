@@ -90,7 +90,7 @@
                     <div class="widget-about font-md mb-md-3 mb-lg-3 mb-xl-0 wow animate__ animate__fadeInUp animated"
                         data-wow-delay="0" style="visibility: visible; animation-name: fadeInUp;">
                         <div class="logo mb-30"><a href="https://nest.botble.com/vi" class="mb-15"><img
-                                    src="https://nest.botble.com/storage/general/logo.png" data-bb-lazy="false"
+                            src="{{base64_decode($system['homepage_logo'])}}" data-bb-lazy="false"  width="100px" height="100px"
                                     class="page_speed_1952188303"
                                     alt="Nest - Kịch bản thương mại điện tử đa năng của Laravel"></a>
                             <p class="font-lg text-heading">Awesome grocery store website template</p>

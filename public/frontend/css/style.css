@@ -1832,7 +1832,8 @@ form .search-form button:hover {
 .card-2 figure img {
     border-radius: 10px;
     display: inline-block;
-    max-width: 80px
+    width: 80px;
+    height: 60px;
 }
 
 .card-2 .heading-card {
@@ -7328,7 +7329,7 @@ span.fi-rs-apps {
     left: 0;
     list-style-type: none;
     margin: 26px 0 0;
-    min-width: 270px;
+    width: 270px;
     opacity: 0;
     padding: 30px;
     position: absolute;
@@ -12226,7 +12227,7 @@ small {
 
 .form-group--icon .product-cat-label:after {
     color: #444;
-    content: "ï„Œ";
+    content: "";
     display: inline-block;
     font-family: uicons-regular-straight!important;
     font-size: 10px;

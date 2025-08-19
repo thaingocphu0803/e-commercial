@@ -1,0 +1,14 @@
+.slide-img {
+    width: 100%;
+    height: 500px;
+    object-fit: "cover";
+}
+.text-silver-300 {
+    color: #d5dadd !important;
+}
+
+.product-cart-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

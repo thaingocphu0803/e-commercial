@@ -281,5 +281,17 @@ return [
     'expired' => 'expried',
     //2025/08/18
     'contactTel' => 'Contact Telephone',
-    'supportCenter' => '24/7 Support Center'
+    'supportCenter' => '24/7 Support Center',
+    'register' => 'Register',
+    'enterEmail' => 'Enter your email',
+    'sigupLetter' => 'Sign up for the daily newsletter',
+    'productCategory' => 'Product Category',
+    'shopNow' =>'Shop Now',
+    'productList' => 'Product List',
+    'addToCart' => 'Add to cart',
+    'allCatalouge' => 'All Catalouge',
+    'send' => 'send',
+    'searchForCatalouge' => 'search for catalouges...',
+    'browseAllCategory' => 'Browse All Category',
+    'seeMore' => 'See More...'
 ];

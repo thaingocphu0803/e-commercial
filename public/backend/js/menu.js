@@ -7,6 +7,7 @@
             : [];
     let timeoutId;
     let currentPage;
+    let removeMenuList = [];
 
 
     FUNCT.createMenuCatalougeEvent = async () => {
@@ -125,13 +126,29 @@
         $(document).on("click", ".delete-menu-row", function () {
             let _this = $(this);
             let parent = _this.parents(".menu-row");
+            let canonical = parent.find('input[name="menu[canonical][]"]').val();
+            let id = parent.find('input[name="menu[id][]"]').val();
+
             parent.remove();
             if ($(".menu-row").length === 0) {
                 $(".menu-wrapper")
                     .find(".menu_row_notification")
                     .removeClass("hidden");
             }
+
+            checkedList = checkedList.filter((item)=> item !== canonical);
+            $(`.menu-item`).find(`input[id="${canonical}"]`).prop('checked', false);
+
+            if(parseInt(id) !== 0){
+                removeMenuList.push(id);
+            }
+
+            console.log(removeMenuList);
+            if(removeMenuList.length){
+                $('input[name="menu[delete_menu_ids]"]').val(removeMenuList.join(','));
+            }
         });
+
     };
 
     FUNCT.getMenuEvent = () => {

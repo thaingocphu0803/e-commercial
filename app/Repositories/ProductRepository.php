@@ -5,7 +5,10 @@ namespace App\Repositories;
 use App\Models\Product;
 use App\Models\ProductCatalouge;
 use App\Models\ProductLanguage;
+use App\Models\ProductVariant;
+use App\Models\Promotion;
 use App\Repositories\Interfaces\ProductRepositoryInterface;
+use Illuminate\Support\Facades\DB;
 
 class ProductRepository implements ProductRepositoryInterface
 {
@@ -14,6 +17,92 @@ class ProductRepository implements ProductRepositoryInterface
         return Product::select('name', 'id')
             ->where('publish', 1)
             ->get();
+    }
+
+    public function getWithPromotion()
+    {
+
+        $lowestPriceSub = ProductVariant::select('product_id', DB::raw('MIN(price) as min_price'))
+                          ->groupBy('product_id');
+
+        $discountSub = Promotion::select(
+            'ppv.product_id',
+            'promotions.discountValue',
+            'promotions.discountType',
+            DB::raw("
+                MIN(
+                    IF(
+                        promotions.maxDiscountValue != 0,
+                        LEAST(
+                            CASE
+                                WHEN promotions.discountType='amount' THEN promotions.discountValue
+                                WHEN promotions.discountType='percent' THEN COALESCE(lp.min_price, p.price) * (promotions.discountValue/100)
+                            ELSE 0
+                            END,
+                            promotions.maxDiscountValue
+                        ),
+                        CASE
+                            WHEN promotions.discountType='amount' THEN promotions.discountValue
+                            WHEN promotions.discountType='percent' THEN COALESCE(lp.min_price, p.price) * (promotions.discountValue/100)
+                        ELSE 0
+
+                        END
+                    )
+                ) as discount
+            ")
+        )
+            ->join('promotion_product_variant as ppv', 'promotions.id', '=', 'ppv.promotion_id')
+            ->join('products as p', 'p.id', '=', 'ppv.product_id')
+            ->leftJoinSub($lowestPriceSub, 'lp', function($join){
+                $join->on('p.id', '=', 'lp.product_id');
+            })
+            ->where('ppv.model', 'product')
+            ->where(function ($q) {
+                $q->whereNull('promotions.end_date')
+                    ->orWhere('promotions.end_date', '>', now());
+            })
+            ->groupBy(
+                'ppv.product_id',
+                'promotions.discountValue',
+                'promotions.discountType',
+            );
+
+        $products = Product::select(
+            'products.image',
+            'products.album',
+            'products.code',
+            DB::raw('MIN(COALESCE(lp.min_price, products.price)) as product_price'),
+            'pl.name as product_name', 'discount_sub.discount',
+            'pcl.name as product_catalouge_name',
+            'pcl.canonical as product_catalouge_canonical',
+            'pl.canonical as product_canonical',
+            'discount_sub.discountValue',
+            'discount_sub.discountType'
+            )
+            ->join('product_language as pl', 'products.id', '=', 'pl.product_id')
+            ->join('product_catalouge_language as pcl', 'products.product_catalouge_id', '=', 'pcl.product_catalouge_id')
+            ->leftJoinSub($lowestPriceSub, 'lp', function($join){
+                $join->on('products.id', '=', 'lp.product_id');
+            })
+            ->leftJoinSub($discountSub, 'discount_sub', function ($join) {
+                $join->on('products.id', '=', 'discount_sub.product_id');
+            })
+            ->groupBy(
+                'products.id',
+                'products.image',
+                'products.album',
+                'products.code',
+                'pl.name',
+                'discount_sub.discount',
+                'pcl.name',
+                'pcl.canonical',
+                'pl.canonical',
+                'discount_sub.discountValue',
+                'discount_sub.discountType'
+            )
+            ->paginate(30);
+
+        return $products;
     }
 
     public function getToTree()
@@ -217,9 +306,9 @@ class ProductRepository implements ProductRepositoryInterface
                 COALESCE(tb3.price, products.price) as price
             "
         )
-        ->join('product_language as tb2', 'products.id', '=', 'tb2.product_id')
-        ->leftJoin('product_variants as tb3', 'products.id', '=', 'tb3.product_id')
-        ->where('tb2.name', 'like', '%'.$keyword.'%')
-        ->paginate(10)->withQueryString();
+            ->join('product_language as tb2', 'products.id', '=', 'tb2.product_id')
+            ->leftJoin('product_variants as tb3', 'products.id', '=', 'tb3.product_id')
+            ->where('tb2.name', 'like', '%' . $keyword . '%')
+            ->paginate(10)->withQueryString();
     }
 }
