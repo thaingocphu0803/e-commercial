@@ -274,6 +274,7 @@ Route::controller(AjaxDashboardController::class)->prefix('ajax/dashboard')->mid
 Route::controller(AjaxProductController::class)->prefix('ajax/product')->middleware(['admin', 'locale'])->group(function(){
     Route::get('loadProductPromotion', 'loadProductPromotion')->name('product.loadProductPromotion');
     Route::get('loadProductCatalougePromotion', 'loadProductCatalougePromotion')->name('product.loadProductCatalougePromotion');
+    Route::get('loadProductWithVariant', 'loadProductWithVariant')->name('product.loadProductWithVariant');
 });
 
 //Ajax PromotionController

@@ -1,3 +1,6 @@
+{{-- lib --}}
+<script src="{{asset('frontend/js/lib.js')}}"></script>
+
 {{-- jquery --}}
 <script src="{{asset('frontend/js/jquery-3.6.0.min.js')}}"></script>
 

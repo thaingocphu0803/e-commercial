@@ -14,8 +14,13 @@
         <div class="row product-grid-5">
             @foreach ($products as $product)
                 <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6 mb-lg-0 mb-md-5 mb-sm-5 col-6">
-                    <div class="product-cart-wrap mb-30 wow animate__ animate__fadeIn animated" data-wow-delay="0.1s"
+                    <div class="product-cart-wrap mb-30 wow animate__ animate__fadeIn animated"
+                        data-wow-delay="0.1s"
+                        data-product-id="{{$product->id}}"
+                        data-product-promotion-id="{{$product->promotion_id}}"
+                        data-product-uuid="{{$product->uuid}}"
                         style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+
                         <div class="product-img-action-wrap">
                             <div class="product-img product-img-zoom">
                                 <a href="{{write_url($product->product_canonical, true, true)}}">
@@ -51,7 +56,7 @@
                         </div>
                         <div class="product-content-wrap">
                             <div class="product-category">
-                                <a href="https://nest.botble.com/vi/product-categories/vegetables">{{ $product->product_catalouge_name }}</a>
+                                <a href="{{write_url($product->product_catalouge_canonical, true, true)}}">{{ $product->product_catalouge_name }}</a>
                             </div>
                             <h2 class="text-truncate">
                                 <a href="https://nest.botble.com/vi/products/seeds-of-change-organic-quinoe">
@@ -85,7 +90,7 @@
                                     </div>
                                 @endif
 
-                                <div class="add-cart">
+                                <div class="add-cart" data-product-id="{{$product->id}}">
                                     <div aria-label="{{ __('custom.addToCart') }}"
                                         class="action-btn add-to-cart-button add mt-md-0 mt-3"
                                         data-open-modal="#open_product_modal"
