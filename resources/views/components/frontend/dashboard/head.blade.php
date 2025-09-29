@@ -48,10 +48,6 @@
     <link media="all" type="text/css" rel="stylesheet"
         href="{{asset('frontend/css/plugins/slick.css')}}">
 
-    {{-- font --}}
-    <link media="all" type="text/css" rel="stylesheet"
-        href="{{asset('frontend/css/plugins/front-ecommerce.css')}}">
-
     {{-- core --}}
     <link media="all" type="text/css" rel="stylesheet"
         href="{{asset('frontend/css/core.css')}}">

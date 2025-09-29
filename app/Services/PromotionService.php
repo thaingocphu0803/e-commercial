@@ -253,6 +253,10 @@ class PromotionService implements PromotionServiceInterface
 
     private function getProductInforPayload($request)
     {
+        $request['product_checked']['variant'] = array_map(function($item){
+             return $item === 'null' ? null : $item;
+        },  $request['product_checked']['variant']);
+
         $payload = [
             'min_quantiy' => $request['product']['min'],
             'max_quantiy' => $request['product']['max'],

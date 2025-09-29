@@ -26,19 +26,19 @@
                             </div>
                             <div class="product-action-1">
                                 <div class="product-action-wrap" style="max-width: 116px !important;">
-                                    <a aria-label="Xem nhanh" href="#"
-                                        class="action-btn hover-up js-quick-view-button"
-                                        data-url="https://nest.botble.com/vi/ajax/quick-view/1">
+                                    <a aria-label="{{__('custom.quickview')}}" href="#"
+                                        class="action-btn hover-up"
+                                        data-url="#">
                                         <i class="fi-rs-eye"></i>
                                     </a>
-                                    <a aria-label="Thêm vào yêu thích" href="#"
+                                    <a aria-label="{{__('custom.addWishList')}}" href="#"
                                         class="action-btn hover-up js-add-to-wishlist-button"
-                                        data-url="https://nest.botble.com/vi/wishlist/1">
+                                        data-url="#">
                                         <i class="fi-rs-heart"></i>
                                     </a>
-                                    <a aria-label="Thêm vào so sánh" href="#"
+                                    <a aria-label="{{__('custom.compare')}}" href="#"
                                         class="action-btn hover-up js-add-to-compare-button"
-                                        data-url="https://nest.botble.com/vi/compare/1">
+                                        data-url="#">
                                         <i class="fi-rs-shuffle"></i>
                                     </a>
                                 </div>
@@ -51,12 +51,12 @@
                         </div>
                         <div class="product-content-wrap">
                             <div class="product-category">
-                                <a
-                                    href="https://nest.botble.com/vi/product-categories/vegetables">{{ $product->product_catalouge_name }}</a>
+                                <a href="https://nest.botble.com/vi/product-categories/vegetables">{{ $product->product_catalouge_name }}</a>
                             </div>
-                            <h2 class="text-truncate"><a
-                                    href="https://nest.botble.com/vi/products/seeds-of-change-organic-quinoe"
-                                    title="Hạt giống thay đổi quinoa hữu cơ">{{ $product->product_name }}</a>
+                            <h2 class="text-truncate">
+                                <a href="https://nest.botble.com/vi/products/seeds-of-change-organic-quinoe">
+                                    {{ $product->product_name }}
+                                </a>
                             </h2>
 
                             {{-- <div class="product-rate-cover">
@@ -66,7 +66,7 @@
                                 <span class="font-small ml-5 text-muted">(9)</span>
                             </div> --}}
                             <div class="product-card-bottom d-md-flex d-block">
-                                @if (is_null($product->discount))
+                                @if (intval($product->discount) === 0)
                                     <div class="product-price">
                                         <span class=""
                                             data-bb-value="product-price">{{ price_format($product->product_price)}}</span>
@@ -86,14 +86,13 @@
                                 @endif
 
                                 <div class="add-cart">
-                                    <a aria-label="{{ __('custom.addToCart') }}"
+                                    <div aria-label="{{ __('custom.addToCart') }}"
                                         class="action-btn add-to-cart-button add mt-md-0 mt-3"
-                                        data-bb-toggle="add-to-cart" data-id="1"
-                                        data-url="https://nest.botble.com/vi/cart/add-to-cart" href="#"
+                                        data-open-modal="#open_product_modal"
                                         title="{{ __('custom.addToCart') }}">
-                                        <i class="fi-rs-shopping-cart mr-5"></i> <span
-                                            class="d-inline-block">{{ __('custom.addToCart') }}</span>
-                                    </a>
+                                        <i class="fi-rs-shopping-cart mr-5"></i>
+                                        <span class="d-inline-block">{{ __('custom.addToCart') }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

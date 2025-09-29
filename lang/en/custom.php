@@ -293,5 +293,10 @@ return [
     'send' => 'send',
     'searchForCatalouge' => 'search for catalouges...',
     'browseAllCategory' => 'Browse All Category',
-    'seeMore' => 'See More...'
+    'seeMore' => 'See More...',
+    'quickview' => 'Quick view',
+    'compare' => 'Compare',
+    'addWishList' => 'Add to wish list',
+    'amount' => 'amount',
+    'productImg' => 'product image',
 ];

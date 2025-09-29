@@ -6,7 +6,6 @@
     FUNC.initSwipper  = () => {
         let settings = $('.pannel-slide-swipper').data("settings");
         let option = FUNC.getSwipperOption(settings);
-        console.log(option);
 
         let swipper  = new Swiper('.pannel-slide-swipper', option);
     }
@@ -55,6 +54,6 @@
         return option;
     }
     $(document).ready(() =>  {
-        FUNC.initSwipper()
+        FUNC.initSwipper();
     });
 })(jQuery);

@@ -25,9 +25,6 @@
 {{-- plugin vticker --}}
 <script src="{{asset('frontend/js/plugins/jquery.vticker-min.js')}}"></script>
 
-{{-- front-ecommerce.js --}}
-<script src="{{asset('frontend/js/plugins/front-ecommerce.js')}}"></script>
-
 {{-- validation --}}
 <script src="{{asset('frontend/js/plugins/js-validation.js')}}"></script>
 
@@ -37,11 +34,19 @@
 {{-- toast --}}
 <script src="{{asset('frontend/js/plugins/toast.js')}}"></script>
 
-{{-- backend --}}
-<script src="{{asset('frontend/js/backend.js')}}"></script>
+{{-- core --}}
+<script src="{{asset('frontend/js/core.js')}}"></script>
+
+{{-- modal --}}
+<script src="{{asset('frontend/js/plugins/modal.js')}}"></script>
+
 
 {{-- core --}}
 <script src="{{asset('frontend/js/core.js')}}"></script>
 
 {{-- main --}}
 <script src="{{asset('frontend/js/main.js')}}"></script>
+
+{{-- product-modal --}}
+<script src="{{asset('frontend/js/product-modal.js')}}"></script>
+
