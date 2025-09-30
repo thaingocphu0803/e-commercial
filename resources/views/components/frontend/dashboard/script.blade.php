@@ -1,3 +1,6 @@
+{{-- lib --}}
+<script src="{{asset('frontend/js/lib.js')}}"></script>
+
 {{-- jquery --}}
 <script src="{{asset('frontend/js/jquery-3.6.0.min.js')}}"></script>
 
@@ -40,6 +43,9 @@
 {{-- modal --}}
 <script src="{{asset('frontend/js/plugins/modal.js')}}"></script>
 
+
+{{-- core --}}
+<script src="{{asset('frontend/js/core.js')}}"></script>
 
 {{-- main --}}
 <script src="{{asset('frontend/js/main.js')}}"></script>

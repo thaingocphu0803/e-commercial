@@ -630,54 +630,8 @@
         t.checkResponsive(!0),
         t.focusHandler()),
         e && t.$slider.trigger("init", [t]),
-        !0 === t.options.accessibility && t.initADA(),
         t.options.autoplay && (t.paused = !1,
         t.autoPlay())
-    }
-    ,
-    e.prototype.initADA = function() {
-        var e = this
-          , t = Math.ceil(e.slideCount / e.options.slidesToShow)
-          , o = e.getNavigableIndexes().filter(function(i) {
-            return i >= 0 && i < e.slideCount
-        });
-        e.$slides.add(e.$slideTrack.find(".slick-cloned")).attr({
-            "aria-hidden": "true",
-            tabindex: "-1"
-        }).find("a, input, button, select").attr({
-            tabindex: "-1"
-        }),
-        null !== e.$dots && (e.$slides.not(e.$slideTrack.find(".slick-cloned")).each(function(t) {
-            var s = o.indexOf(t);
-            i(this).attr({
-                role: "tabpanel",
-                id: "slick-slide" + e.instanceUid + t,
-                tabindex: -1
-            }),
-            -1 !== s && i(this).attr({
-                "aria-describedby": "slick-slide-control" + e.instanceUid + s
-            })
-        }),
-        e.$dots.attr("role", "tablist").find("li").each(function(s) {
-            var n = o[s];
-            i(this).attr({
-                role: "presentation"
-            }),
-            i(this).find("button").first().attr({
-                role: "tab",
-                id: "slick-slide-control" + e.instanceUid + s,
-                "aria-controls": "slick-slide" + e.instanceUid + n,
-                "aria-label": s + 1 + " of " + t,
-                "aria-selected": null,
-                tabindex: "-1"
-            })
-        }).eq(e.currentSlide).find("button").attr({
-            "aria-selected": "true",
-            tabindex: "0"
-        }).end());
-        for (var s = e.currentSlide, n = s + e.options.slidesToShow; s < n; s++)
-            e.$slides.eq(s).attr("tabindex", 0);
-        e.activateADA()
     }
     ,
     e.prototype.initArrowEvents = function() {
@@ -850,7 +804,7 @@
         t.slideCount > t.options.slidesToShow && t.setPosition(),
         t.swipeLeft = null,
         t.options.autoplay && t.autoPlay(),
-        !0 === t.options.accessibility && (t.initADA(),
+        !0 === t.options.accessibility && (
         t.options.focusOnChange && i(t.$slides.get(t.currentSlide)).attr("tabindex", 0).focus()))
     }
     ,

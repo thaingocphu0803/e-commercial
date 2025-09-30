@@ -42,6 +42,12 @@ class ProductService implements ProductServiceInterface
         return $userCatalouge;
     }
 
+    public function getWithVariant($request){
+        $payload = $request->except('_token');
+
+        return $this->productRepository->getWithVariant($payload);
+    }
+
     public function getWithPromotion(){
         return $this->productRepository->getWithPromotion();
     }

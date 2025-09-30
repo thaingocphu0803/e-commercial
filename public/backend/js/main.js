@@ -290,7 +290,7 @@ const ImageUpload = cloudinary.createUploadWidget(
 
             $(".click-to-upload").addClass("hidden");
             $(".upload-list").removeClass("hidden");
-
+            console.log(album);
             album.push(result.info.url);
         }
     }
@@ -320,7 +320,7 @@ $(document).on("click", ".delete-image", function () {
 });
 
 //add album to input value
-$(document).on("submit", "#post_catalouge_form", function (e) {
+$(document).on("submit", "#post_catalouge_form, #product_form", function (e) {
     e.preventDefault();
 
     if (album.length > 0) {

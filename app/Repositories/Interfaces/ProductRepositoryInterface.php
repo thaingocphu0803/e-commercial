@@ -10,6 +10,8 @@ interface ProductRepositoryInterface
 {
     public function getAll();
 
+    public function getWithVariant($payload);
+
     public function getWithPromotion();
 
     public function getToTree();
