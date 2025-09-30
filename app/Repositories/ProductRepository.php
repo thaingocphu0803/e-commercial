@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use App\Models\Attr;
+use App\Models\AttrCatalouge;
 use App\Models\Product;
 use App\Models\ProductCatalouge;
 use App\Models\ProductLanguage;
@@ -22,6 +24,14 @@ class ProductRepository implements ProductRepositoryInterface
     public function getWithPromotion()
     {
 
+        $attrSub = AttrCatalouge::with(['attrs' => function($q){
+            $q->select('attrs.id','al.name', 'al.canonical')
+            ->join('attr_language as al', 'attrs.id', '=', 'al.attr_id');
+        }])
+        ->select('attr_catalouges.id', 'acl.name', 'acl.canonical')
+                ->join('attr_catalouge_language as acl', 'attr_catalouges.id', '=', 'acl.attr_catalouge_id')
+                ->get();
+        dd($attrSub);
         $publish = config('app.general.defaultPublish');
 
         $promotionSub = Promotion::select(
