@@ -21,37 +21,39 @@ class ProductController extends Controller
     public function loadProductPromotion(Request $request)
     {
         $products  = $this->productService->loadProductWithVariant($request);
-        if(count($products)){
-            $response =[
-                'code' => 0,
-                'status' => 'ok',
-                'object' => $products,
-            ];
-        }
-
-        echo json_encode([
-            'code' => $response['code'] ?? 1,
-            'status' => $response['status'] ?? 'ng',
-            'object' =>  $response['object'] ?? []
-        ]);
+        $this->sendResponse($products);
     }
 
 
     public function loadProductCatalougePromotion(Request $request)
     {
         $productCatalouges  = $this->productCatalougeService->loadProductCatalouge($request);
-        if(count($productCatalouges)){
-            $response =[
-                'code' => 0,
-                'status' => 'ok',
-                'object' => $productCatalouges,
-            ];
+        $this->sendResponse($productCatalouges);
+    }
+
+    public function loadProductWithVariant(Request $request){
+        $product = $this->productService->getProductWithVariant($request);
+        $this->sendResponse($product);
+
+    }
+
+    public function loadProductByVariant(Request $request){
+        $product  = $this->productService->getProductByVariant($request);
+        $this->sendResponse($product);
+    }
+
+    private function sendResponse( $object = [], $code = 1 , $status = 'ng' ){
+        if($object && count($object)){
+            $code = 0;
+            $status = 'ok';
         }
 
-        echo json_encode([
-            'code' => $response['code'] ?? 1,
-            'status' => $response['status'] ?? 'ng',
-            'object' =>  $response['object'] ?? []
-        ]);
+        $response = [
+            'code' => $code,
+            'status' => $status,
+            'object' => $object
+        ];
+
+        echo json_encode($response);
     }
 }

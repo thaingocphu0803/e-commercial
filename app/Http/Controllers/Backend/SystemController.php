@@ -36,9 +36,9 @@ class SystemController extends Controller
         $this->languageId =$language->id;
 
         if ($this->systemService->create($request, $this->languageId)) {
-            return redirect()->route('system.index')->with('success', __('alert.addSuccess', ['attribute'=> __('custom.systemCo')]));
+            return redirect()->route('system.index')->with('success', __('alert.updateSuccess', ['attribute'=> __('custom.systemcofig')]));
         }
-        return redirect()->route('system.index')->with('error', __('alert.addError', ['attribute'=> __('custom.systemCo')]));
+        return redirect()->route('system.index')->with('error', __('alert.updateSuccess', ['attribute'=> __('custom.systemcofig')]));
 
     }
 }

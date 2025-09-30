@@ -2,8 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Models\Attr;
-use App\Models\AttrCatalouge;
 use App\Models\Product;
 use App\Models\ProductCatalouge;
 use App\Models\ProductLanguage;
@@ -11,6 +9,8 @@ use App\Models\ProductVariant;
 use App\Models\Promotion;
 use App\Repositories\Interfaces\ProductRepositoryInterface;
 use Illuminate\Support\Facades\DB;
+
+use function PHPUnit\Framework\isEmpty;
 
 class ProductRepository implements ProductRepositoryInterface
 {
@@ -21,20 +21,190 @@ class ProductRepository implements ProductRepositoryInterface
             ->get();
     }
 
+    public function getByVariant($payload)
+    {
+        $product_id = $payload['product_id'];
+        $code = $payload['code'];
+        $publish = config('app.general.defaultPublish');
+
+        $productData = ProductVariant::select(
+            'product_variants.id',
+            'product_variants.product_id',
+            'product_variants.album',
+            'product_variants.price',
+            'product_variants.uuid',
+            'p.maxDiscountValue',
+            'p.discountType',
+            'p.discountValue',
+            DB::raw("
+                IF( p.maxDiscountValue != 0,
+                    LEAST(
+                        CASE
+                            WHEN p.discountType='amount' THEN p.discountValue
+                            WHEN p.discountType='percent' THEN product_variants.price * (p.discountValue/100)
+                            ELSE 0
+                        END,
+                        p.maxDiscountValue
+                        ),
+                    CASE
+                        WHEN p.discountType='amount' THEN p.discountValue
+                        WHEN p.discountType='percent' THEN  product_variants.price * (p.discountValue/100)
+                    ELSE 0
+                    END
+                ) as discount
+            ")
+        )
+            ->leftJoin('promotion_product_variant as ppv', 'ppv.variant_uuid', '=', 'product_variants.uuid')
+            ->leftJoin('promotions as p', function ($join) use ($publish) {
+                $join->on('ppv.variant_uuid', '=', 'product_variants.uuid')
+                    ->where('p.publish', '=', $publish)
+                    ->where(function ($q) {
+                        $q->whereNull('p.end_date')
+                        ->orWhere('p.end_date', '>', now());
+                    });
+            })
+            ->where('product_variants.publish', $publish)
+            ->where('product_variants.code', $code)
+            ->where('product_variants.product_id', $product_id)
+            ->orderBy('discount', 'desc')
+            ->limit(1)
+            ->get();
+
+        if (!count($productData)) return false;
+
+        $productData = $productData->first()->toArray();
+
+
+
+        if (!empty($productData['album'])) {
+            $album = explode(',', $productData['album']);
+            $productData['image'] =  base64_encode($album[0]);
+            $productData['album'] = array_slice($album, 1, 4);
+        }else{
+            $productData['image'] = null;
+            $productData['album'] = null;
+        }
+
+        if($productData['discount'] && $productData['discount'] > 0){
+            $productData['discounted_price'] = $productData['price'] - $productData['discount'];
+        }
+
+        return $productData;
+    }
+
+    public function getWithVariant($payload)
+    {
+        $publish = config('app.general.defaultPublish');
+
+        $uuid = $payload['uuid'];
+
+        $promotion_id = $payload['promotion_id'];
+
+        $product_id = $payload['product_id'];
+
+        $product_attrs = ProductVariant::select('pva.attr_id')
+            ->distinct()
+            ->join('product_variant_attr as pva', 'pva.product_variant_id', '=', 'product_variants.id')
+            ->where('product_variants.product_id',  $product_id)
+            ->get()
+            ->pluck('attr_id')
+            ->toArray();
+
+        $promotion = Promotion::select('discountValue', 'discountType', 'maxDiscountValue')
+            ->publish($publish)
+            ->find($promotion_id);
+
+        $productByCondition = Product::select('products.id', 'pl.name', 'pl.description', 'products.image', 'products.album', 'products.price')
+            ->with(['productCatalouges' => function ($productCatalouges) use ($publish) {
+                $productCatalouges->select('product_catalouges.id', 'pcl.product_catalouge_id', 'pcl.name as product_catalouge_name', 'pcl.canonical as product_catalouge_canonical')
+                    ->join('product_catalouge_language as pcl', 'pcl.product_catalouge_id', '=', 'product_catalouges.id')
+                    ->publish($publish);
+            }]);
+
+        if (!is_null($uuid)) {
+            $productByCondition = $productByCondition->with([
+                'productVariants' => function ($productVariant) use ($publish, $uuid) {
+                    $productVariant->with(['attrs.attrCatalouges' => function ($attrCatalouge) use ($publish) {
+                        $attrCatalouge->with(['attrs' => function ($attrs) use ($publish) {
+                            $attrs->select('attrs.id', 'al.name', 'al.canonical')
+                                ->join('attr_language as al', 'al.attr_id', '=', 'attrs.id')
+                                ->publish($publish);
+                        }])
+                            ->select('attr_catalouges.id', 'acl.name', 'acl.canonical', 'attr_catalouges.id')
+                            ->join('attr_catalouge_language as acl', 'acl.attr_catalouge_id', '=', 'attr_catalouges.id')
+                            ->publish($publish);
+                    }])
+                        ->select('product_variants.id', 'product_variants.product_id', 'product_variants.price', 'product_variants.album', 'product_variants.code')
+                        ->where('product_variants.uuid', $uuid)->first();
+                }
+            ]);
+        }
+
+        $productByCondition = $productByCondition->join('product_language as pl', 'pl.product_id', '=', 'products.id')
+            ->where('id', $product_id)
+            ->publish($publish)
+            ->get()
+            ->first();
+
+        if (empty($productByCondition)) return false;
+
+        $productData['id'] = $productByCondition->id;
+        $productData['name'] = $productByCondition->name;
+        $productData['description'] = $productByCondition->description;
+        $productData['image'] = $productByCondition->image;
+        $productData['album'] = !is_null($productByCondition->album) ? array_slice(json_decode($productByCondition->album, true), 0, 4) : null;
+        $productData['price'] = $productByCondition->price;
+        $productData['catalouges'] = $productByCondition->productCatalouges->toArray();
+
+        if (!empty($productByCondition->productVariants->first())) {
+            $productData['price'] = $productByCondition->productVariants->first()->price;
+            $productData['variant_id'] = $productByCondition->productVariants->first()->id;
+            $productData['variant_codes'] =  explode('-', $productByCondition->productVariants->first()->code);
+
+            $album = $productByCondition->productVariants->first()->album;
+            if (!isEmpty($album)) {
+                $album = explode(',', $album);
+                $productData['image'] =  $album[0];
+                $productData['album'] = array_slice($album, 1, 4);
+            }
+
+            $attrCatalouges = $productByCondition->productVariants->first()->attrs->pluck('attrCatalouges');
+
+            $productData['attrCatalouges'] = $attrCatalouges->map(function ($catalouge) {
+                return [
+                    'attr_catalouge_id' => $catalouge->first()->id,
+                    'attr_catalouge_name' => $catalouge->first()->name,
+                    'attr_catalouge_canonical' => $catalouge->first()->canonical,
+                    'attrs' => $catalouge->first()->attrs->toArray()
+                ];
+            })->toArray();
+        }
+
+        if (!empty($promotion)) {
+            $discount = 0;
+            if ($promotion->maxDiscountValue > 0) {
+                $discount = $promotion->maxDiscountValue;
+            } else {
+                if ($promotion->discountType === 'amount') {
+                    $discount = $promotion->discountValue;
+                } else if ($promotion->discountType === 'percent') {
+                    $discount =  $productData['price'] *  ($promotion->discountValue / 100);
+                }
+            }
+
+            $productData['discounted_price'] = $productData['price'] - $discount;
+        }
+
+        $productData['attrs'] = $product_attrs;
+        return $productData;
+    }
+
     public function getWithPromotion()
     {
-
-        $attrSub = AttrCatalouge::with(['attrs' => function($q){
-            $q->select('attrs.id','al.name', 'al.canonical')
-            ->join('attr_language as al', 'attrs.id', '=', 'al.attr_id');
-        }])
-        ->select('attr_catalouges.id', 'acl.name', 'acl.canonical')
-                ->join('attr_catalouge_language as acl', 'attr_catalouges.id', '=', 'acl.attr_catalouge_id')
-                ->get();
-        dd($attrSub);
         $publish = config('app.general.defaultPublish');
 
         $promotionSub = Promotion::select(
+            'promotions.id',
             'ppv.product_id',
             'ppv.variant_uuid as uuid',
             'promotions.discountValue',
@@ -49,13 +219,12 @@ class ProductRepository implements ProductRepositoryInterface
                     ->orWhere('promotions.end_date', '>', now());
             });
 
-        // dd($promotionSub->get());
-
         $products = DB::table(DB::raw(
-    "(
-            SELECT 
+            "(
+            SELECT
                 products.id,
                 pv.uuid,
+                ps.id as promotion_id,
                 products.image,
                 products.album,
                 products.code,
@@ -85,10 +254,10 @@ class ProductRepository implements ProductRepositoryInterface
                         END
                     )
                 ) as discount,
-                 
-                ROW_NUMBER() OVER (PARTITION BY products.id ORDER BY 
+
+                ROW_NUMBER() OVER (PARTITION BY products.id ORDER BY
                     (
-                        COALESCE(pv.price, products.price) - 
+                        COALESCE(pv.price, products.price) -
                         IF(
                             ps.maxDiscountValue != 0,
                             LEAST(
@@ -113,14 +282,16 @@ class ProductRepository implements ProductRepositoryInterface
                 JOIN product_catalouge_language as pcl ON products.product_catalouge_id = pcl.product_catalouge_id
                 LEFT JOIN product_variants as pv ON products.id = pv.product_id
                 LEFT JOIN (
-                {$promotionSub->toSql()}
-                ) as ps ON ps.product_id = products.id
-                AND (ps.uuid = pv.uuid OR (ps.uuid IS NULL AND pv.uuid IS NULL))
+                    {$promotionSub->toSql()}
+                    ) as ps ON ps.product_id = products.id
+                    AND (ps.uuid = pv.uuid OR (ps.uuid IS NULL AND pv.uuid IS NULL))
+                WHERE products.publish = $publish
             ) as ranked"
         ))
-        ->mergeBindings($promotionSub->getQuery())
-        ->where('rn', 1)
-        ->paginate(30);
+            ->mergeBindings($promotionSub->getQuery())
+            ->where('rn', 1)
+            ->paginate(30);
+
         return $products;
     }
 

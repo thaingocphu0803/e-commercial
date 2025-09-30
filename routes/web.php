@@ -36,6 +36,19 @@ use App\Http\Controllers\Frontend\HomeController;
 // HomeController
 Route::get('/', [HomeController::class, 'index'])->name('home.index')->middleware('locale');
 
+// Ajax ProductController
+Route::controller(AjaxProductController::class)->prefix('ajax/product')->middleware(['locale'])->group(function(){
+    Route::get('loadProductWithVariant', 'loadProductWithVariant')->name('product.loadProductWithVariant');
+    Route::get('loadProductByVariant', 'loadProductByVariant')->name('product.loadProductByVariant');
+
+});
+
+//LanguageController
+Route::controller(LanguageController::class)->middleware(['locale'])->prefix('home/language')->group(function () {
+    Route::get('change/{canonical}', 'changeCurrent')->name('home.language.change');
+});
+
+
 /** BACKEND ROUTES */
 
 // AuthenController

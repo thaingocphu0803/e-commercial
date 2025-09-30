@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : mysql window
+ Source Server         : maria window 15.1
  Source Server Type    : MySQL
  Source Server Version : 100432 (10.4.32-MariaDB)
  Source Host           : 127.0.0.1:3306
@@ -11,7 +11,7 @@
  Target Server Version : 100432 (10.4.32-MariaDB)
  File Encoding         : 65001
 
- Date: 23/09/2025 10:57:22
+ Date: 30/09/2025 16:58:54
 */
 
 SET NAMES utf8mb4;
@@ -1702,6 +1702,7 @@ INSERT INTO `product_catalouge_product` VALUES (1, 49, NULL, NULL);
 INSERT INTO `product_catalouge_product` VALUES (1, 50, NULL, NULL);
 INSERT INTO `product_catalouge_product` VALUES (2, 42, NULL, NULL);
 INSERT INTO `product_catalouge_product` VALUES (3, 51, NULL, NULL);
+INSERT INTO `product_catalouge_product` VALUES (1, 42, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for product_catalouges
@@ -1732,7 +1733,7 @@ CREATE TABLE `product_catalouges`  (
 -- Records of product_catalouges
 -- ----------------------------
 INSERT INTO `product_catalouges` VALUES (1, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzU3MDQ0NTg0L0ltYWdlRm9sZGVyL3d5emYzNzd0ZW5wYWVtM2tuZXlsLmpwZw==', NULL, NULL, 1, 2, 0, 101, NULL, '2025-05-19 08:42:14', '2025-09-05 03:56:27', 1, 2, NULL);
-INSERT INTO `product_catalouges` VALUES (2, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzU3MDQ0NDc5L0ltYWdlRm9sZGVyL2ppZmIwbHZxcWN5YWxkanVvZ2h0LnBuZw==', NULL, NULL, 1, 2, 0, 101, NULL, '2025-07-15 09:33:32', '2025-09-05 03:54:44', 3, 4, NULL);
+INSERT INTO `product_catalouges` VALUES (2, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzU3MDQ0NDc5L0ltYWdlRm9sZGVyL2ppZmIwbHZxcWN5YWxkanVvZ2h0LnBuZw==', NULL, NULL, 2, 2, 0, 101, NULL, '2025-07-15 09:33:32', '2025-09-30 07:40:14', 3, 4, NULL);
 INSERT INTO `product_catalouges` VALUES (3, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzU3MDQ0NTEwL0ltYWdlRm9sZGVyL3R0cWR4a25kZW1ueGo2M3hlcWhsLmpwZw==', NULL, NULL, 1, 2, 0, 101, NULL, '2025-07-15 09:34:11', '2025-09-05 03:55:13', 5, 6, NULL);
 INSERT INTO `product_catalouges` VALUES (4, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzU4MjY1MTc0L0ltYWdlRm9sZGVyL3BuenhyaTJxOHJ0ZmZ6cnF0Y2FjLmF2aWY=', NULL, NULL, 1, 1, 0, 101, NULL, '2025-09-19 06:59:46', '2025-09-19 06:59:46', 7, 8, NULL);
 INSERT INTO `product_catalouges` VALUES (5, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzU4MjY1NDA1L0ltYWdlRm9sZGVyL2xxcGtuc2JyOXVocTF5NnZmMm9zLndlYnA=', NULL, NULL, 1, 1, 0, 101, NULL, '2025-09-19 07:03:39', '2025-09-19 07:03:39', 9, 10, NULL);
@@ -1763,10 +1764,10 @@ CREATE TABLE `product_language`  (
 -- ----------------------------
 -- Records of product_language
 -- ----------------------------
-INSERT INTO `product_language` VALUES (42, 1, 'iphone', NULL, NULL, NULL, NULL, NULL, 'iphone', '2025-07-11 04:10:49', '2025-07-22 07:15:31');
-INSERT INTO `product_language` VALUES (48, 1, 'football', NULL, NULL, NULL, NULL, NULL, 'foot-ball', '2025-07-11 09:23:12', '2025-07-15 02:44:18');
+INSERT INTO `product_language` VALUES (42, 1, 'iphone', '<p><b>IOS:</b>&nbsp;20;</p><p><b>MODEL</b>: 16</p>', NULL, NULL, NULL, NULL, 'iphone', '2025-07-11 04:10:49', '2025-09-30 07:20:45');
+INSERT INTO `product_language` VALUES (48, 1, 'football', NULL, NULL, NULL, NULL, NULL, 'foot-ball', '2025-07-11 09:23:12', '2025-09-30 04:59:01');
 INSERT INTO `product_language` VALUES (49, 1, 'shirt', NULL, NULL, NULL, NULL, NULL, 'shirt', '2025-07-15 02:45:13', '2025-07-15 02:45:13');
-INSERT INTO `product_language` VALUES (50, 1, 'short', NULL, NULL, NULL, NULL, NULL, 'short', '2025-07-15 04:34:19', '2025-07-15 04:34:19');
+INSERT INTO `product_language` VALUES (50, 1, 'short', NULL, NULL, NULL, NULL, NULL, 'short', '2025-07-15 04:34:19', '2025-09-30 06:30:44');
 INSERT INTO `product_language` VALUES (51, 1, 'pc gaming', NULL, NULL, NULL, NULL, NULL, 'pc-gaming', '2025-07-22 07:19:13', '2025-07-22 07:19:13');
 
 -- ----------------------------
@@ -1787,16 +1788,16 @@ CREATE TABLE `product_variant_attr`  (
 -- ----------------------------
 -- Records of product_variant_attr
 -- ----------------------------
-INSERT INTO `product_variant_attr` VALUES (111, 1, '2025-07-22 07:15:31', '2025-07-22 07:15:31');
-INSERT INTO `product_variant_attr` VALUES (111, 4, '2025-07-22 07:15:31', '2025-07-22 07:15:31');
-INSERT INTO `product_variant_attr` VALUES (112, 3, '2025-07-22 07:15:31', '2025-07-22 07:15:31');
-INSERT INTO `product_variant_attr` VALUES (112, 4, '2025-07-22 07:15:31', '2025-07-22 07:15:31');
 INSERT INTO `product_variant_attr` VALUES (113, 1, '2025-07-22 07:19:13', '2025-07-22 07:19:13');
 INSERT INTO `product_variant_attr` VALUES (113, 5, '2025-07-22 07:19:13', '2025-07-22 07:19:13');
 INSERT INTO `product_variant_attr` VALUES (113, 4, '2025-07-22 07:19:13', '2025-07-22 07:19:13');
 INSERT INTO `product_variant_attr` VALUES (114, 3, '2025-07-22 07:19:13', '2025-07-22 07:19:13');
 INSERT INTO `product_variant_attr` VALUES (114, 5, '2025-07-22 07:19:13', '2025-07-22 07:19:13');
 INSERT INTO `product_variant_attr` VALUES (114, 4, '2025-07-22 07:19:13', '2025-07-22 07:19:13');
+INSERT INTO `product_variant_attr` VALUES (127, 1, '2025-09-30 07:20:45', '2025-09-30 07:20:45');
+INSERT INTO `product_variant_attr` VALUES (127, 4, '2025-09-30 07:20:45', '2025-09-30 07:20:45');
+INSERT INTO `product_variant_attr` VALUES (128, 3, '2025-09-30 07:20:45', '2025-09-30 07:20:45');
+INSERT INTO `product_variant_attr` VALUES (128, 4, '2025-09-30 07:20:45', '2025-09-30 07:20:45');
 
 -- ----------------------------
 -- Table structure for product_variants
@@ -1827,15 +1828,15 @@ CREATE TABLE `product_variants`  (
   INDEX `product_variants_user_id_foreign`(`user_id` ASC) USING BTREE,
   CONSTRAINT `product_variants_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `product_variants_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 115 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 129 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of product_variants
 -- ----------------------------
-INSERT INTO `product_variants` VALUES (111, 42, 101, '1-4', 'màu đỏ-Kim cương', 10, '1752206944-1', 22220, '0', '', '', 'http://res.cloudinary.com/my-could-api/image/upload/v1752546304/album/variant/imqslgwqj86lhvlue88y.jpg', 1, NULL, '2025-07-22 07:15:31', '2025-07-22 07:15:31', '2-3', 'f3648c31-8a6d-5e15-b54c-345da98d00b8');
-INSERT INTO `product_variants` VALUES (112, 42, 101, '3-4', 'màu vàng-Kim cương', 20, '1752206944-1', 11110, '0', '', '', '', 1, NULL, '2025-07-22 07:15:31', '2025-07-22 07:15:31', '2-3', 'a3f4ac26-2c02-58d7-9518-fdd1377faf45');
 INSERT INTO `product_variants` VALUES (113, 51, 101, '1-4-5', 'màu đỏ-doji-Kim cương', 20, '1753168540-1-4-5', 15000, '0', '', '', '', 1, NULL, '2025-07-22 07:19:13', '2025-07-22 07:19:13', '2-4-3', '3fcce2e3-b9de-5b10-8a7a-e7be0d2f3b7d');
 INSERT INTO `product_variants` VALUES (114, 51, 101, '3-4-5', 'màu vàng-doji-Kim cương', 110, '1753168540-1-4-5', 20000, '0', '', '', '', 1, NULL, '2025-07-22 07:19:13', '2025-07-22 07:19:13', '2-4-3', 'f8e6d25f-410c-5297-ae7d-2dc6ce65ac73');
+INSERT INTO `product_variants` VALUES (127, 42, 101, '1-4', 'màu đỏ-Kim cương', 10, '1752206944-1', 22220, '0', '', '', 'http://res.cloudinary.com/my-could-api/image/upload/v1759114366/album/variant/ykbsnmrdld7l4x3y3yf3.avif,http://res.cloudinary.com/my-could-api/image/upload/v1759114366/album/variant/eo3eloaitnl3ms4syuwy.png,http://res.cloudinary.com/my-could-api/image/upload/v1759114367/album/variant/spcz735mre3lxbvnp9gb.png', 1, NULL, '2025-09-30 07:20:45', '2025-09-30 07:20:45', '2-3', 'f3648c31-8a6d-5e15-b54c-345da98d00b8');
+INSERT INTO `product_variants` VALUES (128, 42, 101, '3-4', 'màu vàng-Kim cương', 20, '1752206944-1', 11110, '0', '', '', '', 1, NULL, '2025-09-30 07:20:45', '2025-09-30 07:20:45', '2-3', 'a3f4ac26-2c02-58d7-9518-fdd1377faf45');
 
 -- ----------------------------
 -- Table structure for products
@@ -1864,11 +1865,11 @@ CREATE TABLE `products`  (
 -- ----------------------------
 -- Records of products
 -- ----------------------------
-INSERT INTO `products` VALUES (2, 42, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzUyNTQ2NTQ5L0ltYWdlRm9sZGVyL3pleHQ0YWZuaWU5bHNjbHVubThjLmpwZw==', NULL, NULL, 0, 1, 2, NULL, 101, '2025-07-11 04:10:49', '2025-07-22 07:15:31', '1752547080', 1237);
+INSERT INTO `products` VALUES (2, 42, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzUyNTQ2NTQ5L0ltYWdlRm9sZGVyL3pleHQ0YWZuaWU5bHNjbHVubThjLmpwZw==', NULL, '[\"http://res.cloudinary.com/my-could-api/image/upload/v1759128597/album/dzvbuola3qvkcvx7s2zr.png\",\"http://res.cloudinary.com/my-could-api/image/upload/v1759128603/album/xbi3ryvcs1mjhg2dzs2d.png\"]', 0, 1, 2, NULL, 101, '2025-07-11 04:10:49', '2025-09-29 06:50:17', '1752547080', 1237);
 INSERT INTO `products` VALUES (1, 48, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzUyNTQ2NTYwL0ltYWdlRm9sZGVyL2hsbzM4OTR6YnVoemp3aDZydTA0LndlYnA=', NULL, NULL, 0, 1, 2, NULL, 101, '2025-07-11 09:23:12', '2025-07-15 02:44:18', '1752547450', 22457);
 INSERT INTO `products` VALUES (1, 49, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzUyNTQ3NTEwL0ltYWdlRm9sZGVyL2NrZ2Z5aDJjYnVhY29ncWxvdG5xLmpwZw==', NULL, NULL, 0, 1, 2, NULL, 101, '2025-07-15 02:45:13', '2025-07-15 02:45:13', '1752547475', 124875);
 INSERT INTO `products` VALUES (1, 50, NULL, NULL, NULL, 0, 1, 2, NULL, 101, '2025-07-15 04:34:19', '2025-07-15 04:34:19', '1752554032', 33556432);
-INSERT INTO `products` VALUES (3, 51, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzUzMTY4Njk5L0ltYWdlRm9sZGVyL2FneG05YXFwMHVsYnJna2JoM2dpLmpwZw==', NULL, NULL, 0, 1, 1, NULL, 101, '2025-07-22 07:19:13', '2025-07-22 07:19:13', '1753168540', 10000);
+INSERT INTO `products` VALUES (3, 51, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzUzMTY4Njk5L0ltYWdlRm9sZGVyL2FneG05YXFwMHVsYnJna2JoM2dpLmpwZw==', NULL, NULL, 0, 1, 1, NULL, 101, '2025-07-22 07:19:13', '2025-09-30 04:12:46', '1753168540', 10000);
 
 -- ----------------------------
 -- Table structure for promotion_product_variant
@@ -1885,17 +1886,20 @@ CREATE TABLE `promotion_product_variant`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `promotion_product_variant_promotion_id_foreign`(`promotion_id` ASC) USING BTREE,
   CONSTRAINT `promotion_product_variant_promotion_id_foreign` FOREIGN KEY (`promotion_id`) REFERENCES `promotions` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 98 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 145 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of promotion_product_variant
 -- ----------------------------
-INSERT INTO `promotion_product_variant` VALUES (72, 3, 1, 'null', 'productCatalouge', NULL, NULL);
-INSERT INTO `promotion_product_variant` VALUES (93, 2, 42, 'f3648c31-8a6d-5e15-b54c-345da98d00b8', 'Product', NULL, NULL);
-INSERT INTO `promotion_product_variant` VALUES (94, 2, 42, 'a3f4ac26-2c02-58d7-9518-fdd1377faf45', 'Product', NULL, NULL);
-INSERT INTO `promotion_product_variant` VALUES (95, 2, 51, '3fcce2e3-b9de-5b10-8a7a-e7be0d2f3b7d', 'Product', NULL, NULL);
-INSERT INTO `promotion_product_variant` VALUES (96, 2, 48, 'null', 'Product', NULL, NULL);
-INSERT INTO `promotion_product_variant` VALUES (97, 2, 49, 'null', 'Product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (136, 15, 42, 'f3648c31-8a6d-5e15-b54c-345da98d00b8', 'Product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (137, 15, 42, 'a3f4ac26-2c02-58d7-9518-fdd1377faf45', 'Product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (138, 3, 48, NULL, 'Product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (139, 3, 42, 'a3f4ac26-2c02-58d7-9518-fdd1377faf45', 'Product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (140, 2, 42, 'f3648c31-8a6d-5e15-b54c-345da98d00b8', 'Product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (141, 2, 42, 'a3f4ac26-2c02-58d7-9518-fdd1377faf45', 'Product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (142, 2, 51, '3fcce2e3-b9de-5b10-8a7a-e7be0d2f3b7d', 'Product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (143, 2, 48, NULL, 'Product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (144, 2, 49, NULL, 'Product', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for promotions
@@ -1920,13 +1924,14 @@ CREATE TABLE `promotions`  (
   `discountType` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `maxDiscountValue` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of promotions
 -- ----------------------------
-INSERT INTO `promotions` VALUES (2, 'khuyen mai 20/10', 'sale2010', NULL, 'product_specific_discount', '{\"apply_source\":{\"status\":\"specific\",\"data\":[\"2\",\"3\",\"4\"]},\"apply_customer\":{\"status\":\"specific\",\"data\":[\"gender\"],\"condition\":{\"customer_type_gender\":[\"1\",\"2\"]}},\"infor\":{\"min_quantiy\":\"1\",\"max_quantiy\":\"1110\",\"discount\":\"10000\",\"discount_type\":\"amount\",\"module_type\":\"Product\",\"object\":{\"name\":[\"iphone | m\\u00e0u \\u0111\\u1ecf-Kim c\\u01b0\\u01a1ng\",\"iphone | m\\u00e0u v\\u00e0ng-Kim c\\u01b0\\u01a1ng\",\"pc gaming | m\\u00e0u \\u0111\\u1ecf-doji-Kim c\\u01b0\\u01a1ng\",\"football | default\",\"shirt | default\"],\"variant\":[\"f3648c31-8a6d-5e15-b54c-345da98d00b8\",\"a3f4ac26-2c02-58d7-9518-fdd1377faf45\",\"3fcce2e3-b9de-5b10-8a7a-e7be0d2f3b7d\",\"null\",\"null\"],\"id\":[\"42\",\"42\",\"51\",\"48\",\"49\"]}}}', 1, 0, NULL, '2025-07-22 07:11:00', '2025-09-26 07:11:00', NULL, '2025-07-22 07:12:24', '2025-09-19 06:08:44', 10000, 'amount', 1110);
-INSERT INTO `promotions` VALUES (3, 'khuyen mai 11/11', 'SALE1111', NULL, 'product_specific_discount', '{\"apply_source\":{\"status\":\"specific\",\"data\":[\"4\"]},\"apply_customer\":{\"status\":\"specific\",\"data\":[\"birthday\",\"cusomer_catalouge\"],\"condition\":{\"customer_type_birthday\":[\"0\",\"1\"],\"customer_type_cusomer_catalouge\":[\"1\",\"2\"]}},\"infor\":{\"min_quantiy\":\"100\",\"max_quantiy\":\"30000\",\"discount\":\"20\",\"discount_type\":\"percent\",\"module_type\":\"productCatalouge\",\"object\":{\"name\":[\"laptop\"],\"variant\":[\"null\"],\"id\":[\"1\"]}}}', 1, 0, NULL, '2025-07-22 07:27:00', '2025-09-30 07:27:00', NULL, '2025-07-22 07:27:55', '2025-09-19 02:34:26', 20, 'percent', 30000);
+INSERT INTO `promotions` VALUES (2, 'khuyen mai 20/10', 'sale2010', NULL, 'product_specific_discount', '{\"apply_source\":{\"status\":\"specific\",\"data\":[\"2\",\"3\",\"4\"]},\"apply_customer\":{\"status\":\"specific\",\"data\":[\"gender\"],\"condition\":{\"customer_type_gender\":[\"1\",\"2\"]}},\"infor\":{\"min_quantiy\":\"1\",\"max_quantiy\":\"0\",\"discount\":\"3000\",\"discount_type\":\"amount\",\"module_type\":\"Product\",\"object\":{\"name\":[\"iphone | m\\u00e0u \\u0111\\u1ecf-Kim c\\u01b0\\u01a1ng\",\"iphone | m\\u00e0u v\\u00e0ng-Kim c\\u01b0\\u01a1ng\",\"pc gaming | m\\u00e0u \\u0111\\u1ecf-doji-Kim c\\u01b0\\u01a1ng\",\"football | default\",\"shirt | default\"],\"variant\":[\"f3648c31-8a6d-5e15-b54c-345da98d00b8\",\"a3f4ac26-2c02-58d7-9518-fdd1377faf45\",\"3fcce2e3-b9de-5b10-8a7a-e7be0d2f3b7d\",null,null],\"id\":[\"42\",\"42\",\"51\",\"48\",\"49\"]}}}', 2, 0, NULL, '2025-07-22 07:11:00', '2025-10-01 07:11:00', NULL, '2025-07-22 07:12:24', '2025-09-30 08:48:27', 3000, 'amount', 0);
+INSERT INTO `promotions` VALUES (3, 'khuyen mai 11/11', 'SALE1111', NULL, 'product_specific_discount', '{\"apply_source\":{\"status\":\"specific\",\"data\":[\"4\"]},\"apply_customer\":{\"status\":\"specific\",\"data\":[\"birthday\",\"cusomer_catalouge\"],\"condition\":{\"customer_type_birthday\":[\"0\",\"1\"],\"customer_type_cusomer_catalouge\":[\"1\",\"2\"]}},\"infor\":{\"min_quantiy\":\"100\",\"max_quantiy\":\"0\",\"discount\":\"30\",\"discount_type\":\"percent\",\"module_type\":\"Product\",\"object\":{\"name\":[\"football | default\",\"iphone | m\\u00e0u v\\u00e0ng-Kim c\\u01b0\\u01a1ng\"],\"variant\":[null,\"a3f4ac26-2c02-58d7-9518-fdd1377faf45\"],\"id\":[\"48\",\"42\"]}}}', 2, 0, NULL, '2025-07-22 07:27:00', '2025-10-01 07:27:00', NULL, '2025-07-22 07:27:55', '2025-09-30 08:48:15', 30, 'percent', 0);
+INSERT INTO `promotions` VALUES (15, 'khuyen mai 12/12', '3ONTHJY5TX', NULL, 'product_specific_discount', '{\"apply_source\":{\"status\":\"all\",\"data\":[]},\"apply_customer\":{\"status\":\"all\",\"data\":[],\"condition\":[]},\"infor\":{\"min_quantiy\":\"10\",\"max_quantiy\":\"400\",\"discount\":\"500\",\"discount_type\":\"amount\",\"module_type\":\"Product\",\"object\":{\"name\":[\"iphone | m\\u00e0u \\u0111\\u1ecf-Kim c\\u01b0\\u01a1ng\",\"iphone | m\\u00e0u v\\u00e0ng-Kim c\\u01b0\\u01a1ng\"],\"variant\":[\"f3648c31-8a6d-5e15-b54c-345da98d00b8\",\"a3f4ac26-2c02-58d7-9518-fdd1377faf45\"],\"id\":[\"42\",\"42\"]}}}', 1, 0, NULL, '2025-09-30 01:21:00', '2025-11-29 01:21:00', NULL, '2025-09-30 01:22:07', '2025-09-30 03:49:44', 500, 'amount', 400);
 
 -- ----------------------------
 -- Table structure for provinces
@@ -2086,8 +2091,7 @@ CREATE TABLE `sessions`  (
 -- ----------------------------
 -- Records of sessions
 -- ----------------------------
-INSERT INTO `sessions` VALUES ('HVHy4Q6mRK756TUkXlNs7Qv1G1pEljqybMuUkGE8', 101, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMXJxN2l2dEJFMDduOU1VdE9ZN0lXZTNPdGpJOGFoWEpURGs2UnVWQSI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozNDoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3N5c3RlbS9pbmRleCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjEwMTt9', 1758271258);
-INSERT INTO `sessions` VALUES ('QecIxcwZqoIzPAkUX8h8ceX6a2lTlVUcp4QwQUpK', 101, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoibm9ldzNVNUJnRllORk5CcFR5UExCVWtkVnhteGN5aVlqOG9iUjdoWiI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoyMToiaHR0cDovL2xvY2FsaG9zdDo4MDAwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTAxO3M6MTA6ImFwcF9sb2NhbGUiO3M6MjoiZW4iO30=', 1758274411);
+INSERT INTO `sessions` VALUES ('rz2ot3Mwa44E56jVQ33aSw6ZVRQsFFIDl5jc8Wll', 101, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiZkZJeGVpeVZyYTIyanpxaEhRdVppQk12aUY0aEg5eVVIZVBYWG9ZTSI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoyMToiaHR0cDovLzEyNy4wLjAuMTo4MDAwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTAxO30=', 1759226241);
 
 -- ----------------------------
 -- Table structure for slides

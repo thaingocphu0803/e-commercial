@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<x-frontend.dashboard.head>
+<x-frontend.dashboard.head :system="$system">
     {{ $heading ?? '' }}
 </x-frontend.dashboard.head>
 
@@ -27,6 +27,7 @@
 
 <script>
     const lang = "{{ app()->getLocale() }}";
+    const appUrl = "{{  config('app.url') }}";
     const cloudName = "{{ config('cloudinary.cloud_name') }}";
     const uploadPreset = "{{ config('cloudinary.upload_preset') }}";
 </script>

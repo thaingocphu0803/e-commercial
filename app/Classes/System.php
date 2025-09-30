@@ -36,6 +36,7 @@ class System
             'value' => [
                 'office' => ['type' => 'text', 'label' => 'custom.office'],
                 'address' => ['type' => 'text', 'label' => 'custom.address'],
+                'countrycode' => ['type' => 'text', 'label' => 'custom.countrycode'],
                 'hotline' => ['type' => 'text', 'label' => 'custom.hotline'],
                 'technical_phone' => ['type' => 'text', 'label' => 'custom.techPhone'],
                 'sell_phone' => ['type' => 'text', 'label' => 'custom.sellPhone'],
