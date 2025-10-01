@@ -1,9 +1,39 @@
+@props([
+    'system' => []
+])
 <head>
+
+    {{-- @dd($system); --}}
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>TPro</title>
+    <meta name="author" content="{{$system['homepage_company']}}">
+    <meta name="copyright" content="{{$system['homepage_copyright']}}">
+    <meta http-equiv="refresh" content="1800">
+    <link rel="icon" href="{{base64_decode($system['homepage_favicon'])}}" type="image/png" sizes="30x30">
+
+    {{-- GOOGLE --}}
+    <title>{{$system['seo_title_seo']}}</title>
+    <meta name="description" content="{{$system['seo_desciption_seo']}}">\
+    <meta name="keyword" content="{{$system['seo_keyword_seo']}}">
+    <link rel="canonical" href="{{config('app.url')}}">
+    <meta property="og:locale" content="vi_VN">
+    {{-- FACEBOOK --}}
+    <meta property="og:title" content="{{$system['seo_title_seo']}}">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{$system['seo_image_seo']}}">
+    <meta property="og:url" content="{{config('app.url')}}">
+    <meta property="og:site_name" content="">
+    <meta property="og:description" content="{{$system['seo_desciption_seo']}}">
+    <meta property="fb:admins" content="">
+    <meta property="fb:app_id" content="">
+    {{-- TWITTER --}}
+    <meta property="twitter:card" content="sumary">
+    <meta property="twitter:title" content="{{$system['seo_title_seo']}}">
+    <meta property="twitter:description" content="{{$system['seo_desciption_seo']}}">
+    <meta property="twitter:image" content="{{$system['seo_image_seo']}}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

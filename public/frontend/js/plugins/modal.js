@@ -13,7 +13,7 @@
 
             setTimeout(() => {
                 $(modalId).css("display", "block");
-            }, 1000);
+            }, 500);
             return;
 
         }

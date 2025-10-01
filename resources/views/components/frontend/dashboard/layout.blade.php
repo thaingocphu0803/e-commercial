@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<x-frontend.dashboard.head>
+<x-frontend.dashboard.head :system="$system">
     {{ $heading ?? '' }}
 </x-frontend.dashboard.head>
 

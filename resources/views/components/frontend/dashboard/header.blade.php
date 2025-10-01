@@ -43,7 +43,7 @@
                                     @foreach ($languages as $lang)
                                         @if ($lang->canonical !== app()->getLocale())
                                             <li>
-                                                <a href="{{ route('language.change', $lang->canonical) }}">
+                                                <a href="{{ route('home.language.change', $lang->canonical) }}">
                                                     <span>{{ $lang->name }}</span>
                                                 </a>
                                             </li>

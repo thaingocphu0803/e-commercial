@@ -14,9 +14,11 @@ interface ProductServiceInterface
 
     public function findById($id);
 
-    public function getWithVariant($request);
+    public function getProductWithVariant($request);
 
-    public function getWithPromotion();
+    public function getProductByVariant($request);
+
+    public function getProductWithPromotion();
 
     public function paginate($number);
 

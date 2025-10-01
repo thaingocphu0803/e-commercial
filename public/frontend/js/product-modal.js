@@ -4,6 +4,7 @@
     var FUNC = {};
     var _token = $('meta[name="csrf-token"]').attr("content");
     var productModalCache = {};
+    var VariantModalCache = {};
 
     FUNC.handleProductAmount = () => {
         const [min, max] = [1, 1000];
@@ -43,7 +44,7 @@
     };
 
     FUNC.handleRenderProductInModal = () => {
-        $(".add-cart").on("click", async function () {
+        $(document).on("click", ".add-cart", async function () {
             let _this = $(this);
             let parent = _this.parents(".product-cart-wrap");
             let productId = parent.data("product-id");
@@ -67,16 +68,71 @@
 
                 if (result.status == "ng") return;
                 productModalCache[productId] = result.object;
-            }            
+            }
 
             let product = productModalCache[productId];
+
+            $('#open_product_modal').attr('data-model-product-id', product.id)
 
             handleAppendName(product.name);
             handleAppendCatalouge(product.catalouges);
             handleAppendPrice(product.discounted_price, product.price);
             handleAppendDesc(product.description);
-            handleAppendVariant(product.attrCatalouges, product.variant_codes);
+            handleAppendVariant(product.attrCatalouges, product.variant_codes, product.attrs);
             handleProductImage(product.image, product.album);
+        });
+    };
+
+    FUNC.handleRenderProductByVariant = () => {
+        $(document).on("click", ".modal-product-variant .variant-list .list-item", async function () {
+                let _this = $(this);
+
+                _this.addClass("active");
+
+                _this.siblings(".list-item").removeClass("active");
+
+                let attrCatalouge = $(".modal-product-variant");
+
+                let attrArray = $(".modal-product-variant").map(function () {
+                        return $(this)
+                            .find(".variant-list .list-item.active")
+                            .attr("data-attr-id");
+                    })
+                    .get().sort();
+
+                if(attrCatalouge.length !== attrArray.length) return;
+
+                let productId =  $('#open_product_modal').attr('data-model-product-id');
+                let code = attrArray.join("-");
+
+                let payload = {
+                    product_id: productId,
+                    code,
+                    _token
+                }
+
+                let productCombineCode = `${productId}:${code}`
+
+            if(!VariantModalCache[productCombineCode]){
+
+                const result = await $.ajax({
+                    type: "GET",
+                    url: "/ajax/product/loadProductByVariant",
+                    data: payload,
+                    dataType: "json",
+                });
+
+                if (result.status == "ng") return;
+
+                VariantModalCache[productCombineCode] = result.object;
+            }
+
+            let product =  VariantModalCache[productCombineCode];
+
+            handleAppendPrice(product.discounted_price, product.price);
+
+            // handleProductImage(product.image, product.album);
+
         });
     };
 
@@ -84,6 +140,7 @@
         FUNC.handleProductAmount();
         FUNC.handleProductImage();
         FUNC.handleRenderProductInModal();
+        FUNC.handleRenderProductByVariant();
     });
 })(jQuery);
 
@@ -129,7 +186,7 @@ const handleAppendDesc = (desc) => {
     $(".modal-product-description .description-content").html(desc);
 };
 
-const handleAppendVariant = (attrCatalouges, codes) => {
+const handleAppendVariant = (attrCatalouges, codes, attrs) => {
     let productVariantBox = $(".modal-product-variant-box");
 
     if (typeof attrCatalouges == "undefined") {
@@ -154,15 +211,20 @@ const handleAppendVariant = (attrCatalouges, codes) => {
         );
 
         catalouge.attrs.forEach((attr) => {
-            let attrItem = $("<span>")
-                .addClass("list-item")
-                .attr("data-attr-id", attr.id)
-                .text(attr.name);
-            if (codes.includes(`${attr.id}`)) {
-                attrItem.addClass("active");
+            if(attrs.includes(attr.id)){
+                let attrItem = $("<span>")
+                    .addClass("list-item")
+                    .attr("data-attr-id", attr.id)
+                    .text(attr.name);
+
+                if (codes.includes(`${attr.id}`)) {
+                    attrItem.addClass("active");
+                }
+
+                attrList.append(attrItem);
+
             }
 
-            attrList.append(attrItem);
         });
 
         attCatalougue.append(attrCatalougeTitle);

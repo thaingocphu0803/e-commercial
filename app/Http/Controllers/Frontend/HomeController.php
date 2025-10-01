@@ -31,7 +31,8 @@ class HomeController extends Controller
         $bannerItems = json_decode($banners->item, true);
         $slideSettings = $slides->settings;
 
-        $products = $this->productService->getWithPromotion();
+        // get products
+        $products = $this->productService->getProductWithPromotion();
 
         // get product catalouge
         $productCategories = $this->productCatalougeService->getAll();

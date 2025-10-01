@@ -21,6 +21,8 @@ class MenuComposer
         $menus = $this->menuCatalougeService->toTreeByKeyword('main-menu');
         $topMenus = $this->menuCatalougeService->toTreeByKeyword('top-menu');
         $allCatalouge = $this->menuCatalougeService->toTreeByKeyword('all-catalouge');
-        $view->with(compact('menus', 'topMenus', 'allCatalouge'));
+        $footerMenu = $this->menuCatalougeService->toTreeByKeyword('footer-menu');
+
+        $view->with(compact('menus', 'topMenus', 'allCatalouge', 'footerMenu'));
     }
 }

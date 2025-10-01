@@ -12,6 +12,8 @@ interface ProductRepositoryInterface
 
     public function getWithVariant($payload);
 
+    public function getByVariant($payload);
+
     public function getWithPromotion();
 
     public function getToTree();

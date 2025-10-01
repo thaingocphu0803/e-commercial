@@ -32,13 +32,18 @@ class ProductController extends Controller
     }
 
     public function loadProductWithVariant(Request $request){
-        $product = $this->productService->getWithVariant($request);
+        $product = $this->productService->getProductWithVariant($request);
         $this->sendResponse($product);
 
     }
 
+    public function loadProductByVariant(Request $request){
+        $product  = $this->productService->getProductByVariant($request);
+        $this->sendResponse($product);
+    }
+
     private function sendResponse( $object = [], $code = 1 , $status = 'ng' ){
-        if(count($object)){
+        if($object && count($object)){
             $code = 0;
             $status = 'ok';
         }
