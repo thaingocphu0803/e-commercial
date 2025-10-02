@@ -1,16 +1,17 @@
+@props([
+    'seo' => []
+])
+
 <!DOCTYPE html>
 <html>
-<x-frontend.dashboard.head :system="$system">
+<x-frontend.dashboard.head :system="$system" :seo="$seo">
     {{ $heading ?? '' }}
 </x-frontend.dashboard.head>
 
-@php
-    // dd(config('cloudinary.cloud_name'));
-@endphp
 
 <body id="page-home" data-new-gr-c-s-check-loaded="14.1247.0" data-gr-ext-installed="" style="overflow: visible;">
     {{-- header --}}
-    <x-frontend.dashboard.header :system="$system"/>
+    <x-frontend.dashboard.header :system="$system" />
 
     {{-- start body --}}
     {{ $slot }}

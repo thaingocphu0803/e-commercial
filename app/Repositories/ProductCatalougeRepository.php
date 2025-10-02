@@ -10,16 +10,26 @@ class ProductCatalougeRepository implements ProductCatalougeRepositoryInterface
 {
     public function getAll()
     {
-         $productCatalouges = ProductCatalouge::with('products', 'languages')
+        $productCatalouges = ProductCatalouge::with('products', 'languages')
             ->where('publish', 1)
             ->get();
 
-        foreach($productCatalouges as $productCatalouge){
+        foreach ($productCatalouges as $productCatalouge) {
             $productCatalouge['name'] = $productCatalouge->languages->first()->pivot->name;
             $productCatalouge['canonical'] = $productCatalouge->languages->first()->pivot->canonical;
             $productCatalouge['product_quantity'] = count($productCatalouge->products);
         }
         return $productCatalouges;
+    }
+
+    public function getBreadcrumb($id)
+    {
+        $breadcrumb = ProductCatalouge::select('product_catalouges.id', 'pcl.name', 'pcl.canonical', 'product_catalouges._lft', 'product_catalouges._rgt', 'product_catalouges.parent_id')
+            ->join('product_catalouge_language as pcl', 'pcl.product_catalouge_id', '=', 'product_catalouges.id')
+            ->defaultOrder()
+            ->ancestorsAndSelf($id);
+
+        return $breadcrumb;
     }
 
     public function getToTree($id = null)
@@ -68,9 +78,9 @@ class ProductCatalougeRepository implements ProductCatalougeRepositoryInterface
             'pcl.canonical as canonical',
             'product_catalouges.publish as publish'
         )
-        ->join('product_catalouge_language as pcl', 'pcl.product_catalouge_id', '=', 'product_catalouges.id')
-        ->keyword($keyword ?? null)
-        ->publish($publish ?? null);
+            ->join('product_catalouge_language as pcl', 'pcl.product_catalouge_id', '=', 'product_catalouges.id')
+            ->keyword($keyword ?? null)
+            ->publish($publish ?? null);
 
         return $query->orderBy('product_catalouges._lft')->paginate($perpage)->withQueryString();
     }
@@ -152,5 +162,4 @@ class ProductCatalougeRepository implements ProductCatalougeRepositoryInterface
             ->paginate(10)
             ->withQueryString();
     }
-
 }

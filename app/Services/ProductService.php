@@ -42,21 +42,21 @@ class ProductService implements ProductServiceInterface
         return $userCatalouge;
     }
 
-    public function getProductWithVariant($request){
-        $payload = $request->except('_token');
+    public function getProductWithVariant($payload){
 
         return $this->productRepository->getWithVariant($payload);
     }
 
-    public function getProductByVariant($request){
+    public function getProductByVariant($request)
+    {
         $payload = $request->except('_token');
 
         return $this->productRepository->getByVariant($payload);
 
     }
 
-    public function getProductWithPromotion(){
-        return $this->productRepository->getWithPromotion();
+    public function getProductWithPromotion($product_catalouge_id = null){
+        return $this->productRepository->getWithPromotion($product_catalouge_id);
     }
 
     public function paginate($request)
@@ -285,7 +285,7 @@ class ProductService implements ProductServiceInterface
     {
         $payload = $request->only(['variant', 'attr', 'attributes', 'attr-catalouge', 'price']);
         // if varinant is not existed, did not anything
-        if(!count($payload)) return;
+        if(empty($payload) || empty($payload['attr-catalouge'])) return;
         $variant = $this->createVariantArray($product->id, $payload);
 
         $variants = $product->productVariants()->createMany($variant);

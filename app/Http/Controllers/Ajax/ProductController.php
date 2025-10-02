@@ -32,7 +32,9 @@ class ProductController extends Controller
     }
 
     public function loadProductWithVariant(Request $request){
-        $product = $this->productService->getProductWithVariant($request);
+        $payload = $request->except('_token');
+
+        $product = $this->productService->getProductWithVariant($payload);
         $this->sendResponse($product);
 
     }

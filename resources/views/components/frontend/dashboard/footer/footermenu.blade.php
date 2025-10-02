@@ -9,10 +9,15 @@
              <div class="col">
                  <div class="widget-about font-md mb-md-3 mb-lg-3 mb-xl-0 wow animate__ animate__fadeInUp animated"
                      data-wow-delay="0" style="visibility: visible; animation-name: fadeInUp;">
-                     <div class="logo mb-30"><a href="https://nest.botble.com/vi" class="mb-15"><img
-                                 src="{{ base64_decode($system['homepage_logo']) }}" data-bb-lazy="false" width="100px"
-                                 height="100px" class="page_speed_1952188303"
-                                 alt="Nest - Kịch bản thương mại điện tử đa năng của Laravel"></a>
+                     <div class="logo mb-30">
+                        <a href="{{config('app.url')}}" class="mb-15 d-flex justify-content-center">
+                            <img
+                                src="{{ base64_decode($system['homepage_logo']) }}"
+                                data-bb-lazy="false" width="100px"
+                                height="100px" class="page_speed_1952188303"
+                                alt=""
+                            >
+                        </a>
                      </div>
                      <ul class="contact-infor">
                          <li><svg width="16" height="17" viewBox="0 0 16 17" fill="none"

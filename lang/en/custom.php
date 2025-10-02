@@ -316,5 +316,11 @@
         'w30day' => 'Within 30 days',
         'greatDayDeal' => 'Great daily deal',
         'megaDiscounts' => 'Mega Discounts',
-        'footerMessage' => "Start your daily shopping with TPro Mart."
+        'footerMessage' => "Start your daily shopping with TPro Mart.",
+        'home' => 'home',
+        'sortBy' => 'Sort by',
+        'price_hl' => 'Price: High to Low',
+        'price_lh' => 'Price: Low to High',
+        'name_az' => 'Name: A to Z',
+        'name_za' => 'Name: Z to A',
     ];

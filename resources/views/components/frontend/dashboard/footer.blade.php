@@ -14,7 +14,7 @@
                                 {{__('custom.footerMessage')}}
                             </h2>
 
-                            <form method="POST" action="https://nest.botble.com/vi/newsletter/subscribe"
+                            <form method="POST" action="#"
                                 accept-charset="UTF-8" id="botble-newsletter-forms-fronts-newsletter-form"
                                 class="newsletter-form dirty-check"><input name="_token" type="hidden"
                                     value="kbD4pJ3azyMyAqv5V62O0EWIrTUiRc7IyMNpbOYx">

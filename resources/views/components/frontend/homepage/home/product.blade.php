@@ -23,7 +23,13 @@
 
                         <div class="product-img-action-wrap">
                             <div class="product-img product-img-zoom">
-                                <a href="{{write_url($product->product_canonical, true, true)}}">
+                                <a href="{{route('detail.index',
+                                    [
+                                        'product_id' => $product->id,
+                                        'uuid' => $product->uuid,
+                                        'promotion_id' => $product->promotion_id
+                                    ]
+                                )}}">
                                     <img class="default-img"
                                         src="{{ (!is_null($product->image)) ? base64_decode($product->image) : config('app.general.noImage')}}"
                                         alt="{{ $product->product_name }}">
@@ -103,6 +109,7 @@
                         </div>
                     </div>
                 </div>
+
             @endforeach
         </div>
         <div>
@@ -110,3 +117,9 @@
         </div>
     </div>
 </section>
+
+
+
+
+{{-- modal --}}
+<x-frontend.homepage.home.modal/>

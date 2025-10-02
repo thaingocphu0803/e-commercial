@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Router;
 use App\Repositories\Interfaces\RouterRepositoryInterface;
+use Illuminate\Routing\Route;
 
 class RouterRepository implements RouterRepositoryInterface {
     public function create($router)
@@ -21,5 +22,10 @@ class RouterRepository implements RouterRepositoryInterface {
         if ($routerModel) {
             $routerModel->update($router);
         }
+    }
+
+    public function findByCanonical($canonical)
+    {
+        return Router::where('canonical', $canonical)->first();
     }
 }

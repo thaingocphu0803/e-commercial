@@ -96,11 +96,13 @@ class ProductRepository implements ProductRepositoryInterface
     {
         $publish = config('app.general.defaultPublish');
 
-        $uuid = $payload['uuid'];
+        $uuid = $payload['uuid'] ?? null;
 
-        $promotion_id = $payload['promotion_id'];
+        $promotion_id = $payload['promotion_id'] ?? null;
 
-        $product_id = $payload['product_id'];
+        $product_id = $payload['product_id'] ?? null;
+
+
 
         $product_attrs = ProductVariant::select('pva.attr_id')
             ->distinct()
@@ -109,7 +111,6 @@ class ProductRepository implements ProductRepositoryInterface
             ->get()
             ->pluck('attr_id')
             ->toArray();
-
         $promotion = Promotion::select('discountValue', 'discountType', 'maxDiscountValue')
             ->publish($publish)
             ->find($promotion_id);
@@ -199,8 +200,10 @@ class ProductRepository implements ProductRepositoryInterface
         return $productData;
     }
 
-    public function getWithPromotion()
+    public function getWithPromotion($product_catalouge_id)
     {
+        $extraCondition = (!is_null($product_catalouge_id)) ? "AND pcl.product_catalouge_id = $product_catalouge_id" : "";
+
         $publish = config('app.general.defaultPublish');
 
         $promotionSub = Promotion::select(
@@ -280,6 +283,7 @@ class ProductRepository implements ProductRepositoryInterface
                 FROM products
                 JOIN product_language as pl ON products.id = pl.product_id
                 JOIN product_catalouge_language as pcl ON products.product_catalouge_id = pcl.product_catalouge_id
+                {$extraCondition}
                 LEFT JOIN product_variants as pv ON products.id = pv.product_id
                 LEFT JOIN (
                     {$promotionSub->toSql()}
@@ -290,7 +294,7 @@ class ProductRepository implements ProductRepositoryInterface
         ))
             ->mergeBindings($promotionSub->getQuery())
             ->where('rn', 1)
-            ->paginate(30);
+            ->paginate(10);
 
         return $products;
     }

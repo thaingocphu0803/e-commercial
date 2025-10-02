@@ -34,3 +34,16 @@ if(!function_exists("price_format")){
         return $price.$symbol;
     }
 }
+
+// helper create Seo array
+if(!function_exists('seo')){
+    function seo($catalouge){
+        return [
+            'meta_title' => $catalouge->meta_title ?? $catalouge->name,
+            'meta_keyword' => $catalouge->meta_keyword ?? $catalouge->canonical,
+            'meta_description' => Illuminate\Support\Str::limit(strip_tags($catalouge->meta_description), 150),
+            'meta_image' => base64_decode($catalouge->image),
+            'canonical' => write_url($catalouge->canonical, true ,true)
+        ];
+    }
+}

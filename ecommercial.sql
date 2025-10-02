@@ -11,7 +11,7 @@
  Target Server Version : 100432 (10.4.32-MariaDB)
  File Encoding         : 65001
 
- Date: 30/09/2025 16:58:54
+ Date: 02/10/2025 15:42:47
 */
 
 SET NAMES utf8mb4;
@@ -1142,10 +1142,10 @@ CREATE TABLE `languages`  (
 -- ----------------------------
 -- Records of languages
 -- ----------------------------
-INSERT INTO `languages` VALUES (1, 'Vietnamese', 'vi', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQwMzc3ODg3L0ltYWdlRm9sZGVyL2pobmlhdGpmMWRjYnA2ZnZpaXpvLnBuZw==', 101, '2025-02-18 07:34:25', '2025-09-19 09:33:30', NULL, 'Vietnam\'s nature language', 2, 0);
-INSERT INTO `languages` VALUES (2, 'English', 'en', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzM5OTM1ODU3L0ltYWdlRm9sZGVyL2I2eWp5ZWl4NW5qcnR1dzd5cXByLnBuZw==', 101, '2025-02-18 07:43:12', '2025-09-19 09:33:30', NULL, 'Bristish\'s nature language', 2, 1);
-INSERT INTO `languages` VALUES (3, 'Japanese', 'ja', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzM5OTM2NTM5L0ltYWdlRm9sZGVyL2c1aDRweHpjb3p3bTZpdXc5dmhrLnBuZw==', 101, '2025-02-19 02:09:50', '2025-09-19 09:33:30', NULL, 'Japanese\'s nature language', 2, 0);
-INSERT INTO `languages` VALUES (7, 'Chinese', 'zh', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQwMzY3MjExL0ltYWdlRm9sZGVyL3pkdWlyZ3E2ZGdjbTJrdnMwN29kLnBuZw==', 101, '2025-02-24 03:20:14', '2025-09-19 09:33:30', NULL, 'China\'s nature language', 2, 0);
+INSERT INTO `languages` VALUES (1, 'Vietnamese', 'vi', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQwMzc3ODg3L0ltYWdlRm9sZGVyL2pobmlhdGpmMWRjYnA2ZnZpaXpvLnBuZw==', 101, '2025-02-18 07:34:25', '2025-10-01 03:38:25', NULL, 'Vietnam\'s nature language', 2, 1);
+INSERT INTO `languages` VALUES (2, 'English', 'en', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzM5OTM1ODU3L0ltYWdlRm9sZGVyL2I2eWp5ZWl4NW5qcnR1dzd5cXByLnBuZw==', 101, '2025-02-18 07:43:12', '2025-10-01 03:38:25', NULL, 'Bristish\'s nature language', 2, 0);
+INSERT INTO `languages` VALUES (3, 'Japanese', 'ja', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzM5OTM2NTM5L0ltYWdlRm9sZGVyL2c1aDRweHpjb3p3bTZpdXc5dmhrLnBuZw==', 101, '2025-02-19 02:09:50', '2025-10-01 03:38:25', NULL, 'Japanese\'s nature language', 2, 0);
+INSERT INTO `languages` VALUES (7, 'Chinese', 'zh', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQwMzY3MjExL0ltYWdlRm9sZGVyL3pkdWlyZ3E2ZGdjbTJrdnMwN29kLnBuZw==', 101, '2025-02-24 03:20:14', '2025-10-01 03:38:25', NULL, 'China\'s nature language', 2, 0);
 
 -- ----------------------------
 -- Table structure for menu_catalouges
@@ -1191,21 +1191,6 @@ CREATE TABLE `menu_language`  (
 -- ----------------------------
 -- Records of menu_language
 -- ----------------------------
-INSERT INTO `menu_language` VALUES (161, 2, 'vegeta', 've-ge-taaa', '2025-06-10 08:21:05', '2025-06-10 08:21:05');
-INSERT INTO `menu_language` VALUES (134, 2, 'elemental heros', 'elemental-hero', '2025-06-10 08:21:05', '2025-06-10 08:21:05');
-INSERT INTO `menu_language` VALUES (150, 2, 'elemental heros', 'elemental-hero', '2025-06-10 08:21:05', '2025-06-10 08:21:05');
-INSERT INTO `menu_language` VALUES (163, 1, 'elemental heros', 'elemental-hero', '2025-06-11 08:04:47', '2025-06-11 08:04:47');
-INSERT INTO `menu_language` VALUES (134, 1, 'elemental heros', 'elemental-hero', '2025-06-11 08:04:47', '2025-06-11 08:04:47');
-INSERT INTO `menu_language` VALUES (150, 1, 'elemental heros', 'elemental-hero', '2025-06-11 08:04:47', '2025-06-11 08:04:47');
-INSERT INTO `menu_language` VALUES (162, 1, 'gorilaz', 'go-ri-la', '2025-06-11 08:47:53', '2025-06-11 08:47:53');
-INSERT INTO `menu_language` VALUES (164, 1, 'productCatalouge', 'product-catalouge', '2025-06-11 08:47:53', '2025-06-11 08:47:53');
-INSERT INTO `menu_language` VALUES (161, 1, 'vegeta', 've-ge-taaa', '2025-06-11 08:47:53', '2025-06-11 08:47:53');
-INSERT INTO `menu_language` VALUES (165, 1, 'productCatalouge', 'product-catalouge', '2025-06-11 08:47:53', '2025-06-11 08:47:53');
-INSERT INTO `menu_language` VALUES (174, 1, 'Root', 'root', '2025-08-19 01:37:29', '2025-08-19 01:37:29');
-INSERT INTO `menu_language` VALUES (175, 1, 'Root2', 'desendent-root', '2025-08-19 01:37:29', '2025-08-19 01:37:29');
-INSERT INTO `menu_language` VALUES (176, 1, 'Root', 'root', '2025-08-19 01:37:58', '2025-08-19 01:37:58');
-INSERT INTO `menu_language` VALUES (177, 1, 'Root2', 'desendent-root', '2025-08-19 01:37:58', '2025-08-19 01:37:58');
-INSERT INTO `menu_language` VALUES (178, 1, 'fifa', 'fifa', '2025-08-19 01:37:58', '2025-08-19 01:37:58');
 INSERT INTO `menu_language` VALUES (179, 1, 'laptop', 'laptop', '2025-09-05 07:00:49', '2025-09-05 07:00:49');
 INSERT INTO `menu_language` VALUES (180, 1, 'smart phone', 'smart-phone', '2025-09-05 07:00:49', '2025-09-05 07:00:49');
 INSERT INTO `menu_language` VALUES (181, 1, 'PC', 'pc', '2025-09-05 07:00:49', '2025-09-05 07:00:49');
@@ -1215,6 +1200,23 @@ INSERT INTO `menu_language` VALUES (185, 1, 'smart phone', 'smart-phone', '2025-
 INSERT INTO `menu_language` VALUES (186, 1, 'PC', 'pc', '2025-09-19 07:07:58', '2025-09-19 07:07:58');
 INSERT INTO `menu_language` VALUES (187, 1, 'Watch', 'watch', '2025-09-19 07:07:58', '2025-09-19 07:07:58');
 INSERT INTO `menu_language` VALUES (188, 1, 'headphone', 'head-phone', '2025-09-19 07:07:58', '2025-09-19 07:07:58');
+INSERT INTO `menu_language` VALUES (190, 1, 'Company', '#', '2025-10-01 08:54:16', '2025-10-01 08:54:16');
+INSERT INTO `menu_language` VALUES (191, 1, 'Catalouge', '#', '2025-10-01 08:54:16', '2025-10-01 08:54:16');
+INSERT INTO `menu_language` VALUES (192, 1, 'Information', '#', '2025-10-01 08:54:16', '2025-10-01 08:54:16');
+INSERT INTO `menu_language` VALUES (193, 1, 'Fanpage', '#', '2025-10-01 08:54:16', '2025-10-01 08:54:16');
+INSERT INTO `menu_language` VALUES (194, 1, 'about us', 'about-us', '2025-10-01 08:55:17', '2025-10-01 08:55:17');
+INSERT INTO `menu_language` VALUES (195, 1, 'career', 'career', '2025-10-01 08:55:17', '2025-10-01 08:55:17');
+INSERT INTO `menu_language` VALUES (196, 1, 'contact us', 'contact-us', '2025-10-01 08:55:17', '2025-10-01 08:55:17');
+INSERT INTO `menu_language` VALUES (197, 1, 'smart phone', 'smart-phone', '2025-10-01 08:56:03', '2025-10-01 08:56:03');
+INSERT INTO `menu_language` VALUES (198, 1, 'Watch', 'watch', '2025-10-01 08:56:03', '2025-10-01 08:56:03');
+INSERT INTO `menu_language` VALUES (199, 1, 'headphone', 'head-phone', '2025-10-01 08:56:03', '2025-10-01 08:56:03');
+INSERT INTO `menu_language` VALUES (200, 1, 'PC', 'pc', '2025-10-01 08:56:03', '2025-10-01 08:56:03');
+INSERT INTO `menu_language` VALUES (201, 1, 'cookie policies', 'cookie-policies', '2025-10-01 08:59:07', '2025-10-01 08:59:07');
+INSERT INTO `menu_language` VALUES (202, 1, 'Privacy Policy', 'privacy-policy', '2025-10-01 08:59:07', '2025-10-01 08:59:07');
+INSERT INTO `menu_language` VALUES (203, 1, 'Terms & Conditions', 'terms-conditions', '2025-10-01 08:59:07', '2025-10-01 08:59:07');
+INSERT INTO `menu_language` VALUES (204, 1, 'Shipping & Delivery', 'shipping-delivery', '2025-10-01 08:59:07', '2025-10-01 08:59:07');
+INSERT INTO `menu_language` VALUES (205, 1, 'Login', '#', '2025-10-02 08:19:33', '2025-10-02 08:19:33');
+INSERT INTO `menu_language` VALUES (206, 1, 'Sign in', '#', '2025-10-02 08:19:33', '2025-10-02 08:19:33');
 
 -- ----------------------------
 -- Table structure for menus
@@ -1242,32 +1244,37 @@ CREATE TABLE `menus`  (
   INDEX `menus__lft__rgt_parent_id_index`(`_lft` ASC, `_rgt` ASC, `parent_id` ASC) USING BTREE,
   CONSTRAINT `menus_menu_catalouge_id_foreign` FOREIGN KEY (`menu_catalouge_id`) REFERENCES `menu_catalouges` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `menus_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 190 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 207 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of menus
 -- ----------------------------
-INSERT INTO `menus` VALUES (134, 28, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 20, 23, 164, '2025-06-10 07:35:25', '2025-09-19 07:12:49');
-INSERT INTO `menus` VALUES (150, 28, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 21, 22, 134, '2025-06-10 07:56:10', '2025-09-19 07:12:49');
-INSERT INTO `menus` VALUES (161, 28, NULL, NULL, NULL, NULL, 1, 5, 101, NULL, 13, 14, NULL, '2025-06-10 08:21:05', '2025-09-19 07:12:49');
-INSERT INTO `menus` VALUES (162, 28, NULL, NULL, NULL, NULL, 1, 6, 101, NULL, 15, 18, NULL, '2025-06-11 02:06:27', '2025-09-19 07:12:49');
-INSERT INTO `menus` VALUES (163, 28, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 16, 17, 162, '2025-06-11 02:06:27', '2025-09-19 07:12:49');
-INSERT INTO `menus` VALUES (164, 28, NULL, NULL, NULL, NULL, 1, 4, 101, NULL, 19, 24, NULL, '2025-06-11 02:07:28', '2025-09-19 07:12:49');
-INSERT INTO `menus` VALUES (165, 28, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 25, 26, NULL, '2025-06-11 06:59:11', '2025-09-19 07:12:49');
-INSERT INTO `menus` VALUES (174, 32, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 27, 28, NULL, '2025-08-19 01:37:29', '2025-09-19 07:12:49');
-INSERT INTO `menus` VALUES (175, 32, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 29, 30, NULL, '2025-08-19 01:37:29', '2025-09-19 07:12:49');
-INSERT INTO `menus` VALUES (176, 28, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 31, 32, NULL, '2025-08-19 01:37:58', '2025-09-19 07:12:49');
-INSERT INTO `menus` VALUES (177, 28, NULL, NULL, NULL, NULL, 1, 2, 101, NULL, 33, 34, NULL, '2025-08-19 01:37:58', '2025-09-19 07:12:49');
-INSERT INTO `menus` VALUES (178, 28, NULL, NULL, NULL, NULL, 1, 3, 101, NULL, 35, 36, NULL, '2025-08-19 01:37:58', '2025-09-19 07:12:49');
-INSERT INTO `menus` VALUES (179, 30, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 37, 38, NULL, '2025-09-05 04:12:09', '2025-09-19 07:12:49');
-INSERT INTO `menus` VALUES (180, 30, NULL, NULL, NULL, NULL, 1, 2, 101, NULL, 39, 40, NULL, '2025-09-05 04:12:09', '2025-09-19 07:12:49');
-INSERT INTO `menus` VALUES (181, 30, NULL, NULL, NULL, NULL, 1, 3, 101, NULL, 41, 42, NULL, '2025-09-05 04:12:09', '2025-09-19 07:12:49');
-INSERT INTO `menus` VALUES (184, 33, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 1, 2, NULL, '2025-09-19 07:05:19', '2025-09-19 07:07:50');
-INSERT INTO `menus` VALUES (185, 33, NULL, NULL, NULL, NULL, 1, 2, 101, NULL, 5, 6, NULL, '2025-09-19 07:05:19', '2025-09-19 07:12:49');
-INSERT INTO `menus` VALUES (186, 33, NULL, NULL, NULL, NULL, 1, 3, 101, NULL, 7, 8, NULL, '2025-09-19 07:05:19', '2025-09-19 07:12:49');
-INSERT INTO `menus` VALUES (187, 33, NULL, NULL, NULL, NULL, 1, 4, 101, NULL, 9, 10, NULL, '2025-09-19 07:05:19', '2025-09-19 07:12:49');
-INSERT INTO `menus` VALUES (188, 33, NULL, NULL, NULL, NULL, 1, 5, 101, NULL, 11, 12, NULL, '2025-09-19 07:05:19', '2025-09-19 07:12:49');
-INSERT INTO `menus` VALUES (189, 33, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 3, 4, NULL, '2025-09-19 07:07:56', '2025-09-19 07:12:49');
+INSERT INTO `menus` VALUES (179, 30, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 1, 2, NULL, '2025-09-05 04:12:09', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (180, 30, NULL, NULL, NULL, NULL, 1, 2, 101, NULL, 3, 4, NULL, '2025-09-05 04:12:09', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (181, 30, NULL, NULL, NULL, NULL, 1, 3, 101, NULL, 5, 6, NULL, '2025-09-05 04:12:09', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (184, 33, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 7, 8, NULL, '2025-09-19 07:05:19', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (185, 33, NULL, NULL, NULL, NULL, 1, 2, 101, NULL, 9, 10, NULL, '2025-09-19 07:05:19', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (186, 33, NULL, NULL, NULL, NULL, 1, 3, 101, NULL, 11, 12, NULL, '2025-09-19 07:05:19', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (187, 33, NULL, NULL, NULL, NULL, 1, 4, 101, NULL, 13, 14, NULL, '2025-09-19 07:05:19', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (188, 33, NULL, NULL, NULL, NULL, 1, 5, 101, NULL, 15, 16, NULL, '2025-09-19 07:05:19', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (189, 33, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 17, 18, NULL, '2025-09-19 07:07:56', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (190, 28, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 19, 26, NULL, '2025-10-01 08:54:16', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (191, 28, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 27, 36, NULL, '2025-10-01 08:54:16', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (192, 28, NULL, NULL, NULL, NULL, 1, 2, 101, NULL, 37, 46, NULL, '2025-10-01 08:54:16', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (193, 28, NULL, NULL, NULL, NULL, 1, 3, 101, NULL, 47, 48, NULL, '2025-10-01 08:54:16', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (194, 28, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 20, 21, 190, '2025-10-01 08:55:17', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (195, 28, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 22, 23, 190, '2025-10-01 08:55:17', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (196, 28, NULL, NULL, NULL, NULL, 1, 2, 101, NULL, 24, 25, 190, '2025-10-01 08:55:17', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (197, 28, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 28, 29, 191, '2025-10-01 08:56:03', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (198, 28, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 30, 31, 191, '2025-10-01 08:56:03', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (199, 28, NULL, NULL, NULL, NULL, 1, 2, 101, NULL, 32, 33, 191, '2025-10-01 08:56:03', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (200, 28, NULL, NULL, NULL, NULL, 1, 3, 101, NULL, 34, 35, 191, '2025-10-01 08:56:03', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (201, 28, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 38, 39, 192, '2025-10-01 08:59:02', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (202, 28, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 40, 41, 192, '2025-10-01 08:59:02', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (203, 28, NULL, NULL, NULL, NULL, 1, 2, 101, NULL, 42, 43, 192, '2025-10-01 08:59:02', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (204, 28, NULL, NULL, NULL, NULL, 1, 3, 101, NULL, 44, 45, 192, '2025-10-01 08:59:02', '2025-10-02 08:18:57');
+INSERT INTO `menus` VALUES (205, 32, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 49, 50, NULL, '2025-10-02 08:19:33', '2025-10-02 08:19:33');
+INSERT INTO `menus` VALUES (206, 32, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 51, 52, NULL, '2025-10-02 08:19:33', '2025-10-02 08:19:33');
 
 -- ----------------------------
 -- Table structure for migrations
@@ -1672,7 +1679,7 @@ CREATE TABLE `product_catalouge_language`  (
 -- ----------------------------
 -- Records of product_catalouge_language
 -- ----------------------------
-INSERT INTO `product_catalouge_language` VALUES (1, 1, 'laptop', '<p>s</p>', NULL, NULL, NULL, NULL, 'laptop', '2025-05-19 08:42:14', '2025-09-05 03:56:27');
+INSERT INTO `product_catalouge_language` VALUES (1, 1, 'laptop', '<p>s</p>', NULL, NULL, NULL, NULL, 'laptop', '2025-05-19 08:42:14', '2025-10-02 04:17:49');
 INSERT INTO `product_catalouge_language` VALUES (2, 1, 'smart phone', NULL, NULL, NULL, NULL, NULL, 'smart-phone', '2025-07-15 09:33:32', '2025-09-05 03:54:44');
 INSERT INTO `product_catalouge_language` VALUES (3, 1, 'PC', NULL, NULL, NULL, NULL, NULL, 'pc', '2025-07-15 09:34:11', '2025-09-05 03:55:13');
 INSERT INTO `product_catalouge_language` VALUES (4, 1, 'Watch', NULL, NULL, NULL, NULL, NULL, 'watch', '2025-09-19 06:59:46', '2025-09-19 06:59:46');
@@ -1703,6 +1710,7 @@ INSERT INTO `product_catalouge_product` VALUES (1, 50, NULL, NULL);
 INSERT INTO `product_catalouge_product` VALUES (2, 42, NULL, NULL);
 INSERT INTO `product_catalouge_product` VALUES (3, 51, NULL, NULL);
 INSERT INTO `product_catalouge_product` VALUES (1, 42, NULL, NULL);
+INSERT INTO `product_catalouge_product` VALUES (3, 50, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for product_catalouges
@@ -1732,9 +1740,9 @@ CREATE TABLE `product_catalouges`  (
 -- ----------------------------
 -- Records of product_catalouges
 -- ----------------------------
-INSERT INTO `product_catalouges` VALUES (1, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzU3MDQ0NTg0L0ltYWdlRm9sZGVyL3d5emYzNzd0ZW5wYWVtM2tuZXlsLmpwZw==', NULL, NULL, 1, 2, 0, 101, NULL, '2025-05-19 08:42:14', '2025-09-05 03:56:27', 1, 2, NULL);
-INSERT INTO `product_catalouges` VALUES (2, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzU3MDQ0NDc5L0ltYWdlRm9sZGVyL2ppZmIwbHZxcWN5YWxkanVvZ2h0LnBuZw==', NULL, NULL, 2, 2, 0, 101, NULL, '2025-07-15 09:33:32', '2025-09-30 07:40:14', 3, 4, NULL);
-INSERT INTO `product_catalouges` VALUES (3, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzU3MDQ0NTEwL0ltYWdlRm9sZGVyL3R0cWR4a25kZW1ueGo2M3hlcWhsLmpwZw==', NULL, NULL, 1, 2, 0, 101, NULL, '2025-07-15 09:34:11', '2025-09-05 03:55:13', 5, 6, NULL);
+INSERT INTO `product_catalouges` VALUES (1, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzU3MDQ0NTg0L0ltYWdlRm9sZGVyL3d5emYzNzd0ZW5wYWVtM2tuZXlsLmpwZw==', NULL, NULL, 1, 2, 0, 101, NULL, '2025-05-19 08:42:14', '2025-10-02 04:17:21', 4, 5, 3);
+INSERT INTO `product_catalouges` VALUES (2, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzU3MDQ0NDc5L0ltYWdlRm9sZGVyL2ppZmIwbHZxcWN5YWxkanVvZ2h0LnBuZw==', NULL, NULL, 1, 2, 0, 101, NULL, '2025-07-15 09:33:32', '2025-10-02 04:17:38', 1, 2, NULL);
+INSERT INTO `product_catalouges` VALUES (3, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzU3MDQ0NTEwL0ltYWdlRm9sZGVyL3R0cWR4a25kZW1ueGo2M3hlcWhsLmpwZw==', NULL, NULL, 1, 2, 0, 101, NULL, '2025-07-15 09:34:11', '2025-09-05 03:55:13', 3, 6, NULL);
 INSERT INTO `product_catalouges` VALUES (4, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzU4MjY1MTc0L0ltYWdlRm9sZGVyL3BuenhyaTJxOHJ0ZmZ6cnF0Y2FjLmF2aWY=', NULL, NULL, 1, 1, 0, 101, NULL, '2025-09-19 06:59:46', '2025-09-19 06:59:46', 7, 8, NULL);
 INSERT INTO `product_catalouges` VALUES (5, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzU4MjY1NDA1L0ltYWdlRm9sZGVyL2xxcGtuc2JyOXVocTF5NnZmMm9zLndlYnA=', NULL, NULL, 1, 1, 0, 101, NULL, '2025-09-19 07:03:39', '2025-09-19 07:03:39', 9, 10, NULL);
 INSERT INTO `product_catalouges` VALUES (6, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzU4MjY1NjU1L0ltYWdlRm9sZGVyL2gxdXh5YzNnMHo0Y29vd294bG9rLmF2aWY=', NULL, NULL, 1, 1, 0, 101, NULL, '2025-09-19 07:07:43', '2025-09-19 07:07:43', 11, 12, NULL);
@@ -1764,10 +1772,10 @@ CREATE TABLE `product_language`  (
 -- ----------------------------
 -- Records of product_language
 -- ----------------------------
-INSERT INTO `product_language` VALUES (42, 1, 'iphone', '<p><b>IOS:</b>&nbsp;20;</p><p><b>MODEL</b>: 16</p>', NULL, NULL, NULL, NULL, 'iphone', '2025-07-11 04:10:49', '2025-09-30 07:20:45');
-INSERT INTO `product_language` VALUES (48, 1, 'football', NULL, NULL, NULL, NULL, NULL, 'foot-ball', '2025-07-11 09:23:12', '2025-09-30 04:59:01');
+INSERT INTO `product_language` VALUES (42, 1, 'iphone', '<p><b>IOS:</b>&nbsp;20;</p><p><b>MODEL</b>: 16</p>', NULL, NULL, NULL, NULL, 'iphone', '2025-07-11 04:10:49', '2025-10-02 08:42:00');
+INSERT INTO `product_language` VALUES (48, 1, 'football', NULL, NULL, NULL, NULL, NULL, 'foot-ball', '2025-07-11 09:23:12', '2025-10-01 06:59:54');
 INSERT INTO `product_language` VALUES (49, 1, 'shirt', NULL, NULL, NULL, NULL, NULL, 'shirt', '2025-07-15 02:45:13', '2025-07-15 02:45:13');
-INSERT INTO `product_language` VALUES (50, 1, 'short', NULL, NULL, NULL, NULL, NULL, 'short', '2025-07-15 04:34:19', '2025-09-30 06:30:44');
+INSERT INTO `product_language` VALUES (50, 1, 'short', NULL, NULL, NULL, NULL, NULL, 'short', '2025-07-15 04:34:19', '2025-10-02 08:42:14');
 INSERT INTO `product_language` VALUES (51, 1, 'pc gaming', NULL, NULL, NULL, NULL, NULL, 'pc-gaming', '2025-07-22 07:19:13', '2025-07-22 07:19:13');
 
 -- ----------------------------
@@ -1794,10 +1802,11 @@ INSERT INTO `product_variant_attr` VALUES (113, 4, '2025-07-22 07:19:13', '2025-
 INSERT INTO `product_variant_attr` VALUES (114, 3, '2025-07-22 07:19:13', '2025-07-22 07:19:13');
 INSERT INTO `product_variant_attr` VALUES (114, 5, '2025-07-22 07:19:13', '2025-07-22 07:19:13');
 INSERT INTO `product_variant_attr` VALUES (114, 4, '2025-07-22 07:19:13', '2025-07-22 07:19:13');
-INSERT INTO `product_variant_attr` VALUES (127, 1, '2025-09-30 07:20:45', '2025-09-30 07:20:45');
-INSERT INTO `product_variant_attr` VALUES (127, 4, '2025-09-30 07:20:45', '2025-09-30 07:20:45');
-INSERT INTO `product_variant_attr` VALUES (128, 3, '2025-09-30 07:20:45', '2025-09-30 07:20:45');
-INSERT INTO `product_variant_attr` VALUES (128, 4, '2025-09-30 07:20:45', '2025-09-30 07:20:45');
+INSERT INTO `product_variant_attr` VALUES (133, 1, '2025-10-01 06:59:54', '2025-10-01 06:59:54');
+INSERT INTO `product_variant_attr` VALUES (134, 1, '2025-10-02 08:42:01', '2025-10-02 08:42:01');
+INSERT INTO `product_variant_attr` VALUES (134, 4, '2025-10-02 08:42:01', '2025-10-02 08:42:01');
+INSERT INTO `product_variant_attr` VALUES (135, 3, '2025-10-02 08:42:01', '2025-10-02 08:42:01');
+INSERT INTO `product_variant_attr` VALUES (135, 4, '2025-10-02 08:42:01', '2025-10-02 08:42:01');
 
 -- ----------------------------
 -- Table structure for product_variants
@@ -1828,15 +1837,16 @@ CREATE TABLE `product_variants`  (
   INDEX `product_variants_user_id_foreign`(`user_id` ASC) USING BTREE,
   CONSTRAINT `product_variants_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `product_variants_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 129 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 136 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of product_variants
 -- ----------------------------
 INSERT INTO `product_variants` VALUES (113, 51, 101, '1-4-5', 'màu đỏ-doji-Kim cương', 20, '1753168540-1-4-5', 15000, '0', '', '', '', 1, NULL, '2025-07-22 07:19:13', '2025-07-22 07:19:13', '2-4-3', '3fcce2e3-b9de-5b10-8a7a-e7be0d2f3b7d');
 INSERT INTO `product_variants` VALUES (114, 51, 101, '3-4-5', 'màu vàng-doji-Kim cương', 110, '1753168540-1-4-5', 20000, '0', '', '', '', 1, NULL, '2025-07-22 07:19:13', '2025-07-22 07:19:13', '2-4-3', 'f8e6d25f-410c-5297-ae7d-2dc6ce65ac73');
-INSERT INTO `product_variants` VALUES (127, 42, 101, '1-4', 'màu đỏ-Kim cương', 10, '1752206944-1', 22220, '0', '', '', 'http://res.cloudinary.com/my-could-api/image/upload/v1759114366/album/variant/ykbsnmrdld7l4x3y3yf3.avif,http://res.cloudinary.com/my-could-api/image/upload/v1759114366/album/variant/eo3eloaitnl3ms4syuwy.png,http://res.cloudinary.com/my-could-api/image/upload/v1759114367/album/variant/spcz735mre3lxbvnp9gb.png', 1, NULL, '2025-09-30 07:20:45', '2025-09-30 07:20:45', '2-3', 'f3648c31-8a6d-5e15-b54c-345da98d00b8');
-INSERT INTO `product_variants` VALUES (128, 42, 101, '3-4', 'màu vàng-Kim cương', 20, '1752206944-1', 11110, '0', '', '', '', 1, NULL, '2025-09-30 07:20:45', '2025-09-30 07:20:45', '2-3', 'a3f4ac26-2c02-58d7-9518-fdd1377faf45');
+INSERT INTO `product_variants` VALUES (133, 48, 101, '1', 'màu đỏ', 0, '1752547450-1', 11111121, '0', '', '', '', 1, NULL, '2025-10-01 06:59:54', '2025-10-01 06:59:54', '2', 'e792e5c9-b1ef-59b6-8616-04651f84bb10');
+INSERT INTO `product_variants` VALUES (134, 42, 101, '1-4', 'màu đỏ-Kim cương', 10, '1752206944-1', 22220, '0', '', '', '', 1, NULL, '2025-10-02 08:42:01', '2025-10-02 08:42:01', '2-3', 'f3648c31-8a6d-5e15-b54c-345da98d00b8');
+INSERT INTO `product_variants` VALUES (135, 42, 101, '3-4', 'màu vàng-Kim cương', 20, '1752206944-1', 11110, '0', '', '', '', 1, NULL, '2025-10-02 08:42:01', '2025-10-02 08:42:01', '2-3', 'a3f4ac26-2c02-58d7-9518-fdd1377faf45');
 
 -- ----------------------------
 -- Table structure for products
@@ -1886,20 +1896,18 @@ CREATE TABLE `promotion_product_variant`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `promotion_product_variant_promotion_id_foreign`(`promotion_id` ASC) USING BTREE,
   CONSTRAINT `promotion_product_variant_promotion_id_foreign` FOREIGN KEY (`promotion_id`) REFERENCES `promotions` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 145 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 150 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of promotion_product_variant
 -- ----------------------------
 INSERT INTO `promotion_product_variant` VALUES (136, 15, 42, 'f3648c31-8a6d-5e15-b54c-345da98d00b8', 'Product', NULL, NULL);
 INSERT INTO `promotion_product_variant` VALUES (137, 15, 42, 'a3f4ac26-2c02-58d7-9518-fdd1377faf45', 'Product', NULL, NULL);
-INSERT INTO `promotion_product_variant` VALUES (138, 3, 48, NULL, 'Product', NULL, NULL);
-INSERT INTO `promotion_product_variant` VALUES (139, 3, 42, 'a3f4ac26-2c02-58d7-9518-fdd1377faf45', 'Product', NULL, NULL);
-INSERT INTO `promotion_product_variant` VALUES (140, 2, 42, 'f3648c31-8a6d-5e15-b54c-345da98d00b8', 'Product', NULL, NULL);
-INSERT INTO `promotion_product_variant` VALUES (141, 2, 42, 'a3f4ac26-2c02-58d7-9518-fdd1377faf45', 'Product', NULL, NULL);
-INSERT INTO `promotion_product_variant` VALUES (142, 2, 51, '3fcce2e3-b9de-5b10-8a7a-e7be0d2f3b7d', 'Product', NULL, NULL);
-INSERT INTO `promotion_product_variant` VALUES (143, 2, 48, NULL, 'Product', NULL, NULL);
-INSERT INTO `promotion_product_variant` VALUES (144, 2, 49, NULL, 'Product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (145, 2, 42, 'f3648c31-8a6d-5e15-b54c-345da98d00b8', 'Product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (146, 2, 42, 'a3f4ac26-2c02-58d7-9518-fdd1377faf45', 'Product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (147, 2, 51, '3fcce2e3-b9de-5b10-8a7a-e7be0d2f3b7d', 'Product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (148, 2, 49, NULL, 'Product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (149, 3, 42, 'a3f4ac26-2c02-58d7-9518-fdd1377faf45', 'Product', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for promotions
@@ -1929,8 +1937,8 @@ CREATE TABLE `promotions`  (
 -- ----------------------------
 -- Records of promotions
 -- ----------------------------
-INSERT INTO `promotions` VALUES (2, 'khuyen mai 20/10', 'sale2010', NULL, 'product_specific_discount', '{\"apply_source\":{\"status\":\"specific\",\"data\":[\"2\",\"3\",\"4\"]},\"apply_customer\":{\"status\":\"specific\",\"data\":[\"gender\"],\"condition\":{\"customer_type_gender\":[\"1\",\"2\"]}},\"infor\":{\"min_quantiy\":\"1\",\"max_quantiy\":\"0\",\"discount\":\"3000\",\"discount_type\":\"amount\",\"module_type\":\"Product\",\"object\":{\"name\":[\"iphone | m\\u00e0u \\u0111\\u1ecf-Kim c\\u01b0\\u01a1ng\",\"iphone | m\\u00e0u v\\u00e0ng-Kim c\\u01b0\\u01a1ng\",\"pc gaming | m\\u00e0u \\u0111\\u1ecf-doji-Kim c\\u01b0\\u01a1ng\",\"football | default\",\"shirt | default\"],\"variant\":[\"f3648c31-8a6d-5e15-b54c-345da98d00b8\",\"a3f4ac26-2c02-58d7-9518-fdd1377faf45\",\"3fcce2e3-b9de-5b10-8a7a-e7be0d2f3b7d\",null,null],\"id\":[\"42\",\"42\",\"51\",\"48\",\"49\"]}}}', 2, 0, NULL, '2025-07-22 07:11:00', '2025-10-01 07:11:00', NULL, '2025-07-22 07:12:24', '2025-09-30 08:48:27', 3000, 'amount', 0);
-INSERT INTO `promotions` VALUES (3, 'khuyen mai 11/11', 'SALE1111', NULL, 'product_specific_discount', '{\"apply_source\":{\"status\":\"specific\",\"data\":[\"4\"]},\"apply_customer\":{\"status\":\"specific\",\"data\":[\"birthday\",\"cusomer_catalouge\"],\"condition\":{\"customer_type_birthday\":[\"0\",\"1\"],\"customer_type_cusomer_catalouge\":[\"1\",\"2\"]}},\"infor\":{\"min_quantiy\":\"100\",\"max_quantiy\":\"0\",\"discount\":\"30\",\"discount_type\":\"percent\",\"module_type\":\"Product\",\"object\":{\"name\":[\"football | default\",\"iphone | m\\u00e0u v\\u00e0ng-Kim c\\u01b0\\u01a1ng\"],\"variant\":[null,\"a3f4ac26-2c02-58d7-9518-fdd1377faf45\"],\"id\":[\"48\",\"42\"]}}}', 2, 0, NULL, '2025-07-22 07:27:00', '2025-10-01 07:27:00', NULL, '2025-07-22 07:27:55', '2025-09-30 08:48:15', 30, 'percent', 0);
+INSERT INTO `promotions` VALUES (2, 'khuyen mai 20/10', 'sale2010', NULL, 'product_specific_discount', '{\"apply_source\":{\"status\":\"specific\",\"data\":[\"2\",\"3\",\"4\"]},\"apply_customer\":{\"status\":\"specific\",\"data\":[\"gender\"],\"condition\":{\"customer_type_gender\":[\"1\",\"2\"]}},\"infor\":{\"min_quantiy\":\"1\",\"max_quantiy\":\"0\",\"discount\":\"3000\",\"discount_type\":\"amount\",\"module_type\":\"Product\",\"object\":{\"name\":[\"iphone | m\\u00e0u \\u0111\\u1ecf-Kim c\\u01b0\\u01a1ng\",\"iphone | m\\u00e0u v\\u00e0ng-Kim c\\u01b0\\u01a1ng\",\"pc gaming | m\\u00e0u \\u0111\\u1ecf-doji-Kim c\\u01b0\\u01a1ng\",\"shirt | default\"],\"variant\":[\"f3648c31-8a6d-5e15-b54c-345da98d00b8\",\"a3f4ac26-2c02-58d7-9518-fdd1377faf45\",\"3fcce2e3-b9de-5b10-8a7a-e7be0d2f3b7d\",null],\"id\":[\"42\",\"42\",\"51\",\"49\"]}}}', 2, 0, NULL, '2025-07-22 07:11:00', '2025-10-01 07:11:00', NULL, '2025-07-22 07:12:24', '2025-10-01 06:53:59', 3000, 'amount', 0);
+INSERT INTO `promotions` VALUES (3, 'khuyen mai 11/11', 'SALE1111', NULL, 'product_specific_discount', '{\"apply_source\":{\"status\":\"specific\",\"data\":[\"4\"]},\"apply_customer\":{\"status\":\"specific\",\"data\":[\"birthday\",\"cusomer_catalouge\"],\"condition\":{\"customer_type_birthday\":[\"0\",\"1\"],\"customer_type_cusomer_catalouge\":[\"1\",\"2\"]}},\"infor\":{\"min_quantiy\":\"100\",\"max_quantiy\":\"0\",\"discount\":\"30\",\"discount_type\":\"percent\",\"module_type\":\"Product\",\"object\":{\"name\":[\"iphone | m\\u00e0u v\\u00e0ng-Kim c\\u01b0\\u01a1ng\"],\"variant\":[\"a3f4ac26-2c02-58d7-9518-fdd1377faf45\"],\"id\":[\"42\"]}}}', 2, 0, NULL, '2025-07-22 07:27:00', '2025-10-01 07:27:00', NULL, '2025-07-22 07:27:55', '2025-10-01 06:54:17', 30, 'percent', 0);
 INSERT INTO `promotions` VALUES (15, 'khuyen mai 12/12', '3ONTHJY5TX', NULL, 'product_specific_discount', '{\"apply_source\":{\"status\":\"all\",\"data\":[]},\"apply_customer\":{\"status\":\"all\",\"data\":[],\"condition\":[]},\"infor\":{\"min_quantiy\":\"10\",\"max_quantiy\":\"400\",\"discount\":\"500\",\"discount_type\":\"amount\",\"module_type\":\"Product\",\"object\":{\"name\":[\"iphone | m\\u00e0u \\u0111\\u1ecf-Kim c\\u01b0\\u01a1ng\",\"iphone | m\\u00e0u v\\u00e0ng-Kim c\\u01b0\\u01a1ng\"],\"variant\":[\"f3648c31-8a6d-5e15-b54c-345da98d00b8\",\"a3f4ac26-2c02-58d7-9518-fdd1377faf45\"],\"id\":[\"42\",\"42\"]}}}', 1, 0, NULL, '2025-09-30 01:21:00', '2025-11-29 01:21:00', NULL, '2025-09-30 01:22:07', '2025-09-30 03:49:44', 500, 'amount', 400);
 
 -- ----------------------------
@@ -2091,7 +2099,7 @@ CREATE TABLE `sessions`  (
 -- ----------------------------
 -- Records of sessions
 -- ----------------------------
-INSERT INTO `sessions` VALUES ('rz2ot3Mwa44E56jVQ33aSw6ZVRQsFFIDl5jc8Wll', 101, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiZkZJeGVpeVZyYTIyanpxaEhRdVppQk12aUY0aEg5eVVIZVBYWG9ZTSI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoyMToiaHR0cDovLzEyNy4wLjAuMTo4MDAwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTAxO30=', 1759226241);
+INSERT INTO `sessions` VALUES ('x66tTcNB452mAoGNhN5a1rdFmwmNFXIpZgqln83h', 101, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoicVkwOEpHOE5iSk16SGVXdUdHVnl0UzFWcFRneUpHY1FONzc0bkt3NCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozNToiaHR0cDovL2xvY2FsaG9zdDo4MDAwL3Byb2R1Y3QvaW5kZXgiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxMDE7fQ==', 1759394534);
 
 -- ----------------------------
 -- Table structure for slides
@@ -2164,36 +2172,36 @@ CREATE TABLE `systems`  (
   INDEX `systems_user_id_foreign`(`user_id` ASC) USING BTREE,
   CONSTRAINT `systems_language_id_foreign` FOREIGN KEY (`language_id`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `systems_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 49 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of systems
 -- ----------------------------
-INSERT INTO `systems` VALUES (23, 1, 101, 'homepage_company', 'đáassdasdads', NULL, NULL);
-INSERT INTO `systems` VALUES (24, 1, 101, 'homepage_brand', 'ádads', NULL, NULL);
+INSERT INTO `systems` VALUES (23, 1, 101, 'homepage_company', 'Công Ty TPro', NULL, NULL);
+INSERT INTO `systems` VALUES (24, 1, 101, 'homepage_brand', 'TPro', NULL, NULL);
 INSERT INTO `systems` VALUES (25, 1, 101, 'homepage_slogan', 'Benefit for everyone', NULL, NULL);
-INSERT INTO `systems` VALUES (26, 1, 101, 'homepage_copyright', 'sdsdad', NULL, NULL);
+INSERT INTO `systems` VALUES (26, 1, 101, 'homepage_copyright', 'TPro', NULL, NULL);
 INSERT INTO `systems` VALUES (27, 1, 101, 'homepage_website_status', 'open', NULL, NULL);
-INSERT INTO `systems` VALUES (28, 1, 101, 'homepage_logo', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzU4MjcyMDQ5L0ltYWdlRm9sZGVyL3VraXNpa21qZnJ2dGh3d2M0Zjk3LnBuZw==', NULL, NULL);
-INSERT INTO `systems` VALUES (29, 1, 101, 'homepage_favicon', NULL, NULL, NULL);
+INSERT INTO `systems` VALUES (28, 1, 101, 'homepage_logo', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzU5MzA1NzQ4L0ltYWdlRm9sZGVyL2llY3I3dHdwZXR5OXZtbWJyeDAwLnBuZw==', NULL, NULL);
+INSERT INTO `systems` VALUES (29, 1, 101, 'homepage_favicon', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzU5MzA1NzU0L0ltYWdlRm9sZGVyL2g3NG1nMm5tbWRlYzd0M3J5bHFnLnBuZw==', NULL, NULL);
 INSERT INTO `systems` VALUES (30, 1, 101, 'contact_office', 'da', NULL, NULL);
-INSERT INTO `systems` VALUES (31, 1, 101, 'contact_address', 'adada', NULL, NULL);
-INSERT INTO `systems` VALUES (32, 1, 101, 'contact_hotline', 'adasdad', NULL, NULL);
-INSERT INTO `systems` VALUES (33, 1, 101, 'contact_technical_phone', 'adds', NULL, NULL);
-INSERT INTO `systems` VALUES (34, 1, 101, 'contact_sell_phone', 'ádasd', NULL, NULL);
+INSERT INTO `systems` VALUES (31, 1, 101, 'contact_address', '275b Pham Ngu Lao, TP.HCM', NULL, NULL);
+INSERT INTO `systems` VALUES (32, 1, 101, 'contact_hotline', '03470779502', NULL, NULL);
+INSERT INTO `systems` VALUES (33, 1, 101, 'contact_technical_phone', '03470779502', NULL, NULL);
+INSERT INTO `systems` VALUES (34, 1, 101, 'contact_sell_phone', '03470779502', NULL, NULL);
 INSERT INTO `systems` VALUES (35, 1, 101, 'contact_phone', '03470779502', NULL, NULL);
 INSERT INTO `systems` VALUES (36, 1, 101, 'contact_fax', 'dsada', NULL, NULL);
-INSERT INTO `systems` VALUES (37, 1, 101, 'contact_email', 'adađa', NULL, NULL);
+INSERT INTO `systems` VALUES (37, 1, 101, 'contact_email', 'tpro@gmail.com', NULL, NULL);
 INSERT INTO `systems` VALUES (38, 1, 101, 'contact_tax', 'đáa', NULL, NULL);
 INSERT INTO `systems` VALUES (39, 1, 101, 'contact_website', 'đa', NULL, NULL);
 INSERT INTO `systems` VALUES (40, 1, 101, 'contact_map', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.26267585795!2d106.73443467570279!3d10.714211560336897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752587cf5f82d7%3A0xc3c2e8d07c218d59!2zSHXhu7NuaCBU4bqlbiBQaMOhdCwgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1748943880341!5m2!1svi!2s\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>', NULL, NULL);
-INSERT INTO `systems` VALUES (41, 1, 101, 'seo_title_seo', 'dqdasd', NULL, NULL);
-INSERT INTO `systems` VALUES (42, 1, 101, 'seo_keywork_seo', 'ádasdasdá', NULL, NULL);
-INSERT INTO `systems` VALUES (43, 1, 101, 'seo_desciption_seo', 'đsa', NULL, NULL);
-INSERT INTO `systems` VALUES (44, 1, 101, 'seo_image_seo', NULL, NULL, NULL);
+INSERT INTO `systems` VALUES (41, 1, 101, 'seo_title_seo', 'TPro| Trang thương mại điện tử', NULL, NULL);
+INSERT INTO `systems` VALUES (43, 1, 101, 'seo_desciption_seo', 'iPhone 15 Pro Max chính hãng – chip A17 Pro, camera 48MP, thiết kế titan bền bỉ. Giá tốt, bảo hành 12 tháng, giao hàng nhanh.', NULL, NULL);
+INSERT INTO `systems` VALUES (44, 1, 101, 'seo_image_seo', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzU5MzA1NzY0L0ltYWdlRm9sZGVyL2lkZ3Vob3JheXBxNW51amhxNnZ0LmF2aWY=', NULL, NULL);
 INSERT INTO `systems` VALUES (45, 1, 101, 'homepage_short_intro', NULL, NULL, NULL);
 INSERT INTO `systems` VALUES (46, 1, 101, 'files', NULL, NULL, NULL);
-INSERT INTO `systems` VALUES (47, 1, 101, 'seo_keyword_seo', NULL, NULL, NULL);
+INSERT INTO `systems` VALUES (47, 1, 101, 'seo_keyword_seo', 'tpro, thương mại điện tửs', NULL, NULL);
+INSERT INTO `systems` VALUES (48, 1, 101, 'contact_countrycode', '84', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for user_catalouge_permission
