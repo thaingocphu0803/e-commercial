@@ -10,6 +10,8 @@ interface ProductCatalougeServiceInterface
 {
     public function getAll();
 
+    public function getBreadcrumb($id);
+
     public function getToTree($id = null);
 
     public function findById($id);

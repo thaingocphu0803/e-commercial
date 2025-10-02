@@ -24,6 +24,12 @@ class ProductCatalougeService implements ProductCatalougeServiceInterface
         $this->routerRepository = $routeRepository;
     }
 
+    public function getBreadcrumb($id)
+    {
+        $productCatalouge = $this->productCatalougeRepository->getBreadcrumb($id);
+        return $productCatalouge;
+    }
+
     public function getAll()
     {
         $productCatalouge = $this->productCatalougeRepository->getAll();

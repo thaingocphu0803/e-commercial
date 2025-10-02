@@ -4,10 +4,11 @@
     var FUNC = {};
 
     FUNC.initSwipper  = () => {
-        let settings = $('.pannel-slide-swipper').data("settings");
-        let option = FUNC.getSwipperOption(settings);
-
-        let swipper  = new Swiper('.pannel-slide-swipper', option);
+        let settings = $('.pannel-slide-swipper');
+        if(settings.length){
+            let option = FUNC.getSwipperOption(settings.data("settings"));
+            let swipper  = new Swiper('.pannel-slide-swipper', option);
+        }
     }
 
     FUNC.getSwipperOption = (settings) => {
@@ -53,6 +54,7 @@
 
         return option;
     }
+
     $(document).ready(() =>  {
         FUNC.initSwipper();
     });

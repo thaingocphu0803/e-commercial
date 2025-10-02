@@ -94,4 +94,10 @@ return [
             ];
         }, range(1, 30))
     ],
+    'sort_by' => [
+        'price_hl' => 'custom.price_hl',
+        'price_lh' => 'custom.price_lh',
+        'name_az' => 'custom.name_az',
+        'name_za' => 'custom.name_za',
+    ]
 ];

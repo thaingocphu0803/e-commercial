@@ -30,11 +30,15 @@ use App\Http\Controllers\Backend\SlideController;
 use App\Http\Controllers\Backend\SourceController;
 use App\Http\Controllers\Backend\SystemController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\RouterController;
 
 /** FONTEND ROUTES */
 
 // HomeController
 Route::get('/', [HomeController::class, 'index'])->name('home.index')->middleware('locale');
+
+// RouteController
+Route::get('{canonical}'. config('app.general.suffix'), [RouterController::class, 'index'])->name('router.index')->where('canonical', '[a-zA-z0-9-]+');
 
 // Ajax ProductController
 Route::controller(AjaxProductController::class)->prefix('ajax/product')->middleware(['locale'])->group(function(){

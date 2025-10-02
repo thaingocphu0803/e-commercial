@@ -55,8 +55,8 @@ class ProductService implements ProductServiceInterface
 
     }
 
-    public function getProductWithPromotion(){
-        return $this->productRepository->getWithPromotion();
+    public function getProductWithPromotion($product_catalouge_id = null){
+        return $this->productRepository->getWithPromotion($product_catalouge_id);
     }
 
     public function paginate($request)
@@ -285,7 +285,7 @@ class ProductService implements ProductServiceInterface
     {
         $payload = $request->only(['variant', 'attr', 'attributes', 'attr-catalouge', 'price']);
         // if varinant is not existed, did not anything
-        if(!count($payload)) return;
+        if(empty($payload) || empty($payload['attr-catalouge'])) return;
         $variant = $this->createVariantArray($product->id, $payload);
 
         $variants = $product->productVariants()->createMany($variant);

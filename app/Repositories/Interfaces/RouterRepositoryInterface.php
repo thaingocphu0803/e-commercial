@@ -11,4 +11,7 @@ interface RouterRepositoryInterface
     public function create($router);
 
     public function update($router);
+
+    public function findByCanonical($canonical);
+
 }

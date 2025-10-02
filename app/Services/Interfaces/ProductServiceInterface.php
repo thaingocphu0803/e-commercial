@@ -18,7 +18,7 @@ interface ProductServiceInterface
 
     public function getProductByVariant($request);
 
-    public function getProductWithPromotion();
+    public function getProductWithPromotion($product_catalouge_id = null);
 
     public function paginate($number);
 
