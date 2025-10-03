@@ -73,9 +73,9 @@
                                 <div class="product-cat-label">{{ __('custom.allCatalouge') }}</div>
                                 <select class="product-category-select" name="categories[]"
                                     aria-label="Select category">
-                                    <option value="" disabled selected>{{ __('custom.allCatalouge') }}</option>
+                                    <option value="" hidden selected>{{ __('custom.allCatalouge') }}</option>
                                     @foreach ($allCatalouge as $catalouge)
-                                        <option value="{{ $catalouge->id }}">{{ $catalouge->MenuLanguage->name }}
+                                        <option class="text-capitalize" value="{{ $catalouge->id }}">{{ $catalouge->MenuLanguage->name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -145,7 +145,8 @@
                     <div class="main-categories-wrap d-none d-lg-block">
                         <a class="categories-button-active" href="#">
                             <span class="fi-rs-apps"></span>
-                            <span class="et">{{ __('custom.browseAllCategory') }}<i class="fi-rs-angle-down"></i>
+                            <span class="et">{{ __('custom.browseAllCategory') }}
+                            <i class="fi-rs-angle-down"></i>
                         </a>
                         <div class="categories-dropdown-wrap categories-dropdown-active-large font-heading">
                             <div class="d-flex categories-dropdown-inner">

@@ -55,7 +55,43 @@
         return option;
     }
 
+    FUNC.handleProductCategorySelect = () => {
+        $(document).on('change', '.product-category-select', function(){
+            let _this = $(this);
+            let selectedName = _this.find('option:selected').text();
+           
+            $('.product-cat-label').text(selectedName);
+        })
+    }
+
+    FUNC.handleDropdownAllCategories = () => {
+        $(document).on('click', '.categories-button-active', function(){
+            let _this = $(this);
+            let dropdown = $('.categories-dropdown-wrap');
+            let icon = _this.find('i')
+            
+            if(_this.hasClass('open')){
+                _this.removeClass('open');
+                icon.removeClass('fi-rs-angle-up').addClass('fi-rs-angle-down');          
+
+            }else{
+                _this.addClass('open');
+                icon.removeClass('fi-rs-angle-down').addClass('fi-rs-angle-up');
+            }
+
+            
+            if(dropdown.hasClass('open')){
+                dropdown.removeClass('open');
+            }else{
+                dropdown.addClass('open');
+            }
+
+        })
+    }
+
     $(document).ready(() =>  {
         FUNC.initSwipper();
+        FUNC.handleProductCategorySelect();
+        FUNC.handleDropdownAllCategories();
     });
 })(jQuery);
