@@ -1,5 +1,5 @@
 <!-- modal -->
-<div id="open_product_modal" class="modal">
+<div id="open_product_modal" class="modal data-product-id">
     <div class="modal-container">
         <span data-close-modal="#open_product_modal" class="close">&times;</span>
         <div class="modal-content">
@@ -9,7 +9,7 @@
                         <div class="image-main">
                             {{-- content here !! --}}
                         </div>
-                        <div class="image-list d-flex gap-3">
+                        <div class="image-list d-flex justify-content-center gap-3">
                            {{-- content here !! --}}
                         </div>
                     </div>

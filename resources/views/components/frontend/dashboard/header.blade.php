@@ -67,8 +67,8 @@
                             alt="tpro logo"></a></div>
                 <div class="header-right">
                     <div class="search-style-2">
-                        <form action="https://nest.botble.com/vi/products" class="form--quick-search"
-                            data-ajax-url="https://nest.botble.com/vi/ajax/search-products" method="GET">
+                        <form action="" class="form--quick-search"
+                            data-ajax-url="#" method="GET">
                             <div class="form-group--icon position-relative">
                                 <div class="product-cat-label">{{ __('custom.allCatalouge') }}</div>
                                 <select class="product-category-select" name="categories[]"
@@ -96,38 +96,35 @@
                     </div>
                     <div class="header-action-right">
                         <div class="header-action-2">
-                            <div class="header-action-icon-2"><a href="https://nest.botble.com/vi/compare"><img
-                                        class="svgInject" alt="So sánh"
+                            <div class="header-action-icon-2"><a href="#"><img
+                                        class="svgInject" alt="{{__('custom.compare')}}"
                                         src="https://nest.botble.com/themes/nest/imgs/theme/icons/icon-compare.svg"><span
                                         class="pro-count blue compare-count">1</span></a><a
-                                    href="https://nest.botble.com/vi/compare"><span class="lable">So sánh</span></a>
+                                    href="#"><span class="lable">{{__('custom.compare')}}</span></a>
                             </div>
-                            <div class="header-action-icon-2"><a href="https://nest.botble.com/vi/wishlist"><img
-                                        class="svgInject" alt="Danh sách yêu thích"
+                            <div class="header-action-icon-2"><a href="#"><img
+                                        class="svgInject" alt="{{__('custom.wishList')}}"
                                         src="https://nest.botble.com/themes/nest/imgs/theme/icons/icon-heart.svg"><span
                                         class="pro-count blue wishlist-count"> 0 </span></a><a
-                                    href="https://nest.botble.com/vi/wishlist"><span class="lable">Danh sách yêu
-                                        thích</span></a></div>
+                                    href="#"><span class="lable">{{__('custom.wishList')}}</span></a></div>
                             <div class="header-action-icon-2"><a class="mini-cart-icon"
-                                    href="https://nest.botble.com/vi/cart"><img alt="Giỏ hàng"
+                                    href="#"><img alt="{{__('custom.cart')}}"
                                         src="https://nest.botble.com/themes/nest/imgs/theme/icons/icon-cart.svg"><span
                                         class="pro-count blue">0</span></a><a
-                                    href="https://nest.botble.com/vi/cart"><span class="lable">Giỏ hàng</span></a>
-                                <div class="cart-dropdown-wrap cart-dropdown-hm2 cart-dropdown-panel"><span>Không có
-                                        sản phẩm nào trong giỏ.</span></div>
+                                    href="#"><span class="lable">{{__('custom.cart')}}</span></a>
+                                <div class="cart-dropdown-wrap cart-dropdown-hm2 cart-dropdown-panel"><span>{{__('custom.cartEmpty')}}</span></div>
                             </div>
                             <div class="header-action-icon-2"><a
-                                    href="https://nest.botble.com/vi/customer/overview"><img
-                                        class="svgInject rounded-circle" alt="Tài khoản"
+                                    href="#"><img
+                                        class="svgInject rounded-circle" alt="{{__('custom.account')}}"
                                         src="https://nest.botble.com/themes/nest/imgs/theme/icons/icon-user.svg"></a><a
-                                    href="https://nest.botble.com/vi/customer/overview"><span class="lable me-1">Tài
-                                        khoản</span></a>
+                                    href="#"><span class="lable me-1">{{__('custom.account')}}</span></a>
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                                     <ul>
-                                        <li><a href="https://nest.botble.com/vi/login"><i
-                                                    class="fi fi-rs-user mr-10"></i>Đăng nhập</a></li>
-                                        <li><a href="https://nest.botble.com/vi/register"><i
-                                                    class="fi fi-rs-user-add mr-10"></i>Đăng ký</a></li>
+                                        <li><a href="#"><i
+                                                    class="fi fi-rs-user mr-10"></i>{{__('custom.login')}}</a></li>
+                                        <li><a href="#"><i
+                                                    class="fi fi-rs-user-add mr-10"></i>{{__('custom.register')}}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -196,20 +193,19 @@
                 </div>
                 <div class="header-action-right d-block d-lg-none">
                     <div class="header-action-2">
-                        <div class="header-action-icon-2"><a href="https://nest.botble.com/vi/compare"><img
-                                    alt="So sánh"
+                        <div class="header-action-icon-2"><a href="#"><img
+                                    alt="{{__('custom.compare')}}"
                                     src="https://nest.botble.com/themes/nest/imgs/theme/icons/icon-compare.svg"><span
                                     class="pro-count white compare-count">0</span></a></div>
-                        <div class="header-action-icon-2"><a href="https://nest.botble.com/vi/wishlist"><img
-                                    alt="Danh sách yêu thích"
+                        <div class="header-action-icon-2"><a href="#"><img
+                                    alt="{{__('custom.wishList')}}"
                                     src="https://nest.botble.com/themes/nest/imgs/theme/icons/icon-heart.svg"><span
                                     class="pro-count white wishlist-count"> 0 </span></a></div>
                         <div class="header-action-icon-2"><a class="mini-cart-icon" href="#"><img
-                                    alt="Giỏ hàng"
+                                    alt="{{__('custom.cart')}}"
                                     src="https://nest.botble.com/themes/nest/imgs/theme/icons/icon-cart.svg"><span
                                     class="pro-count white">0</span></a>
-                            <div class="cart-dropdown-wrap cart-dropdown-hm2 cart-dropdown-panel"><span>Không có sản
-                                    phẩm nào trong giỏ.</span></div>
+                            <div class="cart-dropdown-wrap cart-dropdown-hm2 cart-dropdown-panel"><span>{{__('custom.cartEmpty')}}</span></div>
                         </div>
                     </div>
                 </div>

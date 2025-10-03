@@ -323,4 +323,10 @@
         'price_lh' => 'Price: Low to High',
         'name_az' => 'Name: A to Z',
         'name_za' => 'Name: Z to A',
+        'productCatalouge' => 'product catalouge',
+        'wishList' => 'Wish list',
+        'cart' => 'Cart',
+         'cartEmpty' => 'Không có sản phẩm nào trong giỏ.',
+         'login' => 'Login',
+         'account' => 'Acount'
     ];

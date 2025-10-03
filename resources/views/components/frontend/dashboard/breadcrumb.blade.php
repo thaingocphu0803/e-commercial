@@ -1,11 +1,12 @@
 @props([
-    'productCatalouge' => [],
+    'product_catalouge_id' => null,
+    'product_catalouge_name' => null,
     'breadcrumbs' => []
 ])
 
 <div class="page-breadcrumb">
     <h1 class="heading-2 text-capitalize mb-5">
-        <span>{{ $productCatalouge->name }}</span>
+        <span>{{ $product_catalouge_name }}</span>
     </h1>
 
     <nav aria-label="breadcrumb">
@@ -18,7 +19,7 @@
             </li>
             @foreach ( $breadcrumbs as  $breadcrumb)
                 <li class="breadcrumb-item" >
-                    <a href="{{write_url($breadcrumb->canonical, true ,true)}}" class="text-capitalize {{($productCatalouge->product_catalouge_id == $breadcrumb->id) ? 'active' : ''}}">
+                    <a href="{{write_url($breadcrumb->canonical, true ,true)}}" class="text-capitalize {{($product_catalouge_id == $breadcrumb->id) ? 'active' : ''}}">
                         {{$breadcrumb->name}}
                     </a>
                 </li>

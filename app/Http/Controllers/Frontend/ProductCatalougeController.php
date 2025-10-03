@@ -23,7 +23,7 @@ class ProductCatalougeController extends Controller
 
     }
 
-    public function index($id){
+    public function index($id, $request){
         $productCatalouge = $this->productCatalougeService->findById($id);
         $breadcrumbs = $this->productCatalougeService->getBreadcrumb($id);
         $products = $this->productService->getProductWithPromotion($id);

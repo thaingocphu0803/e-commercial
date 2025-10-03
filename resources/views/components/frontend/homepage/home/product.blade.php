@@ -23,13 +23,7 @@
 
                         <div class="product-img-action-wrap">
                             <div class="product-img product-img-zoom">
-                                <a href="{{route('detail.index',
-                                    [
-                                        'product_id' => $product->id,
-                                        'uuid' => $product->uuid,
-                                        'promotion_id' => $product->promotion_id
-                                    ]
-                                )}}">
+                                <a href="{{$product->product_canonical . config('app.general.suffix')}}" class="link-to-product">
                                     <img class="default-img"
                                         src="{{ (!is_null($product->image)) ? base64_decode($product->image) : config('app.general.noImage')}}"
                                         alt="{{ $product->product_name }}">

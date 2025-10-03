@@ -37,13 +37,14 @@ if(!function_exists("price_format")){
 
 // helper create Seo array
 if(!function_exists('seo')){
-    function seo($catalouge){
+    function seo($object){
+    // dd($object);
         return [
-            'meta_title' => $catalouge->meta_title ?? $catalouge->name,
-            'meta_keyword' => $catalouge->meta_keyword ?? $catalouge->canonical,
-            'meta_description' => Illuminate\Support\Str::limit(strip_tags($catalouge->meta_description), 150),
-            'meta_image' => base64_decode($catalouge->image),
-            'canonical' => write_url($catalouge->canonical, true ,true)
+            'meta_title' => $object->meta_title ?? $object->name,
+            'meta_keyword' => $object->meta_keyword ?? $object->canonical,
+            'meta_description' => Illuminate\Support\Str::limit(strip_tags($object->meta_description), 150),
+            'meta_image' => base64_decode($object->image),
+            'canonical' => write_url($object->canonical, true ,true)
         ];
     }
 }

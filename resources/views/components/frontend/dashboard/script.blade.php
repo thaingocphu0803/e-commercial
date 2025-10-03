@@ -50,6 +50,5 @@
 {{-- main --}}
 <script src="{{asset('frontend/js/main.js')}}"></script>
 
-{{-- product-modal --}}
-<script src="{{asset('frontend/js/product-modal.js')}}"></script>
-
+{{-- product --}}
+<script src="{{asset('frontend/js/product.js')}}"></script>

@@ -15,10 +15,10 @@ class RouterController extends Controller
         $this->routerRepository = $routerRepository;
     }
 
-    public function index($canonical = ''){
+    public function index($canonical = '', Request $request){
         $router =  $this->routerRepository->findByCanonical($canonical);
         $method = 'index';
 
-        echo app($router->controllers)->{$method}($router->module_id);
+        echo app($router->controllers)->{$method}($router->module_id, $request);
     }
 }

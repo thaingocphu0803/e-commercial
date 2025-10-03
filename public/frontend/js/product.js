@@ -72,19 +72,26 @@
 
             let product = productModalCache[productId];
 
-            $('#open_product_modal').attr('data-model-product-id', product.id)
+            $("#open_product_modal").attr("data-model-product-id", product.id);
 
             handleAppendName(product.name);
             handleAppendCatalouge(product.catalouges);
             handleAppendPrice(product.discounted_price, product.price);
             handleAppendDesc(product.description);
-            handleAppendVariant(product.attrCatalouges, product.variant_codes, product.attrs);
+            handleAppendVariant(
+                product.attrCatalouges,
+                product.variant_codes,
+                product.attrs
+            );
             handleProductImage(product.image, product.album);
         });
     };
 
     FUNC.handleRenderProductByVariant = () => {
-        $(document).on("click", ".modal-product-variant .variant-list .list-item", async function () {
+        $(document).on(
+            "click",
+            ".modal-product-variant .variant-list .list-item",
+            async function () {
                 let _this = $(this);
 
                 _this.addClass("active");
@@ -93,46 +100,71 @@
 
                 let attrCatalouge = $(".modal-product-variant");
 
-                let attrArray = $(".modal-product-variant").map(function () {
+                let attrArray = $(".modal-product-variant")
+                    .map(function () {
                         return $(this)
                             .find(".variant-list .list-item.active")
                             .attr("data-attr-id");
                     })
-                    .get().sort();
+                    .get()
+                    .sort();
 
-                if(attrCatalouge.length !== attrArray.length) return;
+                if (attrCatalouge.length !== attrArray.length) return;
 
-                let productId =  $('#open_product_modal').attr('data-model-product-id');
+                let productId = $(".data-product-id").attr(
+                    "data-model-product-id"
+                );
                 let code = attrArray.join("-");
 
                 let payload = {
                     product_id: productId,
                     code,
-                    _token
+                    _token,
+                };
+
+                let productCombineCode = `${productId}:${code}`;
+
+                if (!VariantModalCache[productCombineCode]) {
+                    const result = await $.ajax({
+                        type: "GET",
+                        url: "/ajax/product/loadProductByVariant",
+                        data: payload,
+                        dataType: "json",
+                    });
+
+                    if (result.status == "ng") return;
+
+                    VariantModalCache[productCombineCode] = result.object;
                 }
 
-                let productCombineCode = `${productId}:${code}`
+                let product = VariantModalCache[productCombineCode];
 
-            if(!VariantModalCache[productCombineCode]){
+                handleAppendPrice(product.discounted_price, product.price);
 
-                const result = await $.ajax({
-                    type: "GET",
-                    url: "/ajax/product/loadProductByVariant",
-                    data: payload,
-                    dataType: "json",
-                });
-
-                if (result.status == "ng") return;
-
-                VariantModalCache[productCombineCode] = result.object;
+                // handleProductImage(product.image, product.album);
             }
+        );
+    };
 
-            let product =  VariantModalCache[productCombineCode];
+    FUNC.handleProductRedirect = () => {
+        $(document).on("click", ".link-to-product", function (e) {
+            e.preventDefault();
+            let _this = $(this);
 
-            handleAppendPrice(product.discounted_price, product.price);
+            let route = _this.attr("href");
+            let parent = _this.parents(".product-cart-wrap");
+            let productPromotionId = parent.data("product-promotion-id");
+            let productUuid = parent.data("product-uuid");
 
-            // handleProductImage(product.image, product.album);
+            let payload = {
+                promotion_id: productPromotionId,
+                uuid: productUuid,
+                _token,
+            };
 
+            let query = new URLSearchParams(payload).toString();
+
+            window.location.href = route + "?" + query;
         });
     };
 
@@ -141,6 +173,8 @@
         FUNC.handleProductImage();
         FUNC.handleRenderProductInModal();
         FUNC.handleRenderProductByVariant();
+        FUNC.handleProductRedirect();
+
     });
 })(jQuery);
 
@@ -211,7 +245,7 @@ const handleAppendVariant = (attrCatalouges, codes, attrs) => {
         );
 
         catalouge.attrs.forEach((attr) => {
-            if(attrs.includes(attr.id)){
+            if (attrs.includes(attr.id)) {
                 let attrItem = $("<span>")
                     .addClass("list-item")
                     .attr("data-attr-id", attr.id)
@@ -222,9 +256,7 @@ const handleAppendVariant = (attrCatalouges, codes, attrs) => {
                 }
 
                 attrList.append(attrItem);
-
             }
-
         });
 
         attCatalougue.append(attrCatalougeTitle);

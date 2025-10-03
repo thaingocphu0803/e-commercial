@@ -115,7 +115,18 @@ class ProductRepository implements ProductRepositoryInterface
             ->publish($publish)
             ->find($promotion_id);
 
-        $productByCondition = Product::select('products.id', 'pl.name', 'pl.description', 'products.image', 'products.album', 'products.price')
+        $productByCondition = Product::select(
+            'products.id',
+            'pl.name',
+            'pl.canonical',
+            'pl.description',
+            'products.image',
+            'products.album',
+            'products.price',
+            'pl.meta_title',
+            'pl.meta_keyword',
+            'pl.meta_description',
+            )
             ->with(['productCatalouges' => function ($productCatalouges) use ($publish) {
                 $productCatalouges->select('product_catalouges.id', 'pcl.product_catalouge_id', 'pcl.name as product_catalouge_name', 'pcl.canonical as product_catalouge_canonical')
                     ->join('product_catalouge_language as pcl', 'pcl.product_catalouge_id', '=', 'product_catalouges.id')
@@ -151,12 +162,15 @@ class ProductRepository implements ProductRepositoryInterface
 
         $productData['id'] = $productByCondition->id;
         $productData['name'] = $productByCondition->name;
+        $productData['canonical'] = $productByCondition->canonical;
         $productData['description'] = $productByCondition->description;
         $productData['image'] = $productByCondition->image;
         $productData['album'] = !is_null($productByCondition->album) ? array_slice(json_decode($productByCondition->album, true), 0, 4) : null;
         $productData['price'] = $productByCondition->price;
         $productData['catalouges'] = $productByCondition->productCatalouges->toArray();
-
+        $productData['meta_title'] = $productByCondition->meta_title;
+        $productData['meta_keyword'] = $productByCondition->meta_keyword;
+        $productData['meta_description'] = $productByCondition->meta_description;
         if (!empty($productByCondition->productVariants->first())) {
             $productData['price'] = $productByCondition->productVariants->first()->price;
             $productData['variant_id'] = $productByCondition->productVariants->first()->id;

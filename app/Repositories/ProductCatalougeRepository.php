@@ -67,7 +67,7 @@ class ProductCatalougeRepository implements ProductCatalougeRepositoryInterface
 
     public function paginate($request)
     {
-        $perpage = $request->input('perpage') ?? 10;
+        $perpage = $request->input('perpage') ?? 6;
         $keyword = $request->input('keyword');
         $publish = $request->input('publish');
 

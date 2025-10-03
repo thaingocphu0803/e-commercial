@@ -41,14 +41,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index')->middlewar
 // RouteController
 Route::get('{canonical}'. config('app.general.suffix'), [RouterController::class, 'index'])->name('router.index')->where('canonical', '[a-zA-z0-9-]+');
 
-// ProductController
-Route::controller(FontendProductController::class)->prefix('detail')->middleware(['locale'])->group(function(){
-    Route::get('{product_id}/{uuid?}/{promotion_id?}', 'index')->name('detail.index');
-});
-
-Route::get('product/{id}/{uuid}/{promotion_id}', [FontendProductController::class, 'index'])->name('product.index');
-
-
 // Ajax ProductController
 Route::controller(AjaxProductController::class)->prefix('ajax/product')->middleware(['locale'])->group(function(){
     Route::get('loadProductWithVariant', 'loadProductWithVariant')->name('product.loadProductWithVariant');
