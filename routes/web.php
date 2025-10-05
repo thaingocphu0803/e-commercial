@@ -30,6 +30,7 @@ use App\Http\Controllers\Backend\SlideController;
 use App\Http\Controllers\Backend\SourceController;
 use App\Http\Controllers\Backend\SystemController;
 use App\Http\Controllers\Fontend\ProductController as FontendProductController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\RouterController;
 
@@ -37,6 +38,10 @@ use App\Http\Controllers\Frontend\RouterController;
 
 // HomeController
 Route::get('/', [HomeController::class, 'index'])->name('home.index')->middleware('locale');
+
+// CartController
+Route::get('payment', [CartController::class, 'checkout'])->name('cart.checkout')->middleware('locale');
+
 
 // RouteController
 Route::get('{canonical}'. config('app.general.suffix'), [RouterController::class, 'index'])->name('router.index')->where('canonical', '[a-zA-z0-9-]+');

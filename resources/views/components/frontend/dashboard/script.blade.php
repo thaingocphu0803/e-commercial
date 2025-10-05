@@ -52,3 +52,6 @@
 
 {{-- product --}}
 <script src="{{asset('frontend/js/product.js')}}"></script>
+
+{{-- cart --}}
+<script src="{{asset('frontend/js/cart.js')}}"></script>
