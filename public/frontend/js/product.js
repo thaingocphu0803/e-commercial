@@ -8,24 +8,24 @@
 
     FUNC.handleProductAmount = () => {
         const [min, max] = [1, 1000];
-        $(document).on("click", ".btn-hande-amount", function () {
+        $(document).on("click", ".btn-hande-quantiy", function () {
             let _this = $(this);
-            let input = _this.siblings('[name="product_amount"]');
-            let amount = parseInt(input.val());
+            let input = _this.siblings('[name="product_quantity"]');
+            let quantity = parseInt(input.val());
 
             if (_this.is("#btn_increase")) {
-                amount += 1;
+                quantity += 1;
             } else if (_this.is("#btn_decrease")) {
-                amount -= 1;
+                quantity -= 1;
             }
 
-            if (amount > max) {
-                amount = max;
-            } else if (amount < min) {
-                amount = min;
+            if (quantity > max) {
+                quantity = max;
+            } else if (quantity < min) {
+                quantity = min;
             }
 
-            input.val(amount);
+            input.val(quantity);
         });
     };
 
@@ -73,7 +73,7 @@
             let product = productModalCache[productId];
 
             $("#open_product_modal").attr("data-model-product-id", product.id);
-
+            handleUpdateProductInforAttr(productPromotionId, productUuid);
             handleAppendName(product.name);
             handleAppendCatalouge(product.catalouges);
             handleAppendPrice(product.discounted_price, product.price);
@@ -111,7 +111,7 @@
 
                 if (attrCatalouge.length !== attrArray.length) return;
 
-                let productId = $(".data-product-id").attr(
+                let productId = $(".product-infor").attr(
                     "data-model-product-id"
                 );
                 let code = attrArray.join("-");
@@ -138,9 +138,9 @@
                 }
 
                 let product = VariantModalCache[productCombineCode];
-
+                console.log(product);
+                handleUpdateProductInforAttr(product.promotion_id, product.uuid);
                 handleAppendPrice(product.discounted_price, product.price);
-
                 // handleProductImage(product.image, product.album);
             }
         );
@@ -292,3 +292,12 @@ const handleProductImage = (image, album) => {
         });
     }
 };
+
+const handleUpdateProductInforAttr = (productPromotionId, productUuid) => {
+    let currentProduct = $('.product-infor');
+
+    currentProduct.attr('data-product-promotion-id', productPromotionId);
+    currentProduct.attr('data-product-uuid', productUuid);
+
+    console.log()
+}

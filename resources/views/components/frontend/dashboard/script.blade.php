@@ -35,7 +35,7 @@
 <script src="{{asset('frontend/js/menu.js')}}"></script>
 
 {{-- toast --}}
-<script src="{{asset('frontend/js/plugins/toast.js')}}"></script>
+<script src="{{asset('frontend/js/plugins/toastr.min.js')}}"></script>
 
 {{-- core --}}
 <script src="{{asset('frontend/js/core.js')}}"></script>
@@ -52,3 +52,6 @@
 
 {{-- product --}}
 <script src="{{asset('frontend/js/product.js')}}"></script>
+
+{{-- cart --}}
+<script src="{{asset('frontend/js/cart.js')}}"></script>

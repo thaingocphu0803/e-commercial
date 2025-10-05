@@ -37,18 +37,6 @@ class PromotionController extends Controller
                 break;
         }
 
-        if (count($data)) {
-            $response = [
-                'code' => 0,
-                'status' => 'ok',
-                'data' => $data,
-            ];
-        }
-
-        echo json_encode([
-            'code' => $response['code'] ?? 1,
-            'status' => $response['status'] ?? 'ng',
-            'data' =>  $response['data'] ?? []
-        ]);
+        $this->sendResponse($data);
     }
 }

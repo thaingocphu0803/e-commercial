@@ -326,7 +326,8 @@
         'productCatalouge' => 'product catalouge',
         'wishList' => 'Wish list',
         'cart' => 'Cart',
-         'cartEmpty' => 'Không có sản phẩm nào trong giỏ.',
-         'login' => 'Login',
-         'account' => 'Acount'
+        'cartEmpty' => 'The Cart is empty!',
+        'login' => 'Login',
+        'account' => 'Acount',
+        'addCartSuccess' => 'Adding the cart successfully.'
     ];

@@ -43,19 +43,4 @@ class ProductController extends Controller
         $product  = $this->productService->getProductByVariant($request);
         $this->sendResponse($product);
     }
-
-    private function sendResponse( $object = [], $code = 1 , $status = 'ng' ){
-        if($object && count($object)){
-            $code = 0;
-            $status = 'ok';
-        }
-
-        $response = [
-            'code' => $code,
-            'status' => $status,
-            'object' => $object
-        ];
-
-        echo json_encode($response);
-    }
 }
