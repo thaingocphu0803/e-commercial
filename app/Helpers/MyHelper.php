@@ -35,6 +35,24 @@ if(!function_exists("price_format")){
     }
 }
 
+// helper caculate discount
+if(!function_exists('caculate_discount_price')){
+    function caculate_discount_price($originalPrice, $discountType, $maxDiscountValue, $discountValue){
+                    $discount = 0;
+            if ($maxDiscountValue > 0) {
+                $discount = $maxDiscountValue;
+            } else {
+                if ($discountType === 'amount') {
+                    $discount = $discountValue;
+                } else if ($discountType === 'percent') {
+                    $discount =  $originalPrice *  ($discountValue / 100);
+                }
+            }
+
+            return $originalPrice - $discount;
+    }
+}
+
 // helper create Seo array
 if(!function_exists('seo')){
     function seo($object){

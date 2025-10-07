@@ -67,18 +67,6 @@ class DashboardController extends Controller
         }
 
         $modelMenu  = $serviceInstance->paginate($request);
-        if ($modelMenu) {
-
-            return response()->json([
-                'code' => 0,
-                'status' => 'ok',
-                'data' => $modelMenu,
-            ]);
-        } else {
-            return response()->json([
-                'code' => 1,
-                'status' => 'ng',
-            ]);
-        }
+        $this->sendResponse($modelMenu);
     }
 }

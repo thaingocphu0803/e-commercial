@@ -98,26 +98,29 @@
                         <div class="header-action-2">
                             <div class="header-action-icon-2"><a href="#"><img
                                         class="svgInject" alt="{{__('custom.compare')}}"
-                                        src="https://nest.botble.com/themes/nest/imgs/theme/icons/icon-compare.svg"><span
+                                        src="{{asset('frontend/icons/icon-compare.svg')}}"><span
                                         class="pro-count blue compare-count">1</span></a><a
                                     href="#"><span class="lable">{{__('custom.compare')}}</span></a>
                             </div>
                             <div class="header-action-icon-2"><a href="#"><img
                                         class="svgInject" alt="{{__('custom.wishList')}}"
-                                        src="https://nest.botble.com/themes/nest/imgs/theme/icons/icon-heart.svg"><span
+                                        src="{{asset('frontend/icons/icon-heart.svg')}}"><span
                                         class="pro-count blue wishlist-count"> 0 </span></a><a
                                     href="#"><span class="lable">{{__('custom.wishList')}}</span></a></div>
-                            <div class="header-action-icon-2"><a class="mini-cart-icon"
-                                    href="#"><img alt="{{__('custom.cart')}}"
-                                        src="https://nest.botble.com/themes/nest/imgs/theme/icons/icon-cart.svg"><span
-                                        class="pro-count blue">0</span></a><a
-                                    href="#"><span class="lable">{{__('custom.cart')}}</span></a>
+                            <div class="header-action-icon-2">
+                                <a class="mini-cart-icon"
+                                    href="{{route('cart.index')}}">
+                                    <img alt="{{__('custom.cart')}}"
+                                        src="{{asset('frontend/icons/icon-cart.svg')}}">
+                                        <span class="pro-count blue">0</span>
+                                    </a>
+                                    <a href="{{route('cart.index')}}"><span class="lable">{{__('custom.cart')}}</span></a>
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2 cart-dropdown-panel"><span>{{__('custom.cartEmpty')}}</span></div>
                             </div>
                             <div class="header-action-icon-2"><a
                                     href="#"><img
                                         class="svgInject rounded-circle" alt="{{__('custom.account')}}"
-                                        src="https://nest.botble.com/themes/nest/imgs/theme/icons/icon-user.svg"></a><a
+                                        src="{{asset('frontend/icons/icon-user.svg')}}"></a><a
                                     href="#"><span class="lable me-1">{{__('custom.account')}}</span></a>
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                                     <ul>
@@ -185,7 +188,7 @@
                 </div>
 
                 <div class="hotline d-none d-lg-flex"><img
-                        src="https://nest.botble.com/themes/nest/imgs/theme/icons/icon-headphone.svg" alt="hotline">
+                        src="{{asset('frontend/icons/icon-headphone.svg')}}" alt="hotline">
                     <p>{{ $system['contact_phone'] }}<span>{{ __('custom.supportCenter') }}</span></p>
                 </div>
                 <div class="header-action-icon-2 d-block d-lg-none">
@@ -196,16 +199,18 @@
                     <div class="header-action-2">
                         <div class="header-action-icon-2"><a href="#"><img
                                     alt="{{__('custom.compare')}}"
-                                    src="https://nest.botble.com/themes/nest/imgs/theme/icons/icon-compare.svg"><span
+                                    src="{{asset('frontend/icons/icon-compare.svg')}}"><span
                                     class="pro-count white compare-count">0</span></a></div>
                         <div class="header-action-icon-2"><a href="#"><img
                                     alt="{{__('custom.wishList')}}"
-                                    src="https://nest.botble.com/themes/nest/imgs/theme/icons/icon-heart.svg"><span
-                                    class="pro-count white wishlist-count"> 0 </span></a></div>
-                        <div class="header-action-icon-2"><a class="mini-cart-icon" href="#"><img
-                                    alt="{{__('custom.cart')}}"
-                                    src="https://nest.botble.com/themes/nest/imgs/theme/icons/icon-cart.svg"><span
-                                    class="pro-count white">0</span></a>
+                                    src="{{asset('frontend/icons/icon-heart.svg')}}"><span
+                                    class="pro-count white wishlist-count"> 2 </span></a></div>
+                        <div class="header-action-icon-2">
+                            <a class="mini-cart-icon" href="{{route('cart.index')}}"><img
+                                alt="{{__('custom.cart')}}"
+                                src="{{asset('frontend/icons/icon-cart.svg')}}">
+                                <span class="pro-count white">0</span>
+                            </a>
                             <div class="cart-dropdown-wrap cart-dropdown-hm2 cart-dropdown-panel"><span>{{__('custom.cartEmpty')}}</span></div>
                         </div>
                     </div>

@@ -26,22 +26,7 @@ class MenuController extends Controller
     {
         $menuCatalouge = $this->menuCatalougeService->create($request);
 
-        if ($menuCatalouge) {
-            return response()->json([
-                'code' => 0,
-                'status' => 'ok',
-                'data' => [
-                    'name' => $menuCatalouge->name,
-                    'id' => $menuCatalouge->id,
-                ]
-            ]);
-        } else {
-            return response()->json([
-                'code' => 1,
-                'status' => 'ng',
-                'data' => []
-            ]);
-        }
+        $this->sendResponse($menuCatalouge);
     }
 
     public function dragDrop(Request $request)
@@ -50,19 +35,8 @@ class MenuController extends Controller
 
         $result = $this->menuService->reBuildTree($newTree);
 
-        if ($result) {
-            return response()->json([
-                'code' => 0,
-                'status' => 'ok',
-                'data' => []
-            ]);
-        } else {
-            return response()->json([
-                'code' => 1,
-                'status' => 'ng',
-                'data' => []
-            ]);
-        }
+        $this->sendResponse($result);
+
 
     }
 

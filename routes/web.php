@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Ajax\AttrController as AjaxAttrController;
+use App\Http\Controllers\Ajax\CartController as AjaxCartController;
 use App\Http\Controllers\Ajax\DashboardController as AjaxDashboardController;
 use App\Http\Controllers\Ajax\LocationController;
 use App\Http\Controllers\Ajax\MenuController as AjaxMenuController;
@@ -33,6 +34,7 @@ use App\Http\Controllers\Fontend\ProductController as FontendProductController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\RouterController;
+use Cloudinary\Transformation\Rotate;
 
 /** FONTEND ROUTES */
 
@@ -40,7 +42,7 @@ use App\Http\Controllers\Frontend\RouterController;
 Route::get('/', [HomeController::class, 'index'])->name('home.index')->middleware('locale');
 
 // CartController
-Route::get('payment', [CartController::class, 'checkout'])->name('cart.checkout')->middleware('locale');
+Route::get('payment', [CartController::class, 'index'])->name('cart.index')->middleware('locale');
 
 
 // RouteController
@@ -51,6 +53,11 @@ Route::controller(AjaxProductController::class)->prefix('ajax/product')->middlew
     Route::get('loadProductWithVariant', 'loadProductWithVariant')->name('product.loadProductWithVariant');
     Route::get('loadProductByVariant', 'loadProductByVariant')->name('product.loadProductByVariant');
 
+});
+
+// Ajax CartController
+Route::controller(AjaxCartController::class)->prefix('ajax/cart')->middleware(['locale'])->group(function(){
+    Route::post('create', 'create')->name('ajax.cart.create');
 });
 
 //LanguageController

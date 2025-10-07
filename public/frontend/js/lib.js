@@ -42,3 +42,12 @@ function writeUrl(canonical = '', fullDomain = true, suffix = false) {
 
     return domain + "/" + canonical + suf;
 }
+
+const caculate_total_quantity = (object) => {
+    let total = 0;
+    $.each(object, function(index, item){
+        total += item.qty;
+    })
+
+    return total;
+}

@@ -17,8 +17,8 @@
                     <div class="product-cart-wrap mb-30 wow animate__ animate__fadeIn animated"
                         data-wow-delay="0.1s"
                         data-product-id="{{$product->id}}"
-                        data-product-promotion-id="{{$product->promotion_id}}"
-                        data-product-uuid="{{$product->uuid}}"
+                        data-product-promotion-id="{{$product->promotion_id ?? null}}"
+                        data-product-uuid="{{$product->uuid ?? null}}"
                         style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
 
                         <div class="product-img-action-wrap">
