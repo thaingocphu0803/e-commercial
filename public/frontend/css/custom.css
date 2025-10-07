@@ -203,3 +203,7 @@
 .product-catalouge-list > .list-content > .content-item:hover > .item-img > img {
         border-color:  var(--color-orange);
 }
+
+.text-bold{
+    font-weight: bold;
+}

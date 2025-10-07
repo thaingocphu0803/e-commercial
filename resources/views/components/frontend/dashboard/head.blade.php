@@ -79,6 +79,10 @@
     <link media="all" type="text/css" rel="stylesheet"
         href="{{asset('frontend/css/plugins/slick.css')}}">
 
+    {{-- toastr --}}
+    <link media="all" type="text/css" rel="stylesheet"
+        href="{{asset('frontend/css/plugins/toastr.min.css')}}">
+
     {{-- core --}}
     <link media="all" type="text/css" rel="stylesheet"
         href="{{asset('frontend/css/core.css')}}">

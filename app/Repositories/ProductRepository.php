@@ -29,6 +29,7 @@ class ProductRepository implements ProductRepositoryInterface
 
         $productData = ProductVariant::select(
             'product_variants.id',
+            'p.id as promotion_id',
             'product_variants.product_id',
             'product_variants.album',
             'product_variants.price',
@@ -56,7 +57,7 @@ class ProductRepository implements ProductRepositoryInterface
         )
             ->leftJoin('promotion_product_variant as ppv', 'ppv.variant_uuid', '=', 'product_variants.uuid')
             ->leftJoin('promotions as p', function ($join) use ($publish) {
-                $join->on('ppv.variant_uuid', '=', 'product_variants.uuid')
+                $join->on('ppv.promotion_id', '=', 'p.id')
                     ->where('p.publish', '=', $publish)
                     ->where(function ($q) {
                         $q->whereNull('p.end_date')
@@ -111,7 +112,8 @@ class ProductRepository implements ProductRepositoryInterface
             ->get()
             ->pluck('attr_id')
             ->toArray();
-        $promotion = Promotion::select('discountValue', 'discountType', 'maxDiscountValue')
+
+        $promotion = Promotion::select('id','discountValue', 'discountType', 'maxDiscountValue')
             ->publish($publish)
             ->find($promotion_id);
 
@@ -146,7 +148,7 @@ class ProductRepository implements ProductRepositoryInterface
                             ->join('attr_catalouge_language as acl', 'acl.attr_catalouge_id', '=', 'attr_catalouges.id')
                             ->publish($publish);
                     }])
-                        ->select('product_variants.id', 'product_variants.product_id', 'product_variants.price', 'product_variants.album', 'product_variants.code')
+                        ->select('product_variants.id', 'product_variants.uuid', 'product_variants.product_id', 'product_variants.name', 'product_variants.price', 'product_variants.album', 'product_variants.code')
                         ->where('product_variants.uuid', $uuid)->first();
                 }
             ]);
@@ -159,7 +161,6 @@ class ProductRepository implements ProductRepositoryInterface
             ->first();
 
         if (empty($productByCondition)) return false;
-
         $productData['id'] = $productByCondition->id;
         $productData['name'] = $productByCondition->name;
         $productData['canonical'] = $productByCondition->canonical;
@@ -173,7 +174,9 @@ class ProductRepository implements ProductRepositoryInterface
         $productData['meta_description'] = $productByCondition->meta_description;
         if (!empty($productByCondition->productVariants->first())) {
             $productData['price'] = $productByCondition->productVariants->first()->price;
+            $productData['variant_name'] = $productByCondition->productVariants->first()->name;
             $productData['variant_id'] = $productByCondition->productVariants->first()->id;
+            $productData['variant_uuid'] = $productByCondition->productVariants->first()->uuid;
             $productData['variant_codes'] =  explode('-', $productByCondition->productVariants->first()->code);
 
             $album = $productByCondition->productVariants->first()->album;
@@ -196,18 +199,10 @@ class ProductRepository implements ProductRepositoryInterface
         }
 
         if (!empty($promotion)) {
-            $discount = 0;
-            if ($promotion->maxDiscountValue > 0) {
-                $discount = $promotion->maxDiscountValue;
-            } else {
-                if ($promotion->discountType === 'amount') {
-                    $discount = $promotion->discountValue;
-                } else if ($promotion->discountType === 'percent') {
-                    $discount =  $productData['price'] *  ($promotion->discountValue / 100);
-                }
-            }
+            $discounted_price = caculate_discount_price($productData['price'], $promotion->discountType, $promotion->maxDiscountValue, $promotion->discountValue);
 
-            $productData['discounted_price'] = $productData['price'] - $discount;
+            $productData['discounted_price'] = $discounted_price;
+            $productData['promotion_id'] = $promotion->id;
         }
 
         $productData['attrs'] = $product_attrs;

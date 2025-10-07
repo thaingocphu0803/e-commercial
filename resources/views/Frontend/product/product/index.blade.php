@@ -1,5 +1,9 @@
 <x-frontend.dashboard.layout :seo="$seo">
-    <div class="product page-wrapper data-product-id" data-model-product-id={{ $product['id'] }}>
+    <div class="product page-wrapper product-infor"
+    data-model-product-id={{ $product['id'] }}
+    data-product-promotion-id="{{ $product['promotion_id'] ?? null }}"
+    data-product-uuid="{{ $product['variant_uuid'] ?? null }}"
+    >
         <div class="container">
             <div class="product-body row my-4">
                 {{-- start product image --}}
@@ -108,16 +112,16 @@
                                 <div
                                     class="toolbox-amount w-50  p-3 d-flex flex-column justify-item-center border-end border-secondary">
                                     <div class="input-group input-group-sm">
-                                        <button class="btn fs-6 btn-outline-secondary btn-hande-amount" type="button"
+                                        <button class="btn fs-6 btn-outline-secondary btn-hande-quantiy" type="button"
                                             id="btn_decrease">-</button>
-                                        <input type="text" class="form-control text-center" name="product_amount"
-                                            id="product_amount" value="1" . />
-                                        <button class="btn fs-6 btn-outline-secondary btn-hande-amount" type="button"
+                                        <input type="text" class="form-control text-center" name="product_quantity"
+                                            id="product_quantity" value="1" . />
+                                        <button class="btn fs-6 btn-outline-secondary btn-hande-quantiy" type="button"
                                             id="btn_increase">+</button>
                                     </div>
                                 </div>
                                 <div class="toolbox-cart w-50 p-3 d-flex justify-content-center">
-                                    <div class=" btn btn-outline-secondary">
+                                    <div class="btn-addToCart btn btn-outline-secondary">
                                         <div aria-label="{{ __('custom.addToCart') }}" class="mt-md-0 mt-3"
                                             title="{{ __('custom.addToCart') }}">
                                             <i class="fi-rs-shopping-cart mr-5"></i>
