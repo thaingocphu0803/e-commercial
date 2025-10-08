@@ -333,5 +333,16 @@
         //2025/10/07
         'orderInfor' => 'order information',
         'hasAccount' => "Already have an account?",
-        'logHere' => 'Login here'
-    ];
+        'logHere' => 'Login here',
+        'enterFullName' => 'Enter  your full name',
+        'enterPhone'=> 'Enter your phone phone',
+        'enterNote' => 'Enter your note (if having)',
+        'paymentMethod' => 'payment method',
+        'payByCOD' => 'Pay by COD',
+        'payByZalo' => 'Pay by ZaloPay',
+        'payByMomo' => 'Pay by ShopeePay',
+        'payByShopee' => 'Pay by MOMO',        
+        'payByVNP' => 'Pay by VNPay',
+
+
+    ];  

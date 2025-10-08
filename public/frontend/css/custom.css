@@ -207,3 +207,14 @@
 .text-bold{
     font-weight: bold;
 }
+
+.radio-input {
+    transform: scale(1.5) !important;
+    width: auto !important;
+}
+
+.img-icon{
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+}
