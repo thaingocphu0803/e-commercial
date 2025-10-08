@@ -22,7 +22,7 @@
                     <i class="fi-rs-filter"></i>
                 </a>
 
-                <div class=" view-perpage">
+                <div class="view-perpage">
                     <select name="perpage" class="nice-select">
                         @for ($i = 10; $i <= 100; $i += 10)
                             <option value={{ $i }}>

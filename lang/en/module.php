@@ -94,10 +94,39 @@ return [
             ];
         }, range(1, 30))
     ],
+    //2025/10/08
     'sort_by' => [
         'price_hl' => 'custom.price_hl',
         'price_lh' => 'custom.price_lh',
         'name_az' => 'custom.name_az',
         'name_za' => 'custom.name_za',
+    ],
+
+    'payment' => [
+        [
+            'id' => 'cod',
+            'img' => asset('frontend/imgs/payment/cod.webp'),
+            'title' => 'custom.payByCOD'
+        ],
+        [
+            'id' => 'zalopay',
+            'img' => asset('frontend/imgs/payment/zalopay.webp'),
+            'title' => 'custom.payByZalo'
+        ],
+        [
+            'id' => 'momo',
+            'img' => asset('frontend/imgs/payment/momo.webp'),
+            'title' => 'custom.payByMomo'
+        ],
+        [
+            'id' => 'shopee',
+            'img' => asset('frontend/imgs/payment/shopeepay.webp'),
+            'title' => 'custom.payByShopee'
+        ],
+        [
+            'id' => 'vnpay',
+            'img' => asset('frontend/imgs/payment/vnpay.webp'),
+            'title' => 'custom.payByVNP'
+        ],
     ]
 ];

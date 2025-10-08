@@ -53,16 +53,16 @@
             <div class="col-lg-6 text-end d-none d-md-block col-xl-4">
                 <div class="mobile-social-icon">
                     <p class="font-heading h6 me-2 text-capitalize">{{__('custom.followUs')}}:</p><a href="https://www.facebook.com"
-                        title="Facebook"><img src="https://nest.botble.com/storage/general/facebook.png"
+                        title="Facebook"><img src="{{asset('frontend/icons/facebook.webp')}}"
                             data-bb-lazy="true" loading="lazy" alt="Facebook"></a><a href="https://www.twitter.com"
-                        title="Twitter"><img src="https://nest.botble.com/storage/general/twitter.png"
+                        title="Twitter"><img src="{{asset('frontend/icons/twitter.webp')}}"
                             data-bb-lazy="true" loading="lazy" alt="Twitter"></a><a
                         href="https://www.instagram.com" title="Instagram"><img
-                            src="https://nest.botble.com/storage/general/instagram.png" data-bb-lazy="true"
+                            src="{{asset('frontend/icons/instagram.webp')}}" data-bb-lazy="true"
                             loading="lazy" alt="Instagram"></a><a href="https://www.pinterest.com"
-                        title="Pinterest"><img src="https://nest.botble.com/storage/general/pinterest.png"
+                        title="Pinterest"><img src="{{asset('frontend/icons/pinterest.webp')}}"
                             data-bb-lazy="true" loading="lazy" alt="Pinterest"></a><a href="https://www.youtube.com"
-                        title="Youtube"><img src="https://nest.botble.com/storage/general/youtube.png"
+                        title="Youtube"><img src="{{asset('frontend/icons/youtube.webp')}}"
                             data-bb-lazy="true" loading="lazy" alt="Youtube"></a>
                 </div>
             </div>
