@@ -329,5 +329,9 @@
         'cartEmpty' => 'The Cart is empty!',
         'login' => 'Login',
         'account' => 'Acount',
-        'addCartSuccess' => 'Adding the cart successfully.'
+        'addCartSuccess' => 'Adding the cart successfully.',
+        //2025/10/07
+        'orderInfor' => 'order information',
+        'hasAccount' => "Already have an account?",
+        'logHere' => 'Login here'
     ];
