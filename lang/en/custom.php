@@ -341,8 +341,12 @@
         'payByCOD' => 'Pay by COD',
         'payByZalo' => 'Pay by ZaloPay',
         'payByMomo' => 'Pay by ShopeePay',
-        'payByShopee' => 'Pay by MOMO',        
+        'payByShopee' => 'Pay by MOMO',
         'payByVNP' => 'Pay by VNPay',
+        'payOrder' => 'Pay for the order',
+        'applyVoucher' => 'apply voucher',
+        'enterVoucher' => 'Enter voucher to apply',
+        'apply' => 'apply'
 
 
-    ];  
+    ];
