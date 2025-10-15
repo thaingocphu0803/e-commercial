@@ -55,3 +55,5 @@
 
 {{-- cart --}}
 <script src="{{asset('frontend/js/cart.js')}}"></script>
+
+{{ $slot }}

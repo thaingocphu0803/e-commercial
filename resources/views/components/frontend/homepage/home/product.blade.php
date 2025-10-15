@@ -83,7 +83,7 @@
 
                                         <span class="">
                                             <small>
-                                                <del class="old-price"
+                                                <del class="old-price text-danger"
                                                     data-bb-value="product-original-price">{{ price_format($product->product_price)}}</del>
                                             </small>
                                         </span>

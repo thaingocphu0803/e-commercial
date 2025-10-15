@@ -25,6 +25,7 @@ class CartService implements CartServiceInterface
         try {
             $payload = $request->except('_token');
             $product = $this->productRepository->getWithVariant($payload);
+
             if (!$product) return false;
 
             $cartData['id'] = (string) $product['id'];
@@ -46,6 +47,8 @@ class CartService implements CartServiceInterface
 
             if (!empty($product['discounted_price'])) {
                 $cartData['price'] = $product['discounted_price'];
+                $cartData['options']['old_price'] =  $product['price'];
+                $cartData['options']['discount'] =  $product['price'] - $product['discounted_price'];
             }
 
             Cart::instance('shopping')->add([$cartData]);
