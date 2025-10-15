@@ -1,10 +1,8 @@
-
-
-<x-slot:script>
-    <script src="{{ asset('frontend/js/plugins/jquery.nice-select.js') }}"></script>
-</x-slot:script>
-
 <x-frontend.dashboard.layout>
+    <x-slot:script>
+        <script src="{{ asset('frontend/js/location.js') }}" defer></script>
+    </x-slot:script>
+
     <div class="payment-infor page-wrapper">
         <div class="cart-container">
             <form action="" method="POST">
@@ -51,38 +49,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        {{-- form input city --}}
-                                        <div class="col-lg-4">
-                                            <select id="province_id" name="customer[province]" class="nice-select form-select">
-                                                <option disabled selected>
-                                                    {{ __('custom.chooseObject', ['attribute' => __('custom.city')]) }}
-                                                </option>
-                                                @foreach ($provinces as $province )
-                                                    <option value="{{ $province->id }}">{{ $province->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-
-                                        {{-- form input district --}}
-                                        <div class="col-lg-4">
-                                            <select id="district_id" name="customer[district]" class="nice-select form-select">
-                                                <option disabled selected>
-                                                    {{ __('custom.chooseObject', ['attribute' => __('custom.district')]) }}
-                                                </option>
-                                            </select>
-                                        </div>
-
-                                        {{-- form input ward --}}
-                                        <div class="col-lg-4">
-                                            <select name="customer[ward]" class="nice-select form-select">
-                                                <option disabled selected>
-                                                    {{ __('custom.chooseObject', ['attribute' => __('custom.ward')]) }}
-                                                </option>
-
-                                            </select>
-                                        </div>
-                                    </div>
+                                    <x-frontend.cart.address :provinces="$provinces" />
 
                                     <div class="row">
                                         {{-- form input note --}}
@@ -111,8 +78,8 @@
                                             @foreach (__('module.payment') as $payment)
                                                 <label for="{{ $payment['id'] }}"
                                                     class="form-control d-flex align-items-center gap-4">
-                                                    <input class="radio-input" type="radio"
-                                                        name="customer[payment_method]" id="{{ $payment['id'] }}">
+                                                    <input class="radio-input" type="radio" name="customer[payment_method]"
+                                                        id="{{ $payment['id'] }}">
                                                     <img class="img-icon" src="{{ $payment['img'] }}"
                                                         alt="{{ __('custom.paymentMethod') }}">
                                                     <span>{{ __($payment['title']) }}</span>
@@ -141,120 +108,44 @@
                                 </div>
                             </div>
                             <div class="form-body">
+                                @if($cart->isEmpty())
+                                    <div class="row">
+                                        <div class="col-lg-12 d-flex  justify-content-center">
+                                            <span class="text-secondary fs-5">{{ __('custom.cartEmpty') }}</span>
+                                        </div>
+                                    </div>
+                                @endif
                                 <div class="row">
-                                    <div class="product-cart-item col-lg-12">
-                                        <div class=" py-3 d-flex align-items-center justify-content-between">
-                                            <div class="d-flex  justify-content-strench gap-5">
-                                                <div class="cart-item-image">
-                                                    <img src="{{ config('app.general.noImage') }}"
-                                                        alt="{{ __('custom.productImage') }}" class="img-cover">
-                                                </div>
-                                                <div
-                                                    class="cart-item-infor d-flex flex-column justify-content-between align-items-center">
-                                                    <span class="fs-6 text-bold text-secondary text-capitalize">samsung
-                                                        galaxy</span>
-                                                    <div class="cart-item-amount position-relative">
-                                                        <button type="button" id="btn_decrease"
-                                                            class="btn-hande-quantiy position-absolute text-bold fs-4">-</button>
-                                                        <input type="text" name="product_quantity"
-                                                            class="text-center text-sencondary" value="1">
-                                                        <button type="button" id="btn_increase"
-                                                            class="btn-hande-quantiy position-absolute text-bold fs-4">+</button>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="d-flex gap-5 align-item-center">
-                                                <span class="cart-item-price fs-5">{{ price_format(1000) }}</span>
-                                                <span class="text-danger cart-item-trash">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                        height="20" fill="currentColor" class="bi bi-trash"
-                                                        viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-                                                        <path
-                                                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
-                                                    </svg>
-                                                </span>
-                                            </div>
-
-                                        </div>
-
-                                        <div
-                                            class=" py-3 d-flex align-items-center justify-content-between border-top">
-                                            <div class="d-flex  justify-content-strench gap-5">
-                                                <div class="cart-item-image">
-                                                    <img src="{{ config('app.general.noImage') }}"
-                                                        alt="{{ __('custom.productImage') }}" class="img-cover">
-                                                </div>
-                                                <div
-                                                    class="cart-item-infor d-flex flex-column justify-content-between align-items-center">
-                                                    <span class="fs-6 text-bold text-secondary text-capitalize">samsung
-                                                        galaxy</span>
-                                                    <div class="cart-item-amount position-relative">
-                                                        <button type="button" id="btn_decrease"
-                                                            class="btn-hande-quantiy position-absolute text-bold fs-4">-</button>
-                                                        <input type="text" name="product_quantity"
-                                                            class="text-center text-sencondary" value="1">
-                                                        <button type="button" id="btn_increase"
-                                                            class="btn-hande-quantiy position-absolute text-bold fs-4">+</button>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="d-flex gap-5 align-item-center">
-                                                <span class="cart-item-price fs-5">{{ price_format(1000) }}</span>
-                                                <span class="text-danger cart-item-trash">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                        height="20" fill="currentColor" class="bi bi-trash"
-                                                        viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-                                                        <path
-                                                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
-                                                    </svg>
-                                                </span>
-                                            </div>
-
-                                        </div>
-                                    </div>
+                                    <x-frontend.cart.item :cart="$cart" />
                                 </div>
                             </div>
                         </div>
 
-                        {{-- choose voucher --}}
-                        <div class="row my-3">
-                            <div class="col-lg-12">
-                                {{-- voucher list --}}
-                                <div class="voucher-list d-flex gap-3 pb-20">
-                                    {{-- voucher item --}}
-                                    <div class="list-item d-flex justify-content-between ">
-                                        <div class="p-2 d-flex flex-column justify-content-start">
-                                            <div class="item-title text-bold text-secondary text-capitalize">
-                                                samsung galaxy
-                                            </div>
-                                            <div class="item-desc border-top">
-                                                 samsung galaxy  samsung galaxy  samsung galaxy  samsung  samsung galaxy  samsung galaxy  samsung galaxy  samsung
-                                            </div>
-                                        </div>
-                                        <button type="button"  class="choose-voucher border-start text-capitalize"> {{__('custom.apply')}}</button>
-                                    </div>
+                        {{-- total price --}}
+                        @if(!$cart->isEmpty())
+                            <div class="cart-total pt-3 row gap-3">
+                                <div class=" total-shipcost col-lg-12 d-flex justify-content-between">
+                                    <span class="header-title text-uppercase fs-6 text-bold">
+                                        {{ __('custom.shipfee') }}:
+                                    </span>
+                                    <span class="value fs-5 text-secondary">{{ __('custom.freeship') }}</span>
+                                </div>
+                                <div class="total-discount col-lg-12 d-flex justify-content-between">
+                                    <span class="header-title text-uppercase fs-6 text-bold">
+                                        {{ __('custom.totalDiscount') }}:
+                                    </span>
+                                    <span
+                                        class="value fs-5 text-secondary">{{caculate_cart_total($cart, 'discount')}}</span>
+                                </div>
+                                <div class="total-grand col-lg-12 d-flex justify-content-between">
+                                    <span class="header-title text-uppercase fs-6 text-bold">
+                                        {{ __('custom.grandTotal') }}:
+                                    </span>
+                                    <span class="value fs-5 text-secondary">{{caculate_cart_total($cart, 'grand')}}</span>
                                 </div>
                             </div>
-                        </div>
+                        @endif
 
-                        {{-- apply voucher button --}}
-                        <div class="row my-3">
-                            <div class="col-lg-8">
-                                <input type="text" class="form-control" name="order_voucher"
-                                    placeholder="{{ __('custom.enterVoucher') }}">
-                            </div>
-                            <div class="col-lg-4">
-                                <button type="button"
-                                    class="btn btn-secondary text-capitalize w-100">{{ __('custom.applyVoucher') }}
-                                </button>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </form>

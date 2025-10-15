@@ -25,7 +25,7 @@
                 quantity = min;
             }
 
-            input.val(quantity);
+            input.val(quantity).trigger('input');
         });
     };
 

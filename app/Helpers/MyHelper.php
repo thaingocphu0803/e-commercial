@@ -1,6 +1,9 @@
 <?php
 
 // helper write url from canonical
+
+use PhpParser\Node\Expr\FuncCall;
+
 if(!function_exists("write_url")){
     function write_url(string $canonical = '', bool $fullDomain = true, bool $suffix = false){
         if(strpos($canonical, 'http') === 0){
@@ -64,5 +67,33 @@ if(!function_exists('seo')){
             'meta_image' => base64_decode($object->image),
             'canonical' => write_url($object->canonical, true ,true)
         ];
+    }
+}
+
+// helper caculate cart total by label
+if(!function_exists('caculate_cart_total')){
+    function caculate_cart_total($cart, $lable){
+        switch($lable){
+            case 'grand':
+                $grandTotal= 0;
+                $qty_price = $cart->pluck('qty', 'price');
+                foreach($qty_price as $qty => $price){
+                    $grandTotal += (intval($qty) * $price);
+                }
+
+                return price_format($grandTotal);
+            case 'qty':
+                return  $cart->sum('qty');
+            case 'discount':
+                $discount_array = $cart->pluck('options.discount');
+                $qty_array = $cart->pluck('qty');
+                $totalDiscount = 0;
+                foreach($discount_array as $key => $val){
+                    $totalDiscount += (intval($val)* intval($qty_array[$key]));
+                }
+                return price_format($totalDiscount);
+            default:
+                break;
+        }
     }
 }

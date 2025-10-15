@@ -23,5 +23,6 @@ abstract class Controller
         ];
 
         echo json_encode($response);
+        exit();
     }
 }

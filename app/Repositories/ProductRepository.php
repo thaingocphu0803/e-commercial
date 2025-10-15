@@ -200,7 +200,6 @@ class ProductRepository implements ProductRepositoryInterface
 
         if (!empty($promotion)) {
             $discounted_price = caculate_discount_price($productData['price'], $promotion->discountType, $promotion->maxDiscountValue, $promotion->discountValue);
-
             $productData['discounted_price'] = $discounted_price;
             $productData['promotion_id'] = $promotion->id;
         }

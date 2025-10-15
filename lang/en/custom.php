@@ -346,7 +346,9 @@
         'payOrder' => 'Pay for the order',
         'applyVoucher' => 'apply voucher',
         'enterVoucher' => 'Enter voucher to apply',
-        'apply' => 'apply'
-
-
+        'apply' => 'apply',
+        'shipfee' => 'shipping fee',
+        'freeship' => 'free ship',
+        'totalDiscount' => 'total discount',
+        'grandTotal' => 'grand total',
     ];
