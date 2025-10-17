@@ -37,8 +37,10 @@
             if (result.status === "ng") return;
             toastr.clear();
             toastr.success(result.message, toastTitle[lang]);
+            console.log(result);
+            let totalQty = result.object.totalQty;
 
-            let total = caculate_total_quantity(result.object);
+            FUNC.updateCartCount(totalQty);
         });
     };
 
@@ -75,6 +77,7 @@
             let newCartItem = result.object.newCartItem;
             let totalDiscount = result.object.totalDiscount;
             let totalGrand = result.object.totalGrand;
+            let totalQty = result.object.totalQty;
             let oldPrice = newCartItem.options.old_price * parseInt(newCartItem.qty);
             let price = (newCartItem.price) * parseInt(newCartItem.qty);
 
@@ -82,8 +85,7 @@
             parent.find('.cart-item-price').text(priceFormat(price));
             $('.cart-total .total-discount .value').text(totalDiscount);
             $('.cart-total .total-grand .value').text(totalGrand);
-
-
+            FUNC.updateCartCount(totalQty);
         });
     };
 
@@ -93,6 +95,10 @@
             console.log(1);
         })
     }
+
+    FUNC.updateCartCount = (qty) => {
+        $('.header-action-icon-2 .mini-cart-icon .pro-count').text(qty);
+    };
 
     $(document).ready(() => {
         FUNC.addCart();

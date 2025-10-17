@@ -65,15 +65,17 @@ class CartService implements CartServiceInterface
         try{
         $payload = $request->except('_token');
         $newCartItem = Cart::instance('shopping')->update($payload['rowId'], ['qty' => $payload['qty']]);
-        
+
         $cart = Cart::instance('shopping')->content();
         $totalDiscount = caculate_cart_total($cart, 'discount');
         $totalGrand =  caculate_cart_total($cart, 'grand');
+        $totalQty = caculate_cart_total($cart, 'qty');
 
         $updateResult = [
             'newCartItem' => $newCartItem->toArray(),
             'totalDiscount' => $totalDiscount,
-            'totalGrand' => $totalGrand
+            'totalGrand' => $totalGrand,
+            'totalQty' => $totalQty
         ];
 
         return $updateResult;

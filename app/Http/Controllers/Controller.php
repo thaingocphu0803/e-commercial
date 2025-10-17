@@ -22,7 +22,6 @@ abstract class Controller
             'object' => $object
         ];
 
-        echo json_encode($response);
-        exit();
-    }
+            echo json_encode($response);
+        }
 }

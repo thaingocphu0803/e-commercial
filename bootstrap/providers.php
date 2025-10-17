@@ -7,4 +7,6 @@ return [
     App\Providers\MenuComposerServiceProvider::class,
     App\Providers\ProductComposerServiceProvider::class,
     App\Providers\SystemComposerServiceProvider::class,
+    App\Providers\CartComposerServiceProvider::class,
+
 ];
