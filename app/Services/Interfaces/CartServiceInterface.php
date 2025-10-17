@@ -9,5 +9,6 @@ namespace App\Services\Interfaces;
 interface CartServiceInterface
 {
     public function create($request);
+    public function update($request);
 
 }

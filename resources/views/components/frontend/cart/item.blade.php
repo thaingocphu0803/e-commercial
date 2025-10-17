@@ -2,9 +2,11 @@
     'cart' => []
 ])
 
+{{-- @dd($cart); --}}
+
 <div class="product-cart col-lg-12">
     @foreach ($cart as $key => $item)
-        <div data-cart-id="{{$item->rowId}}" class="cart-item py-3 d-flex align-items-center justify-content-between {{($item !== $cart->first()) ? 'border-top' : ''}}">
+    <div data-cart-id="{{$item->rowId}}" class="cart-item py-3 d-flex align-items-center justify-content-between {{($item !== $cart->first()) ? 'border-top' : ''}}">
         <div class="d-flex  justify-content-strench gap-5">
             <div class="cart-item-image">
                 <img src="{{ (!is_null($item->options['image'])) ? base64_decode($item->options['image']) : config('app.general.noImage') }}"
@@ -28,7 +30,7 @@
         </div>
         <div class="d-flex gap-5 align-items-center">
             <div class="d-flex flex-column gap-2">
-                <span class="cart-item-price text-decoration-line-through fs-6  text-danger">
+                <span class="cart-item-old-price text-decoration-line-through fs-6  text-danger">
                     {{ (!empty($item->options['old_price'])) ? price_format($item->options['old_price'] * intval($item->qty)) : '' }}
                 </span>
                 <span class="cart-item-price fs-5 text-secondary">{{ price_format($item->price * intval($item->qty))}}</span>

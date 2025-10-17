@@ -5,8 +5,6 @@
     let district_select = $("#district_id");
     let ward_select = $("#ward_id");
 
-    console.log(lang);
-
     let addressSelect = {
         district: {
             vi: "Chọn Quận/Huyện",

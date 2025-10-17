@@ -82,10 +82,8 @@ if(!function_exists('caculate_cart_total')){
                 }
 
                 return price_format($grandTotal);
-                break;
             case 'qty':
                 return  $cart->sum('qty');
-                break;
             case 'discount':
                 $discount_array = $cart->pluck('options.discount');
                 $qty_array = $cart->pluck('qty');
@@ -93,9 +91,7 @@ if(!function_exists('caculate_cart_total')){
                 foreach($discount_array as $key => $val){
                     $totalDiscount += (intval($val)* intval($qty_array[$key]));
                 }
-
                 return price_format($totalDiscount);
-                break;
             default:
                 break;
         }

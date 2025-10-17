@@ -23,5 +23,16 @@ class CartController extends Controller
             $message = __('custom.addCartSuccess');
             $this->sendResponse($cart, $message);
         }
+        $this->sendResponse();
+
     }
+
+    public function update(Request $request){
+        $result = $this->cartService->update($request);
+
+        if($result){
+            $this->sendResponse($result);
+        }
+        $this->sendResponse();
+    }   
 }

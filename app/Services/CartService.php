@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Repositories\ProductRepository;
 use App\Services\Interfaces\CartServiceInterface;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Illuminate\Container\Attributes\DB;
 
 /**
  * Class CartService
@@ -59,5 +58,29 @@ class CartService implements CartServiceInterface
             echo $e->getMessage();
             return false;
         }
+    }
+
+    public function update($request)
+    {
+        try{
+        $payload = $request->except('_token');
+        $newCartItem = Cart::instance('shopping')->update($payload['rowId'], ['qty' => $payload['qty']]);
+        
+        $cart = Cart::instance('shopping')->content();
+        $totalDiscount = caculate_cart_total($cart, 'discount');
+        $totalGrand =  caculate_cart_total($cart, 'grand');
+
+        $updateResult = [
+            'newCartItem' => $newCartItem->toArray(),
+            'totalDiscount' => $totalDiscount,
+            'totalGrand' => $totalGrand
+        ];
+
+        return $updateResult;
+
+        }catch(\Exception $e){
+            return false;
+        }
+
     }
 }
