@@ -21,26 +21,43 @@ class ProductController extends Controller
     public function loadProductPromotion(Request $request)
     {
         $products  = $this->productService->loadProductWithVariant($request);
-        $this->sendResponse($products);
+        if ($products) {
+            $this->sendResponse($products);
+        } else {
+            $this->sendResponse();
+        }
     }
 
 
     public function loadProductCatalougePromotion(Request $request)
     {
         $productCatalouges  = $this->productCatalougeService->loadProductCatalouge($request);
-        $this->sendResponse($productCatalouges);
+        if ($productCatalouges) {
+            $this->sendResponse($productCatalouges);
+        } else {
+            $this->sendResponse();
+        }
     }
 
-    public function loadProductWithVariant(Request $request){
+    public function loadProductWithVariant(Request $request)
+    {
         $payload = $request->except('_token');
 
         $product = $this->productService->getProductWithVariant($payload);
-        $this->sendResponse($product);
-
+        if ($product) {
+            $this->sendResponse($product);
+        } else {
+            $this->sendResponse();
+        }
     }
 
-    public function loadProductByVariant(Request $request){
+    public function loadProductByVariant(Request $request)
+    {
         $product  = $this->productService->getProductByVariant($request);
-        $this->sendResponse($product);
+        if ($product) {
+            $this->sendResponse($product);
+        } else {
+            $this->sendResponse();
+        }
     }
 }

@@ -47,14 +47,9 @@ class PromotionService implements PromotionServiceInterface
                 'end_date',
             );
 
-            $payload['discountValue'] = $request['product']['discount'];
-            $payload['discountType'] = $request['product']['discount_type'];
-            $payload['maxDiscountValue'] =  $request['product']['max'];
-
             if (empty($payload['code'])) {
                 $payload['code'] = Str::upper(Str::random(10));
             }
-
             $payload['discount_information']['apply_source'] = $this->getApplySourcePayload($request->input());
             $payload['discount_information']['apply_customer'] = $this->getApplyCustomerPayload($request->input());
 
@@ -63,6 +58,9 @@ class PromotionService implements PromotionServiceInterface
                     $payload['discount_information']['infor'] = $request->input('promotion');
                     break;
                 case PromotionEnum::PRODUCT_SPECIFIC_DISCOUNT:
+                    $payload['discountValue'] = $request['product']['discount'];
+                    $payload['discountType'] = $request['product']['discount_type'];
+                    $payload['maxDiscountValue'] =  $request['product']['max'];
                     $payload['discount_information']['infor'] = $this->getProductInforPayload($request->input());
                     break;
                 default:
@@ -103,10 +101,6 @@ class PromotionService implements PromotionServiceInterface
                 'end_date',
             );
 
-            $payload['discountValue'] = $request['product']['discount'];
-            $payload['discountType'] = $request['product']['discount_type'];
-            $payload['maxDiscountValue'] =  $request['product']['max'];
-
             if(!isset($payload['not_end_time'])){
                $payload['not_end_time'] = null;
             }
@@ -119,6 +113,9 @@ class PromotionService implements PromotionServiceInterface
                     $payload['discount_information']['infor'] = $request->input('promotion');
                     break;
                 case PromotionEnum::PRODUCT_SPECIFIC_DISCOUNT:
+                    $payload['discountValue'] = $request['product']['discount'];
+                    $payload['discountType'] = $request['product']['discount_type'];
+                    $payload['maxDiscountValue'] =  $request['product']['max'];
                     $payload['discount_information']['infor'] = $this->getProductInforPayload($request->input());
                     break;
                 default:

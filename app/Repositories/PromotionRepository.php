@@ -13,7 +13,8 @@ class PromotionRepository implements PromotionRepositoryInterface
         return Promotion::findOrFail($id);
     }
 
-    public function findPivotById($id){
+    public function findPivotById($id)
+    {
         return Promotion::with([
             'languages',
             'productCatalouges',
@@ -44,16 +45,17 @@ class PromotionRepository implements PromotionRepositoryInterface
         return Promotion::create($payload);
     }
 
-    public function SyncRelationPivot($model, $payload = []){
-        if($payload[0]['model'] == PromotionEnum::MODEL_PRODUCT_CATALOUGE){
+    public function SyncRelationPivot($model, $payload = [])
+    {
+        if ($payload[0]['model'] == PromotionEnum::MODEL_PRODUCT_CATALOUGE) {
             return  $model->productCatalouges()->sync($payload);
-        }elseif ($payload[0]['model'] == PromotionEnum::MODEL_PRODUCT){
+        } elseif ($payload[0]['model'] == PromotionEnum::MODEL_PRODUCT) {
             return  $model->products()->sync($payload);
         }
     }
 
     public function update($id, $payload)
-    {  
+    {
         return Promotion::find($id)->update($payload);
     }
 
@@ -85,5 +87,17 @@ class PromotionRepository implements PromotionRepositoryInterface
         $columm = [$payload['field'] => $value];
 
         return Promotion::whereIn('id', $ids)->update($columm);
+    }
+
+    public function getAllPromotionByCartTotal()
+    {
+        $publish = config('app.general.defaultPublish');
+
+        return Promotion::where('publish', '=', $publish)
+            ->where('method', 'order_total_discount')
+            ->where(function ($q) {
+                $q->whereNull('end_date')
+                    ->orWhere('end_date', '>', now());
+            })->get();
     }
 }

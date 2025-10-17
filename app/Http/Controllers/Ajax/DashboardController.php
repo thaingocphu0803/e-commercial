@@ -67,6 +67,10 @@ class DashboardController extends Controller
         }
 
         $modelMenu  = $serviceInstance->paginate($request);
-        $this->sendResponse($modelMenu);
+        if($modelMenu){
+            $this->sendResponse($modelMenu);
+        }else{
+            $this->sendResponse();
+        }
     }
 }

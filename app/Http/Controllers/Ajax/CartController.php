@@ -21,10 +21,13 @@ class CartController extends Controller
         if($result){
             $cart = Cart::instance('shopping')->content();
             $message = __('custom.addCartSuccess');
-            $this->sendResponse($cart, $message);
-        }
-        $this->sendResponse();
 
+            $totalQty = caculate_cart_total($cart, 'qty');
+
+            $this->sendResponse(['totalQty' => $totalQty], $message);
+        }else{
+            $this->sendResponse();
+        }
     }
 
     public function update(Request $request){
@@ -32,7 +35,20 @@ class CartController extends Controller
 
         if($result){
             $this->sendResponse($result);
+        }else{
+            $this->sendResponse();
+
         }
-        $this->sendResponse();
-    }   
+    }
+
+    public function delete (Request $request){
+        $result = $this->cartService->delete($request);
+
+        if($result){
+            $message = __('custom.deleteCartItemSuccess');
+            $this->sendResponse($result, $message);
+        }else{
+            $this->sendResponse();
+        }
+    }
 }

@@ -38,7 +38,9 @@
             toastr.clear();
             toastr.success(result.message, toastTitle[lang]);
 
-            let total = caculate_total_quantity(result.object);
+            let totalQty = result.object.totalQty;
+
+            FUNC.updateCartCount(totalQty);
         });
     };
 
@@ -46,7 +48,7 @@
         $(document).on("input", "#cart_product_quantity", async function () {
             let _this = $(this);
             let parent = _this.parents(".cart-item");
-            let cartId = parent.attr('data-cart-id');
+            let cartItemId = parent.attr("data-cart-id");
 
             let qty = _this.val().replace(/[^0-9]/g, "");
             if (parseInt(qty) > 1000) {
@@ -58,10 +60,10 @@
             _this.val(qty);
 
             let payload = {
-                rowId: cartId,
+                rowId: cartItemId,
                 qty,
-                _token
-            }
+                _token,
+            };
 
             let result = await $.ajax({
                 type: "POST",
@@ -71,28 +73,71 @@
             });
 
             if (result.status === "ng") return;
-
+            let discountCartTotal = result.object.discountCartTotal;
             let newCartItem = result.object.newCartItem;
-            let totalDiscount = result.object.totalDiscount;
-            let totalGrand = result.object.totalGrand;
-            let oldPrice = newCartItem.options.old_price * parseInt(newCartItem.qty);
-            let price = (newCartItem.price) * parseInt(newCartItem.qty);
+            let totalDiscount = result.object.totalDiscount + discountCartTotal;
+            let totalGrand = result.object.totalGrand - discountCartTotal;
+            let totalQty = result.object.totalQty;
+            let price = parseInt(newCartItem.price) * parseInt(newCartItem.qty);
 
-            parent.find('.cart-item-old-price').text(priceFormat(oldPrice));
-            parent.find('.cart-item-price').text(priceFormat(price));
-            $('.cart-total .total-discount .value').text(totalDiscount);
-            $('.cart-total .total-grand .value').text(totalGrand);
+            if (typeof newCartItem.options.old_price !== "undefined") {
+                let oldPrice =
+                    parseInt(newCartItem.options.old_price) *
+                    parseInt(newCartItem.qty);
+                parent.find(".cart-item-old-price").text(priceFormat(oldPrice));
+            }
 
-
+            parent.find(".cart-item-price").text(priceFormat(price));
+            $(".cart-total .total-discount .value").text(`-${priceFormat(totalDiscount)}`);
+            $(".cart-total .total-grand .value").text(`${priceFormat(totalGrand)}`);
+            FUNC.updateCartCount(totalQty);
         });
     };
 
     FUNC.handleDeleteCartItem = () => {
-        $(document).on('click', '.cart-item-trash', function(){
-            let _this =$(this);
-            console.log(1);
-        })
-    }
+        $(document).on("click", ".cart-item-trash", async function () {
+            let _this = $(this);
+            let parent = _this.parents(".cart-item");
+            let cartItemId = parent.attr("data-cart-id");
+
+            let payload = {
+                rowId: cartItemId,
+                _token,
+            };
+
+            let result = await $.ajax({
+                type: "POST",
+                url: "ajax/cart/delete",
+                data: payload,
+                dataType: "json",
+            });
+
+            if (result.status === "ng") return;
+            parent.remove();
+            toastr.clear();
+            toastr.success(result.message, toastTitle[lang]);
+            let discountCartTotal = result.object.discountCartTotal;
+            let totalDiscount = result.object.totalDiscount + discountCartTotal;
+            let totalGrand = result.object.totalGrand - discountCartTotal;
+            let totalQty = result.object.totalQty;
+            FUNC.updateCartCount(totalQty);
+
+            // handle cart UI
+            if(totalQty == 0){
+                $('.cart-total').addClass('hidden');
+                $('.cart-empty-message').removeClass('hidden');
+                return;
+            }
+
+            // caculate total cart information
+            $(".cart-total .total-discount .value").text(`-${priceFormat(totalDiscount)}`);
+            $(".cart-total .total-grand .value").text(`${priceFormat(totalGrand)}`);
+        });
+    };
+
+    FUNC.updateCartCount = (qty) => {
+        $(".header-action-icon-2 .mini-cart-icon .pro-count").text(qty);
+    };
 
     $(document).ready(() => {
         FUNC.addCart();

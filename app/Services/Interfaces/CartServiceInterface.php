@@ -10,5 +10,7 @@ interface CartServiceInterface
 {
     public function create($request);
     public function update($request);
+    public function delete($request);
+    public function getDiscountByCartTotal($cartTotal);
 
 }

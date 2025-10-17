@@ -99,23 +99,26 @@
                             <div class="header-action-icon-2"><a href="#"><img
                                         class="svgInject" alt="{{__('custom.compare')}}"
                                         src="{{asset('frontend/icons/icon-compare.svg')}}"><span
-                                        class="pro-count blue compare-count">1</span></a><a
+                                        class="pro-count blue compare-count">0</span></a><a
                                     href="#"><span class="lable">{{__('custom.compare')}}</span></a>
                             </div>
-                            <div class="header-action-icon-2"><a href="#"><img
+                            <div class="header-action-icon-2">
+                                <a href="#">
+                                    <img
                                         class="svgInject" alt="{{__('custom.wishList')}}"
-                                        src="{{asset('frontend/icons/icon-heart.svg')}}"><span
-                                        class="pro-count blue wishlist-count"> 0 </span></a><a
-                                    href="#"><span class="lable">{{__('custom.wishList')}}</span></a></div>
+                                        src="{{asset('frontend/icons/icon-heart.svg')}}">
+                                        <span class="pro-count blue wishlist-count"> 0 </span>
+                                    </a>
+                                    <a  href="#"><span class="lable">{{__('custom.wishList')}}</span></a>
+                            </div>
                             <div class="header-action-icon-2">
                                 <a class="mini-cart-icon"
                                     href="{{route('cart.index')}}">
                                     <img alt="{{__('custom.cart')}}"
                                         src="{{asset('frontend/icons/icon-cart.svg')}}">
-                                        <span class="pro-count blue">0</span>
+                                        <span class="pro-count blue">{{$totalQty}}</span>
                                     </a>
                                     <a href="{{route('cart.index')}}"><span class="lable">{{__('custom.cart')}}</span></a>
-                                <div class="cart-dropdown-wrap cart-dropdown-hm2 cart-dropdown-panel"><span>{{__('custom.cartEmpty')}}</span></div>
                             </div>
                             <div class="header-action-icon-2"><a
                                     href="#"><img

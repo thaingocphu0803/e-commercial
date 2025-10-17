@@ -49,6 +49,7 @@ class PromotionController extends Controller
 
     public function store(StorePromotionRequest $request)
     {
+        
         Gate::authorize('modules', 'promotion.create');
         if ($this->promotionService->create($request)) {
             return redirect()->route('promotion.index')->with('success',  __('alert.addSuccess', ['attribute'=> __('custom.promotion')]));
@@ -97,5 +98,9 @@ class PromotionController extends Controller
         }
 
         return redirect()->route('promotion.index')->with('error',  __('alert.deleteError', ['attribute'=> __('custom.promotion')]));
+    }
+    
+    public function getPromotionByCartTotal(){
+        
     }
 }
