@@ -108,22 +108,18 @@
                                 </div>
                             </div>
                             <div class="form-body">
-                                @if($cart->isEmpty())
-                                    <div class="row">
+                                    <div class="row cart-empty-message {{ (!$cart->isEmpty()) ? 'hidden' : '' }}">
                                         <div class="col-lg-12 d-flex  justify-content-center">
                                             <span class="text-secondary fs-5">{{ __('custom.cartEmpty') }}</span>
                                         </div>
                                     </div>
-                                @endif
                                 <div class="row">
                                     <x-frontend.cart.item :cart="$cart" />
                                 </div>
                             </div>
                         </div>
 
-                        {{-- total price --}}
-                        @if(!$cart->isEmpty())
-                            <div class="cart-total pt-3 row gap-3">
+                            <div class="cart-total pt-3 row gap-3 {{ ($cart->isEmpty()) ? 'hidden' : '' }}">
                                 <div class=" total-shipcost col-lg-12 d-flex justify-content-between">
                                     <span class="header-title text-uppercase fs-6 text-bold">
                                         {{ __('custom.shipfee') }}:
@@ -135,16 +131,19 @@
                                         {{ __('custom.totalDiscount') }}:
                                     </span>
                                     <span
-                                        class="value fs-5 text-secondary">{{caculate_cart_total($cart, 'discount')}}</span>
+                                        class="value fs-5 text-danger">
+                                        - {{price_format(caculate_cart_total($cart, 'discount', true) + $discountCartTotal)}}
+                                    </span>
                                 </div>
                                 <div class="total-grand col-lg-12 d-flex justify-content-between">
                                     <span class="header-title text-uppercase fs-6 text-bold">
                                         {{ __('custom.grandTotal') }}:
                                     </span>
-                                    <span class="value fs-5 text-secondary">{{caculate_cart_total($cart, 'grand')}}</span>
+                                    <span class="value fs-5 text-secondary">
+                                        {{price_format(caculate_cart_total($cart, 'grand', true) - $discountCartTotal)}}
+                                    </span>
                                 </div>
                             </div>
-                        @endif
 
                     </div>
                 </div>

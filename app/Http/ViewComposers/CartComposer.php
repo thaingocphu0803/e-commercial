@@ -17,8 +17,7 @@ class CartComposer
 
     public function compose(View $view){
         $cart  = Cart::instance('shopping')->content();
-        $totalQty = $cart->count();
-
+        $totalQty = caculate_cart_total($cart, 'qty');
         $view->with(compact('totalQty'));
     }
 }

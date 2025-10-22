@@ -40,4 +40,15 @@ class CartController extends Controller
 
         }
     }
+
+    public function delete (Request $request){
+        $result = $this->cartService->delete($request);
+
+        if($result){
+            $message = __('custom.deleteCartItemSuccess');
+            $this->sendResponse($result, $message);
+        }else{
+            $this->sendResponse();
+        }
+    }
 }

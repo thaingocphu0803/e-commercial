@@ -351,4 +351,6 @@
         'freeship' => 'free ship',
         'totalDiscount' => 'total discount',
         'grandTotal' => 'grand total',
+        'deleteCartItemSuccess' => 'Deleted the cart item successfully.',
+
     ];

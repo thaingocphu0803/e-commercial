@@ -28,4 +28,6 @@ interface PromotionRepositoryInterface
 
     public function findPivotById($id);
 
+    public function getAllPromotionByCartTotal();
+
 }

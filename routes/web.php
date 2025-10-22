@@ -59,6 +59,8 @@ Route::controller(AjaxProductController::class)->prefix('ajax/product')->middlew
 Route::controller(AjaxCartController::class)->prefix('ajax/cart')->middleware(['locale'])->group(function(){
     Route::post('create', 'create')->name('ajax.cart.create');
     Route::post('update', 'update')->name('ajax.cart.update');
+    Route::post('delete', 'delete')->name('ajax.cart.delete');
+
 });
 
 //LanguageController
