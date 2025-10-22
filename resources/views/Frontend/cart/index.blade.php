@@ -5,7 +5,18 @@
 
     <div class="payment-infor page-wrapper">
         <div class="cart-container">
-            <form action="" method="POST">
+
+            @if ($errors->any())
+                <div class="alert alert-danger m-3">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{route('cart.store')}}" method="POST">
                 @csrf
                 <div class="row my-3">
                     <div class="col-lg-7 px-5">
@@ -78,8 +89,8 @@
                                             @foreach (__('module.payment') as $payment)
                                                 <label for="{{ $payment['id'] }}"
                                                     class="form-control d-flex align-items-center gap-4">
-                                                    <input class="radio-input" type="radio" name="customer[payment_method]"
-                                                        id="{{ $payment['id'] }}">
+                                                    <input class="radio-input" type="radio"
+                                                        name="customer[payment_method]" id="{{ $payment['id'] }}">
                                                     <img class="img-icon" src="{{ $payment['img'] }}"
                                                         alt="{{ __('custom.paymentMethod') }}">
                                                     <span>{{ __($payment['title']) }}</span>
@@ -93,7 +104,7 @@
                             {{-- payment button --}}
                             <div class="row mb-3">
                                 <div class="col-lg-12 ">
-                                    <button type="button"
+                                    <button type="submit"
                                         class="btn btn-primary w-100">{{ __('custom.payOrder') }}</button>
                                 </div>
                             </div>
@@ -108,42 +119,42 @@
                                 </div>
                             </div>
                             <div class="form-body">
-                                    <div class="row cart-empty-message {{ (!$cart->isEmpty()) ? 'hidden' : '' }}">
-                                        <div class="col-lg-12 d-flex  justify-content-center">
-                                            <span class="text-secondary fs-5">{{ __('custom.cartEmpty') }}</span>
-                                        </div>
+                                <div class="row cart-empty-message {{ !$cart->isEmpty() ? 'hidden' : '' }}">
+                                    <div class="col-lg-12 d-flex  justify-content-center">
+                                        <span class="text-secondary fs-5">{{ __('custom.cartEmpty') }}</span>
                                     </div>
+                                </div>
                                 <div class="row">
                                     <x-frontend.cart.item :cart="$cart" />
                                 </div>
                             </div>
                         </div>
 
-                            <div class="cart-total pt-3 row gap-3 {{ ($cart->isEmpty()) ? 'hidden' : '' }}">
-                                <div class=" total-shipcost col-lg-12 d-flex justify-content-between">
-                                    <span class="header-title text-uppercase fs-6 text-bold">
-                                        {{ __('custom.shipfee') }}:
-                                    </span>
-                                    <span class="value fs-5 text-secondary">{{ __('custom.freeship') }}</span>
-                                </div>
-                                <div class="total-discount col-lg-12 d-flex justify-content-between">
-                                    <span class="header-title text-uppercase fs-6 text-bold">
-                                        {{ __('custom.totalDiscount') }}:
-                                    </span>
-                                    <span
-                                        class="value fs-5 text-danger">
-                                        - {{price_format(caculate_cart_total($cart, 'discount', true) + $discountCartTotal)}}
-                                    </span>
-                                </div>
-                                <div class="total-grand col-lg-12 d-flex justify-content-between">
-                                    <span class="header-title text-uppercase fs-6 text-bold">
-                                        {{ __('custom.grandTotal') }}:
-                                    </span>
-                                    <span class="value fs-5 text-secondary">
-                                        {{price_format(caculate_cart_total($cart, 'grand', true) - $discountCartTotal)}}
-                                    </span>
-                                </div>
+                        <div class="cart-total pt-3 row gap-3 {{ $cart->isEmpty() ? 'hidden' : '' }}">
+                            <div class=" total-shipcost col-lg-12 d-flex justify-content-between">
+                                <span class="header-title text-uppercase fs-6 text-bold">
+                                    {{ __('custom.shipfee') }}:
+                                </span>
+                                <span class="value fs-5 text-secondary">{{ __('custom.freeship') }}</span>
                             </div>
+                            <div class="total-discount col-lg-12 d-flex justify-content-between">
+                                <span class="header-title text-uppercase fs-6 text-bold">
+                                    {{ __('custom.totalDiscount') }}:
+                                </span>
+                                <span class="value fs-5 text-danger">
+                                    -
+                                    {{ price_format(caculate_cart_total($cart, 'discount', true) + $discountCartTotal) }}
+                                </span>
+                            </div>
+                            <div class="total-grand col-lg-12 d-flex justify-content-between">
+                                <span class="header-title text-uppercase fs-6 text-bold">
+                                    {{ __('custom.grandTotal') }}:
+                                </span>
+                                <span class="value fs-5 text-secondary">
+                                    {{ price_format(caculate_cart_total($cart, 'grand', true) - $discountCartTotal) }}
+                                </span>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
