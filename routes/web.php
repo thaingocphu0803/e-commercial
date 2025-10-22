@@ -42,8 +42,10 @@ use Cloudinary\Transformation\Rotate;
 Route::get('/', [HomeController::class, 'index'])->name('home.index')->middleware('locale');
 
 // CartController
-Route::get('payment', [CartController::class, 'index'])->name('cart.index')->middleware('locale');
-
+Route::controller(CartController::class)->prefix('cart')->middleware(['locale'])->group(function(){
+    Route::get('index', 'index')->name('cart.index');
+    Route::post('store', 'store')->name('cart.store');
+});
 
 // RouteController
 Route::get('{canonical}'. config('app.general.suffix'), [RouterController::class, 'index'])->name('router.index')->where('canonical', '[a-zA-z0-9-]+');

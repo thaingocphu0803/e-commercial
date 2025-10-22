@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCartRequest;
 use App\Repositories\ProvinceRepository;
 use App\Services\CartService;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -24,5 +25,9 @@ class CartController extends Controller
         $cartTotal = caculate_cart_total($cart, 'grand', true);
         $discountCartTotal = $this->cartService->getDiscountByCartTotal($cartTotal);
         return view('Frontend.cart.index', compact('cart', 'provinces', 'discountCartTotal'));
+    }
+
+    public function store(StoreCartRequest $request){
+        echo 1;
     }
 }

@@ -81,8 +81,22 @@
         });
     };
 
+    FUNC.triggerGetDistrict = () => {
+        if(typeof provinceId == 'undefined') return;
+        $('#province_id').val(provinceId).trigger('change');
+    }
+
+    FUNC.triggerGetWard = () => {
+        if(typeof provinceId == 'undefined') return;
+        $('#district_id').val(districtId).trigger('change');
+ 
+    }
+
     $(document).ready(() => {
         FUNC.getDistrict();
         FUNC.getWard();
+        FUNC.triggerGetDistrict();
+        FUNC.triggerGetWard();
+
     });
 })(jQuery);

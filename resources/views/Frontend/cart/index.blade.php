@@ -1,11 +1,22 @@
 <x-frontend.dashboard.layout>
     <x-slot:script>
         <script src="{{ asset('frontend/js/location.js') }}" defer></script>
-    </x-slot:script>
+    </x-slot:script> 
 
     <div class="payment-infor page-wrapper">
         <div class="cart-container">
-            <form action="" method="POST">
+
+            @if ($errors->any())
+                <div class="alert alert-danger m-3">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>+ {{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{route('cart.store')}}" method="POST">
                 @csrf
                 <div class="row my-3">
                     <div class="col-lg-7 px-5">
@@ -30,13 +41,13 @@
                                     <div class="row">
                                         {{-- form input fullname --}}
                                         <div class="col-lg-6">
-                                            <input class="form-control" type="text" name="customer[fullname]"
+                                            <input class="form-control" type="text" name="fullname" value="{{ old('fullname') }}"
                                                 placeholder="{{ __('custom.enterFullName') }}">
                                         </div>
 
                                         {{-- form input phone --}}
                                         <div class="col-lg-6">
-                                            <input class="form-control" type="text" name="customer[phone]"
+                                            <input class="form-control" type="text" name="phone" value="{{ old('phone') }}"
                                                 placeholder="{{ __('custom.enterPhone') }}">
                                         </div>
                                     </div>
@@ -44,7 +55,7 @@
                                     <div class="row">
                                         {{-- form input email --}}
                                         <div class="col-lg-12">
-                                            <input class="form-control" type="email" name="customer[email]"
+                                            <input class="form-control" type="email" name="email" value="{{ old('email') }}"
                                                 placeholder="{{ __('custom.enterEmail') }}">
                                         </div>
                                     </div>
@@ -54,7 +65,7 @@
                                     <div class="row">
                                         {{-- form input note --}}
                                         <div class="col-lg-12">
-                                            <input class="form-control" type="text" name="customer[note]"
+                                            <input class="form-control" type="text" name="note" value="{{ old('note') }}"
                                                 placeholder="{{ __('custom.enterNote') }}">
                                         </div>
                                     </div>
@@ -75,11 +86,13 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             {{-- form payment method radio --}}
-                                            @foreach (__('module.payment') as $payment)
+                                            @foreach (__('module.payment') as $index => $payment)
                                                 <label for="{{ $payment['id'] }}"
                                                     class="form-control d-flex align-items-center gap-4">
-                                                    <input class="radio-input" type="radio" name="customer[payment_method]"
-                                                        id="{{ $payment['id'] }}">
+                                                    <input class="radio-input" type="radio"
+                                                        name="payment_method" id="{{ $payment['id'] }}" value="{{ $payment['id'] }}"
+                                                        {{  old('payment_method', $loop->first ? $payment['id'] : '') == $payment['id'] ? 'checked' : ''}}
+                                                        > 
                                                     <img class="img-icon" src="{{ $payment['img'] }}"
                                                         alt="{{ __('custom.paymentMethod') }}">
                                                     <span>{{ __($payment['title']) }}</span>
@@ -93,7 +106,7 @@
                             {{-- payment button --}}
                             <div class="row mb-3">
                                 <div class="col-lg-12 ">
-                                    <button type="button"
+                                    <button type="submit"
                                         class="btn btn-primary w-100">{{ __('custom.payOrder') }}</button>
                                 </div>
                             </div>
@@ -108,42 +121,42 @@
                                 </div>
                             </div>
                             <div class="form-body">
-                                    <div class="row cart-empty-message {{ (!$cart->isEmpty()) ? 'hidden' : '' }}">
-                                        <div class="col-lg-12 d-flex  justify-content-center">
-                                            <span class="text-secondary fs-5">{{ __('custom.cartEmpty') }}</span>
-                                        </div>
+                                <div class="row cart-empty-message {{ !$cart->isEmpty() ? 'hidden' : '' }}">
+                                    <div class="col-lg-12 d-flex  justify-content-center">
+                                        <span class="text-secondary fs-5">{{ __('custom.cartEmpty') }}</span>
                                     </div>
+                                </div>
                                 <div class="row">
                                     <x-frontend.cart.item :cart="$cart" />
                                 </div>
                             </div>
                         </div>
 
-                            <div class="cart-total pt-3 row gap-3 {{ ($cart->isEmpty()) ? 'hidden' : '' }}">
-                                <div class=" total-shipcost col-lg-12 d-flex justify-content-between">
-                                    <span class="header-title text-uppercase fs-6 text-bold">
-                                        {{ __('custom.shipfee') }}:
-                                    </span>
-                                    <span class="value fs-5 text-secondary">{{ __('custom.freeship') }}</span>
-                                </div>
-                                <div class="total-discount col-lg-12 d-flex justify-content-between">
-                                    <span class="header-title text-uppercase fs-6 text-bold">
-                                        {{ __('custom.totalDiscount') }}:
-                                    </span>
-                                    <span
-                                        class="value fs-5 text-danger">
-                                        - {{price_format(caculate_cart_total($cart, 'discount', true) + $discountCartTotal)}}
-                                    </span>
-                                </div>
-                                <div class="total-grand col-lg-12 d-flex justify-content-between">
-                                    <span class="header-title text-uppercase fs-6 text-bold">
-                                        {{ __('custom.grandTotal') }}:
-                                    </span>
-                                    <span class="value fs-5 text-secondary">
-                                        {{price_format(caculate_cart_total($cart, 'grand', true) - $discountCartTotal)}}
-                                    </span>
-                                </div>
+                        <div class="cart-total pt-3 row gap-3 {{ $cart->isEmpty() ? 'hidden' : '' }}">
+                            <div class=" total-shipcost col-lg-12 d-flex justify-content-between">
+                                <span class="header-title text-uppercase fs-6 text-bold">
+                                    {{ __('custom.shipfee') }}:
+                                </span>
+                                <span class="value fs-5 text-secondary">{{ __('custom.freeship') }}</span>
                             </div>
+                            <div class="total-discount col-lg-12 d-flex justify-content-between">
+                                <span class="header-title text-uppercase fs-6 text-bold">
+                                    {{ __('custom.totalDiscount') }}:
+                                </span>
+                                <span class="value fs-5 text-danger">
+                                    -
+                                    {{ price_format(caculate_cart_total($cart, 'discount', true) + $discountCartTotal) }}
+                                </span>
+                            </div>
+                            <div class="total-grand col-lg-12 d-flex justify-content-between">
+                                <span class="header-title text-uppercase fs-6 text-bold">
+                                    {{ __('custom.grandTotal') }}:
+                                </span>
+                                <span class="value fs-5 text-secondary">
+                                    {{ price_format(caculate_cart_total($cart, 'grand', true) - $discountCartTotal) }}
+                                </span>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -151,4 +164,9 @@
 
         </div>
     </div>
+    <script>
+        let provinceId = '{{old("province") }}';
+        let districtId = '{{old("district") }}';
+        let wardId = '{{old("ward") }}';
+    </script>
 </x-frontend.dashboard.layout>
