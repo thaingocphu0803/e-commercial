@@ -10,7 +10,7 @@
                 <div class="alert alert-danger m-3">
                     <ul>
                         @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
+                            <li>+ {{ $error }}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -41,21 +41,21 @@
                                     <div class="row">
                                         {{-- form input fullname --}}
                                         <div class="col-lg-6">
-                                            <input class="form-control" type="text" name="customer[fullname]"
+                                            <input class="form-control" type="text" name="fullname" value="{{ old('fullname') }}"
                                                 placeholder="{{ __('custom.enterFullName') }}">
                                         </div>
 
                                         {{-- form input phone --}}
                                         <div class="col-lg-6">
-                                            <input class="form-control" type="text" name="customer[phone]"
-                                                placeholder="{{ __('custom.enterPhone') }}">
+                                            <input class="form-control" type="text" name="phone" value="{{ old('phone') }}"
+                                                placeholder="{{ __('custom.enterPhone') }}" data-maxlength="11">
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         {{-- form input email --}}
                                         <div class="col-lg-12">
-                                            <input class="form-control" type="email" name="customer[email]"
+                                            <input class="form-control" type="email" name="email" value="{{ old('email') }}"
                                                 placeholder="{{ __('custom.enterEmail') }}">
                                         </div>
                                     </div>
@@ -65,7 +65,7 @@
                                     <div class="row">
                                         {{-- form input note --}}
                                         <div class="col-lg-12">
-                                            <input class="form-control" type="text" name="customer[note]"
+                                            <input class="form-control" type="text" name="description" value="{{ old('description') }}"
                                                 placeholder="{{ __('custom.enterNote') }}">
                                         </div>
                                     </div>
@@ -86,11 +86,13 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             {{-- form payment method radio --}}
-                                            @foreach (__('module.payment') as $payment)
+                                            @foreach (__('module.payment') as $index => $payment)
                                                 <label for="{{ $payment['id'] }}"
                                                     class="form-control d-flex align-items-center gap-4">
                                                     <input class="radio-input" type="radio"
-                                                        name="customer[payment_method]" id="{{ $payment['id'] }}">
+                                                        name="method" id="{{ $payment['id'] }}" value="{{ $payment['id'] }}"
+                                                        {{  old('payment_method', $loop->first ? $payment['id'] : '') == $payment['id'] ? 'checked' : ''}}
+                                                        >
                                                     <img class="img-icon" src="{{ $payment['img'] }}"
                                                         alt="{{ __('custom.paymentMethod') }}">
                                                     <span>{{ __($payment['title']) }}</span>
@@ -130,6 +132,10 @@
                             </div>
                         </div>
 
+                        @if(!$cart->isEmpty())
+                            <x-frontend.cart.voucher/>
+                        @endif
+
                         <div class="cart-total pt-3 row gap-3 {{ $cart->isEmpty() ? 'hidden' : '' }}">
                             <div class=" total-shipcost col-lg-12 d-flex justify-content-between">
                                 <span class="header-title text-uppercase fs-6 text-bold">
@@ -162,4 +168,9 @@
 
         </div>
     </div>
+    <script>
+        let provinceId = '{{old("province_id", 0)}}';
+        let districtId = '{{old("district_id", 0)}}';
+        let wardId = '{{old("ward_id", 0) }}';
+    </script>
 </x-frontend.dashboard.layout>

@@ -11,7 +11,7 @@
  Target Server Version : 100432 (10.4.32-MariaDB)
  File Encoding         : 65001
 
- Date: 02/10/2025 15:42:47
+ Date: 23/10/2025 16:48:21
 */
 
 SET NAMES utf8mb4;
@@ -1142,10 +1142,10 @@ CREATE TABLE `languages`  (
 -- ----------------------------
 -- Records of languages
 -- ----------------------------
-INSERT INTO `languages` VALUES (1, 'Vietnamese', 'vi', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQwMzc3ODg3L0ltYWdlRm9sZGVyL2pobmlhdGpmMWRjYnA2ZnZpaXpvLnBuZw==', 101, '2025-02-18 07:34:25', '2025-10-01 03:38:25', NULL, 'Vietnam\'s nature language', 2, 1);
-INSERT INTO `languages` VALUES (2, 'English', 'en', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzM5OTM1ODU3L0ltYWdlRm9sZGVyL2I2eWp5ZWl4NW5qcnR1dzd5cXByLnBuZw==', 101, '2025-02-18 07:43:12', '2025-10-01 03:38:25', NULL, 'Bristish\'s nature language', 2, 0);
-INSERT INTO `languages` VALUES (3, 'Japanese', 'ja', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzM5OTM2NTM5L0ltYWdlRm9sZGVyL2c1aDRweHpjb3p3bTZpdXc5dmhrLnBuZw==', 101, '2025-02-19 02:09:50', '2025-10-01 03:38:25', NULL, 'Japanese\'s nature language', 2, 0);
-INSERT INTO `languages` VALUES (7, 'Chinese', 'zh', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQwMzY3MjExL0ltYWdlRm9sZGVyL3pkdWlyZ3E2ZGdjbTJrdnMwN29kLnBuZw==', 101, '2025-02-24 03:20:14', '2025-10-01 03:38:25', NULL, 'China\'s nature language', 2, 0);
+INSERT INTO `languages` VALUES (1, 'Vietnamese', 'vi', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQwMzc3ODg3L0ltYWdlRm9sZGVyL2pobmlhdGpmMWRjYnA2ZnZpaXpvLnBuZw==', 101, '2025-02-18 07:34:25', '2025-10-23 01:31:56', NULL, 'Vietnam\'s nature language', 2, 1);
+INSERT INTO `languages` VALUES (2, 'English', 'en', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzM5OTM1ODU3L0ltYWdlRm9sZGVyL2I2eWp5ZWl4NW5qcnR1dzd5cXByLnBuZw==', 101, '2025-02-18 07:43:12', '2025-10-23 01:31:56', NULL, 'Bristish\'s nature language', 2, 0);
+INSERT INTO `languages` VALUES (3, 'Japanese', 'ja', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzM5OTM2NTM5L0ltYWdlRm9sZGVyL2c1aDRweHpjb3p3bTZpdXc5dmhrLnBuZw==', 101, '2025-02-19 02:09:50', '2025-10-23 01:31:56', NULL, 'Japanese\'s nature language', 2, 0);
+INSERT INTO `languages` VALUES (7, 'Chinese', 'zh', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQwMzY3MjExL0ltYWdlRm9sZGVyL3pkdWlyZ3E2ZGdjbTJrdnMwN29kLnBuZw==', 101, '2025-02-24 03:20:14', '2025-10-23 01:31:56', NULL, 'China\'s nature language', 2, 0);
 
 -- ----------------------------
 -- Table structure for menu_catalouges
@@ -1285,7 +1285,7 @@ CREATE TABLE `migrations`  (
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 208 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 211 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of migrations
@@ -1374,6 +1374,91 @@ INSERT INTO `migrations` VALUES (203, '2025_07_18_041036_create_promotions_table
 INSERT INTO `migrations` VALUES (204, '2025_07_18_043344_create_promotion_product_variant_table', 51);
 INSERT INTO `migrations` VALUES (205, '2025_07_22_062438_add_uuid_to_product_variants_table', 51);
 INSERT INTO `migrations` VALUES (207, '2025_08_25_063630_add_discount_field_to_promotions_table', 52);
+INSERT INTO `migrations` VALUES (208, '2025_10_21_150539_create_orders_table', 53);
+INSERT INTO `migrations` VALUES (209, '2025_10_21_152801_create_order_payment_table', 54);
+INSERT INTO `migrations` VALUES (210, '2025_10_23_032305_add_price_to_order_product_table', 55);
+
+-- ----------------------------
+-- Table structure for order_payment
+-- ----------------------------
+DROP TABLE IF EXISTS `order_payment`;
+CREATE TABLE `order_payment`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `order_id` bigint UNSIGNED NOT NULL,
+  `method_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payment_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payment_detail` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `order_payment_order_id_foreign`(`order_id` ASC) USING BTREE,
+  CONSTRAINT `order_payment_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of order_payment
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for order_product
+-- ----------------------------
+DROP TABLE IF EXISTS `order_product`;
+CREATE TABLE `order_product`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `order_id` bigint UNSIGNED NOT NULL,
+  `product_id` bigint UNSIGNED NOT NULL,
+  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `qty` double NOT NULL,
+  `price_original` double NOT NULL,
+  `option` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `price` double NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `order_product_order_id_foreign`(`order_id` ASC) USING BTREE,
+  CONSTRAINT `order_product_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of order_product
+-- ----------------------------
+INSERT INTO `order_product` VALUES (10, 24, 48, 'e792e5c9-b1ef-59b6-8616-04651f84bb10', 'football | màu đỏ', 1, 11111121, '{\"image\":\"aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzUyNTQ2NTYwL0ltYWdlRm9sZGVyL2hsbzM4OTR6YnVoemp3aDZydTA0LndlYnA=\"}', '2025-10-23 08:11:31', '2025-10-23 08:11:31', 11111121);
+
+-- ----------------------------
+-- Table structure for orders
+-- ----------------------------
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fullname` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `province_id` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `district_id` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `ward_id` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `promotion` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL,
+  `cart` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL,
+  `customer_id` bigint UNSIGNED NULL DEFAULT NULL,
+  `guest_cookie` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `method` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `confirm` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payment` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `delivery` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `shipping_fee` double NOT NULL DEFAULT 0,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of orders
+-- ----------------------------
+INSERT INTO `orders` VALUES (24, '1761207091', 'Ngọc Phú Thái', '0347079502', 'phu123@gmail.com', '96', '964', '32035', '1234 Elm Street', 'Vietnam\'s nature language', '{\"name\":null,\"code\":null,\"start_date\":null,\"end_date\":null,\"discount\":0}', '{\"totalQty\":1,\"totalGrand\":11111121,\"detail\":{\"7efc56f96f28b7eab271afdbf46c2d03\":{\"rowId\":\"7efc56f96f28b7eab271afdbf46c2d03\",\"id\":\"48:e792e5c9-b1ef-59b6-8616-04651f84bb10\",\"name\":\"football | m\\u00e0u \\u0111\\u1ecf\",\"qty\":\"1\",\"price\":11111121,\"weight\":0,\"options\":{\"image\":\"aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzUyNTQ2NTYwL0ltYWdlRm9sZGVyL2hsbzM4OTR6YnVoemp3aDZydTA0LndlYnA=\"},\"discount\":0,\"tax\":2333335.41,\"subtotal\":11111121}}}', NULL, NULL, 'cod', 'pending', 'unpaid', 'pending', 0, NULL, '2025-10-23 08:11:31', '2025-10-23 08:11:31');
 
 -- ----------------------------
 -- Table structure for password_reset_tokens
@@ -1932,7 +2017,7 @@ CREATE TABLE `promotions`  (
   `discountType` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `maxDiscountValue` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of promotions
@@ -1940,6 +2025,8 @@ CREATE TABLE `promotions`  (
 INSERT INTO `promotions` VALUES (2, 'khuyen mai 20/10', 'sale2010', NULL, 'product_specific_discount', '{\"apply_source\":{\"status\":\"specific\",\"data\":[\"2\",\"3\",\"4\"]},\"apply_customer\":{\"status\":\"specific\",\"data\":[\"gender\"],\"condition\":{\"customer_type_gender\":[\"1\",\"2\"]}},\"infor\":{\"min_quantiy\":\"1\",\"max_quantiy\":\"0\",\"discount\":\"3000\",\"discount_type\":\"amount\",\"module_type\":\"Product\",\"object\":{\"name\":[\"iphone | m\\u00e0u \\u0111\\u1ecf-Kim c\\u01b0\\u01a1ng\",\"iphone | m\\u00e0u v\\u00e0ng-Kim c\\u01b0\\u01a1ng\",\"pc gaming | m\\u00e0u \\u0111\\u1ecf-doji-Kim c\\u01b0\\u01a1ng\",\"shirt | default\"],\"variant\":[\"f3648c31-8a6d-5e15-b54c-345da98d00b8\",\"a3f4ac26-2c02-58d7-9518-fdd1377faf45\",\"3fcce2e3-b9de-5b10-8a7a-e7be0d2f3b7d\",null],\"id\":[\"42\",\"42\",\"51\",\"49\"]}}}', 2, 0, NULL, '2025-07-22 07:11:00', '2025-10-01 07:11:00', NULL, '2025-07-22 07:12:24', '2025-10-01 06:53:59', 3000, 'amount', 0);
 INSERT INTO `promotions` VALUES (3, 'khuyen mai 11/11', 'SALE1111', NULL, 'product_specific_discount', '{\"apply_source\":{\"status\":\"specific\",\"data\":[\"4\"]},\"apply_customer\":{\"status\":\"specific\",\"data\":[\"birthday\",\"cusomer_catalouge\"],\"condition\":{\"customer_type_birthday\":[\"0\",\"1\"],\"customer_type_cusomer_catalouge\":[\"1\",\"2\"]}},\"infor\":{\"min_quantiy\":\"100\",\"max_quantiy\":\"0\",\"discount\":\"30\",\"discount_type\":\"percent\",\"module_type\":\"Product\",\"object\":{\"name\":[\"iphone | m\\u00e0u v\\u00e0ng-Kim c\\u01b0\\u01a1ng\"],\"variant\":[\"a3f4ac26-2c02-58d7-9518-fdd1377faf45\"],\"id\":[\"42\"]}}}', 2, 0, NULL, '2025-07-22 07:27:00', '2025-10-01 07:27:00', NULL, '2025-07-22 07:27:55', '2025-10-01 06:54:17', 30, 'percent', 0);
 INSERT INTO `promotions` VALUES (15, 'khuyen mai 12/12', '3ONTHJY5TX', NULL, 'product_specific_discount', '{\"apply_source\":{\"status\":\"all\",\"data\":[]},\"apply_customer\":{\"status\":\"all\",\"data\":[],\"condition\":[]},\"infor\":{\"min_quantiy\":\"10\",\"max_quantiy\":\"400\",\"discount\":\"500\",\"discount_type\":\"amount\",\"module_type\":\"Product\",\"object\":{\"name\":[\"iphone | m\\u00e0u \\u0111\\u1ecf-Kim c\\u01b0\\u01a1ng\",\"iphone | m\\u00e0u v\\u00e0ng-Kim c\\u01b0\\u01a1ng\"],\"variant\":[\"f3648c31-8a6d-5e15-b54c-345da98d00b8\",\"a3f4ac26-2c02-58d7-9518-fdd1377faf45\"],\"id\":[\"42\",\"42\"]}}}', 1, 0, NULL, '2025-09-30 01:21:00', '2025-11-29 01:21:00', NULL, '2025-09-30 01:22:07', '2025-09-30 03:49:44', 500, 'amount', 400);
+INSERT INTO `promotions` VALUES (16, 'Giảm 1 ngàn cho đơn từ 10 ngàn', '84XCBXQNWA', NULL, 'order_total_discount', '{\"apply_source\":{\"status\":\"all\",\"data\":[]},\"apply_customer\":{\"status\":\"all\",\"data\":[],\"condition\":[]},\"infor\":{\"price_from\":[\"10,000\",\"21,000\"],\"price_to\":[\"20,000\",\"30,000\"],\"discount\":[\"1,000\",\"2,000\"],\"discount_type\":[\"amount\",\"amount\"]}}', 1, 0, 'accept', '2025-10-23 04:12:00', NULL, NULL, '2025-10-23 04:14:37', '2025-10-23 04:14:37', NULL, NULL, NULL);
+INSERT INTO `promotions` VALUES (17, 'Giảm 3 ngàn cho đơn từ 10 ngàn', 'CSXCQP9LYC', NULL, 'order_total_discount', '{\"apply_source\":{\"status\":\"all\",\"data\":[]},\"apply_customer\":{\"status\":\"all\",\"data\":[],\"condition\":[]},\"infor\":{\"price_from\":[\"10,000\"],\"price_to\":[\"30,000\"],\"discount\":[\"3,000\"],\"discount_type\":[\"amount\"]}}', 1, 0, 'accept', '2025-10-23 04:14:00', NULL, NULL, '2025-10-23 04:15:25', '2025-10-23 04:16:06', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for provinces
@@ -2099,7 +2186,7 @@ CREATE TABLE `sessions`  (
 -- ----------------------------
 -- Records of sessions
 -- ----------------------------
-INSERT INTO `sessions` VALUES ('x66tTcNB452mAoGNhN5a1rdFmwmNFXIpZgqln83h', 101, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoicVkwOEpHOE5iSk16SGVXdUdHVnl0UzFWcFRneUpHY1FONzc0bkt3NCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozNToiaHR0cDovL2xvY2FsaG9zdDo4MDAwL3Byb2R1Y3QvaW5kZXgiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxMDE7fQ==', 1759394534);
+INSERT INTO `sessions` VALUES ('S9e4SPiSjv2qiatdhmUL5qfoOHtdz60Hi9v7pJPv', 101, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'YTo4OntzOjY6Il90b2tlbiI7czo0MDoieFh2c0xjdEtwT2QzMkNMZFhuQncwZno1Z3dpQ2tlazFpNHY5SDNnVSI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo0NToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2NhcnQvc3VjY2Vzcy8xNzYxMjA3MDkxIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoxMDoiYXBwX2xvY2FsZSI7czoyOiJ2aSI7czo0OiJjYXJ0IjthOjA6e31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxMDE7czoyMjoiUEhQREVCVUdCQVJfU1RBQ0tfREFUQSI7YTowOnt9fQ==', 1761212861);
 
 -- ----------------------------
 -- Table structure for slides

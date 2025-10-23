@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('province_id', 10)->nullable();
             $table->string('district_id', 10)->nullable();
             $table->string('ward_id', 10)->nullable();
-            $table->string('address', 10);
+            $table->string('address');
             $table->text('description')->nullable();
             $table->json('promotion')->nullable();
             $table->json('cart')->nullable();

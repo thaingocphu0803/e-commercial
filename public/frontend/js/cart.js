@@ -29,7 +29,7 @@
 
             let result = await $.ajax({
                 type: "POST",
-                url: "ajax/cart/create",
+                url: "/ajax/cart/create",
                 data: payload,
                 dataType: "json",
             });
@@ -67,7 +67,7 @@
 
             let result = await $.ajax({
                 type: "POST",
-                url: "ajax/cart/update",
+                url: "/ajax/cart/update",
                 data: payload,
                 dataType: "json",
             });
@@ -107,7 +107,7 @@
 
             let result = await $.ajax({
                 type: "POST",
-                url: "ajax/cart/delete",
+                url: "/ajax/cart/delete",
                 data: payload,
                 dataType: "json",
             });
@@ -143,9 +143,20 @@
         $('.header-action-icon-2 .mini-cart-icon .pro-count').text(qty);
     };
 
+    FUNC.handlePhoneInput = () => {
+        $(document).on('input', "input[name='phone']", function(){
+            let _this = $(this);
+            let phone = _this.val().replace(/[^0-9]/g, "");
+            let maxLength = _this.data('maxlength') ?? 11;
+            phone = phone.substring(0,maxLength)
+            _this.val(phone);
+        })
+    }
+
     $(document).ready(() => {
         FUNC.addCart();
         FUNC.handleUpdateCartItem();
         FUNC.handleDeleteCartItem();
+        FUNC.handlePhoneInput();
     });
 })(jQuery);

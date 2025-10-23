@@ -7,11 +7,10 @@
             <div class="list-item d-flex justify-content-between ">
                 <div class="p-2 d-flex flex-column justify-content-start">
                     <div class="item-title text-bold text-secondary text-capitalize">
-                        samsung galaxy
+                        Free ship 10km
                     </div>
                     <div class="item-desc border-top">
-                        samsung galaxy samsung galaxy samsung galaxy samsung samsung galaxy
-                        samsung galaxy samsung galaxy samsung
+                        Free ship from 0₫ around 10km.
                     </div>
                 </div>
                 <button type="button" class="choose-voucher border-start text-capitalize">

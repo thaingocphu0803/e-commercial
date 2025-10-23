@@ -21,7 +21,7 @@
                     </ul>
                 </div>
                 <div class="logo-element">
-                    IN+
+                   TPro
                 </div>
             </li>
             {{-- manage user --}}

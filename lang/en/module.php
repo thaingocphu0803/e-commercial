@@ -128,5 +128,23 @@ return [
             'img' => asset('frontend/imgs/payment/vnpay.webp'),
             'title' => 'custom.payByVNP'
         ],
-    ]
+    ],
+
+    'confirm_stt' => [
+        'pending' => 'Waiting for confirmation',
+        'confirm' => 'Confirmed',
+    ],
+
+    'payment_stt' => [
+        'unpaid' => 'Not yet paid',
+        'paid' => 'Payment completed',
+    ],
+
+    'delivery_stt' => [
+        'pending' => 'Pending delivery',
+        'delivering' => 'In delivery',
+        'success' => 'Delivered',
+    ],
+
+
 ];

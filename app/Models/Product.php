@@ -46,4 +46,17 @@ class Product extends Model
         return $this->belongsToMany(Promotion::class, 'promotion_product_variant', 'product_id', 'promotion_id')
                 ->withPivot('variant_uuid', 'model');
     }
+
+    public function orders() {
+        return $this->belongsToMany(Order::class, 'order_product', 'product_id', 'order_id')
+            ->withPivot(
+                'uuid',
+                'name',
+                'qty',
+                'price',
+                'price_original',
+                'promotion',
+                'option'
+            )->withTimestamps();
+    }
 }

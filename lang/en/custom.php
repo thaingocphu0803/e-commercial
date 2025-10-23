@@ -350,7 +350,15 @@
         'shipfee' => 'shipping fee',
         'freeship' => 'free ship',
         'totalDiscount' => 'total discount',
+        'totalPrice' => 'total price',
         'grandTotal' => 'grand total',
         'deleteCartItemSuccess' => 'Deleted the cart item successfully.',
-        'attrRequired' => ':attribute is required'
+        'attrRequired' => ':attribute is required',
+        'PurchaseOrder' => 'Purchase order',
+        'orderInfor' => 'order Information',
+        'continueShop' => 'Your order has been placed successfully! Continue shopping now!',
+        'date' => 'date',
+        'discountCode' => 'discount code',
+        'customerName' => 'customer name',
+        'customerInfor' => 'customer information'
     ];

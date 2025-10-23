@@ -41,10 +41,11 @@
                 ward_select.html(
                     `<option selected disabled>${addressSelect.ward[lang]}</option>`
                 );
+                console.log("province",province_id);
 
                 districts.forEach((district) => {
                     district_select.append(
-                        `<option value="${district.code}">${district.name}</option>`
+                        `<option value="${district.code}" ${(district.code == districtId) ? 'selected' : ''}>${district.name}</option>`
                     );
                 });
             } catch (err) {
@@ -57,7 +58,7 @@
         // get ward api
         $(document).on("change", "#district_id", async function () {
             let _this = $(this);
-            let district_id = _this.val();
+            let district_id = _this.val() ?? districtId;
             try {
                 const response = await $.ajax({
                     type: "GET",
@@ -72,7 +73,7 @@
 
                 response.forEach((ward) => {
                     ward_select.append(
-                        `<option value="${ward.code}">${ward.name}</option>`
+                        `<option value="${ward.code}" ${(ward.code == wardId) ? 'selected' : ''}>${ward.name}</option>`
                     );
                 });
             } catch (err) {
@@ -81,8 +82,20 @@
         });
     };
 
+    FUNC.triggerGetDistrict = () => {
+        if(provinceId == 0) return;
+        $('#province_id').trigger('change');
+    }
+
+    FUNC.triggerGetWard = () => {
+        if(districtId == 0) return;
+        $('#district_id').trigger('change');
+    }
+
     $(document).ready(() => {
         FUNC.getDistrict();
         FUNC.getWard();
+        FUNC.triggerGetDistrict();
+        FUNC.triggerGetWard();
     });
 })(jQuery);

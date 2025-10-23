@@ -60,7 +60,7 @@ class AppServiceProvider extends ServiceProvider
 
         'App\Repositories\Interfaces\CustomerCatalougeRepositoryInterface' => 'App\Repositories\CustomerCatalougeRepository',
 
-        'App\Repositories\Interfaces\CartRepositoryInterface' => 'App\Repositories\CartRepository',
+        'App\Repositories\Interfaces\OrderRepositoryInterface' => 'App\Repositories\OrderRepository',
 
     ];
 

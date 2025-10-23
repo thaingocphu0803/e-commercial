@@ -23,12 +23,11 @@
         <div>
             <div>
 
-                <h1 class="logo-name">IN+</h1>
+                <h1 class="logo-name">TPro</h1>
 
             </div>
-            <h3>Welcome to IN+</h3>
+            <h3>Welcome to TPro</h3>
             <p>Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
-                <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
             </p>
             <p>Login in. To see it in action.</p>
             <form class="m-t" role="form" action="{{ route('auth.login') }}" method="POST">

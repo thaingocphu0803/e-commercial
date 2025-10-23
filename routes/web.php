@@ -30,11 +30,9 @@ use App\Http\Controllers\Backend\PromotionController;
 use App\Http\Controllers\Backend\SlideController;
 use App\Http\Controllers\Backend\SourceController;
 use App\Http\Controllers\Backend\SystemController;
-use App\Http\Controllers\Fontend\ProductController as FontendProductController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\RouterController;
-use Cloudinary\Transformation\Rotate;
 
 /** FONTEND ROUTES */
 
@@ -45,6 +43,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index')->middlewar
 Route::controller(CartController::class)->prefix('cart')->middleware(['locale'])->group(function(){
     Route::get('index', 'index')->name('cart.index');
     Route::post('store', 'store')->name('cart.store');
+    Route::get('success/{code}', 'success')->name('cart.success');
 });
 
 // RouteController
