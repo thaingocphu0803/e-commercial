@@ -143,9 +143,18 @@
         $('.header-action-icon-2 .mini-cart-icon .pro-count').text(qty);
     };
 
+    FUNC.handlePhoneInput = () => {
+        $(document).on('input', "input[name='phone']", function(){
+            let _this = $(this);
+            let phone = _this.val().replace(/[^0-9]/g, "");            
+            _this.val(phone);
+        })
+    }
+
     $(document).ready(() => {
         FUNC.addCart();
         FUNC.handleUpdateCartItem();
         FUNC.handleDeleteCartItem();
+        FUNC.handlePhoneInput();
     });
 })(jQuery);

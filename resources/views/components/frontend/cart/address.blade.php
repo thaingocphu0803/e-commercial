@@ -5,20 +5,20 @@
 <div class="row">
     {{-- form input city --}}
     <div class="col-lg-4">
-        <select id="province_id" name="customer[province]" class="nice-select form-select">
-            <option disabled selected>
+        <select id="province_id" name="province" class="nice-select form-select">
+            <option disabled selected value="0">
                 {{ __('custom.chooseObject', ['attribute' => __('custom.city')]) }}
             </option>
             @foreach ($provinces as $province)
-                <option value="{{ $province->code }}">{{ $province->name }}</option>
+                <option value="{{ $province->code }}" {{ ($province->code == old('province')) ? 'selected' : '' }}>{{ $province->name }}</option>
             @endforeach
         </select>
     </div>
 
     {{-- form input district --}}
     <div class="col-lg-4">
-        <select id="district_id" name="customer[district]" class="nice-select form-select">
-            <option disabled selected>
+        <select id="district_id" name="district" class="nice-select form-select">
+            <option disabled selected value="0">
                 {{ __('custom.chooseObject', ['attribute' => __('custom.district')]) }}
             </option>
         </select>
@@ -26,8 +26,8 @@
 
     {{-- form input ward --}}
     <div class="col-lg-4">
-        <select id="ward_id" name="customer[ward]" class="nice-select form-select">
-            <option disabled selected>
+        <select id="ward_id" name="ward" class="nice-select form-select">
+            <option disabled selected value="0">
                 {{ __('custom.chooseObject', ['attribute' => __('custom.ward')]) }}
             </option>
 
@@ -38,6 +38,6 @@
 <div class="row">
     {{-- form input address --}}
     <div class="col-lg-12">
-        <input class="form-control" type="text" name="customer[address]" placeholder="123 Pham Ngu Lao">
+        <input class="form-control" type="text" name="address" placeholder="123 Pham Ngu Lao" value="{{ old('address') }}">
     </div>
 </div>

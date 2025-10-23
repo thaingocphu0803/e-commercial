@@ -22,20 +22,10 @@ class StoreCartRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'customer.fullname' => 'required',
-            'customer.phone' => 'required',
-            'customer.email' => 'required|email',
-            'customer.address' => 'required',
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'customer.fullname.required' => __('custom.attrRequired', [':attribute' => __('custom.fullname')]),
-            'customer.phone.required' => __('custom.attrRequired', [':attribute' => __('custom.phone')]),
-            'customer.email.required' => __('custom.attrRequired', [':attribute' => __('custom.email')]),
-            'customer.address.required' => __('custom.attrRequired', [':attribute' => __('custom.address')]),
+            'fullname' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email',
+            'address' => 'required',
         ];
     }
 }
