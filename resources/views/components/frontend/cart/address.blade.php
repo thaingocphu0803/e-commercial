@@ -5,7 +5,7 @@
 <div class="row">
     {{-- form input city --}}
     <div class="col-lg-4">
-        <select id="province_id" name="province_id" class="nice-select form-select">
+        <select id="province_id" name="province" class="nice-select form-select">
             <option disabled selected value="0">
                 {{ __('custom.chooseObject', ['attribute' => __('custom.city')]) }}
             </option>
@@ -17,7 +17,7 @@
 
     {{-- form input district --}}
     <div class="col-lg-4">
-        <select id="district_id" name="district_id" class="nice-select form-select">
+        <select id="district_id" name="district" class="nice-select form-select">
             <option disabled selected value="0">
                 {{ __('custom.chooseObject', ['attribute' => __('custom.district')]) }}
             </option>
