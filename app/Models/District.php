@@ -21,4 +21,7 @@ class District extends Model
     public function users(){
         return $this->hasMany(User::class, 'district_id', 'code');
     }
+    public function orders(){
+        return $this->hasMany(Order::class, 'district_id', 'code');
+    }
 }

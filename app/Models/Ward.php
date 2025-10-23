@@ -17,4 +17,7 @@ class Ward extends Model
     public function users(){
         return $this->hasMany(User::class, 'ward_id', 'code');
     }
+    public function orders(){
+        return $this->hasMany(Order::class, 'ward_id', 'code');
+    }
 }

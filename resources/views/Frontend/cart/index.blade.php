@@ -90,7 +90,7 @@
                                                 <label for="{{ $payment['id'] }}"
                                                     class="form-control d-flex align-items-center gap-4">
                                                     <input class="radio-input" type="radio"
-                                                        name="payment_method" id="{{ $payment['id'] }}" value="{{ $payment['id'] }}"
+                                                        name="method" id="{{ $payment['id'] }}" value="{{ $payment['id'] }}"
                                                         {{  old('payment_method', $loop->first ? $payment['id'] : '') == $payment['id'] ? 'checked' : ''}}
                                                         >
                                                     <img class="img-icon" src="{{ $payment['img'] }}"

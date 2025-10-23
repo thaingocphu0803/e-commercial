@@ -6,18 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCartRequest;
 use App\Repositories\ProvinceRepository;
 use App\Services\CartService;
-use Flasher\Laravel\Http\Request;
+use App\Services\OrderService;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartController extends Controller
 {   private $provinceRepository;
     private $cartService;
+    private $orderService;
     public function __construct(
         ProvinceRepository $provinceRepository,
-        CartService $cartService
+        CartService $cartService,
+        OrderService $orderService
     ){
         $this->provinceRepository = $provinceRepository;
         $this->cartService = $cartService;
+        $this->orderService = $orderService;
     }
 
     public function index(){
@@ -39,7 +42,8 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('error', __('alert.addError', ['attribute'=> __('custom.PurchaseOrder')]));
     }
 
-    public function success(Request $request){
-        return view('Frontend.cart.success');
+    public function success($code){
+        $order = $this->orderService->findById($code);
+        return view('Frontend.cart.success', compact('order'));
     }
 }

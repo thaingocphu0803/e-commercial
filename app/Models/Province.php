@@ -17,4 +17,8 @@ class Province extends Model
     public function users(){
         return $this->hasMany(User::class, 'province_id', 'code');
     }
+
+    public function orders(){
+        return $this->hasMany(Order::class, 'province_id', 'code');
+    }
 }
