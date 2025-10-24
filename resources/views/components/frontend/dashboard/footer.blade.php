@@ -46,7 +46,7 @@
             </div>
             <div class="col-xl-4 col-lg-6 text-center d-none d-xl-block">
                 <div class="hotline d-lg-inline-flex w-full align-items-center justify-content-center"><img
-                        src="https://nest.botble.com/themes/nest/imgs/theme/icons/phone-call.svg" alt="hotline">
+                        src="{{asset('frontend/icons/phone-call.svg')}}" alt="{{__('custom.hotline')}}">
                     <p>{{$system['contact_phone']}} <span>{{__('custom.supportCenter')}}</span></p>
                 </div>
             </div>

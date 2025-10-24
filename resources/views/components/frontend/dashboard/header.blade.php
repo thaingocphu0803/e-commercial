@@ -62,7 +62,7 @@
                 <div class="logo logo-width-1"><a href="{{route('home.index')}}"><img
                             src="{{base64_decode($system['homepage_logo'])}}" data-bb-lazy="false" width="100px" height="100px"
                             class="page_speed_990213890"
-                            alt="tpro logo"></a></div>
+                            alt="{{$system['seo_title_seo']}}"></a></div>
                 <div class="header-right">
                     <div class="search-style-2">
                         <form action="" class="form--quick-search"
@@ -177,8 +177,8 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="more_categories" data-text-show-more="Cho xem nhiều hơn..."
-                                data-text-show-less="Hiện ít hơn...">
+                            <div class="more_categories" data-text-show-more="{{__('custom.seeMore')}}"
+                                data-text-show-less="{{__('custom.seeLess')}}">
                                 <span class="icon"></span>
                                 <span class="heading-sm-1">{{__('custom.seeMore')}}</span>
                             </div>
@@ -205,14 +205,13 @@
                         <div class="header-action-icon-2"><a href="#"><img
                                     alt="{{__('custom.wishList')}}"
                                     src="{{asset('frontend/icons/icon-heart.svg')}}"><span
-                                    class="pro-count white wishlist-count"> 2 </span></a></div>
+                                    class="pro-count white wishlist-count"> 0 </span></a></div>
                         <div class="header-action-icon-2">
                             <a class="mini-cart-icon" href="{{route('cart.index')}}"><img
                                 alt="{{__('custom.cart')}}"
                                 src="{{asset('frontend/icons/icon-cart.svg')}}">
-                                <span class="pro-count white">0</span>
+                                <span class="pro-count white">{{$totalQty}}</span>
                             </a>
-                            <div class="cart-dropdown-wrap cart-dropdown-hm2 cart-dropdown-panel"><span>{{__('custom.cartEmpty')}}</span></div>
                         </div>
                     </div>
                 </div>

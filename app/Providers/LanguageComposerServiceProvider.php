@@ -30,5 +30,10 @@ class LanguageComposerServiceProvider extends ServiceProvider
             $languages = Language::all();
             $view->with('languages', $languages);
         });
+
+        View::composer('components.frontend.dashboard.mobile.header', function ($view) {
+            $languages = Language::all();
+            $view->with('languages', $languages);
+        });
     }
 }

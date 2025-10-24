@@ -24,6 +24,8 @@ class MenuComposerServiceProvider extends ServiceProvider
 
         view()->composer('components.frontend.dashboard.header', MenuComposer::class);
 
+        view()->composer('components.frontend.dashboard.mobile.header', MenuComposer::class);
+
         view()->composer('components.frontend.dashboard.footer', MenuComposer::class);
     }
 }
