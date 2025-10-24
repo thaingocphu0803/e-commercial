@@ -13,21 +13,69 @@ class OrderService implements OrderServiceInterface
 {
     private $orderRepository;
 
-    public function __construct(OrderRepository $orderRepository){
+    public function __construct(OrderRepository $orderRepository)
+    {
         $this->orderRepository = $orderRepository;
     }
 
-    public function findById($code){
+    public function findById($code)
+    {
         $order =  $this->orderRepository->findById($code);
 
         $orderData['code'] = $order->code;
-        $orderData['created_at'] = $order->created_at;
-        $orderData['shipping_fee'] = $order->shipping_fee;
+        $orderData['created_at'] = $order->created_at->format('Y/m/d H:i:s');
         $orderData['customer_phone'] = $order->phone;
         $orderData['customer_name'] = $order->fullname;
+        $orderData['customer_email'] = $order->email;
+        $orderData['customer_address'] = $this->formatAddress($order);
+        $orderData['customer_method'] = $order->method;
+        $orderData['shipping_fee'] = $order->shipping_fee;
+        $orderData['total_price_original'] = $this->caculatePriceOriginal($order->products);
+        $orderData['total_discount'] = $this->caculateOrderDiscount($order);
         $orderData['total_grand'] = $order->cart['totalGrand'];
+        $orderData['cart_discount_code'] = $order->promotion['code'];
+        $orderData['products'] = $this->getOrderProduct($order->products);
 
+        return $orderData;
+    }
 
-        dd($order, $orderData);
+    private function formatAddress($order)
+    {
+
+        $full_address = array_filter([
+            $order->address,
+            $order->ward->name ?? null,
+            $order->district->name ?? null,
+            $order->province->name ?? null,
+        ]);
+
+        return implode(', ', $full_address);
+    }
+
+    private function caculateOrderDiscount($order){
+        $product_discount = floatval($order->cart['totalDiscount']);
+        $cart_discount = floatval($order->promotion['discount']);
+
+        return $product_discount + $cart_discount;
+    }
+
+    private function getOrderProduct($products){
+        $temps = [];
+
+        foreach($products->pluck('pivot') as $product){
+            $temps[] = [
+                'name' => $product->name,
+                'qty' => $product->qty,
+                'price' => $product->price,
+                'price_original' => $product->price_original
+            ];
+        }
+
+        return $temps;
+    }
+
+    public function caculatePriceOriginal($products){
+        $price_originals = $products->pluck('pivot.price_original');
+        return $price_originals->sum();
     }
 }

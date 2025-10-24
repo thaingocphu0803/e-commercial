@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AuthenticateMiddleware;
+use App\Http\Middleware\CartMiddleware;
 use App\Http\Middleware\LoginMiddleware;
 use App\Http\Middleware\SetLocale;
 use Illuminate\Foundation\Application;
@@ -17,7 +18,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => AuthenticateMiddleware::class,
             'login' => LoginMiddleware::class,
-            'locale' => SetLocale::class
+            'locale' => SetLocale::class,
+            'cart' => CartMiddleware::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

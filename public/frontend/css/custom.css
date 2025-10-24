@@ -141,6 +141,7 @@
 .modal-product-image > .image-list > .list-item.active {
     border: 1px solid var(--color-secondary);
     border-radius: 5px;
+    padding: 2px;
 }
 
 .img-cover {

@@ -1,3 +1,8 @@
+@php
+    $paymentMethod = collect(__('module.payment'));
+    $method = $paymentMethod->firstWhere('id', $order['customer_method']);
+@endphp
+
 <x-frontend.dashboard.layout>
     <div class="success-container">
         {{-- order infor --}}
@@ -23,78 +28,73 @@
                     <div class="body-title">
                         <div class="d-flex justify-content-center">
                             <span class="title-code text-uppercase fs-6 text-bold">
-                                {{ __('custom.PurchaseOrder') . ' #111111' }}
+                                {{ __('custom.PurchaseOrder') ." #". $order['code'] }}
                             </span>
                         </div>
                         <span
-                            class="fs-6 text-secondary fst-italic text-capitalize text-bold">{{ __('custom.date') . ': 2025/11/11' }}</span>
+                            class="fs-6 text-secondary fst-italic text-capitalize text-bold">{{ __('custom.date') .' '. $order['created_at'] }}</span>
                     </div>
 
                     {{-- body  table --}}
                     <table class="table table-hover text-center">
                         <thead>
                             <tr class="table-success">
-                                <th class="text-capitalize">name</th>
-                                <th class="text-capitalize">amount</th>
-                                <th class="text-capitalize">price</th>
-                                <th class="text-capitalize">purchase price</th>
+                                <th class="text-capitalize">{{ __('custom.name') }}</th>
+                                <th class="text-capitalize">{{ __('custom.qty') }}</th>
+                                <th class="text-capitalize">{{ __('custom.purchasePrice') }}</th>
+                                <th class="text-capitalize">{{ __('custom.originalPrice') }}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="table-secondary">
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                            </tr>
-                            <tr class="table-secondary">
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                            </tr>
+                            @foreach ($order['products'] as $product)
+                                <tr class="table-secondary">
+                                    <td>{{$product['name']}}</td>
+                                    <td>{{intval($product['qty'])}}</td>
+                                    <td>{{price_format($product['price'])}}</td>
+                                    <td>{{price_format($product['price_original'])}}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
 
                     {{-- body discount --}}
                     <div class="body-discount d-flex justify-content-between">
                         <span class="discount-title text-secondary fs-6 text-bold text-capitalize">
-                            {{__('custom.discountCode')}}:
+                            {{ __('custom.discountCode') }}:
                         </span>
-                        <span class="discount-code text-secondary">#SSSSSSSSSXXSS</span>
+                        <span class="discount-code text-secondary">{{$order['cart_discount_code']}}</span>
                     </div>
 
                     {{-- body total price --}}
                     <div class="body-total-price d-flex justify-content-between">
                         <span class="total-price-title text-secondary fs-6 text-bold text-capitalize">
-                            {{__('custom.totalPrice')}}:
+                            {{ __('custom.totalPrice') }}:
                         </span>
-                        <span class="total-price-value text-secondary">#SSSSSSSSSXXSS</span>
+                        <span class="total-price-value text-secondary">{{price_format($order['total_price_original'])}}</span>
                     </div>
 
                     {{-- body total-discount --}}
                     <div class="body-total-discount d-flex justify-content-between">
                         <span class="total-discount-title text-secondary fs-6 text-bold text-capitalize">
-                            {{__('custom.totalDiscount')}}:
+                            {{ __('custom.totalDiscount') }}:
                         </span>
-                        <span class="total-discount-value text-secondary">#SSSSSSSSSXXSS</span>
+                        <span class="total-discount-value text-secondary">{{price_format($order['total_discount'])}}</span>
                     </div>
 
                     {{-- body shipping fee --}}
                     <div class="body-shipping-fee d-flex justify-content-between">
                         <span class="shipping-fee-title text-secondary fs-6 text-bold text-capitalize">
-                            {{__('custom.shipfee')}}:
+                            {{ __('custom.shipfee') }}:
                         </span>
-                        <span class="shipping-fee-value text-secondary">#SSSSSSSSSXXSS</span>
+                        <span class="shipping-fee-value text-secondary">{{price_format($order['shipping_fee'])}}</span>
                     </div>
-
 
                     {{-- body total grand --}}
                     <div class="body-total-grand d-flex justify-content-between">
                         <span class="total-grand-title text-dark fs-5 text-bold text-capitalize">
-                            {{__('custom.grandTotal')}}:
+                            {{ __('custom.grandTotal') }}:
                         </span>
-                        <span class="total-grand-value text-dark fs-5 text-bold">#SSSSSSSSSXXSS</span>
+                        <span class="total-grand-value text-dark fs-5 text-bold">{{price_format($order['total_grand'])}}</span>
                     </div>
                 </div>
             </div>
@@ -106,7 +106,8 @@
                 {{-- customer header --}}
                 <div class="customer-header">
                     <div class="d-flex justify-content-center">
-                        <span class="header-title text-uppercase fs-5 text-bold">{{ __('custom.customerInfor') }}</span>
+                        <span
+                            class="header-title text-uppercase fs-5 text-bold">{{ __('custom.customerInfor') }}</span>
                     </div>
                 </div>
                 {{-- customer body --}}
@@ -114,42 +115,42 @@
                     {{-- body name --}}
                     <div class="body-name d-flex justify-content-between">
                         <span class="name-title text-secondary fs-6 text-bold text-capitalize">
-                            {{__('custom.customerName')}}:
+                            {{ __('custom.customerName') }}:
                         </span>
-                        <span class="name-value text-secondary">#SSSSSSSSSXXSS</span>
+                        <span class="name-value text-secondary">{{$order['customer_name']}}</span>
                     </div>
 
                     {{-- body email --}}
                     <div class="body-email d-flex justify-content-between">
                         <span class="email-title text-secondary fs-6 text-bold text-capitalize">
-                            {{__('custom.email')}}:
+                            {{ __('custom.email') }}:
                         </span>
-                        <span class="email-value text-secondary">#SSSSSSSSSXXSS</span>
+                        <span class="email-value text-secondary">{{$order['customer_email']}}</span>
                     </div>
 
                     {{-- body address --}}
                     <div class="body-address d-flex justify-content-between">
                         <span class="address-title text-secondary fs-6 text-bold text-capitalize">
-                            {{__('custom.address')}}:
+                            {{ __('custom.address') }}:
                         </span>
-                        <span class="address-value text-secondary">#SSSSSSSSSXXSS</span>
+                        <span class="address-value text-secondary">{{$order['customer_address']}}</span>
                     </div>
 
                     {{-- body phone --}}
                     <div class="body-phone d-flex justify-content-between">
                         <span class="phone-title text-secondary fs-6 text-bold text-capitalize">
-                            {{__('custom.phone')}}:
+                            {{ __('custom.phone') }}:
                         </span>
-                        <span class="phone-value text-secondary">#SSSSSSSSSXXSS</span>
+                        <span class="phone-value text-secondary">{{$order['customer_phone']}}</span>
                     </div>
 
 
                     {{-- body payment-method --}}
                     <div class="body-payment-method d-flex justify-content-between">
                         <span class="payment-method-title text-secondary fs-6 text-bold text-capitalize">
-                            {{__('custom.paymentMethod')}}:
+                            {{ __('custom.paymentMethod') }}:
                         </span>
-                        <span class="payment-method-value text-secondary fs-6">#SSSSSSSSSXXSS</span>
+                        <span class="payment-method-value text-secondary fs-6">{{__($method['title'])}}</span>
                     </div>
                 </div>
             </div>

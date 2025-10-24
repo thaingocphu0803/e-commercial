@@ -40,7 +40,7 @@ use App\Http\Controllers\Frontend\RouterController;
 Route::get('/', [HomeController::class, 'index'])->name('home.index')->middleware('locale');
 
 // CartController
-Route::controller(CartController::class)->prefix('cart')->middleware(['locale'])->group(function(){
+Route::controller(CartController::class)->prefix('cart')->middleware(['locale', 'cart'])->group(function(){
     Route::get('index', 'index')->name('cart.index');
     Route::post('store', 'store')->name('cart.store');
     Route::get('success/{code}', 'success')->name('cart.success');
@@ -59,8 +59,8 @@ Route::controller(AjaxProductController::class)->prefix('ajax/product')->middlew
 // Ajax CartController
 Route::controller(AjaxCartController::class)->prefix('ajax/cart')->middleware(['locale'])->group(function(){
     Route::post('create', 'create')->name('ajax.cart.create');
-    Route::post('update', 'update')->name('ajax.cart.update');
-    Route::post('delete', 'delete')->name('ajax.cart.delete');
+    Route::post('update', 'update')->name('ajax.cart.update')->middleware(['cart']);
+    Route::post('delete', 'delete')->name('ajax.cart.delete')->middleware(['cart']);
 
 });
 

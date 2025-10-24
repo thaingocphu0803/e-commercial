@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCartRequest;
+use App\Mail\Order;
 use App\Repositories\ProvinceRepository;
 use App\Services\CartService;
 use App\Services\OrderService;
@@ -44,6 +45,7 @@ class CartController extends Controller
 
     public function success($code){
         $order = $this->orderService->findById($code);
+
         return view('Frontend.cart.success', compact('order'));
     }
 }

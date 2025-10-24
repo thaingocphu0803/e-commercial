@@ -360,5 +360,8 @@
         'date' => 'date',
         'discountCode' => 'discount code',
         'customerName' => 'customer name',
-        'customerInfor' => 'customer information'
+        'customerInfor' => 'customer information',
+        'qty' => 'quantity',
+        'purchasePrice' => 'purchase price',
+        'originalPrice' => 'original price',
     ];

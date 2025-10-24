@@ -126,6 +126,7 @@
             if(totalQty == 0){
                 $('.cart-total').addClass('hidden');
                 $('.cart-empty-message').removeClass('hidden');
+                $('.cart-voucher').addClass('hidden');
                 return;
             }
 

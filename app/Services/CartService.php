@@ -226,12 +226,14 @@ class CartService implements CartServiceInterface
         $cart = Cart::instance('shopping')->content();
         $totalGrand =  caculate_cart_total($cart, 'grand', true);
         $totalQty = caculate_cart_total($cart, 'qty');
+        $totalDiscount = caculate_cart_total($cart, 'discount', true);
         $objectCartDiscount = $this->getDiscountByCartTotal($totalGrand);
         $payload = $request->except('_token');
         $payload['code'] = time();
         $payload['cart'] = [
             'totalQty' =>  $totalQty,
             'totalGrand' => $totalGrand,
+            'totalDiscount' => $totalDiscount,
             'detail' => $cart->toArray()
         ];
 

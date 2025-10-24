@@ -79,5 +79,55 @@ return [
             ];
         }, range(1, 30))
     ],
+    'sort_by' => [
+        'price_hl' => '价格：从高到低',
+        'price_lh' => '价格：从低到高',
+        'name_az' => '名称：A → Z',
+        'name_za' => '名称：Z → A',
+    ],
+
+    'payment' => [
+        [
+            'id' => 'cod',
+            'img' => asset('frontend/imgs/payment/cod.webp'),
+            'title' => 'custom.payByCOD'
+        ],
+        [
+            'id' => 'zalopay',
+            'img' => asset('frontend/imgs/payment/zalopay.webp'),
+            'title' => 'custom.payByZalo'
+        ],
+        [
+            'id' => 'momo',
+            'img' => asset('frontend/imgs/payment/momo.webp'),
+            'title' => 'custom.payByMomo'
+        ],
+        [
+            'id' => 'shopee',
+            'img' => asset('frontend/imgs/payment/shopeepay.webp'),
+            'title' => 'custom.payByShopee'
+        ],
+        [
+            'id' => 'vnpay',
+            'img' => asset('frontend/imgs/payment/vnpay.webp'),
+            'title' => 'custom.payByVNP'
+        ],
+    ],
+
+    'confirm_stt' => [
+        'pending' => '待确认',
+        'confirm' => '已确认',
+    ],
+
+    'payment_stt' => [
+        'unpaid' => '未付款',
+        'paid' => '已付款',
+    ],
+
+    'delivery_stt' => [
+        'pending' => '待发货',
+        'delivering' => '配送中',
+        'success' => '已送达',
+    ],
 
 ];
