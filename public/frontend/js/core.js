@@ -437,17 +437,7 @@
                 slidesToShow: 1
             }
         }]
-    }),
-    s(".categories-button-active").on("click", (function(e) {
-        if (e.preventDefault(),
-        a.find(".categories-button-active").hasClass("cant-close") && !i.hasClass("stick"))
-            return !1;
-        s(this).hasClass("open") ? (s(this).removeClass("open"),
-        s(this).siblings(".categories-dropdown-active-large").removeClass("open"),
-        a.find(".categories-button-active").hasClass("cant-close") || s(this).siblings(".categories-dropdown-active-large").removeClass("default-open")) : (s(this).addClass("open"),
-        s(this).siblings(".categories-dropdown-active-large").addClass("open"))
-    }
-    ));
+    });
     var n, d, c, p = s(".pagingInfo"), u = s(".testimonial-active-2");
     if (u.on("init reInit afterChange", (function(s, e, i) {
         var t = (i || 0) + 1;

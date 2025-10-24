@@ -15,7 +15,7 @@ class AuthenController extends Controller
     }
 
     public function index(){
-
+        
         return view('Backend.auth.login');
     }
 

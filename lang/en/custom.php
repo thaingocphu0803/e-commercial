@@ -293,7 +293,7 @@
         'send' => 'send',
         'searchForCatalouge' => 'search for catalouges...',
         'browseAllCategory' => 'Browse All Category',
-        'seeMore' => 'See More...',
+        'seeMore' => 'See more...',
         'quickview' => 'Quick view',
         'compare' => 'Compare',
         'addWishList' => 'Add to wish list',
@@ -364,4 +364,9 @@
         'qty' => 'quantity',
         'purchasePrice' => 'purchase price',
         'originalPrice' => 'original price',
+        //2025/10/24
+        'seeLess' => 'See less...',
+        'contact' => 'contact',
+        'faq' => 'FAQ',
+        
     ];

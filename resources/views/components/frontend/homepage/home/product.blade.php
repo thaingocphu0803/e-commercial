@@ -59,7 +59,7 @@
                                 <a href="{{write_url($product->product_catalouge_canonical, true, true)}}">{{ $product->product_catalouge_name }}</a>
                             </div>
                             <h2 class="text-truncate">
-                                <a href="https://nest.botble.com/vi/products/seeds-of-change-organic-quinoe">
+                                <a href="{{$product->product_canonical . config('app.general.suffix')}}" class="link-to-product">
                                     {{ $product->product_name }}
                                 </a>
                             </h2>

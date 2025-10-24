@@ -16,8 +16,10 @@ class LoginMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::id() > 0){
+        if(Auth::id() > 0 && !$request->routeIs('auth.admin')){
             return redirect()->back();
+        }elseif(Auth::id() && $request->routeIs('auth.admin')){
+            return redirect()->route('dashboard.index');
         }
 
         return $next($request);
