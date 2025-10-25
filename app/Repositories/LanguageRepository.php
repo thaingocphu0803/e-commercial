@@ -74,17 +74,4 @@ class LanguageRepository implements LanguageRepositoryInterface
         ]);
 
     }
-
-    // public function updateByWhereIn($ids, $value)
-    // {
-
-    //     if (is_array($ids)) {
-    //         return User::whereIn('user_catalouge_id', $ids)
-    //             ->update(['publish' => $value]);
-    //     } else {
-    //         $value = $value == 1 ? 2 : 1;
-    //         return User::where('user_catalouge_id', $ids)
-    //             ->update(['publish' => $value]);
-    //     }
-    // }
 }

@@ -331,3 +331,8 @@ Route::controller(AjaxMenuController::class)->prefix('ajax/menu')->middleware(['
 
 // DashboardController
 Route::get('/dashboard/index', [DashboardController::class, 'index'])->name('dashboard.index')->middleware(['admin', 'locale']);
+
+// handle Error
+Route::fallback(function(){
+    return response()->view('backend.404.notfound404');
+});

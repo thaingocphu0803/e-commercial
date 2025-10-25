@@ -508,3 +508,15 @@ a.active{
 .w-50{
     width: 50%;
 }
+.user-small-avt{
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+}
+
+/* .profile-element{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+} */

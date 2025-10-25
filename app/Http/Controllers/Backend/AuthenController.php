@@ -25,7 +25,7 @@ class AuthenController extends Controller
             'email' => $request->input('email'),
             'password' => $request->input('password')
         ];
-
+        
        if(Auth::attempt($credentials)){
             return redirect()->route('dashboard.index')->with('success', __('alert.loginSuccess'));
        }

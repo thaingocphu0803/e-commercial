@@ -79,7 +79,7 @@
         'productVision' => 'Product Vision',
         'email' => 'email',
         'birthday' => 'birthday',
-        'password' => 'password',
+        'password' => 'Password',
         'passwordConfirm' => 'password confirm',
         'avatar' => 'avatar',
         'city' => 'city',
@@ -368,5 +368,9 @@
         'seeLess' => 'See less...',
         'contact' => 'contact',
         'faq' => 'FAQ',
-        
+        'tproAdmin' => 'TPro Admin',
+        'welcomeTPro' => 'Welcome to TPro',
+        'forgotPass' => 'Forgot password?',
+        'searchForSomething' => 'Search for something...',
+        'pageNotFound' => 'Page Not Found'
     ];
