@@ -334,5 +334,5 @@ Route::get('/dashboard/index', [DashboardController::class, 'index'])->name('das
 
 // handle Error
 Route::fallback(function(){
-    return response()->view('backend.404.notfound404');
+    return response()->view('Errors.404');
 });

@@ -1,7 +1,0 @@
-<x-backend.dashboard.layout>
-    
-    <div class="middle-box text-center animated fadeInDown">
-        <h1>404</h1>
-        <h3 class="font-bold">{{ __('custom.pageNotFound') }}</h3>
-    </div>
-</x-backend.dashboard.layout>
