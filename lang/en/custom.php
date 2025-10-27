@@ -79,7 +79,7 @@
         'productVision' => 'Product Vision',
         'email' => 'email',
         'birthday' => 'birthday',
-        'password' => 'password',
+        'password' => 'Password',
         'passwordConfirm' => 'password confirm',
         'avatar' => 'avatar',
         'city' => 'city',
@@ -367,5 +367,13 @@
         //2025/10/24
         'seeLess' => 'See less...',
         'contact' => 'contact',
-        'faq' => 'FAQ'
+        'faq' => 'FAQ',
+        'tproAdmin' => 'TPro | Admin',
+        'tpro404' => 'TPro | 404 Error',
+        'welcomeTPro' => 'Welcome to TPro',
+        'forgotPass' => 'Forgot password?',
+        'searchForSomething' => 'Search for something...',
+        'pageNotFound' => 'Page Not Found',
+        'backPrev' => 'Back to Previous Page',
+        'permissionStatus' => 'permission status'
     ];

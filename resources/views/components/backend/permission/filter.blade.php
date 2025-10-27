@@ -18,11 +18,11 @@
                         @endfor
                     </select>
                 </div>
-
+{{-- 
                 <div class="flex gap-10">
                     <select name="publish" class="form-control  select2">
                         <option value="0" selected>
-                            {{ __('custom.chooseObject', ['attribute' => __('custom.languageStatus')]) }}
+                            {{ __('custom.chooseObject', ['attribute' => __('custom.permissionStatus')]) }}
                         </option>
                         <option value="1" @selected(request('publish') == 1)>
                             {{ __('custom.published') }}
@@ -31,7 +31,7 @@
                             {{ __('custom.private') }}
                         </option>
                     </select>
-                </div>
+                </div> --}}
 
                 <div class="flex flex-middle gap-10">
                     <div class="input-group">

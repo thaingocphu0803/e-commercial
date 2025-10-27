@@ -3,19 +3,21 @@
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element">
-                    <span>
-                        <img alt="image" class="img-circle" src="{{asset('backend/img/profile_small.jpg')}}" />
+                    <span class="user-small-avt">
+                        <img alt="image" class="img-circle img-cover" src="{{Auth::user()->image ?? config('app.general.noImage')}}" />
                     </span>
 
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David
-                                    Williams</strong>
-                            </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
-                        </span> </a>
+                        <span class="clear"> <span class="block m-t-xs">
+                            <strong class="font-bold">{{ Auth::user()->name }}</strong> 
+                            <b class="ms-5 caret"></b>
+                            </span> 
+                        </span>
+                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a href="profile.html">{{ __('custom.profile') }}</a></li>
-                        <li><a href="contacts.html">{{ __('custom.contacts') }}</a></li>
-                        <li><a href="mailbox.html">{{ __('custom.mailbox') }}</a></li>
+                        <li><a href="auth/profile">{{ __('custom.profile') }}</a></li>
+                        <li><a href="auth/contact">{{ __('custom.contacts') }}</a></li>
+                        <li><a href="auth/email">{{ __('custom.mailbox') }}</a></li>
                         <li class="divider"></li>
                         <li><a href="{{ route('auth.logout') }}">{{ __('custom.logout') }}</a></li>
                     </ul>
@@ -27,7 +29,7 @@
             {{-- manage user --}}
             <x-backend.dashboard.nav.module icon='fa-user-circle-o' :title="__('custom.managerObject', ['attribute' => __('custom.member')])">
                 @can('modules', 'user.index')
-                    <li>
+                    <li class="nav-menu-item">
                         <a class="text-capitalize" href="{{ route('user.index') }}">
                             {{ __('custom.member') }}
                         </a>
@@ -35,7 +37,7 @@
                 @endcan
 
                 @can('modules', 'user.catalouge.index')
-                    <li>
+                    <li class="nav-menu-item">
                         <a class="text-capitalize" href="{{ route('user.catalouge.index') }}">
                             {{ __('custom.objectGroup', ['attribute' => __('custom.member')]) }}
                         </a>
@@ -43,7 +45,7 @@
                 @endcan
 
                 @can('modules', 'permission.index')
-                    <li>
+                    <li class="nav-menu-item">
                         <a class="text-capitalize" href="{{ route('permission.index') }}">
                             {{ __('custom.permission') }}
                         </a>
@@ -55,7 +57,7 @@
             {{-- manage customer --}}
             <x-backend.dashboard.nav.module icon='fa-users' :title="__('custom.managerObject', ['attribute' => __('custom.customer')])">
                 @can('modules', 'customer.index')
-                    <li>
+                    <li class="nav-menu-item">
                         <a class="text-capitalize" href="{{ route('customer.index') }}">
                             {{ __('custom.customer') }}
                         </a>
@@ -63,7 +65,7 @@
                 @endcan
 
                 @can('modules', 'customer.catalouge.index')
-                    <li>
+                    <li class="nav-menu-item">
                         <a class="text-capitalize" href="{{ route('customer.catalouge.index') }}">
                             {{ __('custom.objectGroup', ['attribute' => __('custom.customer')]) }}
                         </a>
@@ -75,7 +77,7 @@
             {{-- manage product --}}
             <x-backend.dashboard.nav.module icon='fa-cubes' :title="__('custom.managerObject', ['attribute' => __('custom.product')])">
                 @can('modules', 'product.index')
-                    <li>
+                    <li class="nav-menu-item">
                         <a class="text-capitalize" href="/product/index">
                             {{ __('custom.product') }}
                         </a>
@@ -83,7 +85,7 @@
                 @endcan
 
                 @can('modules', 'product.catalouge.index')
-                    <li>
+                    <li class="nav-menu-item">
                         <a class="text-capitalize" href="/product/catalouge/index">
                             {{ __('custom.objectGroup', ['attribute' => __('custom.product')]) }}
                         </a>
@@ -91,7 +93,7 @@
                 @endcan
 
                 @can('modules', 'attr.index')
-                    <li>
+                    <li class="nav-menu-item">
                         <a class="text-capitalize" href="/attr/index">
                             {{ __('custom.attr') }}
                         </a>
@@ -99,7 +101,7 @@
                 @endcan
 
                 @can('modules', 'attr.catalouge.index')
-                    <li>
+                    <li class="nav-menu-item">
                         <a class="text-capitalize" href="/attr/catalouge/index">
                             {{ __('custom.objectGroup', ['attribute' => __('custom.attr')]) }}
                         </a>
@@ -110,7 +112,7 @@
             {{-- manage marketing --}}
             <x-backend.dashboard.nav.module icon='fa-money' :title="__('custom.managerObject', ['attribute' => __('custom.marketing')])">
                 @can('modules', 'promotion.index')
-                    <li>
+                    <li class="nav-menu-item">
                         <a class="text-capitalize" href="/promotion/index">
                             {{ __('custom.managerObject', ['attribute' => __('custom.promotion')]) }}
                         </a>
@@ -119,7 +121,7 @@
                 @endcan
 
                 @can('modules', 'coupon.index')
-                    <li>
+                    <li class="nav-menu-item">
                         <a class="text-capitalize" href="/coupon/index">
                             {{ __('custom.managerObject', ['attribute' => __('custom.coupon')]) }}
                         </a>
@@ -127,7 +129,7 @@
                 @endcan
 
                 @can('modules', 'source.index')
-                    <li>
+                    <li class="nav-menu-item">
                         <a class="text-capitalize" href="/source/index">
                             {{ __('custom.managerObject', ['attribute' => __('custom.source')]) }}
                         </a>
@@ -140,7 +142,7 @@
             {{-- manage post --}}
             <x-backend.dashboard.nav.module icon='fa-file' :title="__('custom.managerObject', ['attribute' => __('custom.post')])">
                 @can('modules', 'post.index')
-                    <li>
+                    <li class="nav-menu-item">
                         <a class="text-capitalize" href="{{ route('post.index') }}">
                             {{ __('custom.post') }}
                         </a>
@@ -148,7 +150,7 @@
                 @endcan
 
                 @can('modules', 'post.catalouge.index')
-                    <li>
+                    <li class="nav-menu-item">
                         <a class="text-capitalize" href="{{ route('post.catalouge.index') }}">
                             {{ __('custom.objectGroup', ['attribute' => __('custom.post')]) }}
                         </a>
@@ -159,7 +161,7 @@
             {{-- manage slide & banner --}}
             <x-backend.dashboard.nav.module icon='fa-picture-o' :title="__('custom.managerObject', ['attribute' => __('custom.slideBanner')])">
                 @can('modules', 'slide.index')
-                    <li>
+                    <li class="nav-menu-item">
                         <a class="text-capitalize" href="{{ route('slide.index') }}">
                             {{ __('custom.slides') }}
                         </a>
@@ -170,7 +172,7 @@
             {{-- manage menu --}}
             <x-backend.dashboard.nav.module icon='fa-th-large' :title="__('custom.managerObject', ['attribute' => __('custom.menu')])">
                 @can('modules', 'menu.index')
-                    <li>
+                    <li class="nav-menu-item">
                         <a class="text-capitalize" href="{{ route('menu.index') }}">
                             {{ __('custom.menu') }}
                         </a>
@@ -181,7 +183,7 @@
             {{-- manage setting --}}
             <x-backend.dashboard.nav.module icon='fa-cog' :title="__('custom.managerObject', ['attribute' => __('custom.setting')])">
                 @can('modules', 'language.index')
-                    <li>
+                    <li class="nav-menu-item">
                         <a class="text-capitalize" href="{{ route('language.index') }}">
                             {{ __('custom.language') }}
                         </a>
@@ -189,14 +191,14 @@
                 @endcan
 
                 @can('modules', 'generate.index')
-                    <li>
+                    <li class="nav-menu-item">
                         <a class="text-capitalize" href="{{ route('generate.index') }}">
                             {{ __('custom.generate') }}
                         </a>
                     </li>
                 @endcan
                 @can('modules', 'system.index')
-                    <li>
+                    <li class="nav-menu-item">
                         <a class="text-capitalize" href="{{ route('system.index') }}">
                             {{ __('custom.system') }}
                         </a>

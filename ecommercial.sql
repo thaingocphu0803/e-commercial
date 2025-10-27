@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : maria window 15.1
+ Source Server         : mySQL xampp
  Source Server Type    : MySQL
- Source Server Version : 100432 (10.4.32-MariaDB)
- Source Host           : 127.0.0.1:3306
+ Source Server Version : 100432
+ Source Host           : localhost:3306
  Source Schema         : ecommercial
 
  Target Server Type    : MySQL
- Target Server Version : 100432 (10.4.32-MariaDB)
+ Target Server Version : 100432
  File Encoding         : 65001
 
- Date: 23/10/2025 16:48:21
+ Date: 26/10/2025 23:03:34
 */
 
 SET NAMES utf8mb4;
@@ -84,7 +84,7 @@ CREATE TABLE `attr_catalouge_attr`  (
   INDEX `attr_catalouge_attr_attr_id_foreign`(`attr_id` ASC) USING BTREE,
   CONSTRAINT `attr_catalouge_attr_attr_catalouge_id_foreign` FOREIGN KEY (`attr_catalouge_id`) REFERENCES `attr_catalouges` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `attr_catalouge_attr_attr_id_foreign` FOREIGN KEY (`attr_id`) REFERENCES `attrs` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of attr_catalouge_attr
@@ -115,7 +115,7 @@ CREATE TABLE `attr_catalouge_language`  (
   INDEX `attr_catalouge_language_language_id_foreign`(`language_id` ASC) USING BTREE,
   CONSTRAINT `attr_catalouge_language_attr_catalouge_id_foreign` FOREIGN KEY (`attr_catalouge_id`) REFERENCES `attr_catalouges` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `attr_catalouge_language_language_id_foreign` FOREIGN KEY (`language_id`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of attr_catalouge_language
@@ -148,7 +148,7 @@ CREATE TABLE `attr_catalouges`  (
   INDEX `attr_catalouges_user_id_foreign`(`user_id` ASC) USING BTREE,
   INDEX `attr_catalouges__lft__rgt_parent_id_index`(`_lft` ASC, `_rgt` ASC, `parent_id` ASC) USING BTREE,
   CONSTRAINT `attr_catalouges_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of attr_catalouges
@@ -178,7 +178,7 @@ CREATE TABLE `attr_language`  (
   INDEX `attr_language_language_id_foreign`(`language_id` ASC) USING BTREE,
   CONSTRAINT `attr_language_attr_id_foreign` FOREIGN KEY (`attr_id`) REFERENCES `attrs` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `attr_language_language_id_foreign` FOREIGN KEY (`language_id`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of attr_language
@@ -209,7 +209,7 @@ CREATE TABLE `attrs`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `attrs_user_id_foreign`(`user_id` ASC) USING BTREE,
   CONSTRAINT `attrs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of attrs
@@ -263,7 +263,7 @@ CREATE TABLE `customer_catalouges`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of customer_catalouges
@@ -307,7 +307,7 @@ CREATE TABLE `customers`  (
   INDEX `customers_source_id_foreign`(`source_id` ASC) USING BTREE,
   CONSTRAINT `customers_customer_catalouge_id_foreign` FOREIGN KEY (`customer_catalouge_id`) REFERENCES `customer_catalouges` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `customers_source_id_foreign` FOREIGN KEY (`source_id`) REFERENCES `sources` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of customers
@@ -1068,7 +1068,7 @@ CREATE TABLE `generates`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 58 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 58 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of generates
@@ -1137,15 +1137,15 @@ CREATE TABLE `languages`  (
   UNIQUE INDEX `languages_canonical_unique`(`canonical` ASC) USING BTREE,
   INDEX `languages_user_id_foreign`(`user_id` ASC) USING BTREE,
   CONSTRAINT `languages_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of languages
 -- ----------------------------
-INSERT INTO `languages` VALUES (1, 'Vietnamese', 'vi', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQwMzc3ODg3L0ltYWdlRm9sZGVyL2pobmlhdGpmMWRjYnA2ZnZpaXpvLnBuZw==', 101, '2025-02-18 07:34:25', '2025-10-23 01:31:56', NULL, 'Vietnam\'s nature language', 2, 1);
-INSERT INTO `languages` VALUES (2, 'English', 'en', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzM5OTM1ODU3L0ltYWdlRm9sZGVyL2I2eWp5ZWl4NW5qcnR1dzd5cXByLnBuZw==', 101, '2025-02-18 07:43:12', '2025-10-23 01:31:56', NULL, 'Bristish\'s nature language', 2, 0);
-INSERT INTO `languages` VALUES (3, 'Japanese', 'ja', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzM5OTM2NTM5L0ltYWdlRm9sZGVyL2c1aDRweHpjb3p3bTZpdXc5dmhrLnBuZw==', 101, '2025-02-19 02:09:50', '2025-10-23 01:31:56', NULL, 'Japanese\'s nature language', 2, 0);
-INSERT INTO `languages` VALUES (7, 'Chinese', 'zh', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQwMzY3MjExL0ltYWdlRm9sZGVyL3pkdWlyZ3E2ZGdjbTJrdnMwN29kLnBuZw==', 101, '2025-02-24 03:20:14', '2025-10-23 01:31:56', NULL, 'China\'s nature language', 2, 0);
+INSERT INTO `languages` VALUES (1, 'Vietnamese', 'vi', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQwMzc3ODg3L0ltYWdlRm9sZGVyL2pobmlhdGpmMWRjYnA2ZnZpaXpvLnBuZw==', 101, '2025-02-18 07:34:25', '2025-10-26 15:58:02', NULL, 'Vietnam\'s nature language', 1, 1);
+INSERT INTO `languages` VALUES (2, 'English', 'en', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzM5OTM1ODU3L0ltYWdlRm9sZGVyL2I2eWp5ZWl4NW5qcnR1dzd5cXByLnBuZw==', 101, '2025-02-18 07:43:12', '2025-10-26 15:58:02', NULL, 'Bristish\'s nature language', 1, 0);
+INSERT INTO `languages` VALUES (3, 'Japanese', 'ja', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzM5OTM2NTM5L0ltYWdlRm9sZGVyL2c1aDRweHpjb3p3bTZpdXc5dmhrLnBuZw==', 101, '2025-02-19 02:09:50', '2025-10-26 15:58:02', NULL, 'Japanese\'s nature language', 1, 0);
+INSERT INTO `languages` VALUES (7, 'Chinese', 'zh', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQwMzY3MjExL0ltYWdlRm9sZGVyL3pkdWlyZ3E2ZGdjbTJrdnMwN29kLnBuZw==', 101, '2025-02-24 03:20:14', '2025-10-26 15:58:02', NULL, 'China\'s nature language', 1, 0);
 
 -- ----------------------------
 -- Table structure for menu_catalouges
@@ -1161,7 +1161,7 @@ CREATE TABLE `menu_catalouges`  (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `menu_catalouges_keyword_unique`(`keyword` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of menu_catalouges
@@ -1186,7 +1186,7 @@ CREATE TABLE `menu_language`  (
   INDEX `menu_language_language_id_foreign`(`language_id` ASC) USING BTREE,
   CONSTRAINT `menu_language_language_id_foreign` FOREIGN KEY (`language_id`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `menu_language_menu_id_foreign` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of menu_language
@@ -1215,8 +1215,13 @@ INSERT INTO `menu_language` VALUES (201, 1, 'cookie policies', 'cookie-policies'
 INSERT INTO `menu_language` VALUES (202, 1, 'Privacy Policy', 'privacy-policy', '2025-10-01 08:59:07', '2025-10-01 08:59:07');
 INSERT INTO `menu_language` VALUES (203, 1, 'Terms & Conditions', 'terms-conditions', '2025-10-01 08:59:07', '2025-10-01 08:59:07');
 INSERT INTO `menu_language` VALUES (204, 1, 'Shipping & Delivery', 'shipping-delivery', '2025-10-01 08:59:07', '2025-10-01 08:59:07');
-INSERT INTO `menu_language` VALUES (205, 1, 'Login', '#', '2025-10-02 08:19:33', '2025-10-02 08:19:33');
-INSERT INTO `menu_language` VALUES (206, 1, 'Sign in', '#', '2025-10-02 08:19:33', '2025-10-02 08:19:33');
+INSERT INTO `menu_language` VALUES (207, 1, 'test 1', '#', '2025-10-24 14:58:51', '2025-10-24 14:58:51');
+INSERT INTO `menu_language` VALUES (208, 1, 'test 2', '#', '2025-10-24 14:58:51', '2025-10-24 14:58:51');
+INSERT INTO `menu_language` VALUES (209, 1, 'Tuyển dụng', 'tuyen-dung', '2025-10-26 15:43:30', '2025-10-26 15:43:30');
+INSERT INTO `menu_language` VALUES (210, 1, 'Liên hệ', 'lien he', '2025-10-26 15:43:30', '2025-10-26 15:43:30');
+INSERT INTO `menu_language` VALUES (211, 1, 'Về chúng tôi', 've-chung-toi', '2025-10-26 15:43:30', '2025-10-26 15:43:30');
+INSERT INTO `menu_language` VALUES (205, 1, 'Tin Tức', 'tin-tuc', '2025-10-26 15:43:30', '2025-10-26 15:43:30');
+INSERT INTO `menu_language` VALUES (206, 1, 'Chính sách', 'chinh-sach', '2025-10-26 15:43:30', '2025-10-26 15:43:30');
 
 -- ----------------------------
 -- Table structure for menus
@@ -1244,37 +1249,42 @@ CREATE TABLE `menus`  (
   INDEX `menus__lft__rgt_parent_id_index`(`_lft` ASC, `_rgt` ASC, `parent_id` ASC) USING BTREE,
   CONSTRAINT `menus_menu_catalouge_id_foreign` FOREIGN KEY (`menu_catalouge_id`) REFERENCES `menu_catalouges` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `menus_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 207 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 213 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of menus
 -- ----------------------------
-INSERT INTO `menus` VALUES (179, 30, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 1, 2, NULL, '2025-09-05 04:12:09', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (180, 30, NULL, NULL, NULL, NULL, 1, 2, 101, NULL, 3, 4, NULL, '2025-09-05 04:12:09', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (181, 30, NULL, NULL, NULL, NULL, 1, 3, 101, NULL, 5, 6, NULL, '2025-09-05 04:12:09', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (184, 33, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 7, 8, NULL, '2025-09-19 07:05:19', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (185, 33, NULL, NULL, NULL, NULL, 1, 2, 101, NULL, 9, 10, NULL, '2025-09-19 07:05:19', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (186, 33, NULL, NULL, NULL, NULL, 1, 3, 101, NULL, 11, 12, NULL, '2025-09-19 07:05:19', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (187, 33, NULL, NULL, NULL, NULL, 1, 4, 101, NULL, 13, 14, NULL, '2025-09-19 07:05:19', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (188, 33, NULL, NULL, NULL, NULL, 1, 5, 101, NULL, 15, 16, NULL, '2025-09-19 07:05:19', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (189, 33, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 17, 18, NULL, '2025-09-19 07:07:56', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (190, 28, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 19, 26, NULL, '2025-10-01 08:54:16', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (191, 28, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 27, 36, NULL, '2025-10-01 08:54:16', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (192, 28, NULL, NULL, NULL, NULL, 1, 2, 101, NULL, 37, 46, NULL, '2025-10-01 08:54:16', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (193, 28, NULL, NULL, NULL, NULL, 1, 3, 101, NULL, 47, 48, NULL, '2025-10-01 08:54:16', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (194, 28, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 20, 21, 190, '2025-10-01 08:55:17', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (195, 28, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 22, 23, 190, '2025-10-01 08:55:17', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (196, 28, NULL, NULL, NULL, NULL, 1, 2, 101, NULL, 24, 25, 190, '2025-10-01 08:55:17', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (197, 28, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 28, 29, 191, '2025-10-01 08:56:03', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (198, 28, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 30, 31, 191, '2025-10-01 08:56:03', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (199, 28, NULL, NULL, NULL, NULL, 1, 2, 101, NULL, 32, 33, 191, '2025-10-01 08:56:03', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (200, 28, NULL, NULL, NULL, NULL, 1, 3, 101, NULL, 34, 35, 191, '2025-10-01 08:56:03', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (201, 28, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 38, 39, 192, '2025-10-01 08:59:02', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (202, 28, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 40, 41, 192, '2025-10-01 08:59:02', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (203, 28, NULL, NULL, NULL, NULL, 1, 2, 101, NULL, 42, 43, 192, '2025-10-01 08:59:02', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (204, 28, NULL, NULL, NULL, NULL, 1, 3, 101, NULL, 44, 45, 192, '2025-10-01 08:59:02', '2025-10-02 08:18:57');
-INSERT INTO `menus` VALUES (205, 32, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 49, 50, NULL, '2025-10-02 08:19:33', '2025-10-02 08:19:33');
-INSERT INTO `menus` VALUES (206, 32, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 51, 52, NULL, '2025-10-02 08:19:33', '2025-10-02 08:19:33');
+INSERT INTO `menus` VALUES (179, 30, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 31, 36, NULL, '2025-09-05 04:12:09', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (180, 30, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 37, 38, NULL, '2025-09-05 04:12:09', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (181, 30, NULL, NULL, NULL, NULL, 1, 2, 101, NULL, 39, 40, NULL, '2025-09-05 04:12:09', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (184, 33, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 41, 42, NULL, '2025-09-19 07:05:19', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (185, 33, NULL, NULL, NULL, NULL, 1, 2, 101, NULL, 43, 44, NULL, '2025-09-19 07:05:19', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (186, 33, NULL, NULL, NULL, NULL, 1, 3, 101, NULL, 45, 46, NULL, '2025-09-19 07:05:19', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (187, 33, NULL, NULL, NULL, NULL, 1, 4, 101, NULL, 47, 48, NULL, '2025-09-19 07:05:19', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (188, 33, NULL, NULL, NULL, NULL, 1, 5, 101, NULL, 49, 50, NULL, '2025-09-19 07:05:19', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (189, 33, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 51, 52, NULL, '2025-09-19 07:07:56', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (190, 28, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 1, 8, NULL, '2025-10-01 08:54:16', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (191, 28, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 9, 18, NULL, '2025-10-01 08:54:16', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (192, 28, NULL, NULL, NULL, NULL, 1, 2, 101, NULL, 19, 28, NULL, '2025-10-01 08:54:16', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (193, 28, NULL, NULL, NULL, NULL, 1, 3, 101, NULL, 29, 30, NULL, '2025-10-01 08:54:16', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (194, 28, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 2, 3, 190, '2025-10-01 08:55:17', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (195, 28, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 4, 5, 190, '2025-10-01 08:55:17', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (196, 28, NULL, NULL, NULL, NULL, 1, 2, 101, NULL, 6, 7, 190, '2025-10-01 08:55:17', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (197, 28, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 10, 11, 191, '2025-10-01 08:56:03', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (198, 28, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 12, 13, 191, '2025-10-01 08:56:03', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (199, 28, NULL, NULL, NULL, NULL, 1, 2, 101, NULL, 14, 15, 191, '2025-10-01 08:56:03', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (200, 28, NULL, NULL, NULL, NULL, 1, 3, 101, NULL, 16, 17, 191, '2025-10-01 08:56:03', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (201, 28, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 20, 21, 192, '2025-10-01 08:59:02', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (202, 28, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 22, 23, 192, '2025-10-01 08:59:02', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (203, 28, NULL, NULL, NULL, NULL, 1, 2, 101, NULL, 24, 25, 192, '2025-10-01 08:59:02', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (204, 28, NULL, NULL, NULL, NULL, 1, 3, 101, NULL, 26, 27, 192, '2025-10-01 08:59:02', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (205, 32, NULL, NULL, NULL, NULL, 1, 1, 101, NULL, 53, 54, NULL, '2025-10-02 08:19:33', '2025-10-26 15:46:12');
+INSERT INTO `menus` VALUES (206, 32, NULL, NULL, NULL, NULL, 1, 3, 101, NULL, 55, 56, NULL, '2025-10-02 08:19:33', '2025-10-26 15:46:12');
+INSERT INTO `menus` VALUES (207, 30, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 32, 35, 179, '2025-10-24 14:58:51', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (208, 30, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 33, 34, 207, '2025-10-24 14:58:51', '2025-10-26 15:47:26');
+INSERT INTO `menus` VALUES (209, 32, NULL, NULL, NULL, NULL, 1, 4, 101, NULL, 57, 58, NULL, '2025-10-26 15:43:30', '2025-10-26 15:46:12');
+INSERT INTO `menus` VALUES (210, 32, NULL, NULL, NULL, NULL, 1, 2, 101, NULL, 59, 60, NULL, '2025-10-26 15:43:30', '2025-10-26 15:46:12');
+INSERT INTO `menus` VALUES (211, 32, NULL, NULL, NULL, NULL, 1, 0, 101, NULL, 61, 62, NULL, '2025-10-26 15:43:30', '2025-10-26 15:46:12');
 
 -- ----------------------------
 -- Table structure for migrations
@@ -1393,7 +1403,7 @@ CREATE TABLE `order_payment`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `order_payment_order_id_foreign`(`order_id` ASC) USING BTREE,
   CONSTRAINT `order_payment_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of order_payment
@@ -1418,12 +1428,15 @@ CREATE TABLE `order_product`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `order_product_order_id_foreign`(`order_id` ASC) USING BTREE,
   CONSTRAINT `order_product_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of order_product
 -- ----------------------------
 INSERT INTO `order_product` VALUES (10, 24, 48, 'e792e5c9-b1ef-59b6-8616-04651f84bb10', 'football | màu đỏ', 1, 11111121, '{\"image\":\"aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzUyNTQ2NTYwL0ltYWdlRm9sZGVyL2hsbzM4OTR6YnVoemp3aDZydTA0LndlYnA=\"}', '2025-10-23 08:11:31', '2025-10-23 08:11:31', 11111121);
+INSERT INTO `order_product` VALUES (11, 25, 42, 'a3f4ac26-2c02-58d7-9518-fdd1377faf45', 'iphone | màu vàng, Kim cương', 2, 11110, '{\"image\":\"aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzUyNTQ2NTQ5L0ltYWdlRm9sZGVyL3pleHQ0YWZuaWU5bHNjbHVubThjLmpwZw==\",\"old_price\":11110,\"discount\":400}', '2025-10-23 14:24:02', '2025-10-23 14:24:02', 10710);
+INSERT INTO `order_product` VALUES (12, 26, 42, 'a3f4ac26-2c02-58d7-9518-fdd1377faf45', 'iphone | màu vàng, Kim cương', 2, 11110, '{\"image\":\"aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzUyNTQ2NTQ5L0ltYWdlRm9sZGVyL3pleHQ0YWZuaWU5bHNjbHVubThjLmpwZw==\",\"old_price\":11110,\"discount\":400}', '2025-10-23 14:24:17', '2025-10-23 14:24:17', 10710);
+INSERT INTO `order_product` VALUES (13, 28, 42, 'a3f4ac26-2c02-58d7-9518-fdd1377faf45', 'iphone | màu vàng, Kim cương', 2, 11110, '{\"image\":\"aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzUyNTQ2NTQ5L0ltYWdlRm9sZGVyL3pleHQ0YWZuaWU5bHNjbHVubThjLmpwZw==\",\"old_price\":11110,\"discount\":400}', '2025-10-23 15:28:08', '2025-10-23 15:28:08', 10710);
 
 -- ----------------------------
 -- Table structure for orders
@@ -1453,12 +1466,16 @@ CREATE TABLE `orders`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
 INSERT INTO `orders` VALUES (24, '1761207091', 'Ngọc Phú Thái', '0347079502', 'phu123@gmail.com', '96', '964', '32035', '1234 Elm Street', 'Vietnam\'s nature language', '{\"name\":null,\"code\":null,\"start_date\":null,\"end_date\":null,\"discount\":0}', '{\"totalQty\":1,\"totalGrand\":11111121,\"detail\":{\"7efc56f96f28b7eab271afdbf46c2d03\":{\"rowId\":\"7efc56f96f28b7eab271afdbf46c2d03\",\"id\":\"48:e792e5c9-b1ef-59b6-8616-04651f84bb10\",\"name\":\"football | m\\u00e0u \\u0111\\u1ecf\",\"qty\":\"1\",\"price\":11111121,\"weight\":0,\"options\":{\"image\":\"aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzUyNTQ2NTYwL0ltYWdlRm9sZGVyL2hsbzM4OTR6YnVoemp3aDZydTA0LndlYnA=\"},\"discount\":0,\"tax\":2333335.41,\"subtotal\":11111121}}}', NULL, NULL, 'cod', 'pending', 'unpaid', 'pending', 0, NULL, '2025-10-23 08:11:31', '2025-10-23 08:11:31');
+INSERT INTO `orders` VALUES (25, '1761229442', 'thai ngoc phu', '0347079502', 'admin@eshop.com', NULL, NULL, '07108', '111', 'sss', '{\"name\":\"Gi\\u1ea3m 3 ng\\u00e0n cho \\u0111\\u01a1n t\\u1eeb 10 ng\\u00e0n\",\"code\":\"CSXCQP9LYC\",\"start_date\":\"2025-10-23 04:14:00\",\"end_date\":null,\"discount\":3000}', '{\"totalQty\":2,\"totalGrand\":21420,\"detail\":{\"ea8448ef96a41833afc9f78a6eb54811\":{\"rowId\":\"ea8448ef96a41833afc9f78a6eb54811\",\"id\":\"42:a3f4ac26-2c02-58d7-9518-fdd1377faf45\",\"name\":\"iphone | m\\u00e0u v\\u00e0ng, Kim c\\u01b0\\u01a1ng\",\"qty\":\"2\",\"price\":10710,\"weight\":0,\"options\":{\"image\":\"aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzUyNTQ2NTQ5L0ltYWdlRm9sZGVyL3pleHQ0YWZuaWU5bHNjbHVubThjLmpwZw==\",\"old_price\":11110,\"discount\":400},\"discount\":0,\"tax\":2249.1,\"subtotal\":21420}}}', NULL, NULL, 'cod', 'pending', 'unpaid', 'pending', 0, NULL, '2025-10-23 14:24:02', '2025-10-23 14:24:02');
+INSERT INTO `orders` VALUES (26, '1761229457', 'thai ngoc phu', '0347079502', 'admin@eshop.com', NULL, NULL, '07108', '111', 'sss', '{\"name\":\"Gi\\u1ea3m 3 ng\\u00e0n cho \\u0111\\u01a1n t\\u1eeb 10 ng\\u00e0n\",\"code\":\"CSXCQP9LYC\",\"start_date\":\"2025-10-23 04:14:00\",\"end_date\":null,\"discount\":3000}', '{\"totalQty\":2,\"totalGrand\":21420,\"detail\":{\"ea8448ef96a41833afc9f78a6eb54811\":{\"rowId\":\"ea8448ef96a41833afc9f78a6eb54811\",\"id\":\"42:a3f4ac26-2c02-58d7-9518-fdd1377faf45\",\"name\":\"iphone | m\\u00e0u v\\u00e0ng, Kim c\\u01b0\\u01a1ng\",\"qty\":\"2\",\"price\":10710,\"weight\":0,\"options\":{\"image\":\"aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzUyNTQ2NTQ5L0ltYWdlRm9sZGVyL3pleHQ0YWZuaWU5bHNjbHVubThjLmpwZw==\",\"old_price\":11110,\"discount\":400},\"discount\":0,\"tax\":2249.1,\"subtotal\":21420}}}', NULL, NULL, 'cod', 'pending', 'unpaid', 'pending', 0, NULL, '2025-10-23 14:24:17', '2025-10-23 14:24:17');
+INSERT INTO `orders` VALUES (27, '1761233244', 'thai ngoc phu', '0347079502', 'admin@eshop.com', NULL, NULL, '05977', '111', 'sss', '{\"name\":null,\"code\":null,\"start_date\":null,\"end_date\":null,\"discount\":0}', '{\"totalQty\":0,\"totalGrand\":0,\"detail\":[]}', NULL, NULL, 'cod', 'pending', 'unpaid', 'pending', 0, NULL, '2025-10-23 15:27:24', '2025-10-23 15:27:24');
+INSERT INTO `orders` VALUES (28, '1761233288', 'thai ngoc phu', '0347079502', 'phu123@gmail.com', '22', '207', '07192', '803/97 Huỳnh Tấn Phát', 'zaaaaaaa', '{\"name\":\"Gi\\u1ea3m 3 ng\\u00e0n cho \\u0111\\u01a1n t\\u1eeb 10 ng\\u00e0n\",\"code\":\"CSXCQP9LYC\",\"start_date\":\"2025-10-23 04:14:00\",\"end_date\":null,\"discount\":3000}', '{\"totalQty\":2,\"totalGrand\":21420,\"detail\":{\"ea8448ef96a41833afc9f78a6eb54811\":{\"rowId\":\"ea8448ef96a41833afc9f78a6eb54811\",\"id\":\"42:a3f4ac26-2c02-58d7-9518-fdd1377faf45\",\"name\":\"iphone | m\\u00e0u v\\u00e0ng, Kim c\\u01b0\\u01a1ng\",\"qty\":\"2\",\"price\":10710,\"weight\":0,\"options\":{\"image\":\"aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzUyNTQ2NTQ5L0ltYWdlRm9sZGVyL3pleHQ0YWZuaWU5bHNjbHVubThjLmpwZw==\",\"old_price\":11110,\"discount\":400},\"discount\":0,\"tax\":2249.1,\"subtotal\":21420}}}', NULL, NULL, 'cod', 'pending', 'unpaid', 'pending', 0, NULL, '2025-10-23 15:28:08', '2025-10-23 15:28:08');
 
 -- ----------------------------
 -- Table structure for password_reset_tokens
@@ -1487,12 +1504,12 @@ CREATE TABLE `permissions`  (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `permissions_canonical_unique`(`canonical` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 324 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 324 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of permissions
 -- ----------------------------
-INSERT INTO `permissions` VALUES (2, 'xóa nhóm bài viết', 'post.catalouge.destroy', '2025-03-05 04:22:35', '2025-03-05 04:28:32');
+INSERT INTO `permissions` VALUES (2, 'xóa nhóm bài viết', 'post.catalouge.delete', '2025-03-05 04:22:35', '2025-10-26 15:38:42');
 INSERT INTO `permissions` VALUES (3, 'Xem toàn bộ danh mục bài viết', 'post.catalouge.all', '2025-03-05 04:23:39', '2025-03-05 04:28:07');
 INSERT INTO `permissions` VALUES (4, 'Sửa nhóm bài viết', 'post.catalouge.update', '2025-03-05 04:29:46', '2025-03-05 04:29:46');
 INSERT INTO `permissions` VALUES (5, 'tạo mới nhóm bài viết', 'post.catalouge.create', '2025-03-05 04:30:23', '2025-03-05 04:30:23');
@@ -1588,7 +1605,7 @@ CREATE TABLE `post_catalouge_language`  (
   INDEX `post_catalouge_language_language_id_foreign`(`language_id` ASC) USING BTREE,
   CONSTRAINT `post_catalouge_language_language_id_foreign` FOREIGN KEY (`language_id`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `post_catalouge_language_post_catalouge_id_foreign` FOREIGN KEY (`post_catalouge_id`) REFERENCES `post_catalouges` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of post_catalouge_language
@@ -1616,7 +1633,7 @@ CREATE TABLE `post_catalouge_post`  (
   INDEX `post_catalouge_post_post_id_foreign`(`post_id` ASC) USING BTREE,
   CONSTRAINT `post_catalouge_post_post_catalouge_id_foreign` FOREIGN KEY (`post_catalouge_id`) REFERENCES `post_catalouges` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `post_catalouge_post_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of post_catalouge_post
@@ -1657,20 +1674,20 @@ CREATE TABLE `post_catalouges`  (
   INDEX `post_catalouges_user_id_foreign`(`user_id` ASC) USING BTREE,
   INDEX `post_catalouges__lft__rgt_parent_id_index`(`_lft` ASC, `_rgt` ASC, `parent_id` ASC) USING BTREE,
   CONSTRAINT `post_catalouges_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 69 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 69 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of post_catalouges
 -- ----------------------------
-INSERT INTO `post_catalouges` VALUES (57, NULL, 1, 12, NULL, NULL, NULL, 1, 0, 2, 101, NULL, '2025-02-21 07:38:45', '2025-02-25 04:52:21');
+INSERT INTO `post_catalouges` VALUES (57, NULL, 1, 2, NULL, NULL, NULL, 1, 0, 2, 101, '2025-10-26 15:40:08', '2025-02-21 07:38:45', '2025-10-26 15:40:08');
 INSERT INTO `post_catalouges` VALUES (58, 57, 2, 5, NULL, NULL, NULL, 1, 0, 2, 101, '2025-02-25 04:52:21', '2025-02-21 07:39:32', '2025-02-25 04:52:21');
-INSERT INTO `post_catalouges` VALUES (59, 61, 5, 6, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQxMDcyODgzL0ltYWdlRm9sZGVyL2ZscWZrcXA1NWlpd3BwZjNmdDVnLnBuZw==', NULL, '[\"http://res.cloudinary.com/my-could-api/image/upload/v1740543445/album/hls2mrbzdw8pnyf1tspl.jpg\",\"http://res.cloudinary.com/my-could-api/image/upload/v1740543446/album/ekrv29l6dizfwkjs7vwr.jpg\"]', 1, 0, 1, 101, NULL, '2025-02-24 04:13:34', '2025-03-04 07:21:26');
-INSERT INTO `post_catalouges` VALUES (60, 57, 2, 3, NULL, NULL, NULL, 1, 0, 1, 101, NULL, '2025-02-24 04:58:46', '2025-02-25 04:52:21');
-INSERT INTO `post_catalouges` VALUES (61, 57, 4, 9, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQxMDcyODU0L0ltYWdlRm9sZGVyL3MxajY2MGN6dDh6Z3gxa296bG5zLmpwZw==', NULL, NULL, 1, 0, 1, 101, NULL, '2025-02-26 04:33:04', '2025-03-04 07:20:57');
-INSERT INTO `post_catalouges` VALUES (62, 61, 7, 8, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQwNzEzNTY0L0ltYWdlRm9sZGVyL25sb3ZoMG1zeXlxdGF6Z3FvdjF2LmpwZw==', NULL, '[\"http://res.cloudinary.com/my-could-api/image/upload/v1740713474/album/ac0c6jnkfcloopnicmzc.png\",\"http://res.cloudinary.com/my-could-api/image/upload/v1740713475/album/ybhuktkrukh9vow0qu3j.jpg\"]', 1, 0, 1, 101, NULL, '2025-02-28 03:32:52', '2025-02-28 03:32:52');
-INSERT INTO `post_catalouges` VALUES (65, NULL, 13, 14, NULL, NULL, NULL, 1, 0, 2, 101, NULL, '2025-03-04 08:23:06', '2025-03-04 08:23:06');
-INSERT INTO `post_catalouges` VALUES (66, NULL, 15, 16, NULL, NULL, NULL, 1, 0, 2, 105, NULL, '2025-03-05 02:02:59', '2025-05-19 08:46:38');
-INSERT INTO `post_catalouges` VALUES (68, 57, 10, 11, NULL, NULL, NULL, 1, 0, 2, 101, NULL, '2025-03-05 02:08:29', '2025-03-05 02:08:29');
+INSERT INTO `post_catalouges` VALUES (59, 61, 5, 6, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQxMDcyODgzL0ltYWdlRm9sZGVyL2ZscWZrcXA1NWlpd3BwZjNmdDVnLnBuZw==', NULL, '[\"http://res.cloudinary.com/my-could-api/image/upload/v1740543445/album/hls2mrbzdw8pnyf1tspl.jpg\",\"http://res.cloudinary.com/my-could-api/image/upload/v1740543446/album/ekrv29l6dizfwkjs7vwr.jpg\"]', 1, 0, 1, 101, '2025-10-26 15:39:51', '2025-02-24 04:13:34', '2025-10-26 15:39:51');
+INSERT INTO `post_catalouges` VALUES (60, 57, 2, 3, NULL, NULL, NULL, 1, 0, 1, 101, '2025-10-26 15:40:02', '2025-02-24 04:58:46', '2025-10-26 15:40:02');
+INSERT INTO `post_catalouges` VALUES (61, 57, 4, 5, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQxMDcyODU0L0ltYWdlRm9sZGVyL3MxajY2MGN6dDh6Z3gxa296bG5zLmpwZw==', NULL, NULL, 1, 0, 1, 101, '2025-10-26 15:39:57', '2025-02-26 04:33:04', '2025-10-26 15:39:57');
+INSERT INTO `post_catalouges` VALUES (62, 61, 7, 8, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQwNzEzNTY0L0ltYWdlRm9sZGVyL25sb3ZoMG1zeXlxdGF6Z3FvdjF2LmpwZw==', NULL, '[\"http://res.cloudinary.com/my-could-api/image/upload/v1740713474/album/ac0c6jnkfcloopnicmzc.png\",\"http://res.cloudinary.com/my-could-api/image/upload/v1740713475/album/ybhuktkrukh9vow0qu3j.jpg\"]', 1, 0, 1, 101, '2025-10-26 15:39:46', '2025-02-28 03:32:52', '2025-10-26 15:39:46');
+INSERT INTO `post_catalouges` VALUES (65, NULL, 13, 14, NULL, NULL, NULL, 1, 0, 2, 101, '2025-10-26 15:39:08', '2025-03-04 08:23:06', '2025-10-26 15:39:08');
+INSERT INTO `post_catalouges` VALUES (66, NULL, 15, 16, NULL, NULL, NULL, 1, 0, 2, 105, '2025-10-26 15:39:02', '2025-03-05 02:02:59', '2025-10-26 15:39:02');
+INSERT INTO `post_catalouges` VALUES (68, 57, 10, 11, NULL, NULL, NULL, 1, 0, 2, 101, '2025-10-26 15:39:14', '2025-03-05 02:08:29', '2025-10-26 15:39:14');
 
 -- ----------------------------
 -- Table structure for post_language
@@ -1693,7 +1710,7 @@ CREATE TABLE `post_language`  (
   INDEX `post_language_language_id_foreign`(`language_id` ASC) USING BTREE,
   CONSTRAINT `post_language_language_id_foreign` FOREIGN KEY (`language_id`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `post_language_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of post_language
@@ -1726,18 +1743,18 @@ CREATE TABLE `posts`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `posts_user_id_foreign`(`user_id` ASC) USING BTREE,
   CONSTRAINT `posts_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 47 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 47 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of posts
 -- ----------------------------
 INSERT INTO `posts` VALUES (28, 60, NULL, NULL, NULL, 0, 1, '2025-02-27 07:32:27', 101, '2025-02-27 02:14:48', '2025-02-27 07:32:27', 2);
-INSERT INTO `posts` VALUES (36, 57, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQwNjM5MTIzL0ltYWdlRm9sZGVyL3psamtxejNpb21jendpNTB0bDJyLmpwZw==', NULL, '[\"http://res.cloudinary.com/my-could-api/image/upload/v1740637112/album/keaunmmzbh38nrmhxrn2.jpg\",\"http://res.cloudinary.com/my-could-api/image/upload/v1740637113/album/c7t9onh3ngntfcld0fnt.jpg\"]', 0, 1, NULL, 101, '2025-02-27 02:46:45', '2025-02-27 06:52:10', 2);
-INSERT INTO `posts` VALUES (37, 59, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQwNjM5MTgyL0ltYWdlRm9sZGVyL3FpamVsMjVtem9xYmN1bHh4Y3BmLmpwZw==', NULL, '[\"http://res.cloudinary.com/my-could-api/image/upload/v1740638519/album/uvaqwynylhwk3lqmrf7d.jpg\",\"http://res.cloudinary.com/my-could-api/image/upload/v1740639229/album/nbnfyvyqie2eseautmti.jpg\"]', 0, 1, NULL, 101, '2025-02-27 06:43:19', '2025-02-27 06:54:00', 1);
-INSERT INTO `posts` VALUES (38, 59, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQwNzE0MDE3L0ltYWdlRm9sZGVyL3FxeHllandvbWpydmVqamN5eGNzLmpwZw==', NULL, '[\"http://res.cloudinary.com/my-could-api/image/upload/v1740646472/album/oywxobt6wrkrbxtcwgsf.jpg\",\"http://res.cloudinary.com/my-could-api/image/upload/v1740646473/album/wl3waeze7eniycwcwnzu.jpg\"]', 0, 1, NULL, 101, '2025-02-27 08:56:27', '2025-02-28 03:47:01', 1);
-INSERT INTO `posts` VALUES (44, 57, NULL, NULL, NULL, 0, 1, NULL, 105, '2025-03-04 09:45:44', '2025-05-19 08:25:33', 2);
-INSERT INTO `posts` VALUES (45, 57, NULL, NULL, NULL, 0, 1, NULL, 101, '2025-03-05 01:39:24', '2025-03-05 01:39:24', 2);
-INSERT INTO `posts` VALUES (46, 57, NULL, NULL, NULL, 0, 1, NULL, 101, '2025-03-05 02:13:32', '2025-03-05 02:13:32', 2);
+INSERT INTO `posts` VALUES (36, 57, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQwNjM5MTIzL0ltYWdlRm9sZGVyL3psamtxejNpb21jendpNTB0bDJyLmpwZw==', NULL, '[\"http://res.cloudinary.com/my-could-api/image/upload/v1740637112/album/keaunmmzbh38nrmhxrn2.jpg\",\"http://res.cloudinary.com/my-could-api/image/upload/v1740637113/album/c7t9onh3ngntfcld0fnt.jpg\"]', 0, 1, '2025-10-26 15:22:20', 101, '2025-02-27 02:46:45', '2025-10-26 15:22:20', 2);
+INSERT INTO `posts` VALUES (37, 59, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQwNjM5MTgyL0ltYWdlRm9sZGVyL3FpamVsMjVtem9xYmN1bHh4Y3BmLmpwZw==', NULL, '[\"http://res.cloudinary.com/my-could-api/image/upload/v1740638519/album/uvaqwynylhwk3lqmrf7d.jpg\",\"http://res.cloudinary.com/my-could-api/image/upload/v1740639229/album/nbnfyvyqie2eseautmti.jpg\"]', 0, 1, '2025-10-26 15:22:16', 101, '2025-02-27 06:43:19', '2025-10-26 15:22:16', 1);
+INSERT INTO `posts` VALUES (38, 59, 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQwNzE0MDE3L0ltYWdlRm9sZGVyL3FxeHllandvbWpydmVqamN5eGNzLmpwZw==', NULL, '[\"http://res.cloudinary.com/my-could-api/image/upload/v1740646472/album/oywxobt6wrkrbxtcwgsf.jpg\",\"http://res.cloudinary.com/my-could-api/image/upload/v1740646473/album/wl3waeze7eniycwcwnzu.jpg\"]', 0, 1, '2025-10-26 15:22:26', 101, '2025-02-27 08:56:27', '2025-10-26 15:22:26', 1);
+INSERT INTO `posts` VALUES (44, 57, NULL, NULL, NULL, 0, 1, '2025-10-26 15:21:55', 105, '2025-03-04 09:45:44', '2025-10-26 15:21:55', 2);
+INSERT INTO `posts` VALUES (45, 57, NULL, NULL, NULL, 0, 1, '2025-10-26 15:22:31', 101, '2025-03-05 01:39:24', '2025-10-26 15:22:31', 2);
+INSERT INTO `posts` VALUES (46, 57, NULL, NULL, NULL, 0, 1, '2025-10-26 15:21:50', 101, '2025-03-05 02:13:32', '2025-10-26 15:21:50', 2);
 
 -- ----------------------------
 -- Table structure for product_catalouge_language
@@ -1759,7 +1776,7 @@ CREATE TABLE `product_catalouge_language`  (
   INDEX `product_catalouge_language_language_id_foreign`(`language_id` ASC) USING BTREE,
   CONSTRAINT `product_catalouge_language_language_id_foreign` FOREIGN KEY (`language_id`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `product_catalouge_language_product_catalouge_id_foreign` FOREIGN KEY (`product_catalouge_id`) REFERENCES `product_catalouges` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of product_catalouge_language
@@ -1784,7 +1801,7 @@ CREATE TABLE `product_catalouge_product`  (
   INDEX `product_catalouge_product_product_id_foreign`(`product_id` ASC) USING BTREE,
   CONSTRAINT `product_catalouge_product_product_catalouge_id_foreign` FOREIGN KEY (`product_catalouge_id`) REFERENCES `product_catalouges` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `product_catalouge_product_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of product_catalouge_product
@@ -1820,7 +1837,7 @@ CREATE TABLE `product_catalouges`  (
   INDEX `product_catalouges_user_id_foreign`(`user_id` ASC) USING BTREE,
   INDEX `product_catalouges__lft__rgt_parent_id_index`(`_lft` ASC, `_rgt` ASC, `parent_id` ASC) USING BTREE,
   CONSTRAINT `product_catalouges_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of product_catalouges
@@ -1852,7 +1869,7 @@ CREATE TABLE `product_language`  (
   INDEX `product_language_language_id_foreign`(`language_id` ASC) USING BTREE,
   CONSTRAINT `product_language_language_id_foreign` FOREIGN KEY (`language_id`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `product_language_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of product_language
@@ -1876,7 +1893,7 @@ CREATE TABLE `product_variant_attr`  (
   INDEX `product_variant_attr_attr_id_foreign`(`attr_id` ASC) USING BTREE,
   CONSTRAINT `product_variant_attr_attr_id_foreign` FOREIGN KEY (`attr_id`) REFERENCES `attrs` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `product_variant_attr_product_variant_id_foreign` FOREIGN KEY (`product_variant_id`) REFERENCES `product_variants` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of product_variant_attr
@@ -1922,7 +1939,7 @@ CREATE TABLE `product_variants`  (
   INDEX `product_variants_user_id_foreign`(`user_id` ASC) USING BTREE,
   CONSTRAINT `product_variants_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `product_variants_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 136 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 136 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of product_variants
@@ -1955,7 +1972,7 @@ CREATE TABLE `products`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `products_user_id_foreign`(`user_id` ASC) USING BTREE,
   CONSTRAINT `products_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 52 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 52 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of products
@@ -1981,7 +1998,7 @@ CREATE TABLE `promotion_product_variant`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `promotion_product_variant_promotion_id_foreign`(`promotion_id` ASC) USING BTREE,
   CONSTRAINT `promotion_product_variant_promotion_id_foreign` FOREIGN KEY (`promotion_id`) REFERENCES `promotions` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 150 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 150 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of promotion_product_variant
@@ -2017,7 +2034,7 @@ CREATE TABLE `promotions`  (
   `discountType` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `maxDiscountValue` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of promotions
@@ -2128,7 +2145,7 @@ CREATE TABLE `routers`  (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `routers_canonical_unique`(`canonical` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 79 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 79 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of routers
@@ -2186,7 +2203,8 @@ CREATE TABLE `sessions`  (
 -- ----------------------------
 -- Records of sessions
 -- ----------------------------
-INSERT INTO `sessions` VALUES ('S9e4SPiSjv2qiatdhmUL5qfoOHtdz60Hi9v7pJPv', 101, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'YTo4OntzOjY6Il90b2tlbiI7czo0MDoieFh2c0xjdEtwT2QzMkNMZFhuQncwZno1Z3dpQ2tlazFpNHY5SDNnVSI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo0NToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2NhcnQvc3VjY2Vzcy8xNzYxMjA3MDkxIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoxMDoiYXBwX2xvY2FsZSI7czoyOiJ2aSI7czo0OiJjYXJ0IjthOjA6e31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxMDE7czoyMjoiUEhQREVCVUdCQVJfU1RBQ0tfREFUQSI7YTowOnt9fQ==', 1761212861);
+INSERT INTO `sessions` VALUES ('1wNuCjyw5i8bfe7Nj2zAqRK0VKjnn3HCZRzCSqna', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiazJwMWp1SzFYcmZ5akJVQ1o3NjNjZ2t2Y2JDc0JuVkpkeWF1ZGdPUiI7czoyMjoiUEhQREVCVUdCQVJfU1RBQ0tfREFUQSI7YTowOnt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC90dXllbi1kdW5nLmh0bWwiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjE4OiJmbGFzaGVyOjplbnZlbG9wZXMiO2E6MDp7fX0=', 1761494215);
+INSERT INTO `sessions` VALUES ('TQPdMfOf3ysIHgDu8oTQ1anKBo06MbHY7uqLqYcv', 101, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiSURiS0hRbW9uSW5Va0JDTEw0eVhGN1VFYVVueW93MThaMnFmeVdGSCI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoyMToiaHR0cDovLzEyNy4wLjAuMTo4MDAwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTAxO3M6MTA6ImFwcF9sb2NhbGUiO3M6MjoidmkiO3M6MjI6IlBIUERFQlVHQkFSX1NUQUNLX0RBVEEiO2E6MDp7fX0=', 1761494557);
 
 -- ----------------------------
 -- Table structure for slides
@@ -2209,7 +2227,7 @@ CREATE TABLE `slides`  (
   UNIQUE INDEX `slides_keyword_unique`(`keyword` ASC) USING BTREE,
   INDEX `slides_user_id_foreign`(`user_id` ASC) USING BTREE,
   CONSTRAINT `slides_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of slides
@@ -2232,7 +2250,7 @@ CREATE TABLE `sources`  (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `sources_keyword_unique`(`keyword` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sources
@@ -2259,17 +2277,17 @@ CREATE TABLE `systems`  (
   INDEX `systems_user_id_foreign`(`user_id` ASC) USING BTREE,
   CONSTRAINT `systems_language_id_foreign` FOREIGN KEY (`language_id`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `systems_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 49 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 49 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of systems
 -- ----------------------------
 INSERT INTO `systems` VALUES (23, 1, 101, 'homepage_company', 'Công Ty TPro', NULL, NULL);
 INSERT INTO `systems` VALUES (24, 1, 101, 'homepage_brand', 'TPro', NULL, NULL);
-INSERT INTO `systems` VALUES (25, 1, 101, 'homepage_slogan', 'Benefit for everyone', NULL, NULL);
+INSERT INTO `systems` VALUES (25, 1, 101, 'homepage_slogan', 'Nơi mua sắm đáng tin cậy cho mọi nhà.', NULL, NULL);
 INSERT INTO `systems` VALUES (26, 1, 101, 'homepage_copyright', 'TPro', NULL, NULL);
 INSERT INTO `systems` VALUES (27, 1, 101, 'homepage_website_status', 'open', NULL, NULL);
-INSERT INTO `systems` VALUES (28, 1, 101, 'homepage_logo', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzU5MzA1NzQ4L0ltYWdlRm9sZGVyL2llY3I3dHdwZXR5OXZtbWJyeDAwLnBuZw==', NULL, NULL);
+INSERT INTO `systems` VALUES (28, 1, 101, 'homepage_logo', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzYxNDk0NTQ2L0ltYWdlRm9sZGVyL3VoczNnajFlbXFtemVoNGNmdW1qLnBuZw==', NULL, NULL);
 INSERT INTO `systems` VALUES (29, 1, 101, 'homepage_favicon', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzU5MzA1NzU0L0ltYWdlRm9sZGVyL2g3NG1nMm5tbWRlYzd0M3J5bHFnLnBuZw==', NULL, NULL);
 INSERT INTO `systems` VALUES (30, 1, 101, 'contact_office', 'da', NULL, NULL);
 INSERT INTO `systems` VALUES (31, 1, 101, 'contact_address', '275b Pham Ngu Lao, TP.HCM', NULL, NULL);
@@ -2278,7 +2296,7 @@ INSERT INTO `systems` VALUES (33, 1, 101, 'contact_technical_phone', '0347077950
 INSERT INTO `systems` VALUES (34, 1, 101, 'contact_sell_phone', '03470779502', NULL, NULL);
 INSERT INTO `systems` VALUES (35, 1, 101, 'contact_phone', '03470779502', NULL, NULL);
 INSERT INTO `systems` VALUES (36, 1, 101, 'contact_fax', 'dsada', NULL, NULL);
-INSERT INTO `systems` VALUES (37, 1, 101, 'contact_email', 'tpro@gmail.com', NULL, NULL);
+INSERT INTO `systems` VALUES (37, 1, 101, 'contact_email', 'thangocphu0803@gmail.com', NULL, NULL);
 INSERT INTO `systems` VALUES (38, 1, 101, 'contact_tax', 'đáa', NULL, NULL);
 INSERT INTO `systems` VALUES (39, 1, 101, 'contact_website', 'đa', NULL, NULL);
 INSERT INTO `systems` VALUES (40, 1, 101, 'contact_map', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.26267585795!2d106.73443467570279!3d10.714211560336897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752587cf5f82d7%3A0xc3c2e8d07c218d59!2zSHXhu7NuaCBU4bqlbiBQaMOhdCwgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1748943880341!5m2!1svi!2s\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>', NULL, NULL);
@@ -2301,7 +2319,7 @@ CREATE TABLE `user_catalouge_permission`  (
   INDEX `user_catalouge_permission_permission_id_foreign`(`permission_id` ASC) USING BTREE,
   CONSTRAINT `user_catalouge_permission_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `user_catalouge_permission_user_catalouge_id_foreign` FOREIGN KEY (`user_catalouge_id`) REFERENCES `user_catalouges` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_catalouge_permission
@@ -2393,7 +2411,7 @@ CREATE TABLE `user_catalouges`  (
   `updated_at` timestamp NULL DEFAULT NULL,
   `publish` tinyint NOT NULL DEFAULT 2,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_catalouges

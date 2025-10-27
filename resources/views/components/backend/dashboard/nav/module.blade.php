@@ -3,8 +3,8 @@
     'title' => null,
 ])
 
-<li class="active">
-    <a href="index.html">
+<li class="module-nav-menu" data-module="{{ $icon }}">
+    <a href="#">
         <i class="fa {{$icon}} fa-lg"></i>
         <span class="nav-label text-capitalize">{{$title}}</span>
         <span class="fa arrow"></span>

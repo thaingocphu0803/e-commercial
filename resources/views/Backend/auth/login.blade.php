@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{-- /@vite('resources/css/app.css') --}}
 
-    <title>e-commercal | Login</title>
+    <title>{{ __('custom.tproAdmin') }}</title>
 
     <link href="{{asset('backend/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('backend/font-awesome/css/font-awesome.css')}}" rel="stylesheet">
@@ -26,34 +26,30 @@
                 <h1 class="logo-name">TPro</h1>
 
             </div>
-            <h3>Welcome to TPro</h3>
-            <p>Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
-            </p>
-            <p>Login in. To see it in action.</p>
+            <h3>{{ __('custom.welcomeTPro') }}</h3>
+
             <form class="m-t" role="form" action="{{ route('auth.login') }}" method="POST">
                 @csrf
 
                 <div class="form-group">
-                    <input type="text" class="form-control" name="email" placeholder="Username" value="{{old('email')}}">
+                    <input type="text" class="form-control" name="email" placeholder="{{ __('custom.email') }}" value="{{old('email')}}">
                     @error('email')
                         <div class="error-message">* {{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="form-group">
-                    <input type="password" class="form-control" name="password" placeholder="Password">
+                    <input type="password" class="form-control" name="password" placeholder="{{ __('custom.password') }}">
                     @error('password')
                         <div class="error-message">* {{ $message }}</div>
                     @enderror
                 </div>
 
-                <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+                <button type="submit" class="btn btn-primary block full-width m-b">{{ __('custom.login') }}</button>
 
-                <a href="#"><small>Forgot password?</small></a>
-                <p class="text-muted text-center"><small>Do not have an account?</small></p>
-                <a class="btn btn-sm btn-white btn-block" href="register.html">Create an account</a>
+                <a href="#"><small>{{ __('custom.forgotPass') }}</small></a>
             </form>
-            <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
+            <p class="m-t"> <small>{{__('custom.copyrightBy', ['attribute' => 'TPro']);}}</small> </p>
         </div>
     </div>
 

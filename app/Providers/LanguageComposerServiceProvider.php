@@ -22,12 +22,17 @@ class LanguageComposerServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('components.backend.dashboard.sidebar', function ($view) {
-            $languages = Language::all();
+            $languages = Language::where('publish', config('app.general.defaultPublish'))->get();
             $view->with('languages', $languages);
         });
 
         View::composer('components.frontend.dashboard.header', function ($view) {
-            $languages = Language::all();
+            $languages = Language::where('publish', config('app.general.defaultPublish'))->get();
+            $view->with('languages', $languages);
+        });
+
+        View::composer('components.frontend.dashboard.mobile.header', function ($view) {
+            $languages = Language::where('publish', config('app.general.defaultPublish'))->get();
             $view->with('languages', $languages);
         });
 
