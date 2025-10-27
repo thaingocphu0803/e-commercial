@@ -2,8 +2,8 @@
      'system' => [],
      'footerMenu' => [],
  ])
- {{-- @dd($footerMenu); --}}
- <section class="section-padding footer-mid">
+
+<section class="section-padding footer-mid">
      <div class="container pt-15 pb-20">
          <div class="row">
              <div class="col">

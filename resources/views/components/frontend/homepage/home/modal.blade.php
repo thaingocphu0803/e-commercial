@@ -27,7 +27,7 @@
                             <div class="modal-product-catalouge d-flex align-items-center">
                                 <span
                                     class=" me-3 fs-5 text-secondary text-capitalize">{{ __('custom.catalouge') }}:</span>
-                                <div class="catalouge-list d-flex justify-content-between gap-3">
+                                <div class="catalouge-list d-flex justify-content-between gap-3 mt-50">
                                     {{-- content here !! --}}
                                 </div>
                             </div>

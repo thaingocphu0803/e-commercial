@@ -1,5 +1,4 @@
 <x-backend.dashboard.layout>
-
     <x-slot:heading>
         <link href="{{asset('backend/css/plugins/switchery/switchery.css')}}" rel="stylesheet">
     </x-slot:heading>
@@ -124,7 +123,7 @@
                                     rowLength="12"
                                     type="text"
                                     :labelName="__('custom.price')"
-                                    :value="$product->price ?? ''"
+                                    :value="price_format($product->price, true) ?? ''"
                                 />
                                 <x-backend.dashboard.form.input
                                     inputName="origin"

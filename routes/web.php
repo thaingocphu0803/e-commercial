@@ -47,7 +47,7 @@ Route::controller(CartController::class)->prefix('cart')->middleware(['locale', 
 });
 
 // RouteController
-Route::get('{canonical}'. config('app.general.suffix'), [RouterController::class, 'index'])->name('router.index')->where('canonical', '[a-zA-z0-9-]+');
+Route::get('{canonical}'. config('app.general.suffix'), [RouterController::class, 'index'])->middleware(['locale'])->name('router.index')->where('canonical', '[a-zA-z0-9-]+');
 
 // Ajax ProductController
 Route::controller(AjaxProductController::class)->prefix('ajax/product')->middleware(['locale'])->group(function(){

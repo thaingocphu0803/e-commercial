@@ -17,7 +17,7 @@ if (!function_exists("write_url")) {
 
 // helper fomart price number
 if (!function_exists("price_format")) {
-    function price_format($number)
+    function price_format($number, $onlyNumber = false)
     {
         $map = [
             'vi' => ['symbol' => '₫',  'decimals' => 0],
@@ -33,10 +33,13 @@ if (!function_exists("price_format")) {
 
 
         $price = number_format(intval($number), $decimals, '.', ',');
-
+        if($onlyNumber){
+            return $price;
+        }
         return $price . $symbol;
     }
 }
+
 
 // helper caculate discount
 if (!function_exists('caculate_discount_price')) {
@@ -61,7 +64,6 @@ if (!function_exists('caculate_discount_price')) {
 if (!function_exists('seo')) {
     function seo($object)
     {
-        // dd($object);
         return [
             'meta_title' => $object->meta_title ?? $object->name,
             'meta_keyword' => $object->meta_keyword ?? $object->canonical,

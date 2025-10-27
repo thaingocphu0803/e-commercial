@@ -12,7 +12,7 @@
         <a href="{{ write_url($menu->menuLanguage->canonical, true, true) }}" target="_self">
             {{ $menu->menuLanguage->name }}
         </a>
-        {{-- @dd($menu) --}}
+
         @if (count($menu->children))
             <ul class="dropdown" style="display: none;">
                 @foreach ($menu->children as $menu)

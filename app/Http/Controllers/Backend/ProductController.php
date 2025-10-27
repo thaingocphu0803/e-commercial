@@ -65,6 +65,7 @@ class ProductController extends Controller
     {
         Gate::authorize('modules', 'product.update');
         $product = $this->productService->findById($id);
+        // dd($product);
         $listNode = $this->productService->getToTree();
         $listAttr = $this->attrCatalougeService->getToTree();
         $languages = Language::select('id', 'name')->get();
@@ -81,7 +82,6 @@ class ProductController extends Controller
     public function update($id, UpdateProductRequest $request)
     {
         Gate::authorize('modules', 'product.update');
-
         if ($this->productService->update($id, $request)) {
             return redirect()->route('product.index')->with('success',  __('alert.updateSuccess', ['attribute'=> __('custom.product')]));
         }

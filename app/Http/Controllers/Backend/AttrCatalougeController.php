@@ -45,6 +45,7 @@ class AttrCatalougeController extends Controller
     public function store(StoreAttrCatalougeRequest $request)
     {
         Gate::authorize('modules', 'attr.catalouge.create');
+
         if ($this->attrCatalougeService->create($request)) {
             return redirect()->route('attr.catalouge.index')->with('success', __('alert.addSuccess', ['attribute'=> __('custom.attrCatalouge')]));
         }

@@ -132,7 +132,7 @@
                                     <span>{{ __('custom.guideLinkList') }}</span>
                                 </div>
                             </div>
-                            @if (!empty(old('menu', $menuArr)))
+                            @if (!empty(old('menu', $menuArr)['name']))
                                 @foreach (old('menu', $menuArr)['name'] as $key => $value)
                                     @php
                                         $data = [

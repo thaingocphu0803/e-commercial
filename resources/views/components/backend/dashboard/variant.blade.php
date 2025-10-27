@@ -1,4 +1,3 @@
-{{-- @dd($product->variants['attributes']) --}}
 <div class="ibox variant-box">
     <div class="ibox-title">
         <h5>{{ __('custom.variant') }}</h5>
