@@ -271,7 +271,7 @@ const handleProductImage = (image, album) => {
     let srcImg = image ? atob(image) : noImage;
     let imgList = $(".modal-product-image .image-list");
 
-    let mainImg = $("<img>").addClass("img-cover").attr("src", srcImg);
+    let mainImg = $("<img>").addClass("img-contain").attr("src", srcImg);
     $(".modal-product-image .image-main").html(mainImg);
 
     imgList.empty();
@@ -279,7 +279,7 @@ const handleProductImage = (image, album) => {
     if (image) {
         let mainItem = $("<div>")
             .addClass("list-item active")
-            .append($("<img>").addClass("img-cover").attr("src", srcImg));
+            .append($("<img>").addClass("img-contain").attr("src", srcImg));
         imgList.append(mainItem);
     }
 
@@ -287,7 +287,7 @@ const handleProductImage = (image, album) => {
         album.forEach((src) => {
             let item = $("<div>")
                 .addClass("list-item")
-                .append($("<img>").addClass("img-cover").attr("src", src));
+                .append($("<img>").addClass("img-contain").attr("src", src));
             imgList.append(item);
         });
     }

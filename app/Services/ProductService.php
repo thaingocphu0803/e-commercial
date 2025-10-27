@@ -97,7 +97,7 @@ class ProductService implements ProductServiceInterface
         DB::beginTransaction();
         try {
             $payloadProduct = $request->only($this->getRequestPost());
-
+            $payloadProduct['price'] = str_replace(',','', $payloadProduct['price']);
 
             $payloadProduct['user_id'] = Auth::id();
             $payloadProduct['product_catalouge_id'] = $request->input('product_catalouge_id') ?? null;
@@ -144,6 +144,7 @@ class ProductService implements ProductServiceInterface
         DB::beginTransaction();
         try {
             $payloadProduct = $request->only($this->getRequestPost());
+            $payloadProduct['price'] = str_replace(',','', $payloadProduct['price']);
 
             $payloadProduct['user_id'] = Auth::id();
 
@@ -284,6 +285,7 @@ class ProductService implements ProductServiceInterface
     public function createVariant($product, $request)
     {
         $payload = $request->only(['variant', 'attr', 'attributes', 'attr-catalouge', 'price']);
+
         // if varinant is not existed, did not anything
         if(empty($payload) || empty($payload['attr-catalouge'])) return;
         $variant = $this->createVariantArray($product->id, $payload);
@@ -308,7 +310,7 @@ class ProductService implements ProductServiceInterface
                     'name' => $payload['attr']['name'][$key],
                     'quantity' => ($payload['variant']['quantity'][$key]) ?? '',
                     'sku' => $val,
-                    'price' => ($payload['variant']['price'][$key]) ?? '',
+                    'price' => str_replace(',', '', ($payload['variant']['price'][$key])) ?? '',
                     'barcode' => ($payload['variant']['barcode'][$key]) ?? '',
                     'filename' => ($payload['variant']['filename'][$key]) ?? '',
                     'url' => ($payload['variant']['url'][$key]) ?? '',

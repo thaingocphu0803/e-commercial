@@ -41,6 +41,9 @@
 {{-- nestable --}}
 <script src="{{asset('backend/js/plugins/nestable/jquery.nestable.js')}}"></script>
 
+{{-- lib.js --}}
+ <script src="{{asset('backend/js/lib.js')}}" defer></script>
+
  {{-- main.js --}}
  <script src="{{asset('backend/js/main.js')}}" defer></script>
 

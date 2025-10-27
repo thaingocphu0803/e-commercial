@@ -5,9 +5,6 @@
     {{ $heading  ?? ''}}
 </x-backend.dashboard.head>
 
-@php
-    // dd(config('cloudinary.cloud_name'));
-@endphp
 <body>
     <div id="wrapper">
         <x-backend.dashboard.nav />

@@ -376,4 +376,10 @@ $(document).ready(() => {
             }
         });
     })();
+
+    $(document).on('input', 'input[name="price"], input[name="variant-price"]', function(){
+        let _this = $(this);
+        let price = _this.val().replace(/[^0-9]/g, "");
+        _this.val(convertToCommas(price));
+    })
 });

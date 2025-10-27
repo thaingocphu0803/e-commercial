@@ -353,7 +353,7 @@ class ProductRepository implements ProductRepositoryInterface
         if (count($product->productVariants)) {
             $attr_catalouge = explode('-', $product->productVariants->first()->attr_catalouge);
             foreach ($product->productVariants as $variant) {
-                $attr = explode('-', $variant->code);
+                $attr = explode('-', $variant->code); //MAU-RAM
 
                 foreach ($attr_catalouge as $key => $val) {
                     $attributes[$val][] = $attr[$key];

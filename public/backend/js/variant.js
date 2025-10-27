@@ -428,7 +428,7 @@ const appendProductVersion = (attrs, attrIds, attrTitle) => {
         });
 
         let strAttrName = attrName.join("-");
-        let strAttrId = variantAttrId.sort().join("-");
+        let strAttrId = variantAttrId.join("-");
 
         let tdHidden = `
             <td class="hidden td-variant">

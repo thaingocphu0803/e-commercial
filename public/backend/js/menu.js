@@ -158,7 +158,9 @@
                 model: _this.data("model"),
             };
 
-            FUNCT.ajaxGetMenu(requestData);
+            if(_this.attr('aria-expanded') == 'false') return;
+                FUNCT.ajaxGetMenu(requestData);
+
         });
     };
 
@@ -170,8 +172,10 @@
                 data: requestData,
                 dataType: "json",
             });
+
+
             if (response.code === 0) {
-                let dataArr = response.data.data;
+                let dataArr = response.object.data;
                 let menuItem = "";
                 $.each(dataArr, function (key, val) {
                     menuItem += `
@@ -192,8 +196,8 @@
                 });
                 $(".menu-list").html(menuItem);
 
-                if (response.data.links.length > 3) {
-                    let pagination = FUNCT.menuLinks(response.data.links);
+                if (response.object.links.length > 3) {
+                    let pagination = FUNCT.menuLinks(response.object.links);
                     $(".menu-list").append(pagination);
                 }
             }

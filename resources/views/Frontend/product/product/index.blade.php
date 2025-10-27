@@ -11,17 +11,17 @@
                     <div class="d-flex">
                         <div class="modal-product-image w-100 d-flex flex-column gap-3 pe-3">
                             <div class="image-main">
-                                <img src="{{ base64_decode($product['image']) }}" alt="" class="img-cover">
+                                <img src="{{ base64_decode($product['image']) }}" alt="{{__('custom.productImage')}}" class="img-contain">
                             </div>
-                            <div class="image-list d-flex justify-content-center gap-3">
+                            <div class="image-list d-flex justify-content-center gap-3 mt-50">
                                 <div class="list-item active">
-                                    <img src="{{ base64_decode($product['image']) }}" alt="" class="img-cover">
+                                    <img src="{{ base64_decode($product['image']) }}" alt="{{__('custom.productImage')}}" class="img-contain">
                                 </div>
 
                                 @if (!empty($product['album']))
                                     @foreach ($product['album'] as $img)
                                         <div class="list-item">
-                                            <img src="{{ $img }}" alt="" class="img-cover">
+                                            <img src="{{ $img }}" alt="{{__('custom.productImage')}}" class="img-contain">
                                         </div>
                                     @endforeach
                                 @endif

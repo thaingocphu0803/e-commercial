@@ -375,5 +375,6 @@
         'searchForSomething' => 'Search for something...',
         'pageNotFound' => 'Page Not Found',
         'backPrev' => 'Back to Previous Page',
-        'permissionStatus' => 'permission status'
+        'permissionStatus' => 'permission status',
+        'attrCatalouge' => 'attribute catalouge',
     ];

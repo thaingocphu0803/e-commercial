@@ -28,7 +28,6 @@ class ProductCatalougeController extends Controller
         $breadcrumbs = $this->productCatalougeService->getBreadcrumb($id);
         $products = $this->productService->getProductWithPromotion($id);
 
-
         $seo = seo($productCatalouge);
 
         return view('Frontend.product.catalouge.index', compact('seo', 'productCatalouge', 'breadcrumbs', 'products'));

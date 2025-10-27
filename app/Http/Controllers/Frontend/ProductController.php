@@ -30,7 +30,9 @@ class ProductController extends Controller
 
         $product = $this->productService->getProductWithVariant($payload);
         $seo = seo((object)$product);
-        $productCategories = $this->productCatalougeService->paginate($request);
+        $productCategories = $this->productCatalougeService->paginate($request->merge([
+            'perpage' => 6
+        ]));
 
         return view('Frontend.product.product.index', compact('product', 'seo', 'productCategories'));
     }

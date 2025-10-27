@@ -24,14 +24,16 @@ class StoreAttrRequest extends FormRequest
         return [
             'name' => 'required|unique:attr_language,name',
             'canonical' => 'required|unique:routers,canonical',
-            'language_id' => 'required|integer'
+            'language_id' => 'required|integer',
+            'attr_catalouge_id' => 'required'
         ];
     }
 
     public function messages()
     {
         return [
-            'language_id.required' => __('validation.requireLanguage')
+            'language_id.required' => __('validation.requireLanguage'),
+            'attr_catalouge_id.required' => __('validation.requireParentCatalouge')
         ];
     }
 }
