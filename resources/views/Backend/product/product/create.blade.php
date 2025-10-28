@@ -123,7 +123,7 @@
                                     rowLength="12"
                                     type="text"
                                     :labelName="__('custom.price')"
-                                    :value="price_format($product->price, true) ?? ''"
+                                    :value="price_format($product->price ?? 0, true) ?? ''"
                                 />
                                 <x-backend.dashboard.form.input
                                     inputName="origin"

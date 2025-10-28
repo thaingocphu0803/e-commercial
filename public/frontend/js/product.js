@@ -106,8 +106,7 @@
                             .find(".variant-list .list-item.active")
                             .attr("data-attr-id");
                     })
-                    .get()
-                    .sort();
+                    .get();
 
                 if (attrCatalouge.length !== attrArray.length) return;
 
