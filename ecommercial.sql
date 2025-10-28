@@ -11,7 +11,7 @@
  Target Server Version : 100432 (10.4.32-MariaDB)
  File Encoding         : 65001
 
- Date: 27/10/2025 16:43:29
+ Date: 26/10/2025 23:03:34
 */
 
 SET NAMES utf8mb4;
@@ -1888,7 +1888,7 @@ CREATE TABLE `product_language`  (
 -- ----------------------------
 -- Records of product_language
 -- ----------------------------
-INSERT INTO `product_language` VALUES (42, 1, 'Điện thoại Samsung Galaxy A17 5G', '<p><b>Hệ điều hành: </b>Android 15</p><p><b>Màn hình: </b>Super AMOLED</p><p><b>Tần số quét:</b> 90 Hz</p><p><b>Chip xử lý: </b>Exynos 1330</p><p><b>Tốc độ CPU:</b> 2 nhân 2.4 GHz &amp; 6 nhân 2 GHz</p><p><b>Dung lương Pin:</b> 5000 mAh</p><p><b>Kết nối sac: Type </b>C</p><p><b>Hỗ trợ sac tối đa: </b>25W</p><div><br></div>', NULL, NULL, NULL, NULL, 'dien-thoai-samsung-galaxy-a17-5g', '2025-07-11 04:10:49', '2025-10-27 09:34:39');
+INSERT INTO `product_language` VALUES (42, 1, 'iphone', '<p><b>IOS:</b>&nbsp;20;</p><p><b>MODEL</b>: 16</p>', NULL, NULL, NULL, NULL, 'iphone', '2025-07-11 04:10:49', '2025-10-02 08:42:00');
 INSERT INTO `product_language` VALUES (48, 1, 'football', NULL, NULL, NULL, NULL, NULL, 'foot-ball', '2025-07-11 09:23:12', '2025-10-01 06:59:54');
 INSERT INTO `product_language` VALUES (49, 1, 'shirt', NULL, NULL, NULL, NULL, NULL, 'shirt', '2025-07-15 02:45:13', '2025-07-15 02:45:13');
 INSERT INTO `product_language` VALUES (50, 1, 'short', NULL, NULL, NULL, NULL, NULL, 'short', '2025-07-15 04:34:19', '2025-10-02 08:42:14');
@@ -1919,18 +1919,10 @@ INSERT INTO `product_variant_attr` VALUES (114, 3, '2025-07-22 07:19:13', '2025-
 INSERT INTO `product_variant_attr` VALUES (114, 5, '2025-07-22 07:19:13', '2025-07-22 07:19:13');
 INSERT INTO `product_variant_attr` VALUES (114, 4, '2025-07-22 07:19:13', '2025-07-22 07:19:13');
 INSERT INTO `product_variant_attr` VALUES (133, 1, '2025-10-01 06:59:54', '2025-10-01 06:59:54');
-INSERT INTO `product_variant_attr` VALUES (161, 7, '2025-10-27 09:34:39', '2025-10-27 09:34:39');
-INSERT INTO `product_variant_attr` VALUES (161, 9, '2025-10-27 09:34:39', '2025-10-27 09:34:39');
-INSERT INTO `product_variant_attr` VALUES (162, 7, '2025-10-27 09:34:39', '2025-10-27 09:34:39');
-INSERT INTO `product_variant_attr` VALUES (162, 11, '2025-10-27 09:34:39', '2025-10-27 09:34:39');
-INSERT INTO `product_variant_attr` VALUES (163, 13, '2025-10-27 09:34:39', '2025-10-27 09:34:39');
-INSERT INTO `product_variant_attr` VALUES (163, 9, '2025-10-27 09:34:39', '2025-10-27 09:34:39');
-INSERT INTO `product_variant_attr` VALUES (164, 13, '2025-10-27 09:34:39', '2025-10-27 09:34:39');
-INSERT INTO `product_variant_attr` VALUES (164, 11, '2025-10-27 09:34:39', '2025-10-27 09:34:39');
-INSERT INTO `product_variant_attr` VALUES (165, 12, '2025-10-27 09:34:39', '2025-10-27 09:34:39');
-INSERT INTO `product_variant_attr` VALUES (165, 9, '2025-10-27 09:34:39', '2025-10-27 09:34:39');
-INSERT INTO `product_variant_attr` VALUES (166, 12, '2025-10-27 09:34:39', '2025-10-27 09:34:39');
-INSERT INTO `product_variant_attr` VALUES (166, 11, '2025-10-27 09:34:39', '2025-10-27 09:34:39');
+INSERT INTO `product_variant_attr` VALUES (134, 1, '2025-10-02 08:42:01', '2025-10-02 08:42:01');
+INSERT INTO `product_variant_attr` VALUES (134, 4, '2025-10-02 08:42:01', '2025-10-02 08:42:01');
+INSERT INTO `product_variant_attr` VALUES (135, 3, '2025-10-02 08:42:01', '2025-10-02 08:42:01');
+INSERT INTO `product_variant_attr` VALUES (135, 4, '2025-10-02 08:42:01', '2025-10-02 08:42:01');
 
 -- ----------------------------
 -- Table structure for product_variants
@@ -1961,7 +1953,7 @@ CREATE TABLE `product_variants`  (
   INDEX `product_variants_user_id_foreign`(`user_id` ASC) USING BTREE,
   CONSTRAINT `product_variants_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `product_variants_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 167 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 136 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of product_variants
@@ -1969,12 +1961,8 @@ CREATE TABLE `product_variants`  (
 INSERT INTO `product_variants` VALUES (113, 51, 101, '1-4-5', 'màu đỏ-doji-Kim cương', 20, '1753168540-1-4-5', 15000, '0', '', '', '', 1, NULL, '2025-07-22 07:19:13', '2025-07-22 07:19:13', '2-4-3', '3fcce2e3-b9de-5b10-8a7a-e7be0d2f3b7d');
 INSERT INTO `product_variants` VALUES (114, 51, 101, '3-4-5', 'màu vàng-doji-Kim cương', 110, '1753168540-1-4-5', 20000, '0', '', '', '', 1, NULL, '2025-07-22 07:19:13', '2025-07-22 07:19:13', '2-4-3', 'f8e6d25f-410c-5297-ae7d-2dc6ce65ac73');
 INSERT INTO `product_variants` VALUES (133, 48, 101, '1', 'màu đỏ', 0, '1752547450-1', 11111121, '0', '', '', '', 1, NULL, '2025-10-01 06:59:54', '2025-10-01 06:59:54', '2', 'e792e5c9-b1ef-59b6-8616-04651f84bb10');
-INSERT INTO `product_variants` VALUES (161, 42, 101, '7-9', 'Màu đen-8G - 128G', 100, '1752547080-12-9', 5890000, '0', '', '', '', 1, NULL, '2025-10-27 09:34:39', '2025-10-27 09:34:39', '5-6', 'd2e846fc-5b68-5773-ae06-b46a957bd153');
-INSERT INTO `product_variants` VALUES (162, 42, 101, '13-9', 'Màu xanh dương-8G - 128G', 0, NULL, 0, '0', '', '', '', 1, NULL, '2025-10-27 09:34:39', '2025-10-27 09:34:39', '5-6', 'edf17326-43b4-5b25-979c-c3aba1ac292c');
-INSERT INTO `product_variants` VALUES (163, 42, 101, '12-9', 'Màu xám-8G - 128G', 0, NULL, 0, '0', '', '', '', 1, NULL, '2025-10-27 09:34:39', '2025-10-27 09:34:39', '5-6', '0dfca9a2-7d8d-5cd3-a496-1fe2c093e11c');
-INSERT INTO `product_variants` VALUES (164, 42, 101, '11-7', 'Màu đen-8G - 256G', 0, NULL, 0, '0', '', '', '', 1, NULL, '2025-10-27 09:34:39', '2025-10-27 09:34:39', '5-6', '2a409e5e-6f44-560b-be77-19fcfcbacd41');
-INSERT INTO `product_variants` VALUES (165, 42, 101, '11-13', 'Màu xanh dương-8G - 256G', 0, NULL, 0, '0', '', '', '', 1, NULL, '2025-10-27 09:34:39', '2025-10-27 09:34:39', '5-6', '815810a4-f9ea-5dea-bd1d-e3a2df543d33');
-INSERT INTO `product_variants` VALUES (166, 42, 101, '11-12', 'Màu xám-8G - 256G', 0, NULL, 0, '0', '', '', '', 1, NULL, '2025-10-27 09:34:39', '2025-10-27 09:34:39', '5-6', '51af17bf-cf0a-5db7-8b14-df9c2a60c0b1');
+INSERT INTO `product_variants` VALUES (134, 42, 101, '1-4', 'màu đỏ-Kim cương', 10, '1752206944-1', 22220, '0', '', '', '', 1, NULL, '2025-10-02 08:42:01', '2025-10-02 08:42:01', '2-3', 'f3648c31-8a6d-5e15-b54c-345da98d00b8');
+INSERT INTO `product_variants` VALUES (135, 42, 101, '3-4', 'màu vàng-Kim cương', 20, '1752206944-1', 11110, '0', '', '', '', 1, NULL, '2025-10-02 08:42:01', '2025-10-02 08:42:01', '2-3', 'a3f4ac26-2c02-58d7-9518-fdd1377faf45');
 
 -- ----------------------------
 -- Table structure for products
@@ -2223,9 +2211,8 @@ CREATE TABLE `sessions`  (
 -- ----------------------------
 -- Records of sessions
 -- ----------------------------
-INSERT INTO `sessions` VALUES ('9KMNbcqkFEZKbLyw6DYSvxr3Xp7vJRvrrz0cLCS5', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoieEJJVDRuYkluUHZFdVJXb3dPd1JUYUx3UWFVVWdQZ09aM25kTlg5aCI7czoyMjoiUEhQREVCVUdCQVJfU1RBQ0tfREFUQSI7YTowOnt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9kaWVuLXRob2FpLmh0bWwiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1761550667);
-INSERT INTO `sessions` VALUES ('pWQxqmAR0VmchgjEkgI0mZvifqZdHE1qELcrQ5x0', 101, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiVWtLdFRQbkNMRjJJNmVyYUE5TEhTN1Rrc2xhdmpZbzBNdXJmTHB1eSI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo3MDoiaHR0cDovLzEyNy4wLjAuMTo4MDAwLy53ZWxsLWtub3duL2FwcHNwZWNpZmljL2NvbS5jaHJvbWUuZGV2dG9vbHMuanNvbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjEwMTtzOjEwOiJhcHBfbG9jYWxlIjtzOjI6InZpIjtzOjIyOiJQSFBERUJVR0JBUl9TVEFDS19EQVRBIjthOjA6e319', 1761557686);
-INSERT INTO `sessions` VALUES ('sKTeecnMOno4AsLoxk2Z6oFbkTOttKDqAR3Xog8M', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiS21wY1NjV3RFem9GZ1IwOUM4OGwySE9FYVF2eXZwOWxWbEdoamtGYSI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjIyOiJQSFBERUJVR0JBUl9TVEFDS19EQVRBIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoxNjM6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9kaWVuLXRob2FpLXNhbXN1bmctZ2FsYXh5LWExNy01Zy5odG1sP190b2tlbj1LbXBjU2NXdEV6b0ZnUjA5Qzg4bDJIT0VhUXZ5dnA5bFZsR2hqa0ZhJnByb21vdGlvbl9pZD0mdXVpZD0wZGZjYTlhMi03ZDhkLTVjZDMtYTQ5Ni0xZmUyYzA5M2UxMWMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1761556605);
+INSERT INTO `sessions` VALUES ('1wNuCjyw5i8bfe7Nj2zAqRK0VKjnn3HCZRzCSqna', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiazJwMWp1SzFYcmZ5akJVQ1o3NjNjZ2t2Y2JDc0JuVkpkeWF1ZGdPUiI7czoyMjoiUEhQREVCVUdCQVJfU1RBQ0tfREFUQSI7YTowOnt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC90dXllbi1kdW5nLmh0bWwiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjE4OiJmbGFzaGVyOjplbnZlbG9wZXMiO2E6MDp7fX0=', 1761494215);
+INSERT INTO `sessions` VALUES ('TQPdMfOf3ysIHgDu8oTQ1anKBo06MbHY7uqLqYcv', 101, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiSURiS0hRbW9uSW5Va0JDTEw0eVhGN1VFYVVueW93MThaMnFmeVdGSCI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoyMToiaHR0cDovLzEyNy4wLjAuMTo4MDAwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTAxO3M6MTA6ImFwcF9sb2NhbGUiO3M6MjoidmkiO3M6MjI6IlBIUERFQlVHQkFSX1NUQUNLX0RBVEEiO2E6MDp7fX0=', 1761494557);
 
 -- ----------------------------
 -- Table structure for slides
