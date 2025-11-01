@@ -302,7 +302,7 @@ class ProductRepository implements ProductRepositoryInterface
         ))
             ->mergeBindings($promotionSub->getQuery())
             ->where('rn', 1)
-            ->paginate(10);
+            ->paginate(20);
 
         return $products;
     }
