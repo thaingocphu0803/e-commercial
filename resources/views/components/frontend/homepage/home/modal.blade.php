@@ -9,8 +9,11 @@
                         <div class="image-main">
                             {{-- content here !! --}}
                         </div>
-                        <div class="image-list d-flex justify-content-center gap-3">
-                           {{-- content here !! --}}
+                        <div class="swiper product-swiper">
+                            <div class="swiper-wrapper image-list">
+                                {{-- content here !! --}}
+                            </div>
+                            <div class="swiper-pagination"></div>
                         </div>
                     </div>
                     <div class="d-flex flex-column justify-content-between w-50">

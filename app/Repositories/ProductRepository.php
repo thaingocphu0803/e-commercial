@@ -80,7 +80,7 @@ class ProductRepository implements ProductRepositoryInterface
         if (!empty($productData['album'])) {
             $album = explode(',', $productData['album']);
             $productData['image'] =  base64_encode($album[0]);
-            $productData['album'] = array_slice($album, 1, 4);
+            $productData['album'] = array_slice($album, 1);
         }else{
             $productData['image'] = null;
             $productData['album'] = null;
@@ -166,7 +166,7 @@ class ProductRepository implements ProductRepositoryInterface
         $productData['canonical'] = $productByCondition->canonical;
         $productData['description'] = $productByCondition->description;
         $productData['image'] = $productByCondition->image;
-        $productData['album'] = !is_null($productByCondition->album) ? array_slice(json_decode($productByCondition->album, true), 0, 4) : null;
+        $productData['album'] = !is_null($productByCondition->album) ? array_slice(json_decode($productByCondition->album, true), 0) : null;
         $productData['price'] = $productByCondition->price;
         $productData['catalouges'] = $productByCondition->productCatalouges->toArray();
         $productData['meta_title'] = $productByCondition->meta_title;
@@ -183,7 +183,7 @@ class ProductRepository implements ProductRepositoryInterface
             if (!isEmpty($album)) {
                 $album = explode(',', $album);
                 $productData['image'] =  $album[0];
-                $productData['album'] = array_slice($album, 1, 4);
+                $productData['album'] = array_slice($album, 1);
             }
 
             $attrCatalouges = $productByCondition->productVariants->first()->attrs->pluck('attrCatalouges');
