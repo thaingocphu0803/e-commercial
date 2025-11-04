@@ -226,10 +226,10 @@ class ProductRepository implements ProductRepositoryInterface
             ->where('ppv.model', 'product')
             ->publish($publish)
             ->where(function ($q) {
-                $q->whereNull('promotions.end_date')
+                $q->where('promotions.not_end_time', 'accept')
                     ->orWhere('promotions.end_date', '>', now());
             });
-
+        
         $products = DB::table(DB::raw(
             "(
             SELECT

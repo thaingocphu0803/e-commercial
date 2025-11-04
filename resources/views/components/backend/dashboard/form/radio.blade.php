@@ -5,7 +5,8 @@
     'must' => false,
     'rowLength' => null,
     'old', null,
-    'id' => null
+    'id' => null,
+    'isChecked' => false
 ])
 
 <div class="col-lg-{{ $rowLength ?? 6 }}">
@@ -16,7 +17,7 @@
             id="{{ $id }}"
             value="{{ $value }}"
             {{$attributes->merge(['class'])}}
-            {{$old == $value ? 'checked' : ''}}
+            {{(($old == $value) || (is_null($old) && $isChecked )) ? 'checked' : ''}}
         >
         <label for="{{ $id }}" class="control-label text-500 text-right m-0 text-sm">{{ $labelName }}
             @if ($must)

@@ -11,7 +11,7 @@
  Target Server Version : 100432
  File Encoding         : 65001
 
- Date: 01/11/2025 17:32:11
+ Date: 04/11/2025 23:31:43
 */
 
 SET NAMES utf8mb4;
@@ -2371,18 +2371,44 @@ CREATE TABLE `promotion_product_variant`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `promotion_product_variant_promotion_id_foreign`(`promotion_id` ASC) USING BTREE,
   CONSTRAINT `promotion_product_variant_promotion_id_foreign` FOREIGN KEY (`promotion_id`) REFERENCES `promotions` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 150 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 183 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of promotion_product_variant
 -- ----------------------------
-INSERT INTO `promotion_product_variant` VALUES (136, 15, 42, 'f3648c31-8a6d-5e15-b54c-345da98d00b8', 'Product', NULL, NULL);
-INSERT INTO `promotion_product_variant` VALUES (137, 15, 42, 'a3f4ac26-2c02-58d7-9518-fdd1377faf45', 'Product', NULL, NULL);
-INSERT INTO `promotion_product_variant` VALUES (145, 2, 42, 'f3648c31-8a6d-5e15-b54c-345da98d00b8', 'Product', NULL, NULL);
-INSERT INTO `promotion_product_variant` VALUES (146, 2, 42, 'a3f4ac26-2c02-58d7-9518-fdd1377faf45', 'Product', NULL, NULL);
-INSERT INTO `promotion_product_variant` VALUES (147, 2, 51, '3fcce2e3-b9de-5b10-8a7a-e7be0d2f3b7d', 'Product', NULL, NULL);
-INSERT INTO `promotion_product_variant` VALUES (148, 2, 49, NULL, 'Product', NULL, NULL);
-INSERT INTO `promotion_product_variant` VALUES (149, 3, 42, 'a3f4ac26-2c02-58d7-9518-fdd1377faf45', 'Product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (150, 18, 42, 'd2e846fc-5b68-5773-ae06-b46a957bd153', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (151, 18, 42, '0dfca9a2-7d8d-5cd3-a496-1fe2c093e11c', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (152, 18, 42, 'edf17326-43b4-5b25-979c-c3aba1ac292c', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (153, 18, 42, '949081c8-99ec-5dee-9b80-49ab978c4340', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (154, 18, 42, '01554e68-a84a-58af-a9e2-44f3ca55d39f', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (155, 18, 42, 'e77cea84-84b3-512d-890a-d62e50e0dee4', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (156, 18, 48, 'e4314182-6b1f-5260-a3d8-47392c54f1d9', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (157, 18, 48, 'f22e4d82-ea7f-558c-b1d6-3c1c1b738e6e', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (158, 18, 48, 'ca557383-c80b-51fd-86a7-e62e3ac4e2c9', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (159, 18, 48, '64204b4e-b2df-5370-87e3-8133a2779212', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (160, 18, 50, '384f00ce-0dc4-5d14-9ec7-b87460dfff11', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (161, 18, 49, 'ce2b2072-785b-5338-9625-92c678bc5697', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (162, 18, 49, '0e641422-4a76-53b3-8f1e-88caea11c560', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (163, 18, 49, 'b8f9c216-eba0-57e6-b252-c62918617e74', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (164, 18, 49, 'e6fe4b54-9848-5562-b855-7086606805e9', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (165, 18, 49, '9e647fb4-04d7-5f23-9b14-f572aa6f5ea6', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (166, 18, 49, '9ef0177c-e108-561f-8668-1118a090e250', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (167, 18, 49, '0abb6f96-2c40-5157-b88e-2dda0c21c8ae', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (168, 18, 49, 'a0b2dbed-5535-5589-ad86-deeb66e25a75', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (169, 18, 49, 'af288d2d-a5e2-5268-a353-b8dcd023ec2c', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (170, 18, 50, '89b19b74-2e65-5377-91c1-05567cb9d967', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (171, 18, 50, '9354f0ed-fd42-5ce2-b698-3b8405f87044', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (172, 18, 50, 'eeb0671e-ef6c-5bba-9961-adc0d817b597', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (173, 18, 51, NULL, 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (174, 18, 52, '708bb9ea-49b0-5e46-801e-63e8b9f0399e', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (175, 18, 52, 'b03aa1da-add0-53ca-b5fb-24f32ba5fe17', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (176, 18, 52, 'ed4d6231-5773-524d-901c-31609599ef32', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (177, 18, 52, '43e8fd98-b190-5862-891d-023d31e1c44a', 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (178, 19, 63, NULL, 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (179, 19, 64, NULL, 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (180, 19, 65, NULL, 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (181, 19, 66, NULL, 'product', NULL, NULL);
+INSERT INTO `promotion_product_variant` VALUES (182, 19, 67, NULL, 'product', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for promotions
@@ -2407,16 +2433,15 @@ CREATE TABLE `promotions`  (
   `discountType` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `maxDiscountValue` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of promotions
 -- ----------------------------
-INSERT INTO `promotions` VALUES (2, 'khuyen mai 20/10', 'sale2010', NULL, 'product_specific_discount', '{\"apply_source\":{\"status\":\"specific\",\"data\":[\"2\",\"3\",\"4\"]},\"apply_customer\":{\"status\":\"specific\",\"data\":[\"gender\"],\"condition\":{\"customer_type_gender\":[\"1\",\"2\"]}},\"infor\":{\"min_quantiy\":\"1\",\"max_quantiy\":\"0\",\"discount\":\"3000\",\"discount_type\":\"amount\",\"module_type\":\"Product\",\"object\":{\"name\":[\"iphone | m\\u00e0u \\u0111\\u1ecf-Kim c\\u01b0\\u01a1ng\",\"iphone | m\\u00e0u v\\u00e0ng-Kim c\\u01b0\\u01a1ng\",\"pc gaming | m\\u00e0u \\u0111\\u1ecf-doji-Kim c\\u01b0\\u01a1ng\",\"shirt | default\"],\"variant\":[\"f3648c31-8a6d-5e15-b54c-345da98d00b8\",\"a3f4ac26-2c02-58d7-9518-fdd1377faf45\",\"3fcce2e3-b9de-5b10-8a7a-e7be0d2f3b7d\",null],\"id\":[\"42\",\"42\",\"51\",\"49\"]}}}', 2, 0, NULL, '2025-07-22 07:11:00', '2025-10-01 07:11:00', '2025-10-27 04:26:03', '2025-07-22 07:12:24', '2025-10-27 04:26:03', 3000, 'amount', 0);
-INSERT INTO `promotions` VALUES (3, 'khuyen mai 11/11', 'SALE1111', NULL, 'product_specific_discount', '{\"apply_source\":{\"status\":\"specific\",\"data\":[\"4\"]},\"apply_customer\":{\"status\":\"specific\",\"data\":[\"birthday\",\"cusomer_catalouge\"],\"condition\":{\"customer_type_birthday\":[\"0\",\"1\"],\"customer_type_cusomer_catalouge\":[\"1\",\"2\"]}},\"infor\":{\"min_quantiy\":\"100\",\"max_quantiy\":\"0\",\"discount\":\"30\",\"discount_type\":\"percent\",\"module_type\":\"Product\",\"object\":{\"name\":[\"iphone | m\\u00e0u v\\u00e0ng-Kim c\\u01b0\\u01a1ng\"],\"variant\":[\"a3f4ac26-2c02-58d7-9518-fdd1377faf45\"],\"id\":[\"42\"]}}}', 2, 0, NULL, '2025-07-22 07:27:00', '2025-10-01 07:27:00', '2025-10-27 04:26:07', '2025-07-22 07:27:55', '2025-10-27 04:26:07', 30, 'percent', 0);
-INSERT INTO `promotions` VALUES (15, 'khuyen mai 12/12', '3ONTHJY5TX', NULL, 'product_specific_discount', '{\"apply_source\":{\"status\":\"all\",\"data\":[]},\"apply_customer\":{\"status\":\"all\",\"data\":[],\"condition\":[]},\"infor\":{\"min_quantiy\":\"10\",\"max_quantiy\":\"400\",\"discount\":\"500\",\"discount_type\":\"amount\",\"module_type\":\"Product\",\"object\":{\"name\":[\"iphone | m\\u00e0u \\u0111\\u1ecf-Kim c\\u01b0\\u01a1ng\",\"iphone | m\\u00e0u v\\u00e0ng-Kim c\\u01b0\\u01a1ng\"],\"variant\":[\"f3648c31-8a6d-5e15-b54c-345da98d00b8\",\"a3f4ac26-2c02-58d7-9518-fdd1377faf45\"],\"id\":[\"42\",\"42\"]}}}', 1, 0, NULL, '2025-09-30 01:21:00', '2025-11-29 01:21:00', '2025-10-27 04:26:11', '2025-09-30 01:22:07', '2025-10-27 04:26:11', 500, 'amount', 400);
-INSERT INTO `promotions` VALUES (16, 'Giảm 1 ngàn cho đơn từ 10 ngàn', '84XCBXQNWA', NULL, 'order_total_discount', '{\"apply_source\":{\"status\":\"all\",\"data\":[]},\"apply_customer\":{\"status\":\"all\",\"data\":[],\"condition\":[]},\"infor\":{\"price_from\":[\"10,000\",\"21,000\"],\"price_to\":[\"20,000\",\"30,000\"],\"discount\":[\"1,000\",\"2,000\"],\"discount_type\":[\"amount\",\"amount\"]}}', 1, 0, 'accept', '2025-10-23 04:12:00', NULL, '2025-10-27 04:26:15', '2025-10-23 04:14:37', '2025-10-27 04:26:15', NULL, NULL, NULL);
-INSERT INTO `promotions` VALUES (17, 'Giảm 3 ngàn cho đơn từ 10 ngàn', 'CSXCQP9LYC', NULL, 'order_total_discount', '{\"apply_source\":{\"status\":\"all\",\"data\":[]},\"apply_customer\":{\"status\":\"all\",\"data\":[],\"condition\":[]},\"infor\":{\"price_from\":[\"10,000\"],\"price_to\":[\"30,000\"],\"discount\":[\"3,000\"],\"discount_type\":[\"amount\"]}}', 1, 0, 'accept', '2025-10-23 04:14:00', NULL, '2025-10-27 04:26:19', '2025-10-23 04:15:25', '2025-10-27 04:26:19', NULL, NULL, NULL);
+INSERT INTO `promotions` VALUES (18, 'Điện Thoại Khuyến Mãi 5%', 'DIENTHOAIKM5%', NULL, 'product_specific_discount', '{\"apply_source\":{\"status\":\"all\",\"data\":[]},\"apply_customer\":{\"status\":\"all\",\"data\":[],\"condition\":[]},\"infor\":{\"min_quantiy\":\"10\",\"max_quantiy\":\"0\",\"discount\":\"5\",\"discount_type\":\"percent\",\"module_type\":\"product\",\"object\":{\"name\":[\"\\u0110i\\u1ec7n tho\\u1ea1i Samsung Galaxy A17 5G | M\\u00e0u \\u0111en-8G - 128G\",\"\\u0110i\\u1ec7n tho\\u1ea1i Samsung Galaxy A17 5G | M\\u00e0u x\\u00e1m-8G - 128G\",\"\\u0110i\\u1ec7n tho\\u1ea1i Samsung Galaxy A17 5G | M\\u00e0u xanh d\\u01b0\\u01a1ng-8G - 128G\",\"\\u0110i\\u1ec7n tho\\u1ea1i Samsung Galaxy A17 5G | M\\u00e0u \\u0111en-8G - 256G\",\"\\u0110i\\u1ec7n tho\\u1ea1i Samsung Galaxy A17 5G | M\\u00e0u x\\u00e1m-8G - 256G\",\"\\u0110i\\u1ec7n tho\\u1ea1i Samsung Galaxy A17 5G | M\\u00e0u xanh d\\u01b0\\u01a1ng-8G - 256G\",\"\\u0110i\\u1ec7n tho\\u1ea1i vivo Y19s Pro | M\\u00e0u \\u0111en-8G - 128G\",\"\\u0110i\\u1ec7n tho\\u1ea1i vivo Y19s Pro | M\\u00e0u x\\u00e1m-8G - 128G\",\"\\u0110i\\u1ec7n tho\\u1ea1i vivo Y19s Pro | M\\u00e0u \\u0111en-6G - 128G\",\"\\u0110i\\u1ec7n tho\\u1ea1i vivo Y19s Pro | M\\u00e0u x\\u00e1m-6G - 128G\",\"\\u0110i\\u1ec7n tho\\u1ea1i OPPO A5 | M\\u00e0u tr\\u1eafng-6GB - 128GB\",\"\\u0110i\\u1ec7n tho\\u1ea1i Samsung Galaxy A56 5G | M\\u00e0u x\\u00e1m-12GB - 256GB\",\"\\u0110i\\u1ec7n tho\\u1ea1i Samsung Galaxy A56 5G | M\\u00e0u xanh-12GB - 256GB\",\"\\u0110i\\u1ec7n tho\\u1ea1i Samsung Galaxy A56 5G | M\\u00e0u \\u0111en-12GB - 256GB\",\"\\u0110i\\u1ec7n tho\\u1ea1i Samsung Galaxy A56 5G | M\\u00e0u x\\u00e1m-8GB - 256GB\",\"\\u0110i\\u1ec7n tho\\u1ea1i Samsung Galaxy A56 5G | M\\u00e0u xanh-8GB - 256GB\",\"\\u0110i\\u1ec7n tho\\u1ea1i Samsung Galaxy A56 5G | M\\u00e0u \\u0111en-8GB - 256GB\",\"\\u0110i\\u1ec7n tho\\u1ea1i Samsung Galaxy A56 5G | M\\u00e0u x\\u00e1m-8GB - 128GB\",\"\\u0110i\\u1ec7n tho\\u1ea1i Samsung Galaxy A56 5G | M\\u00e0u xanh-8GB - 128GB\",\"\\u0110i\\u1ec7n tho\\u1ea1i Samsung Galaxy A56 5G | M\\u00e0u \\u0111en-8GB - 128GB\",\"\\u0110i\\u1ec7n tho\\u1ea1i OPPO A5 | M\\u00e0u xanh l\\u00e1-6GB - 128GB\",\"\\u0110i\\u1ec7n tho\\u1ea1i OPPO A5 | M\\u00e0u tr\\u1eafng-8GB - 128GB\",\"\\u0110i\\u1ec7n tho\\u1ea1i OPPO A5 | M\\u00e0u xanh l\\u00e1-8GB - 128GB\",\"PC SingPC i713H695SF-W i7 13620H | default\",\"\\u0110i\\u1ec7n tho\\u1ea1i realme 14T 5G | M\\u00e0u t\\u00edm-12G - 256GB\",\"\\u0110i\\u1ec7n tho\\u1ea1i realme 14T 5G | M\\u00e0u \\u0111en-12G - 256GB\",\"\\u0110i\\u1ec7n tho\\u1ea1i realme 14T 5G | M\\u00e0u t\\u00edm-8G - 256G\",\"\\u0110i\\u1ec7n tho\\u1ea1i realme 14T 5G | M\\u00e0u \\u0111en-8G - 256G\"],\"variant\":[\"d2e846fc-5b68-5773-ae06-b46a957bd153\",\"0dfca9a2-7d8d-5cd3-a496-1fe2c093e11c\",\"edf17326-43b4-5b25-979c-c3aba1ac292c\",\"949081c8-99ec-5dee-9b80-49ab978c4340\",\"01554e68-a84a-58af-a9e2-44f3ca55d39f\",\"e77cea84-84b3-512d-890a-d62e50e0dee4\",\"e4314182-6b1f-5260-a3d8-47392c54f1d9\",\"f22e4d82-ea7f-558c-b1d6-3c1c1b738e6e\",\"ca557383-c80b-51fd-86a7-e62e3ac4e2c9\",\"64204b4e-b2df-5370-87e3-8133a2779212\",\"384f00ce-0dc4-5d14-9ec7-b87460dfff11\",\"ce2b2072-785b-5338-9625-92c678bc5697\",\"0e641422-4a76-53b3-8f1e-88caea11c560\",\"b8f9c216-eba0-57e6-b252-c62918617e74\",\"e6fe4b54-9848-5562-b855-7086606805e9\",\"9e647fb4-04d7-5f23-9b14-f572aa6f5ea6\",\"9ef0177c-e108-561f-8668-1118a090e250\",\"0abb6f96-2c40-5157-b88e-2dda0c21c8ae\",\"a0b2dbed-5535-5589-ad86-deeb66e25a75\",\"af288d2d-a5e2-5268-a353-b8dcd023ec2c\",\"89b19b74-2e65-5377-91c1-05567cb9d967\",\"9354f0ed-fd42-5ce2-b698-3b8405f87044\",\"eeb0671e-ef6c-5bba-9961-adc0d817b597\",null,\"708bb9ea-49b0-5e46-801e-63e8b9f0399e\",\"b03aa1da-add0-53ca-b5fb-24f32ba5fe17\",\"ed4d6231-5773-524d-901c-31609599ef32\",\"43e8fd98-b190-5862-891d-023d31e1c44a\"],\"id\":[\"42\",\"42\",\"42\",\"42\",\"42\",\"42\",\"48\",\"48\",\"48\",\"48\",\"50\",\"49\",\"49\",\"49\",\"49\",\"49\",\"49\",\"49\",\"49\",\"49\",\"50\",\"50\",\"50\",\"51\",\"52\",\"52\",\"52\",\"52\"]}}}', 1, 0, 'accept', '2025-11-04 15:42:00', NULL, NULL, '2025-11-04 15:45:29', '2025-11-04 15:46:11', 5, 'percent', 0);
+INSERT INTO `promotions` VALUES (19, 'Màn Hình Khuyến mãi 10%', 'MANHINHKM10%', NULL, 'product_specific_discount', '{\"apply_source\":{\"status\":\"all\",\"data\":[]},\"apply_customer\":{\"status\":\"all\",\"data\":[],\"condition\":[]},\"infor\":{\"min_quantiy\":\"1\",\"max_quantiy\":\"10000000\",\"discount\":\"10\",\"discount_type\":\"percent\",\"module_type\":\"product\",\"object\":{\"name\":[\"M\\u00e0n h\\u00ecnh Asus VA249HG-R 23.8 inch FHD\\/IPS\\/120Hz\\/1ms | default\",\"M\\u00e0n h\\u00ecnh Gaming Acer KB242Y P6 23.8 inch FHD\\/IPS\\/144Hz\\/1ms | default\",\"M\\u00e0n h\\u00ecnh MSI PRO MP252L 24.5 inch FHD\\/IPS\\/100Hz\\/1ms | default\",\"M\\u00e0n h\\u00ecnh Samsung S3 S30GD LS24D300GAEXXV 23.8 inch FHD\\/IPS\\/100Hz\\/1ms | default\",\"M\\u00e0n h\\u00ecnh Gaming Asus TUF VG249QM5A 23.8 inch FHD\\/IPS\\/240Hz\\/0.3ms | default\"],\"variant\":[null,null,null,null,null],\"id\":[\"63\",\"64\",\"65\",\"66\",\"67\"]}}}', 1, 0, 'accept', '2025-11-04 16:17:00', NULL, NULL, '2025-11-04 16:18:03', '2025-11-04 16:18:03', 10, 'percent', 10000000);
+INSERT INTO `promotions` VALUES (20, 'GIẢM ĐẾN 2 TRIỆU CHO ĐƠN HÀNG', 'GIAMDEN2TRIEU', NULL, 'order_total_discount', '{\"apply_source\":{\"status\":\"all\",\"data\":[]},\"apply_customer\":{\"status\":\"all\",\"data\":[],\"condition\":[]},\"infor\":{\"price_from\":[\"1,000,000\",\"5,000,000\",\"10,000,000\",\"15,000,000\"],\"price_to\":[\"4,999,000\",\"9,999,000\",\"14,999,000\",\"20,000,000\"],\"discount\":[\"500,000\",\"1,000,000\",\"1,500,000\",\"2,000,000\"],\"discount_type\":[\"amount\",\"amount\",\"amount\",\"percent\"]}}', 1, 0, 'accept', '2025-11-04 16:18:00', NULL, NULL, '2025-11-04 16:24:44', '2025-11-04 16:30:40', NULL, NULL, NULL);
+INSERT INTO `promotions` VALUES (21, 'Giảm 10 % Cho Đơn Từ 30 TRIỆU', 'TU30TRIEU10%', NULL, 'order_total_discount', '{\"apply_source\":{\"status\":\"all\",\"data\":[]},\"apply_customer\":{\"status\":\"all\",\"data\":[],\"condition\":[]},\"infor\":{\"price_from\":[\"30,000,000\"],\"price_to\":[\"100,000,000\"],\"discount\":[\"10\"],\"discount_type\":[\"percent\"]}}', 1, 0, 'accept', '2025-11-04 16:24:00', NULL, NULL, '2025-11-04 16:30:18', '2025-11-04 16:30:18', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for provinces
@@ -2631,7 +2656,7 @@ CREATE TABLE `sessions`  (
 -- ----------------------------
 -- Records of sessions
 -- ----------------------------
-INSERT INTO `sessions` VALUES ('vJBjIjtmCUuxk3S43ez5Pm7nSyxEpfLmtvCtiF6W', 101, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiTDN0YTFoTFA3TU5kdnc3eEdTMTFmMXQ3dzRQMU5ocXg5RzlGTmxwZiI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo0MjoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3Byb2R1Y3QvaW5kZXg/cGFnZT01Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTAxO3M6MjI6IlBIUERFQlVHQkFSX1NUQUNLX0RBVEEiO2E6MDp7fX0=', 1761993092);
+INSERT INTO `sessions` VALUES ('5Y2EKIZSSmTH4PnV1X3bSBNkPw899oormbvPU6Hr', 101, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoieGxvQTNYd3B5YkdLM0VtNlZOZUdKeDZmVjhNTGxpVlFEdXJaWm9ORiI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozNzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3Byb21vdGlvbi9pbmRleCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjEwMTt9', 1762273841);
 
 -- ----------------------------
 -- Table structure for slides
@@ -2682,7 +2707,7 @@ CREATE TABLE `sources`  (
 -- ----------------------------
 -- Records of sources
 -- ----------------------------
-INSERT INTO `sources` VALUES (1, 'tiktok', 'tik-tok', NULL, 2, NULL, '2025-07-16 03:17:24', '2025-07-16 07:06:21');
+INSERT INTO `sources` VALUES (1, 'tiktok', 'tik-tok', NULL, 1, NULL, '2025-07-16 03:17:24', '2025-11-04 14:13:07');
 INSERT INTO `sources` VALUES (2, 'shoppe', 'shoppe', NULL, 1, NULL, '2025-07-16 04:00:30', '2025-07-16 04:00:30');
 INSERT INTO `sources` VALUES (3, 'lazada', 'lazada', NULL, 1, NULL, '2025-07-16 04:00:43', '2025-07-16 04:00:43');
 INSERT INTO `sources` VALUES (4, 'instagram', 'instagram', NULL, 1, NULL, '2025-07-16 04:01:02', '2025-07-16 04:01:02');
@@ -2844,9 +2869,9 @@ CREATE TABLE `user_catalouges`  (
 -- Records of user_catalouges
 -- ----------------------------
 INSERT INTO `user_catalouges` VALUES (2, 'admin club', 'having all authority in the project', NULL, '2025-02-17 11:52:47', '2025-02-18 01:55:00', 1);
-INSERT INTO `user_catalouges` VALUES (4, 'internship', 'let go new intern', NULL, '2025-02-17 06:06:28', '2025-02-18 01:55:00', 1);
+INSERT INTO `user_catalouges` VALUES (4, 'internship', 'let go new intern', '2025-11-04 14:11:56', '2025-02-17 06:06:28', '2025-11-04 14:11:56', 1);
 INSERT INTO `user_catalouges` VALUES (5, 'admin', 'oh no', '2025-02-17 06:56:07', '2025-02-17 06:09:00', '2025-02-17 06:56:07', 2);
-INSERT INTO `user_catalouges` VALUES (6, 'experts', 'have a high experiences', NULL, '2025-02-17 07:27:07', '2025-05-19 08:43:03', 1);
+INSERT INTO `user_catalouges` VALUES (6, 'Employees', 'Employees', NULL, '2025-02-17 07:27:07', '2025-11-04 14:09:52', 1);
 INSERT INTO `user_catalouges` VALUES (7, 'a', NULL, '2025-02-19 04:04:23', '2025-02-18 07:15:54', '2025-02-19 04:04:23', 2);
 
 -- ----------------------------

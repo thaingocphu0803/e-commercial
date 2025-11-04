@@ -47,7 +47,7 @@ class PromotionRepository implements PromotionRepositoryInterface
 
     public function SyncRelationPivot($model, $payload = [])
     {
-        if ($payload[0]['model'] == PromotionEnum::MODEL_PRODUCT_CATALOUGE) {
+        if($payload[0]['model'] == PromotionEnum::MODEL_PRODUCT_CATALOUGE) {
             return  $model->productCatalouges()->sync($payload);
         } elseif ($payload[0]['model'] == PromotionEnum::MODEL_PRODUCT) {
             return  $model->products()->sync($payload);

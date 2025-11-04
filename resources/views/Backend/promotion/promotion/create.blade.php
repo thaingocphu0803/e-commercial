@@ -9,7 +9,7 @@
     </x-slot:script>
 
     @php
-        $url = isset($promotion) ? route('promotion.update', $promotion->id) : route('promotion.store');
+        $url = !empty($promotion) ? route('promotion.update', $promotion->id) : route('promotion.store');
         $customerPrmotionIds = array_column(__('module.customer'), 'id');
         $promotionTypeData = [];
         $customerKeyValue =  array_column(__('module.customer'), 'name', 'id');
@@ -17,7 +17,7 @@
 
 
         foreach ($customerPrmotionIds as $value) {
-            if(isset($promotion->discount_information['apply_customer']['data']) && in_array($value,  $promotion->discount_information['apply_customer']['data'])){
+            if(!empty($promotion->discount_information['apply_customer']['data']) && in_array($value,  $promotion->discount_information['apply_customer']['data'])){
                 $customerTypeCondition = $promotion->discount_information['apply_customer']['condition']["customer_type_$value"];
             }
             $promotionTypeData["customer_type_$value"] = old("customer_type_$value", $customerTypeCondition ?? []) ?? [];
@@ -34,7 +34,7 @@
             }
         }
 
-        $title = isset($promotion)
+        $title = !empty($promotion)
             ? __('custom.editObject', ['attribute' => __('custom.promotion')])
             : __('custom.addObject', ['attribute' => __('custom.promotion')]);
 
@@ -142,7 +142,7 @@
                                 <div class="row flex flex-col gap-10">
                                     {{-- all source --}}
                                     <x-backend.dashboard.form.radio class="choose-source" :labelName="__('custom.applyAllSource')"
-                                        value="all" name="apply_source" rowLength="12" id="all_source"
+                                        value="all" name="apply_source" rowLength="12" id="all_source" :isChecked="true"
                                         :old="old('apply_source', $promotion->discount_information['apply_source']['status'] ?? null)">
                                     </x-backend.dashboard.form.radio>
                                     {{-- specific source --}}
@@ -168,7 +168,7 @@
                                 <div class="row flex flex-col gap-10">
                                     {{-- all customer --}}
                                     <x-backend.dashboard.form.radio class="choose-customer" :labelName="__('custom.applyAllCustomerType')"
-                                        value="all" name="apply_customer" rowLength="12" id="all_customer"
+                                        value="all" name="apply_customer" rowLength="12" id="all_customer" :isChecked="true"
                                         :old="old('apply_customer', $promotion->discount_information['apply_customer']['status'] ?? null)">
                                     </x-backend.dashboard.form.radio>
                                     {{-- specific customer --}}

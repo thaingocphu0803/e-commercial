@@ -395,7 +395,7 @@
             let productType = $('select[name="module_type"]').val();
 
             switch (productType) {
-                case "Product":
+                case "product":
                     FUNC.ajaxLoadProduct();
                     break;
                 case "productCatalouge":
@@ -525,12 +525,13 @@
                 page,
             };
 
+
             if (parent.hasClass("active") || parent.hasClass("disabled"))
                 return;
 
-            if (productType == "product_version") {
+            if (productType == "product") {
                 FUNC.ajaxLoadProduct(requestData);
-            } else if (productType == "product_catalouge") {
+            } else if (productType == "productCatalouge") {
                 FUNC.ajaxLoadProductCatalouge(requestData);
             }
         });
@@ -604,7 +605,6 @@
     FUNC.renderProductVariantList = (data) => {
         let html = "";
         data.forEach((item) => {
-            console.log(data);
             let productid = item.id;
             let variantid = item.variant_uuid;
             let image = item.image ? atob(item.image) : noImage;
@@ -616,7 +616,7 @@
             let match = object.find((item) => item.productName === name);
 
             html += `
-                <div class="promotion-product-variant-item col-lg-12 flex flex-space-between flex-middle border-b" data-productid="${productid}" data-variantid="${variantid}">
+                <div class="promotion-product-variant-item col-lg-12 flex flex-space-between flex-middle border-b pointer" data-productid="${productid}" data-variantid="${variantid}">
                     <div class="flex gap-20 flex-middle">
                         <input class="check-table" type="checkbox" name="product_checked[id][]"
                             value="" id="" ${match ? "checked" : ""}>
@@ -946,5 +946,6 @@
         FUNC.handleSelectProductType();
         FUNC.saveOldCustomerType();
         FUNC.saveOldTypePromotion();
+        FUNC.cancelPromotionProductVariant();
     });
 })(jQuery);
