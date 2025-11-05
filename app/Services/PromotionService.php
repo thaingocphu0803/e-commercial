@@ -128,7 +128,6 @@ class PromotionService implements PromotionServiceInterface
 
             if ($promotion && $payload['method'] == PromotionEnum::PRODUCT_SPECIFIC_DISCOUNT) {
                 $payloadRelation = $this->getPromotionProductVariantPayload($promotion->id, $payload['discount_information']['infor']);
-
                 $this->promotionRepository->SyncRelationPivot($promotion, $payloadRelation);
             }
             DB::commit();

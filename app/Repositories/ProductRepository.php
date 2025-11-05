@@ -80,7 +80,7 @@ class ProductRepository implements ProductRepositoryInterface
         if (!empty($productData['album'])) {
             $album = explode(',', $productData['album']);
             $productData['image'] =  base64_encode($album[0]);
-            $productData['album'] = array_slice($album, 1, 4);
+            $productData['album'] = array_slice($album, 1);
         }else{
             $productData['image'] = null;
             $productData['album'] = null;
@@ -166,7 +166,7 @@ class ProductRepository implements ProductRepositoryInterface
         $productData['canonical'] = $productByCondition->canonical;
         $productData['description'] = $productByCondition->description;
         $productData['image'] = $productByCondition->image;
-        $productData['album'] = !is_null($productByCondition->album) ? array_slice(json_decode($productByCondition->album, true), 0, 4) : null;
+        $productData['album'] = !is_null($productByCondition->album) ? array_slice(json_decode($productByCondition->album, true), 0) : null;
         $productData['price'] = $productByCondition->price;
         $productData['catalouges'] = $productByCondition->productCatalouges->toArray();
         $productData['meta_title'] = $productByCondition->meta_title;
@@ -183,7 +183,7 @@ class ProductRepository implements ProductRepositoryInterface
             if (!isEmpty($album)) {
                 $album = explode(',', $album);
                 $productData['image'] =  $album[0];
-                $productData['album'] = array_slice($album, 1, 4);
+                $productData['album'] = array_slice($album, 1);
             }
 
             $attrCatalouges = $productByCondition->productVariants->first()->attrs->pluck('attrCatalouges');
@@ -226,10 +226,10 @@ class ProductRepository implements ProductRepositoryInterface
             ->where('ppv.model', 'product')
             ->publish($publish)
             ->where(function ($q) {
-                $q->whereNull('promotions.end_date')
+                $q->where('promotions.not_end_time', 'accept')
                     ->orWhere('promotions.end_date', '>', now());
             });
-
+        
         $products = DB::table(DB::raw(
             "(
             SELECT
@@ -302,7 +302,7 @@ class ProductRepository implements ProductRepositoryInterface
         ))
             ->mergeBindings($promotionSub->getQuery())
             ->where('rn', 1)
-            ->paginate(10);
+            ->paginate(20);
 
         return $products;
     }

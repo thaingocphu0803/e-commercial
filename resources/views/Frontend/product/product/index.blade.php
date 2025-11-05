@@ -1,9 +1,7 @@
 <x-frontend.dashboard.layout :seo="$seo">
-    <div class="product page-wrapper product-infor"
-    data-model-product-id={{ $product['id'] }}
-    data-product-promotion-id="{{ $product['promotion_id'] ?? null }}"
-    data-product-uuid="{{ $product['variant_uuid'] ?? null }}"
-    >
+    <div class="product page-wrapper product-infor" data-model-product-id={{ $product['id'] }}
+        data-product-promotion-id="{{ $product['promotion_id'] ?? null }}"
+        data-product-uuid="{{ $product['variant_uuid'] ?? null }}">
         <div class="container">
             <div class="product-body row my-4">
                 {{-- start product image --}}
@@ -11,20 +9,25 @@
                     <div class="d-flex">
                         <div class="modal-product-image w-100 d-flex flex-column gap-3 pe-3">
                             <div class="image-main">
-                                <img src="{{ base64_decode($product['image']) }}" alt="{{__('custom.productImage')}}" class="img-contain">
+                                <img src="{{ base64_decode($product['image']) }}" alt="{{__('custom.productImage')}}"
+                                    class="img-contain">
                             </div>
-                            <div class="image-list d-flex justify-content-center gap-3 mt-50">
-                                <div class="list-item active">
-                                    <img src="{{ base64_decode($product['image']) }}" alt="{{__('custom.productImage')}}" class="img-contain">
-                                </div>
+                            <div class="swiper product-swiper">
+                                <div class="swiper-wrapper image-list mt-50">
+                                    <div class="swiper-slide list-item active">
+                                        <img src="{{ base64_decode($product['image']) }}"
+                                            alt="{{__('custom.productImage')}}" class="img-contain">
+                                    </div>
 
-                                @if (!empty($product['album']))
-                                    @foreach ($product['album'] as $img)
-                                        <div class="list-item">
-                                            <img src="{{ $img }}" alt="{{__('custom.productImage')}}" class="img-contain">
-                                        </div>
-                                    @endforeach
-                                @endif
+                                    @if (!empty($product['album']))
+                                        @foreach ($product['album'] as $img)
+                                            <div class="swiper-slide  list-item">
+                                                <img src="{{ $img }}" alt="{{__('custom.productImage')}}" class="img-contain">
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div>
+                                <div class="swiper-pagination"></div>
                             </div>
                         </div>
                     </div>
@@ -41,8 +44,7 @@
 
                             <div class="modal-product-price py-3 d-flex">
                                 @if (!empty($product['discounted_price']))
-                                    <span
-                                        class="fs-3 text-infor">{{ price_format($product['discounted_price']) }}</span>
+                                    <span class="fs-3 text-infor">{{ price_format($product['discounted_price']) }}</span>
                                     <span
                                         class="old-price text-danger ms-1 fs-6">{{ price_format($product['price']) }}</span>
                                 @else
@@ -57,8 +59,7 @@
                                 <div class="catalouge-list d-flex justify-content-between gap-3">
                                     @foreach ($product['catalouges'] as $catalouge)
                                         <a href="{{ write_url($catalouge['product_catalouge_canonical'], true, true) }}"
-                                            class="list-item"
-                                            data-catalouge-id="{{ $catalouge['product_catalouge_id'] }}">
+                                            class="list-item" data-catalouge-id="{{ $catalouge['product_catalouge_id'] }}">
                                             {{ $catalouge['product_catalouge_name'] }}
                                         </a>
                                     @endforeach
@@ -145,10 +146,10 @@
 
                         <div class="list-content d-flex flex-column gap-2 justify-content-start p-10">
                             @foreach ($productCategories as $productCategory)
-                                <a href="{{write_url($productCategory->canonical, true, true)}}" class="content-item d-flex align-items-center gap-3">
+                                <a href="{{write_url($productCategory->canonical, true, true)}}"
+                                    class="content-item d-flex align-items-center gap-3">
                                     <div class="item-img">
-                                        <img src="{{ base64_decode($productCategory->image) }}" alt=""
-                                            class="img-cover">
+                                        <img src="{{ base64_decode($productCategory->image) }}" alt="" class="img-cover">
                                     </div>
                                     <span class="fs-6">{{$productCategory->name}}</span>
                                 </a>

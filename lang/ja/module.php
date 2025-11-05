@@ -36,7 +36,7 @@ return [
         'ja' => '¥',
     ],
     'productType' => [
-        'Product' => '商品バージョン',
+        'product' => '商品バージョン',
         'productCatalouge' => '商品カタログ',
     ],
     'customer' => [

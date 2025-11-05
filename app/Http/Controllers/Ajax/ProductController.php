@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Ajax;
 
 use App\Http\Controllers\Controller;
-use App\Models\ProductCatalouge;
 use App\Services\ProductCatalougeService;
 use App\Services\ProductService;
 use Illuminate\Http\Request;

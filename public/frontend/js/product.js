@@ -25,7 +25,7 @@
                 quantity = min;
             }
 
-            input.val(quantity).trigger('input');
+            input.val(quantity).trigger("input");
         });
     };
 
@@ -33,7 +33,7 @@
         $(document).on("click", ".image-list .list-item", function () {
             let _this = $(this);
             let src = _this.find("img").attr("src");
-            let parent = _this.parents(".image-list");
+            let parent = _this.parents(".product-swiper");
             let sibling = parent.siblings(".image-main");
 
             sibling.find("img").attr("src", src);
@@ -106,8 +106,7 @@
                             .find(".variant-list .list-item.active")
                             .attr("data-attr-id");
                     })
-                    .get()
-                    .sort();
+                    .get();
 
                 if (attrCatalouge.length !== attrArray.length) return;
 
@@ -139,7 +138,10 @@
 
                 let product = VariantModalCache[productCombineCode];
                 console.log(product);
-                handleUpdateProductInforAttr(product.promotion_id, product.uuid);
+                handleUpdateProductInforAttr(
+                    product.promotion_id,
+                    product.uuid
+                );
                 handleAppendPrice(product.discounted_price, product.price);
                 // handleProductImage(product.image, product.album);
             }
@@ -168,13 +170,24 @@
         });
     };
 
+    FUNC.initSwipperProductImage = () => {
+        new Swiper(".product-swiper", {
+            slidesPerView: 4,
+            spaceBetween: 10,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
+    };
+
     $(document).ready(() => {
         FUNC.handleProductAmount();
         FUNC.handleProductImage();
         FUNC.handleRenderProductInModal();
         FUNC.handleRenderProductByVariant();
         FUNC.handleProductRedirect();
-
+        FUNC.initSwipperProductImage();
     });
 })(jQuery);
 
@@ -278,7 +291,7 @@ const handleProductImage = (image, album) => {
 
     if (image) {
         let mainItem = $("<div>")
-            .addClass("list-item active")
+            .addClass("swiper-slide list-item active")
             .append($("<img>").addClass("img-contain").attr("src", srcImg));
         imgList.append(mainItem);
     }
@@ -286,7 +299,7 @@ const handleProductImage = (image, album) => {
     if (album && album.length) {
         album.forEach((src) => {
             let item = $("<div>")
-                .addClass("list-item")
+                .addClass("swiper-slide list-item")
                 .append($("<img>").addClass("img-contain").attr("src", src));
             imgList.append(item);
         });
@@ -294,10 +307,10 @@ const handleProductImage = (image, album) => {
 };
 
 const handleUpdateProductInforAttr = (productPromotionId, productUuid) => {
-    let currentProduct = $('.product-infor');
+    let currentProduct = $(".product-infor");
 
-    currentProduct.attr('data-product-promotion-id', productPromotionId);
-    currentProduct.attr('data-product-uuid', productUuid);
+    currentProduct.attr("data-product-promotion-id", productPromotionId);
+    currentProduct.attr("data-product-uuid", productUuid);
 
-    console.log()
-}
+    console.log();
+};

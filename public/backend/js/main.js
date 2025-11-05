@@ -368,9 +368,9 @@ $(document).ready(() => {
         $(".module-nav-menu").each(function () {
             let _this = $(this);
             let moduleData = _this.data("module");
-            let activeModule = sessionStorage.getItem("activeModule");
+            let activeModule = sessionStorage.getItem("activeModule") ?? null;
 
-            if (activeModule.length && activeModule == moduleData) {
+            if (activeModule && activeModule == moduleData) {
                 _this.addClass("active");
                 _this.find('.nav-second-level').addClass('collapse in');
             }

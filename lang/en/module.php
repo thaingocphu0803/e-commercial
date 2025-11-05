@@ -49,7 +49,7 @@ return [
         'ja' => '¥',
     ],
     'productType' => [
-        'Product' => 'Product Version',
+        'product' => 'Product Version',
         'productCatalouge' => 'Product catalouge',
 
     ],
