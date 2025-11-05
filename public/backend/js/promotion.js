@@ -896,7 +896,7 @@
                                     <span>${searchProductPlaceholder[lang]}</span>
                                 </div>
                             </div>
-                            <div class="choose-product-list mt-10 grid-2-col hidden">
+                            <div class="choose-product-list mt-10 hidden">
                             </div>
                         </td>
                         <td>
@@ -946,6 +946,5 @@
         FUNC.handleSelectProductType();
         FUNC.saveOldCustomerType();
         FUNC.saveOldTypePromotion();
-        FUNC.cancelPromotionProductVariant();
     });
 })(jQuery);
