@@ -21,17 +21,17 @@ cd e-commercial
 ```
 
 ##### Step 3: Configure environment for Docker
-- Rename **.env.example** to **.env**
+- Rename **.env.example** to **.env**.
 ```cmd
 mv .env.example .env
 ```
 
-- Edit the **.env** file for Docker Compose
+- Edit the **.env** file for Docker Compose.
 ```cmd
 sudo vim .env
 ```
 
-- Add or modify values according to the table below:
+- Add or modify values according to the table below\:
 
 | Name  | Description  |
 | ------------ | ------------ |
@@ -39,21 +39,21 @@ sudo vim .env
 |DB_NAME|Database name that will be created when MySQL container is initialized|
 
 ##### Step 4: Configure environment for Laravel app
-- Go to the **src** folder
+- Go to the **src** folder.
 ```cmd
 cd src
 ```
-- Rename **.env.example** to **.env**
+- Rename **.env.example** to **.env**.
 ```cmd
 mv .env.example .env
 ```
 
-- Edit the **.env** file for Docker Compose
+- Edit the **.env** file for Docker Compose.
 ```cmd
 sudo vim .env
 ```
 
-- Add or modify values according to the table below
+- Add or modify values according to the table below\:
   
 | Name  | Description  |
 | ------------ | ------------ |
@@ -95,15 +95,15 @@ sudo docker exec -it app_php_8.2 php artisan key:generate
 ```
 
 # III. Accessing the Application
-After successfully starting the containers, open your browser and go to:
+After successfully starting the containers, open your browser and go to\:
 | URL  | Description  |
 | ------------ | ------------ |
 |[localhost](http://localhost)|Main E-Commerce website|
 |[localhost/admin](http://localhost/admin)|Admin Dashboard|
 
-**Note**: Use the following credentials to log in to the admin panel:
-- Email: ```admin@gmail.com```
-- Password: ```111111```
+**Note**: Use the following credentials to log in to the admin panel\:
+- Email: ```admin@gmail.com```.
+- Password: ```111111```.
 
 # IV. References
 ### 1. Get Cloudinary API Key
