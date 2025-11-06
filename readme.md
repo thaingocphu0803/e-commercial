@@ -60,9 +60,9 @@ sudo vim .env
 |DB_DATABASE|Same as **DB_NAME** defined in the root **.env**|
 |DB_USERNAME|Usually **root**|
 |DB_PASSWORD|Same as **DB_ROOT_PASSWORD** defined in the root **.env**|
-|CLOUDINARY_URL|Cloudinary API key (see the [Get Cloudinary API Key](1-get-cloudinary-api-key) section)|
-|CLOUDINARY_UPLOAD_PRESET|Cloudinary upload preset (see the [Get Cloudinary Upload Preset](3-get-cloudinary-upload-preset) section)|
-|CLOUDINARY_NAME|Cloud name from your Cloudinary account (see the [Get Cloudinary Name](2-get-cloudinary-cloud-name) section)|
+|CLOUDINARY_URL|Cloudinary API key (see the [Get Cloudinary API Key](#1-get-cloudinary-api-key) section)|
+|CLOUDINARY_UPLOAD_PRESET|Cloudinary upload preset (see the [Get Cloudinary Upload Preset](#3-get-cloudinary-upload-preset) section)|
+|CLOUDINARY_NAME|Cloud name from your Cloudinary account (see the [Get Cloudinary Name](#2-get-cloudinary-cloud-name) section)|
 
 ##### Step 5: Set folder permissions
 ```cmd
