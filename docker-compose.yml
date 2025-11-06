@@ -1,0 +1,59 @@
+# ========================================
+# Docker Compose setup for Web Application
+# Includes: Nginx + PHP 8.2 + MySQL
+# ========================================
+services:
+    nginx: 	# NGINX (Web Server)
+        build:
+            context: ./docker/nginx # Path to Nginx Dockerfile
+        container_name: app_nginx
+        ports:
+            - "80:80" # Expose port 80 to the host machine
+        volumes:
+            - ./src:/var/www/html  # Mount application source code
+            - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf # store Nginx config in the named volume
+            - nginx_logs:/var/log/nginx # Store Nginx logs in a named volume
+        depends_on:
+            - php-8.2 # Start Nginx after PHP container is ready
+        networks:
+            - app_network
+
+    php-8.2: # PHP-FPM (Application Layer)
+        build: 
+            context: ./docker/php # Path to PHP Dockerfile
+        container_name: app_php_8.2 # Also use for fastgci_pass in nginx.conf
+        volumes:
+            - ./src:/var/www/html # Mount PHP source files
+            - ./docker/php/php.ini:/usr/local/etc/php/conf.d/custom.ini # store PHP config in the named volume
+        working_dir: /var/www/html # Set working directory inside the container	
+        networks:
+            - app_network
+
+    mysql:
+        image: mysql:8.2
+        container_name: app_mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD} # Load root password from .env file
+            MYSQL_DATABASE: ${DB_NAME} #create database when create container
+        ports:
+            - "3306:3306" # Expose MySQL port
+        volumes:
+            - mysql_data:/var/lib/mysql # Persist MySQL data in a named volume
+        networks:
+            - app_network
+
+# ----------------------------
+# Volumes - Persistent storage
+# ----------------------------
+volumes:
+    nginx_logs:  	# Stores Nginx logs
+    php_logs:		# (Not yet mounted) Stores PHP logs if needed
+    mysql_logs:  	# (Not yet mounted) Stores MySQL logs if needed
+    mysql_data:		# Stores MySQL database files
+
+# ----------------------------
+# Network - Shared between all services
+# ----------------------------
+networks:
+    app_network:
+        driver: bridge
