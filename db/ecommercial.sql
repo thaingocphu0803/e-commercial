@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : mySQL xampp
+ Source Server         : docker mysql
  Source Server Type    : MySQL
- Source Server Version : 100432
+ Source Server Version : 80200 (8.2.0)
  Source Host           : localhost:3306
  Source Schema         : ecommercial
 
  Target Server Type    : MySQL
- Target Server Version : 100432
+ Target Server Version : 80200 (8.2.0)
  File Encoding         : 65001
 
- Date: 04/11/2025 23:31:43
+ Date: 11/11/2025 12:00:25
 */
 
 SET NAMES utf8mb4;
@@ -1100,7 +1100,7 @@ CREATE TABLE `failed_jobs`  (
   `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `failed_jobs_uuid_unique`(`uuid` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
@@ -2657,6 +2657,8 @@ CREATE TABLE `sessions`  (
 -- Records of sessions
 -- ----------------------------
 INSERT INTO `sessions` VALUES ('5Y2EKIZSSmTH4PnV1X3bSBNkPw899oormbvPU6Hr', 101, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoieGxvQTNYd3B5YkdLM0VtNlZOZUdKeDZmVjhNTGxpVlFEdXJaWm9ORiI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozNzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3Byb21vdGlvbi9pbmRleCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjEwMTt9', 1762273841);
+INSERT INTO `sessions` VALUES ('i1jcF8SAJ0YxXXglgH5jgpC1f5thV44sY4O4v41i', NULL, '172.19.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiWEF5eWRSaGR1U0ZxWFBzc09ydzJVS3EwRVNuTHQ4QTVuS0ZxVEpvaCI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjIyOiJQSFBERUJVR0JBUl9TVEFDS19EQVRBIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoxNjoiaHR0cDovL2xvY2FsaG9zdCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1762837154);
+INSERT INTO `sessions` VALUES ('koKC6GEDHFyaXWD7axY77HwoGSyH6rmiuyxKgUHx', 101, '172.19.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiTXN1MWRnRThMTk9aU3Y5QTNkcjZKN0czUHY0cXBoOWgyaWxQTWZoYSI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozMjoiaHR0cDovL2xvY2FsaG9zdC9kYXNoYm9hcmQvaW5kZXgiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxMDE7fQ==', 1762837206);
 
 -- ----------------------------
 -- Table structure for slides
@@ -3005,7 +3007,7 @@ INSERT INTO `users` VALUES (95, 'Dr. Giles Terry', '1-409-675-3415', NULL, NULL,
 INSERT INTO `users` VALUES (96, 'Madyson Erdman', '(614) 919-9019', NULL, NULL, NULL, '3041 Van Squares\nWalkerville, OR 17428', NULL, NULL, NULL, NULL, NULL, 'jbreitenberg@example.com', '2025-02-13 03:36:32', '$2y$12$MB2NKfVruNdJRanU6wLzcOIdgkUUFjoPVFeznJnCEx5ZRtjyGeoSq', 'IcjWkAqeU4', '2025-02-13 03:36:32', '2025-07-11 02:48:57', 6, NULL, 1);
 INSERT INTO `users` VALUES (97, 'Dr. Robbie Kuvalis I', '781-542-0129', NULL, NULL, NULL, '5367 Kshlerin Mews Apt. 306\nWest Milan, KS 47459-2114', NULL, NULL, NULL, NULL, NULL, 'arlie.balistreri@example.net', '2025-02-13 03:36:32', '$2y$12$MB2NKfVruNdJRanU6wLzcOIdgkUUFjoPVFeznJnCEx5ZRtjyGeoSq', 'om6Cc6osMm', '2025-02-13 03:36:32', '2025-07-11 02:48:57', 6, NULL, 1);
 INSERT INTO `users` VALUES (99, 'Estrella McKenzie PhD', '1-385-651-3617', NULL, NULL, NULL, '918 Schulist Street\nSouth Winnifredfurt, OK 13607', NULL, NULL, NULL, NULL, NULL, 'lang.lilly@example.net', '2025-02-13 03:36:32', '$2y$12$MB2NKfVruNdJRanU6wLzcOIdgkUUFjoPVFeznJnCEx5ZRtjyGeoSq', 'lGduZWM9x2', '2025-02-13 03:36:32', '2025-02-14 02:14:34', 6, '2025-02-14 02:14:34', 1);
-INSERT INTO `users` VALUES (101, 'thai phu', '0347079502', '01', '002', '00043', 'ss', '2025-02-13', NULL, 'ss', NULL, NULL, 'phu123@gmail.com', NULL, '$2y$12$xXfNX60qwUnTpUzMwLHmdeE8/sm6hgbr06m51vZTzyOr1qqxeNJZK', NULL, '2025-02-13 04:03:36', '2025-07-11 02:48:57', 2, NULL, 1);
+INSERT INTO `users` VALUES (101, 'thai phu', '0347079502', '01', '002', '00043', 'ss', '2025-02-13', NULL, 'ss', NULL, NULL, 'admin@gmail.com', NULL, '$2y$12$xXfNX60qwUnTpUzMwLHmdeE8/sm6hgbr06m51vZTzyOr1qqxeNJZK', NULL, '2025-02-13 04:03:36', '2025-07-11 02:48:57', 2, NULL, 1);
 INSERT INTO `users` VALUES (104, 'ngoc phu', '0347079502', '83', '834', '28984', '111', '2025-02-17', NULL, NULL, NULL, NULL, 'phu111@gmail.com', NULL, '$2y$12$MoM3zDf1CSRGyF/R2zVjdOONxqQ2J70qSm4Oq9iHuVigZafVOBQ3u', NULL, '2025-02-17 09:02:54', '2025-07-11 02:48:57', 2, NULL, 1);
 INSERT INTO `users` VALUES (105, 'admin', NULL, '02', '028', '00829', NULL, '2025-02-19', 'aHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9teS1jb3VsZC1hcGkvaW1hZ2UvdXBsb2FkL3YxNzQwMzgxNTE1L0ltYWdlRm9sZGVyL2l0bzB2ZHdtdHNtbTZleG91OHRlLmpwZw==', NULL, NULL, NULL, 'phu222@gmail.com', NULL, '$2y$12$6lqC.D9Rgb2KeZstiATDy.BgZ5UMOkyjL.cnGzfhXDZRfonjLvXTG', NULL, '2025-02-19 02:27:08', '2025-07-11 02:48:57', 2, NULL, 1);
 
