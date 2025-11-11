@@ -109,7 +109,7 @@ After successfully starting the containers, open your browser and go to\:
 ### 1. Get Cloudinary API Key
 - Step 1: Log in to your [Cloudinary Console](https://cloudinary.com/users/login).
 - Step 2: Navigate to **Settings** → **API Keys**.
-- Step 3: Copy the API Environment Variable (starts with cloudinary://).
+- Step 3: Copy the API Environment Variable (starts with cloudinary://). Then, replace `<your_api_key>` and `<your_api_secret>` with your actual API Key and API Secret values.
 
 ### 2. Get Cloudinary Cloud Name
 - Step 1: Log in to your [Cloudinary Console](https://cloudinary.com/users/login).
