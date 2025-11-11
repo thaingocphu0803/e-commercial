@@ -81,7 +81,7 @@ sudo docker-compose up -d --build
 ##### Step 8: Import database data
 Use the following command to import your SQL data into MySQL container. Replace **{db_password}** and **{db_name}** with the values defined in your root **.env**.
 ```cmd
-sudo docker exec -i app_mysql mysql -u root -p{db_password} {db_name} < db/your_file.sql
+sudo docker exec -i app_mysql mysql -u root -p{db_password} {db_name} < db/ecommercial.sql
 ```
 
 ##### Step 9: Install Composer dependencies
