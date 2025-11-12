@@ -36,22 +36,23 @@
                     </div>
 
                     {{-- body  table --}}
-                    <table class="table table-hover text-center">
+                    <table class="table table-hover ">
                         <thead>
-                            <tr class="table-success">
-                                <th class="text-capitalize">{{ __('custom.name') }}</th>
-                                <th class="text-capitalize">{{ __('custom.qty') }}</th>
-                                <th class="text-capitalize">{{ __('custom.purchasePrice') }}</th>
-                                <th class="text-capitalize">{{ __('custom.originalPrice') }}</th>
+                            <tr class="table-success text-center">
+                                <th class="text-capitalize" colspan="8">{{ __('custom.name') }}</th>
+                                <th class="text-capitalize" colspan="4">{{ __('custom.qty') }}</th>
+                                <th class="text-capitalize" colspan="4">{{ __('custom.originalPrice') }}</th>
+                                <th class="text-capitalize" colspan="4">{{ __('custom.purchasePrice') }}</th>
+
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($order['products'] as $product)
                                 <tr class="table-secondary">
-                                    <td>{{$product['name']}}</td>
-                                    <td>{{intval($product['qty'])}}</td>
-                                    <td>{{price_format($product['price'])}}</td>
-                                    <td>{{price_format($product['price_original'])}}</td>
+                                    <td colspan="8">{{$product['name']}}</td>
+                                    <td class="text-center" colspan="4">{{intval($product['qty'])}}</td>
+                                    <td class="text-center" colspan="4">{{price_format($product['price_original'])}}</td>
+                                    <td class="text-center" colspan="4">{{price_format($product['price'])}}</td>
                                 </tr>
                             @endforeach
                         </tbody>

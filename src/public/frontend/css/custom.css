@@ -345,28 +345,3 @@
 .voucher-list > .list-item:has(.choose-voucher:hover)  {
     border-color: var(--color-warning);
 }
-
-.order-body {
-    border: 1px solid var(--color-secondary);
-    padding: 1em;
-    border-radius: 10px;
-}
-
-.order-body >  .body-title > div > .title-code  {
-    border: 1px solid var(--color-secondary);
-    padding: 5px 1em;
-    border-radius: 1em;
-}
-
-.customer-body {
-    border: 1px solid var(--color-secondary);
-    padding: 1em;
-    border-radius: 10px;
-}
-
-.customer-body >  .body-title > div > .title-code  {
-    border: 1px solid var(--color-secondary);
-    padding: 5px 1em;
-    border-radius: 1em;
-}
-

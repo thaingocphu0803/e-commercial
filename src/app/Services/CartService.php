@@ -5,10 +5,10 @@ namespace App\Services;
 use App\Repositories\OrderRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\PromotionRepository;
+use App\Repositories\SystemRepository;
 use App\Services\Interfaces\CartServiceInterface;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\DB;
-use  Illuminate\Support\Str;
 
 
 /**
@@ -20,15 +20,18 @@ class CartService implements CartServiceInterface
     private $productRepository;
     private $promotionRepository;
     private $orderRepository;
+    private $systemRepository;
 
     public function __construct(
         ProductRepository $productRepository,
         PromotionRepository $promotionRepository,
-        OrderRepository $orderRepository
+        OrderRepository $orderRepository,
+        SystemRepository $systemRepository
     ) {
         $this->productRepository = $productRepository;
         $this->promotionRepository = $promotionRepository;
         $this->orderRepository = $orderRepository;
+        $this->systemRepository = $systemRepository;
     }
 
     public function create($request)

@@ -356,7 +356,7 @@
         'attrRequired' => ':attribute is required',
         'PurchaseOrder' => 'Purchase order',
         'orderInfor' => 'order Information',
-        'continueShop' => 'Your order has been placed successfully! Continue shopping now!',
+        'continueShop' => 'Your order has been placed successfully. Continue shopping now!',
         'date' => 'date',
         'discountCode' => 'discount code',
         'customerName' => 'customer name',
@@ -377,4 +377,5 @@
         'backPrev' => 'Back to Previous Page',
         'permissionStatus' => 'permission status',
         'attrCatalouge' => 'attribute catalouge',
+        'orderAttrConfirm' => 'Order :attribute confirm'
     ];

@@ -65,7 +65,6 @@ class ProductController extends Controller
     {
         Gate::authorize('modules', 'product.update');
         $product = $this->productService->findById($id);
-        // dd($product);
         $listNode = $this->productService->getToTree();
         $listAttr = $this->attrCatalougeService->getToTree();
         $languages = Language::select('id', 'name')->get();

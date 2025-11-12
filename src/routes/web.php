@@ -40,9 +40,9 @@ use App\Http\Controllers\Frontend\RouterController;
 Route::get('/', [HomeController::class, 'index'])->name('home.index')->middleware('locale');
 
 // CartController
-Route::controller(CartController::class)->prefix('cart')->middleware(['locale', 'cart'])->group(function(){
-    Route::get('index', 'index')->name('cart.index');
-    Route::post('store', 'store')->name('cart.store');
+Route::controller(CartController::class)->prefix('cart')->middleware(['locale'])->group(function(){
+    Route::get('index', 'index')->name('cart.index')->middleware(['cart']);
+    Route::post('store', 'store')->name('cart.store')->middleware(['cart']);
     Route::get('success/{code}', 'success')->name('cart.success');
 });
 
