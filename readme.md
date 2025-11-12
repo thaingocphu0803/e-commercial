@@ -59,6 +59,10 @@ sudo vim .env
 | ------------ | ------------ |
 |DB_DATABASE|Same as **DB_NAME** defined in the root **.env**|
 |DB_USERNAME|Usually **root**|
+|DB_USERNAME|Usually **root**|
+|MAIL_USERNAME|The email address used to send messages to users|
+|MAIL_PASSWORD|The application-specific password for this email (see the [Get Mail Password](#4-get-mail-password) section)|
+|MAIL_FROM_NAME|The name displayed as the sender in emails sent to users|
 |DB_PASSWORD|Same as **DB_ROOT_PASSWORD** defined in the root **.env**|
 |CLOUDINARY_URL|Cloudinary API key (see the [Get Cloudinary API Key](#1-get-cloudinary-api-key) section)|
 |CLOUDINARY_UPLOAD_PRESET|Cloudinary upload preset (see the [Get Cloudinary Upload Preset](#3-get-cloudinary-upload-preset) section)|
@@ -120,5 +124,12 @@ After successfully starting the containers, open your browser and go to\:
 - Step 1: Log in to your [Cloudinary Console](https://cloudinary.com/users/login).
 - Step 2: Go to **Settings** → **Upload**.
 - Step 3: Click **Add Upload Preset**.
-- Step 3: Enter necessary information and set **Signing Mode** to **Unsigned**.
-- Step 3: Save, then copy the **Upload Preset Name** you just created.
+- Step 4: Enter necessary information and set **Signing Mode** to **Unsigned**.
+- Step 5: Save, then copy the **Upload Preset Name** you just created.
+
+### 4. Get Mail Password
+- Step 1: Log in to your [Gmail](https://accounts.google.com).
+- Step 2: Go to [Manage your Google Account](https://myaccount.google.com/) → Security → 2-Step Verification, and turn it on if it’s not already enabled.
+- Step 3: Go back to [Manage your Google Account](https://myaccount.google.com/). In the search box at the top, type App passwords and press Enter to go to the App Passwords page.
+- Step 4: On the App Passwords page, enter a name for your app (e.g., MyApp Mail) and click **Create**.
+- Step 5: Copy the generated 16-character app password. Use this as MAIL_PASSWORD in your application.
