@@ -133,6 +133,7 @@ return [
     'confirm_stt' => [
         'pending' => 'Waiting for confirmation',
         'confirm' => 'Confirmed',
+        'cancel' => 'Canceled'
     ],
 
     'payment_stt' => [

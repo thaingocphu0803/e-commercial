@@ -116,3 +116,19 @@ if (!function_exists('caculate_cart_total')) {
         }
     }
 }
+
+//helper format address from collection
+if(!function_exists('format_address')){
+    function format_address($object)
+    {
+
+        $full_address = array_filter([
+            $object->address,
+            $object->ward->name ?? null,
+            $object->district->name ?? null,
+            $object->province->name ?? null,
+        ]);
+
+        return implode(', ', $full_address);
+    }
+}

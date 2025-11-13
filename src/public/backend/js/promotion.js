@@ -117,7 +117,6 @@
         $(".datetimepicker").datetimepicker({
             timepicker: true,
             format: "Y-m-d H:i",
-            // value: new Date(),
             minDate: new Date(),
             step: 30,
             onChangeDateTime: function (dp, $input) {

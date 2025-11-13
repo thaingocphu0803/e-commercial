@@ -8,7 +8,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>{{ __('custom.listObject', ['attribute' => __('custom.product')]) }}</h5>
-                    <x-backend.dashboard.toolbox model="product" object="product"/>
+                    <x-backend.dashboard.toolbox model="product" object="coupon"/>
                 </div>
                 <div class="ibox-content">
                     <x-backend.product.product.filter :listNode="$listNode"/>

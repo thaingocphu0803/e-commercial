@@ -377,5 +377,21 @@
         'backPrev' => 'Back to Previous Page',
         'permissionStatus' => 'permission status',
         'attrCatalouge' => 'attribute catalouge',
-        'orderAttrConfirm' => 'Order :attribute confirm'
+        'orderAttrConfirm' => 'Order :attribute confirm',
+        //2025/11/12
+        'orders' =>  'Orders',
+        'publishAttrChoosen' => 'Publish :attribute Chosen',
+        'privateAttrChoosen' => 'Publish :attribute Chosen',
+        'menuCatalouge' => 'menu catalouge',
+        'postCatalouge' => 'post catalouge',
+        'ceateOn' => 'create on',
+        'payment' => 'payment',
+        'method' => 'method',
+        'status' => 'status',
+        'delivery' => 'delivery',
+        'chooseConfirmStatus' => 'Choose confirmed status',
+        'choosePaymentStatus' => 'Choose payment status',
+        'chooseDeliveryStatus' => 'Choose delivery status',
+        'choosePaymentMethod' => 'Choose payment method',
+        'selectCreatedDateRange' => 'Select created date range'
     ];

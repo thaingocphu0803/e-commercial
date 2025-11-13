@@ -514,9 +514,18 @@ a.active{
     display: inline-block;
 }
 
-/* .profile-element{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-} */
+.fake-select2 {
+    border-radius: 4px !important;
+    border: 1px solid #aaa !important;
+}
+
+.fake-select2:focus {
+    border-color: #1ab394 !important
+}
+
+.rangepicker::placeholder {
+    color: #444;
+    opacity: 1;
+    font-size: 13px;
+    line-height: 28px;
+}

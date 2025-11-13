@@ -41,6 +41,9 @@
 {{-- nestable --}}
 <script src="{{asset('backend/js/plugins/nestable/jquery.nestable.js')}}"></script>
 
+ {{-- datetimepicker --}}
+<script src="{{asset('backend/js/plugins/datetimepicker/build/jquery.datetimepicker.full.min.js')}}"></script>
+
 {{-- lib.js --}}
  <script src="{{asset('backend/js/lib.js')}}" defer></script>
 
@@ -59,8 +62,7 @@
   {{-- promotion.js --}}
  <script src="{{asset('backend/js/promotion.js')}}" defer></script>
 
- {{-- datetimepicker --}}
-<script src="{{asset('backend/js/plugins/datetimepicker/build/jquery.datetimepicker.full.min.js')}}" defer></script>
-
 {{ $slot }}
+
+@stack('backend-script')
 

@@ -381,5 +381,11 @@ $(document).ready(() => {
         let _this = $(this);
         let price = _this.val().replace(/[^0-9]/g, "");
         _this.val(convertToCommas(price));
-    })
+    });
+
+    (function (){
+        $(".rangepicker").daterangepicker({
+            format: 'YYYY/MM/DD',
+        })
+    })();
 });

@@ -9,9 +9,9 @@
 
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear"> <span class="block m-t-xs">
-                            <strong class="font-bold">{{ Auth::user()->name }}</strong> 
+                            <strong class="font-bold">{{ Auth::user()->name }}</strong>
                             <b class="ms-5 caret"></b>
-                            </span> 
+                            </span>
                         </span>
                      </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
@@ -78,7 +78,7 @@
             <x-backend.dashboard.nav.module icon='fa-cubes' :title="__('custom.managerObject', ['attribute' => __('custom.product')])">
                 @can('modules', 'product.index')
                     <li class="nav-menu-item">
-                        <a class="text-capitalize" href="/product/index">
+                        <a class="text-capitalize" href="{{route('product.index')}}">
                             {{ __('custom.product') }}
                         </a>
                     </li>
@@ -86,7 +86,7 @@
 
                 @can('modules', 'product.catalouge.index')
                     <li class="nav-menu-item">
-                        <a class="text-capitalize" href="/product/catalouge/index">
+                        <a class="text-capitalize" href="{{route('product.catalouge.index')}}">
                             {{ __('custom.objectGroup', ['attribute' => __('custom.product')]) }}
                         </a>
                     </li>
@@ -94,7 +94,7 @@
 
                 @can('modules', 'attr.index')
                     <li class="nav-menu-item">
-                        <a class="text-capitalize" href="/attr/index">
+                        <a class="text-capitalize" href="{{route('attr.index')}}">
                             {{ __('custom.attr') }}
                         </a>
                     </li>
@@ -102,7 +102,7 @@
 
                 @can('modules', 'attr.catalouge.index')
                     <li class="nav-menu-item">
-                        <a class="text-capitalize" href="/attr/catalouge/index">
+                        <a class="text-capitalize" href="{{route('attr.catalouge.index')}}">
                             {{ __('custom.objectGroup', ['attribute' => __('custom.attr')]) }}
                         </a>
                     </li>
@@ -113,25 +113,37 @@
             <x-backend.dashboard.nav.module icon='fa-money' :title="__('custom.managerObject', ['attribute' => __('custom.marketing')])">
                 @can('modules', 'promotion.index')
                     <li class="nav-menu-item">
-                        <a class="text-capitalize" href="/promotion/index">
+                        <a class="text-capitalize" href="{{route('promotion.index')}}">
                             {{ __('custom.managerObject', ['attribute' => __('custom.promotion')]) }}
                         </a>
                         </a>
                     </li>
                 @endcan
 
-                @can('modules', 'coupon.index')
+                {{-- @can('modules', 'coupon.index')
                     <li class="nav-menu-item">
-                        <a class="text-capitalize" href="/coupon/index">
+                        <a class="text-capitalize" href="{{route('coupon.index')}}">
                             {{ __('custom.managerObject', ['attribute' => __('custom.coupon')]) }}
                         </a>
                     </li>
-                @endcan
+                @endcan --}}
 
                 @can('modules', 'source.index')
                     <li class="nav-menu-item">
-                        <a class="text-capitalize" href="/source/index">
+                        <a class="text-capitalize" href="{{route('source.index')}}">
                             {{ __('custom.managerObject', ['attribute' => __('custom.source')]) }}
+                        </a>
+                    </li>
+                @endcan
+            </x-backend.dashboard.nav.module>
+
+            {{-- manage Order --}}
+            <x-backend.dashboard.nav.module icon='fa-shopping-bag' :title="__('custom.managerObject', ['attribute' => __('custom.orders')])">
+                @can('modules', 'order.index')
+                    <li class="nav-menu-item">
+                        <a class="text-capitalize" href="{{route('order.index')}}">
+                            {{ __('custom.managerObject', ['attribute' => __('custom.orders')]) }}
+                        </a>
                         </a>
                     </li>
                 @endcan

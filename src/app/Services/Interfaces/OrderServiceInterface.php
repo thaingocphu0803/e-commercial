@@ -9,4 +9,6 @@ namespace App\Services\Interfaces;
 interface OrderServiceInterface
 {
     public function findById($code);
+    public function paginate($request);
+
 }

@@ -117,6 +117,7 @@ return [
     'confirm_stt' => [
         'pending' => '待确认',
         'confirm' => '已确认',
+        'cancel' => '已取消'
     ],
 
     'payment_stt' => [

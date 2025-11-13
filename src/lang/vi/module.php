@@ -117,6 +117,7 @@ return [
     'confirm_stt' => [
         'pending' => 'Chờ xác nhận',
         'confirm' => 'Đã xác nhận',
+        'cancel' => 'Đã hủy'
     ],
 
     'payment_stt' => [

@@ -18,6 +18,12 @@ class OrderService implements OrderServiceInterface
         $this->orderRepository = $orderRepository;
     }
 
+    public function paginate($request)
+    {
+        $orders = $this->orderRepository->paginate($request);
+        return $orders;
+    }
+
     public function findById($code)
     {
         $order =  $this->orderRepository->findById($code);
@@ -27,7 +33,7 @@ class OrderService implements OrderServiceInterface
         $orderData['customer_phone'] = $order->phone;
         $orderData['customer_name'] = $order->fullname;
         $orderData['customer_email'] = $order->email;
-        $orderData['customer_address'] = $this->formatAddress($order);
+        $orderData['customer_address'] = format_address($order);
         $orderData['customer_method'] = $order->method;
         $orderData['shipping_fee'] = $order->shipping_fee;
         $orderData['total_price_original'] = $this->caculatePriceOriginal($order->products);
@@ -37,19 +43,6 @@ class OrderService implements OrderServiceInterface
         $orderData['products'] = $this->getOrderProduct($order->products);
 
         return $orderData;
-    }
-
-    private function formatAddress($order)
-    {
-
-        $full_address = array_filter([
-            $order->address,
-            $order->ward->name ?? null,
-            $order->district->name ?? null,
-            $order->province->name ?? null,
-        ]);
-
-        return implode(', ', $full_address);
     }
 
     private function caculateOrderDiscount($order){
@@ -74,7 +67,7 @@ class OrderService implements OrderServiceInterface
         return $temps;
     }
 
-    public function caculatePriceOriginal($products){
+    private function caculatePriceOriginal($products){
         $price_originals = $products->pluck('pivot.price_original');
         return $price_originals->sum();
     }

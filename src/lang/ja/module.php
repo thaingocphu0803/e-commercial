@@ -117,6 +117,7 @@ return [
     'confirm_stt' => [
         'pending' => '確認待ち',
         'confirm' => '確認済み',
+        'cancel' => 'キャンセル'
     ],
 
     'payment_stt' => [

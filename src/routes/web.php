@@ -26,6 +26,7 @@ use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\CustomerCatalougeController;
 use App\Http\Controllers\Backend\CustomerController;
 use App\Http\Controllers\Backend\MenuController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PromotionController;
 use App\Http\Controllers\Backend\SlideController;
 use App\Http\Controllers\Backend\SourceController;
@@ -243,6 +244,7 @@ Route::controller(ProductCatalougeController::class)->middleware(['admin', 'loca
     Route::get('delete/{id}', 'delete')->name('product.catalouge.delete');
     Route::delete('destroy/{id}', 'destroy')->name('product.catalouge.destroy');
 });
+
 //PromotionController
 Route::controller(PromotionController::class)->middleware(['admin', 'locale'])->prefix('promotion')->group(function () {
     Route::get('index',  'index')->name('promotion.index');
@@ -253,16 +255,17 @@ Route::controller(PromotionController::class)->middleware(['admin', 'locale'])->
     Route::get('delete/{id}', 'delete')->name('promotion.delete');
     Route::delete('destroy/{id}', 'destroy')->name('promotion.destroy');
 });
-//CouponController
-Route::controller(CouponController::class)->middleware(['admin', 'locale'])->prefix('coupon')->group(function () {
-    Route::get('index',  'index')->name('coupon.index');
-    Route::get('create', 'create')->name('coupon.create');
-    Route::post('store', 'store')->name('coupon.store');
-    Route::get('edit/{id}', 'edit')->name('coupon.edit');
-    Route::post('update/{id}', 'update')->name('coupon.update');
-    Route::get('delete/{id}', 'delete')->name('coupon.delete');
-    Route::delete('destroy/{id}', 'destroy')->name('coupon.destroy');
-});
+
+// //CouponController
+// Route::controller(CouponController::class)->middleware(['admin', 'locale'])->prefix('coupon')->group(function () {
+//     Route::get('index',  'index')->name('coupon.index');
+//     Route::get('create', 'create')->name('coupon.create');
+//     Route::post('store', 'store')->name('coupon.store');
+//     Route::get('edit/{id}', 'edit')->name('coupon.edit');
+//     Route::post('update/{id}', 'update')->name('coupon.update');
+//     Route::get('delete/{id}', 'delete')->name('coupon.delete');
+//     Route::delete('destroy/{id}', 'destroy')->name('coupon.destroy');
+// });
 
 //SouceController
 Route::controller(SourceController::class)->middleware(['admin', 'locale'])->prefix('source')->group(function () {
@@ -273,6 +276,17 @@ Route::controller(SourceController::class)->middleware(['admin', 'locale'])->pre
     Route::post('update/{id}', 'update')->name('source.update');
     Route::get('delete/{id}', 'delete')->name('source.delete');
     Route::delete('destroy/{id}', 'destroy')->name('source.destroy');
+});
+
+//OrderController
+Route::controller(OrderController::class)->middleware(['admin', 'locale'])->prefix('order')->group(function () {
+    Route::get('index',  'index')->name('order.index');
+    // Route::get('create', 'create')->name('order.create');
+    // Route::post('store', 'store')->name('order.store');
+    // Route::get('edit/{id}', 'edit')->name('order.edit');
+    // Route::post('update/{id}', 'update')->name('order.update');
+    // Route::get('delete/{id}', 'delete')->name('order.delete');
+    // Route::delete('destroy/{id}', 'destroy')->name('order.destroy');
 });
 
 //AttrController

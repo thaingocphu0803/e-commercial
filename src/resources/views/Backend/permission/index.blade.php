@@ -8,7 +8,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>{{ __('custom.listObject', ['attribute' => __('custom.permission')]) }}</h5>
-                    <x-backend.dashboard.toolbox model="permission" object="permissions"/>
+                    <x-backend.dashboard.toolbox model="permission" object="permission"/>
                 </div>
                 <div class="ibox-content">
                     <x-backend.permission.filter/>
