@@ -34,6 +34,10 @@
     margin-left:10px;
 }
 
+.ml-20{
+    margin-left:20px;
+}
+
 
 h5 {
     text-transform: uppercase;
@@ -72,6 +76,11 @@ table strong {
 .flex-middle {
     align-items: center;
 }
+
+.align-start{
+    align-items: start;
+}
+
 .flex-align-end{
     align-items: end;
 }
@@ -120,6 +129,11 @@ table strong {
 .active-bg{
     background-color: rgb(155, 222, 231) !important;
 }
+
+.gap-5{
+    gap: 5px;
+}
+
 
 .gap-10{
     gap: 10px;
@@ -340,6 +354,11 @@ a.active{
 .text-bold{
     font-weight: bold;
 }
+
+.align-self-end {
+    align-self: end;
+}
+
 .text-semibold {
     font-weight:semibold;
 }
@@ -373,6 +392,10 @@ a.active{
 
 .m-0{
     margin: 0 !important;
+}
+
+.p-10{
+
 }
 
 .text-500 {
@@ -528,4 +551,47 @@ a.active{
     opacity: 1;
     font-size: 13px;
     line-height: 28px;
+}
+
+.ibox-title-left > .badge {
+    background-color: #ffea8a;
+    padding: 5px 10px;
+}
+
+.ibox-title-left > .badge > .badge__tip {
+    color: #9c6f19;
+    background-color: transparent;
+    width: 12px;
+    height: 12px;
+    border: 0.2em solid currentColor;
+    border-radius: 50%;
+}
+
+.table-item{
+    padding: 10px
+}
+
+.border-b-1{
+    border-bottom: 1px solid #c3c8cc;
+}
+
+.border-t-1{
+    border-top: 1px solid #676a6c;
+}
+
+.my-10{
+    margin: 0 10px;
+}
+
+.pt-10 {
+    padding-top: 10px;
+}
+
+.order-alert > .alert-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.ml-auto {
+    margin-left: auto;
 }

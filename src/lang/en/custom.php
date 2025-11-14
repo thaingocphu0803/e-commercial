@@ -340,8 +340,8 @@
         'paymentMethod' => 'payment method',
         'payByCOD' => 'Pay by COD',
         'payByZalo' => 'Pay by ZaloPay',
-        'payByMomo' => 'Pay by ShopeePay',
-        'payByShopee' => 'Pay by MOMO',
+        'payByMomo' => 'Pay by MOMO',
+        'payByShopee' => 'Pay by ShopeePay',
         'payByVNP' => 'Pay by VNPay',
         'payOrder' => 'Pay for the order',
         'applyVoucher' => 'apply voucher',
@@ -393,5 +393,12 @@
         'choosePaymentStatus' => 'Choose payment status',
         'chooseDeliveryStatus' => 'Choose delivery status',
         'choosePaymentMethod' => 'Choose payment method',
-        'selectCreatedDateRange' => 'Select created date range'
+        'selectCreatedDateRange' => 'Select created date range',
+        'alertIcon' => 'alert icon',
+        'waitConfirmAttrOrder' => 'Awaiting confirmation of the :attribute order.',
+        'confirm' => 'confirm',
+        'confirmOrder' => 'Confirm order',
+        'orderdetail' => 'Chi tiết đơn hàng',
+        'note' => "note",
+        'noNot' => 'No note'
     ];

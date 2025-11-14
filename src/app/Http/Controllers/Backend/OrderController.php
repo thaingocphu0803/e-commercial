@@ -34,19 +34,12 @@ class OrderController extends Controller
         return view('Backend.order.index', compact('orders'));
     }
 
-    // public function create()
-    // {
-    //     Gate::authorize('modules', 'product.create');
-    //     $listNode = $this->productService->getToTree();
-    //     $listAttr = $this->attrCatalougeService->getToTree();
-    //     $languages = Language::select('id', 'name')->get();
-
-    //     return view('Backend.product.product.create', [
-    //         'listNode' => $listNode,
-    //         'listAttr' => $listAttr,
-    //         'languages' => $languages
-    //     ]);
-    // }
+    public function detail($code)
+    {
+        $order = $this->orderService->findById($code);
+        // dd($order);
+        return view('Backend.order.detail' , compact('order'));
+    }
 
     // public function store(StoreProductRequest $request)
     // {

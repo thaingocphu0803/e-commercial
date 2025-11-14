@@ -48,7 +48,7 @@
 
                     {{-- code --}}
                     <td>
-                        <a href="">{{ $order->code }}</a>
+                        <a href="{{route('order.detail', $order->code)}}">{{ $order->code }}</a>
                     </td>
 
                     {{-- create on --}}
@@ -56,9 +56,9 @@
 
                     {{-- customer info --}}
                     <td>
-                        <div><Strong style="min-width:1em">N:</Strong> <span class="ms-1">{{ $order->fullname }}</span></div>
-                        <div><Strong style="min-width:1em">P:</Strong> <span class="ms-1">{{ $order->phone }}</div>
-                        <div><Strong style="min-width:1em">A:</Strong> <span class="ms-1">{{ format_address($order) }}</span>
+                        <div><Strong style="min-width:1em">{{__('custom.name') . ": "}}</Strong> <span class="ms-1">{{ $order->fullname }}</span></div>
+                        <div><Strong style="min-width:1em">{{__('custom.phone') . ": "}}</Strong> <span class="ms-1">{{ $order->phone }}</div>
+                        <div><Strong style="min-width:1em">{{__('custom.address') . ": "}}</Strong> <span class="ms-1">{{ format_address($order) }}</span>
                     </td>
 
                     {{-- cart discount --}}

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\OrderRepository;
 use App\Services\Interfaces\OrderServiceInterface;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class OrderService
@@ -29,6 +30,7 @@ class OrderService implements OrderServiceInterface
         $order =  $this->orderRepository->findById($code);
 
         $orderData['code'] = $order->code;
+        $orderData['note'] = $order->description;
         $orderData['created_at'] = $order->created_at->format('Y/m/d H:i:s');
         $orderData['customer_phone'] = $order->phone;
         $orderData['customer_name'] = $order->fullname;
@@ -45,6 +47,20 @@ class OrderService implements OrderServiceInterface
         return $orderData;
     }
 
+    public function ajaxUpdate($request)
+    {
+        $payload = $request->except('_token');
+        switch($payload['target']){
+            case "orderNote":
+                return $this->updateOrderDescription($payload);
+                break;
+            case "customerInfor":
+                break;
+            default:
+                break;
+        }
+    }
+
     private function caculateOrderDiscount($order){
         $product_discount = floatval($order->cart['totalDiscount']);
         $cart_discount = floatval($order->promotion['discount']);
@@ -56,7 +72,9 @@ class OrderService implements OrderServiceInterface
         $temps = [];
 
         foreach($products->pluck('pivot') as $product){
+            // dd($product->option);
             $temps[] = [
+                'image' => $this->getProductOptionItem( $product->option, 'image'),
                 'name' => $product->name,
                 'qty' => $product->qty,
                 'price' => $product->price,
@@ -70,5 +88,31 @@ class OrderService implements OrderServiceInterface
     private function caculatePriceOriginal($products){
         $price_originals = $products->pluck('pivot.price_original');
         return $price_originals->sum();
+    }
+
+    // handle get product option
+    private function getProductOptionItem($option, $columnName) {
+        $decodeOption = json_decode($option, true);
+
+        return $decodeOption[$columnName];
+    }
+
+    private function updateOrderDescription($payload){
+        try{
+            DB::beginTransaction();
+
+            $code = $payload['code'];
+            $updatePayload = [
+                'description' => $payload['descripion']
+            ];
+            $this->orderRepository->update($code, $updatePayload);
+
+            DB::commit();
+            return true;
+
+        }catch(\Exception $e){
+            DB::rollBack();
+            return false;
+        }
     }
 }

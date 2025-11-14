@@ -12,6 +12,11 @@ class OrderRepository implements OrderRepositoryInterface
         return Order::create($payload);
     }
 
+    public function update($code, $payload)
+    {
+        return Order::where('code', $code)->update($payload);
+    }
+
     public function findById($code)
     {
         return Order::with('products', 'province', 'district', 'ward')->where('code', $code)->get()->first();
