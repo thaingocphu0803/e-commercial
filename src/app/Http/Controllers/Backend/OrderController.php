@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\ProvinceRepository;
 use App\Services\ProductService;
 use App\Services\AttrCatalougeService;
 use App\Services\OrderService;
@@ -14,39 +15,34 @@ class OrderController extends Controller
     protected $productService;
     protected $attrCatalougeService;
     protected $orderService;
+    protected $provinceRepository;
 
     public function __construct(
         ProductService $productService,
         AttrCatalougeService $attrCatalougeService,
-        OrderService $orderService
+        OrderService $orderService,
+        ProvinceRepository $provinceRepository,
     ) {
         $this->productService = $productService;
         $this->attrCatalougeService = $attrCatalougeService;
         $this->orderService = $orderService;
+        $this->provinceRepository = $provinceRepository;
     }
 
     public function index(Request $request)
     {
         Gate::authorize('modules', 'order.index');
         $orders = $this->orderService->paginate($request);
-        // dd($orders);
-
         return view('Backend.order.index', compact('orders'));
     }
 
-    // public function create()
-    // {
-    //     Gate::authorize('modules', 'product.create');
-    //     $listNode = $this->productService->getToTree();
-    //     $listAttr = $this->attrCatalougeService->getToTree();
-    //     $languages = Language::select('id', 'name')->get();
+    public function detail($code)
+    {
+        $order = $this->orderService->findById($code);
+        $provinces = $this->provinceRepository->getAll();
 
-    //     return view('Backend.product.product.create', [
-    //         'listNode' => $listNode,
-    //         'listAttr' => $listAttr,
-    //         'languages' => $languages
-    //     ]);
-    // }
+        return view('Backend.order.detail' , compact('order', 'provinces'));
+    }
 
     // public function store(StoreProductRequest $request)
     // {

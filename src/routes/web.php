@@ -5,6 +5,7 @@ use App\Http\Controllers\Ajax\CartController as AjaxCartController;
 use App\Http\Controllers\Ajax\DashboardController as AjaxDashboardController;
 use App\Http\Controllers\Ajax\LocationController;
 use App\Http\Controllers\Ajax\MenuController as AjaxMenuController;
+use App\Http\Controllers\Ajax\OrderController as AjaxOrderController;
 use App\Http\Controllers\Ajax\ProductController as AjaxProductController;
 use App\Http\Controllers\Ajax\PromotionController as AjaxPromotionController;
 use App\Http\Controllers\Backend\AuthenController;
@@ -281,7 +282,7 @@ Route::controller(SourceController::class)->middleware(['admin', 'locale'])->pre
 //OrderController
 Route::controller(OrderController::class)->middleware(['admin', 'locale'])->prefix('order')->group(function () {
     Route::get('index',  'index')->name('order.index');
-    // Route::get('create', 'create')->name('order.create');
+    Route::get('detail/{code}', 'detail')->name('order.detail');
     // Route::post('store', 'store')->name('order.store');
     // Route::get('edit/{id}', 'edit')->name('order.edit');
     // Route::post('update/{id}', 'update')->name('order.update');
@@ -313,34 +314,39 @@ Route::controller(AttrCatalougeController::class)->middleware(['admin', 'locale'
 
 //Ajax DashboardController
 Route::controller(AjaxDashboardController::class)->prefix('ajax/dashboard')->middleware(['admin', 'locale'])->group(function(){
-    Route::post('changeStatus', 'changeStatus')->name('dashboard.changeStatus');
-    Route::post('changeStatusAll', 'changeStatusAll')->name('dashboard.changeStatus');
-    Route::post('upload/image', 'uploadImage')->name('dashboard.upload.image');
-    Route::get('getMenu', 'getMenu')->name('dashboard.getMenu');
+    Route::post('changeStatus', 'changeStatus')->name('ajax.dashboard.changeStatus');
+    Route::post('changeStatusAll', 'changeStatusAll')->name('ajax.dashboard.changeStatusAll');
+    Route::post('upload/image', 'uploadImage')->name('ajax.dashboard.uploadImage');
+    Route::get('getMenu', 'getMenu')->name('ajax.dashboard.getMenu');
 });
 
 //Ajax ProductController
 Route::controller(AjaxProductController::class)->prefix('ajax/product')->middleware(['admin', 'locale'])->group(function(){
-    Route::get('loadProductPromotion', 'loadProductPromotion')->name('product.loadProductPromotion');
-    Route::get('loadProductCatalougePromotion', 'loadProductCatalougePromotion')->name('product.loadProductCatalougePromotion');
+    Route::get('loadProductPromotion', 'loadProductPromotion')->name('ajax.product.loadProductPromotion');
+    Route::get('loadProductCatalougePromotion', 'loadProductCatalougePromotion')->name('ajax.product.loadProductCatalougePromotion');
 });
 
 //Ajax PromotionController
 Route::controller(AjaxPromotionController::class)->prefix('ajax/promotion')->middleware(['admin', 'locale'])->group(function(){
-    Route::get('loadCustomerPromotionType', 'loadCustomerPromotionType')->name('product.loadCustomerPromotionType');
+    Route::get('loadCustomerPromotionType', 'loadCustomerPromotionType')->name('ajax.promotion.loadCustomerPromotionType');
 });
 
 //Ajax AttrController
 Route::controller(AjaxAttrController::class)->prefix('ajax/attr')->middleware(['admin', 'locale'])->group(function(){
-    Route::get('getAttr', 'getAttr')->name('attr.getAttr');
-    Route::get('loadAttr', 'loadAttr')->name('attr.loadAttr');
+    Route::get('getAttr', 'getAttr')->name('ajax.attr.getAttr');
+    Route::get('loadAttr', 'loadAttr')->name('ajax.attr.loadAttr');
 
 });
 
 //Ajax MenuController
 Route::controller(AjaxMenuController::class)->prefix('ajax/menu')->middleware(['admin', 'locale'])->group(function(){
-    Route::post('createCatalouge', 'createCatalouge')->name('menu.createCatalouge');
-    Route::post('dragDrop', 'dragDrop')->name('menu.dragDrop');
+    Route::post('createCatalouge', 'createCatalouge')->name('ajax.menu.createCatalouge');
+    Route::post('dragDrop', 'dragDrop')->name('ajax.menu.dragDrop');
+});
+
+//Ajax OrderController
+Route::controller(AjaxOrderController::class)->prefix('ajax/order')->middleware(['admin', 'locale'])->group(function(){
+    Route::post('ajaxUpdate', 'ajaxUpdate')->name('ajax.order.ajaxUpdate');
 });
 
 // DashboardController

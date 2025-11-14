@@ -372,20 +372,27 @@ $(document).ready(() => {
 
             if (activeModule && activeModule == moduleData) {
                 _this.addClass("active");
-                _this.find('.nav-second-level').addClass('collapse in');
+                _this.find(".nav-second-level").addClass("collapse in");
             }
         });
     })();
 
-    $(document).on('input', 'input[name="price"], input[name="variant-price"]', function(){
-        let _this = $(this);
-        let price = _this.val().replace(/[^0-9]/g, "");
-        _this.val(convertToCommas(price));
-    });
+    $(document).on(
+        "input",
+        'input[name="price"], input[name="variant-price"]',
+        function () {
+            let _this = $(this);
+            let price = _this.val().replace(/[^0-9]/g, "");
+            _this.val(convertToCommas(price));
+        }
+    );
 
-    (function (){
-        $(".rangepicker").daterangepicker({
-            format: 'YYYY/MM/DD',
-        })
+    (function () {
+        let rangePicker = $(".rangepicker");
+        if (rangePicker.length) {
+            rangePicker.daterangepicker({
+                format: "YYYY/MM/DD",
+            });
+        }
     })();
 });

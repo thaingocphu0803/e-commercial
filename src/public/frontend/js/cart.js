@@ -37,7 +37,6 @@
             if (result.status === "ng") return;
             toastr.clear();
             toastr.success(result.message, toastTitle[lang]);
-            console.log(result);
             let totalQty = result.object.totalQty;
 
             FUNC.updateCartCount(totalQty);

@@ -1,19 +1,3 @@
-<x-slot:heading>
-    <link href="{{ asset('backend/css/plugins/switchery/switchery.css') }}" rel="stylesheet">
-</x-slot:heading>
-
-<x-slot:script>
-    <script src="{{ asset('backend/js/plugins/switchery/switchery.js') }}"></script>
-
-    <script>
-        $('.js-switch').each((index, element) => {
-            var switchery = new Switchery(element, {
-                color: '#1AB394'
-            });
-        });
-    </script>
-</x-slot:script>
-
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
@@ -48,7 +32,7 @@
 
                     {{-- code --}}
                     <td>
-                        <a href="">{{ $order->code }}</a>
+                        <a href="{{ route('order.detail', $order->code) }}">{{ $order->code }}</a>
                     </td>
 
                     {{-- create on --}}
@@ -56,9 +40,12 @@
 
                     {{-- customer info --}}
                     <td>
-                        <div><Strong style="min-width:1em">N:</Strong> <span class="ms-1">{{ $order->fullname }}</span></div>
-                        <div><Strong style="min-width:1em">P:</Strong> <span class="ms-1">{{ $order->phone }}</div>
-                        <div><Strong style="min-width:1em">A:</Strong> <span class="ms-1">{{ format_address($order) }}</span>
+                        <div><Strong style="min-width:1em">{{ __('custom.name') . ': ' }}</Strong> <span
+                                class="ms-1">{{ $order->fullname }}</span></div>
+                        <div><Strong style="min-width:1em">{{ __('custom.phone') . ': ' }}</Strong> <span
+                                class="ms-1">{{ $order->phone }}</div>
+                        <div><Strong style="min-width:1em">{{ __('custom.address') . ': ' }}</Strong> <span
+                                class="ms-1">{{ format_address($order) }}</span>
                     </td>
 
                     {{-- cart discount --}}
@@ -71,13 +58,37 @@
                     <td class="text-bold">{{ price_format($order->cart['totalGrand']) }}</td>
 
                     {{-- payment status --}}
-                    <td>{{ __('module.payment_stt')[$order->payment] }}</td>
+                    <td>
+                        @if ($order->confirm == 'cancel')
+                            <span>---</span>
+                        @else
+                            <select name="payment" id="payment" class="form-control select2">
+                                @foreach (__('module.payment_stt') as $key => $val)
+                                    <option value="{{ $key }}"
+                                        {{ $order->payment == $key ? 'selected' : '' }}>
+                                        {{ $val }}</option>
+                                @endforeach
+                            </select>
+                        @endif
+                    </td>
 
                     {{-- payment method --}}
                     <td>{{ __($method['title']) }}</td>
 
                     {{-- payment delivery status --}}
-                    <td>{{ __('module.delivery_stt')[$order->delivery] }}</td>
+                    <td>
+                        @if ($order->confirm == 'cancel')
+                            <span>---</span>
+                        @else
+                            <select name="delivery" id="delivery" class="form-control select2">
+                                @foreach (__('module.delivery_stt') as $key => $val)
+                                    <option value="{{ $key }}"
+                                        {{ $order->delivery == $key ? 'selected' : '' }}>{{ $val }}</option>
+                                @endforeach
+                            </select>
+                        @endif
+
+                    </td>
 
                     {{-- payment confirm status --}}
                     <td>{{ __('module.confirm_stt')[$order->confirm] }}</td>
@@ -95,5 +106,4 @@
         </tbody>
     </table>
     {{ $orders->links('pagination::bootstrap-4') }}
-
 </div>
