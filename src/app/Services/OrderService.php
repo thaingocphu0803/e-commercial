@@ -33,6 +33,7 @@ class OrderService implements OrderServiceInterface
         $orderData['note'] = $order->description;
         $orderData['delivery'] = $order->delivery;
         $orderData['confirm'] = $order->confirm;
+        $orderData['payment'] = $order->payment;
         $orderData['created_at'] = $order->created_at->format('Y/m/d H:i:s');
         $orderData['customer_phone'] = $order->phone;
         $orderData['customer_name'] = $order->fullname;
@@ -57,18 +58,33 @@ class OrderService implements OrderServiceInterface
 
     public function ajaxUpdate($request)
     {
-        $target =  $request->input('target');
-        switch($target){
-            case "orderNote":
-                return $this->updateOrderDescription($request);
-                break;
-            case "customerInfor":
-                return $this->updateOrderCustomerInfor($request);
-                break;
-            case "orderConfirm":
-                return $this->updateOrderConfirm($request);
-            default:
-                break;
+        try{
+            DB::beginTransaction();
+
+            $code = $request->input('code');
+            $payload = $request->except('code', '_token');
+
+            $this->orderRepository->update($code, $payload);
+            DB::commit();
+            return true;
+        }catch(\Exception $e){
+            DB::rollBack();
+            return false;
+        }
+    }
+
+    public function updateStatusAll($payload)
+    {
+        DB::beginTransaction();
+        try{
+            $this->orderRepository->updateStatusAll($payload);
+
+            DB::commit();
+
+            return true;
+        }catch(\Exception $e){
+            DB::rollBack();
+            return false;
         }
     }
 
@@ -108,53 +124,4 @@ class OrderService implements OrderServiceInterface
         return $decodeOption[$columnName];
     }
 
-    private function updateOrderDescription($request){
-        try{
-            DB::beginTransaction();
-
-            $code = (int) $request->input('code');
-            $payload = $request->except('code', 'target', '_token');
-
-            $this->orderRepository->update($code, $payload);
-
-            DB::commit();
-            return true;
-
-        }catch(\Exception $e){
-            DB::rollBack();
-            return false;
-        }
-    }
-
-    private function updateOrderCustomerInfor($request){
-        try{
-            DB::beginTransaction();
-
-            $code = $request->input('code');
-            $payload = $request->except('code', 'target', '_token');
-
-            $this->orderRepository->update($code, $payload);
-            DB::commit();
-            return true;
-        }catch(\Exception $e){
-            DB::rollBack();
-            return false;
-        }
-    }
-
-    private function updateOrderConfirm($request){
-        try{
-            DB::beginTransaction();
-
-            $code = $request->input('code');
-            $payload = $request->except('code', 'target', '_token');
-
-            $this->orderRepository->update($code, $payload);
-            DB::commit();
-            return true;
-        }catch(\Exception $e){
-            DB::rollBack();
-            return false;
-        }
-    }
 }

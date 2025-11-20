@@ -4,12 +4,12 @@
             <li class="nav-header">
                 <div class="dropdown profile-element">
                     <span class="user-small-avt">
-                        <img alt="image" class="img-circle img-cover" src="{{Auth::user()->image ?? config('app.general.noImage')}}" />
+                        <img alt="image" class="img-circle img-cover" src="{{auth()->   user()->image ?? config('app.general.noImage')}}" />
                     </span>
 
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear"> <span class="block m-t-xs">
-                            <strong class="font-bold">{{ Auth::user()->name }}</strong>
+                            <strong class="font-bold">{{ auth()->   user()->name }}</strong>
                             <b class="ms-5 caret"></b>
                             </span>
                         </span>

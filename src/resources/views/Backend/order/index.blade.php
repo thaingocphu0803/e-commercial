@@ -1,6 +1,13 @@
 <x-backend.dashboard.layout>
+    @push('backend-link')
+        <link rel="stylesheet" href="{{ asset('backend/css/plugins/toastr/toastr.min.css') }}">
+    @endpush
+    @push('backend-script')
+        <script src="{{ asset('backend/js/plugins/toastr/toastr.min.js') }}"></script>
+    @endpush
+
     <div class="row wrapper border-bottom white-bg page-heading">
-        <x-backend.dashboard.breadcrumb :title="__('custom.managerObject', ['attribute' => __('custom.product')])"/>
+        <x-backend.dashboard.breadcrumb :title="__('custom.managerObject', ['attribute' => __('custom.product')])" />
 
         <div class="col-lg-2">
         </div>
@@ -8,10 +15,10 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>{{ __('custom.listObject', ['attribute' => __('custom.product')]) }}</h5>
-                    <x-backend.dashboard.toolbox model="Order" object="orders"/>
+                    <x-backend.order.toolbox model="Order" object="orderInfor" />
                 </div>
                 <div class="ibox-content">
-                    <x-backend.order.filter/>
+                    <x-backend.order.filter />
                     <x-backend.order.table :orders="$orders" />
                 </div>
             </div>

@@ -27,6 +27,11 @@
                                         <div class="badge-text text-sm text-center">
                                             {{ __('module.delivery_stt')[$order['delivery']] }}</div>
                                     </span>
+                                    <span class="badge flex flex-middle gap-5">
+                                        <div class="badge__tip"></div>
+                                        <div class="badge-text text-sm text-center">
+                                            {{ __('module.payment_stt')[$order['payment']] }}</div>
+                                    </span>
                                 </div>
                                 <div class="ibox-title-right text-sm">
                                     Source: Website

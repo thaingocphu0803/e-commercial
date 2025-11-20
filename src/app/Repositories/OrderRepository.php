@@ -51,4 +51,15 @@ class OrderRepository implements OrderRepositoryInterface
 
         return $query->orderBy('id', 'desc')->paginate($perpage)->withQueryString();
     }
+
+    public function updateStatusAll($payload)
+    {
+        $ids = $payload['ids'];
+        $value = $payload['value'];
+        $columm = [$payload['field'] => $value];
+        $confirm = 'confirm';
+
+        return Order::whereIn('code', $ids)->where('confirm', $confirm)->update($columm);
+    }
+
 }

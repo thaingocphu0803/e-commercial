@@ -40,34 +40,24 @@
         zh: "已取消",
     };
 
-    if (typeof orderPrice !== "undefined") {
-        const AlertConfirmed = {
-            en: `The ${orderPrice} order has been confirmed.`,
-            vi: `Đơn hàng trị giá ${orderPrice} đã được xác nhận.`,
-            ja: `${orderPrice} のご注文が確認されました。`,
-            zh: `金额为 ${orderPrice} 的订单已确认。`,
-        };
-
-        const AlertCancel = {
-            en: `The ${orderPrice} order has been cancelled.`,
-            vi: `Đơn hàng trị giá ${orderPrice} đã bị hủy.`,
-            ja: `${orderPrice} のご注文はキャンセルされました。`,
-            zh: `金额为 ${orderPrice} 的订单已被取消。`,
-        };
-    }
-
     FUNCT.handleConfirmOrder = () => {
         $(document).on("click", ".order-confirm-btn", async function () {
             let _this = $(this);
             let orderCanelBtn = $(".order-cancel-btn");
             let orderAlert = $(".order-alert");
-            let target = _this.data("target");
             let confirm = _this.data("confirm");
+
             let payload = {
                 code: orderCode,
                 confirm,
-                target,
                 _token,
+            };
+
+            const AlertConfirmed = {
+                en: `The ${orderPrice} order has been confirmed.`,
+                vi: `Đơn hàng trị giá ${orderPrice} đã được xác nhận.`,
+                ja: `${orderPrice} のご注文が確認されました。`,
+                zh: `金额为 ${orderPrice} 的订单已确认。`,
             };
 
             let respone = await ajaxUpdateOrder(payload);
@@ -126,13 +116,11 @@
                 let _this = $(this);
                 let value = _this.val();
                 let orderNoteBtn = $('button[data-target="orderNote"]');
-                let target = orderNoteBtn.data("target");
                 let noteContent = _this.parents(".ibox-content").find("span");
 
                 let payload = {
                     description: value,
                     code: orderCode,
-                    target,
                     _token,
                 };
 
@@ -159,7 +147,6 @@
             let staticCustomerBox = $(".static-customer-box");
             let editCustomerBox = $(".edit-customer-box");
             let orderNoteBtn = $('button[data-target="customerInfor"]');
-            let target = orderNoteBtn.data("target");
             let payload = {
                 fullname: $('input[name="customer_infor_name"]').val(),
                 email: $('input[name="customer_infor_email"]').val(),
@@ -169,7 +156,6 @@
                 district_id: $('select[name="district_id"]').val(),
                 ward_id: $('select[name="ward_id"]').val(),
                 code: orderCode,
-                target,
                 _token,
             };
 
@@ -214,13 +200,19 @@
         $(document).on("click", ".order-cancel-btn", async function () {
             let _this = $(this);
             let parent = _this.parents(".order-alert");
-            let target = _this.data("target");
             let confirm = _this.data("confirm");
+
             let payload = {
                 code: orderCode,
                 confirm,
-                target,
                 _token,
+            };
+
+            const AlertCancel = {
+                en: `The ${orderPrice} order has been cancelled.`,
+                vi: `Đơn hàng trị giá ${orderPrice} đã bị hủy.`,
+                ja: `${orderPrice} のご注文はキャンセルされました。`,
+                zh: `金额为 ${orderPrice} 的订单已被取消。`,
             };
 
             let respone = await ajaxUpdateOrder(payload);
@@ -240,12 +232,102 @@
         });
     };
 
+    FUNCT.handleOrderStatus = () => {
+        $(document).on("change", ".select-orders-stt", async function () {
+            let _this = $(this);
+            let code = _this.data("code");
+            let field = _this.data("field");
+            let value = _this.val();
+            let oldValue = _this.data("old");
+
+            let payload = {
+                [field]: value,
+                code,
+                _token,
+            };
+
+            let respone = await ajaxUpdateOrder(payload);
+
+            if (respone.code == 0) {
+                toastr.clear();
+                toastr.success(respone.message, toastTitle[lang]);
+            } else {
+                _this.val(oldValue).trigger("change.select2");
+                toastr.clear();
+                toastr.error(respone.message, toastTitle[lang]);
+            }
+        });
+    };
+
+    FUNCT.changeStatusAllOrder = () => {
+        $(document).on("click", ".changeStatusAllOrder", async function (e) {
+            e.preventDefault();
+            let _this = $(this);
+            let ids = [];
+            let value =  _this.attr("data-value");
+            let model = _this.attr("data-model");
+            let field = _this.attr("data-field");
+
+            let successMessage = {
+                en: "Update all order status success",
+                vi: "Cập nhật trạng thái tất cả đơn hàng thành công",
+                ja: "すべての注文ステータスを更新しました",
+                zh: "成功更新所有订单状态",
+            };
+
+            let failedMessage = {
+                en: "Failed to update order status",
+                vi: "Cập nhật trạng thái đơn hàng thất bại",
+                ja: "注文ステータスの更新に失敗しました",
+                zh: "更新订单状态失败",
+            };
+
+            $(".checkItem:checked").each(function () {
+                let checkItem = $(this);
+                ids.push(checkItem.val());
+            });
+
+            if (!ids.length) return;
+
+            let requestData = {
+                value,
+                ids,
+                model,
+                field,
+                _token: _token,
+            };
+
+            const response = await $.ajax({
+                type: "POST",
+                url: "/ajax/dashboard/changeStatusAll",
+                data: requestData,
+                dataType: "json",
+            });
+
+            if (response.flag) {
+                $(".checkItem:checked").each(function () {
+                    let _this = $(this);
+                    let selectElement = _this.parents('tr').find(`select[data-field="${field}"]`);
+                    selectElement.val(value).trigger('change.select2');
+                });
+
+                toastr.clear();
+                toastr.success(successMessage[lang], toastTitle[lang]);
+            } else {
+                toastr.clear();
+                toastr.error(failedMessage[lang], toastTitle[lang]);
+            }
+        });
+    };
+
     $(document).ready(() => {
         FUNCT.handleConfirmOrder();
         FUNCT.handleOrderEdit();
         FUNCT.handleUpdateOrderNote();
         FUNCT.handleSaveCustomerInfor();
         FUNCT.handleCancelOrder();
+        FUNCT.handleOrderStatus();
+        FUNCT.changeStatusAllOrder();
     });
 })(jQuery);
 

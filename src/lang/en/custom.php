@@ -409,4 +409,10 @@
         'confirmedAttrOrder' => 'The :attribute order has been confirmed.',
         'cancelAttrOrder' => 'The :attribute order has been cancelled.',
         'cancelled' => 'cancelled',
+        'confirmOrderBefore' => 'You must confirm order before',
+        'paymentCompleteAttrChoosen' => 'Payment completed :attribute Chosen',
+        'unpaidAttrChoosen' => 'Unpaid :attribute Chosen',
+        'pendingDeliveryAttrChoosen' => 'Pending delivery :attribute Chosen',
+        'inDeliveryAttrChoosen' => 'In delivery :attribute Chosen',
+        'deliveredAttrChoosen' => 'Delivered :attribute Chosen',
     ];
