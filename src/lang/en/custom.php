@@ -415,4 +415,9 @@
         'pendingDeliveryAttrChoosen' => 'Pending delivery :attribute Chosen',
         'inDeliveryAttrChoosen' => 'In delivery :attribute Chosen',
         'deliveredAttrChoosen' => 'Delivered :attribute Chosen',
+        //2025/11/25
+        'paymentSuccess' => 'payment success',
+        'paymentFailed' => 'payment failed',
+        'paymentStatus' => 'Payment status',
+        'momoAlert' => 'This transaction could be hacked, please check your signature and returned signature.',
     ];

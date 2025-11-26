@@ -82,7 +82,6 @@ class CartService implements CartServiceInterface
             $order = $this->orderRepository->create($orderPayload);
             if ($order->id > 0) {
                 $this->createOrderProduct($orderPayload, $order);
-                $this->createOrderPayment($request->input('method'));
                 Cart::instance('shopping')->destroy();
             }
 
@@ -267,30 +266,5 @@ class CartService implements CartServiceInterface
 
         $order->products()->sync($temps);
     }
-
-    private function createOrderPayment($method)
-    {
-        switch ($method) {
-            case "zalopay":
-                $this->handleZaloPay();
-                break;
-            case "momo":
-                $this->handleMomoPay();
-                break;
-            case "shopee":
-                $this->handleShopeePay();
-                break;
-            case "vnpay":
-                $this->handleVnPay();
-                break;
-            default:
-                break;
-        }
-    }
-
-    private function handleZaloPay(){}
-    private function handleMomoPay(){}
-    private function handleShopeePay(){}
-    private function handleVnPay(){}
 
 }

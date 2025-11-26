@@ -1,6 +1,6 @@
 @php
-    $paymentMethod = collect(__('module.payment'));
-    $method = $paymentMethod->firstWhere('id', $order['customer_method']);
+$paymentMethod = collect(__('module.payment'));
+$method = $paymentMethod->firstWhere('id', $order['customer_method']);
 @endphp
 
 <x-frontend.dashboard.layout>
@@ -48,12 +48,12 @@
                         </thead>
                         <tbody>
                             @foreach ($order['products'] as $product)
-                                <tr class="table-secondary">
-                                    <td colspan="8">{{$product['name']}}</td>
-                                    <td class="text-center" colspan="4">{{intval($product['qty'])}}</td>
-                                    <td class="text-center" colspan="4">{{price_format($product['price_original'])}}</td>
-                                    <td class="text-center" colspan="4">{{price_format($product['price'])}}</td>
-                                </tr>
+                            <tr class="table-secondary">
+                                <td colspan="8">{{$product['name']}}</td>
+                                <td class="text-center" colspan="4">{{intval($product['qty'])}}</td>
+                                <td class="text-center" colspan="4">{{price_format($product['price_original'])}}</td>
+                                <td class="text-center" colspan="4">{{price_format($product['price'])}}</td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -153,6 +153,11 @@
                         </span>
                         <span class="payment-method-value text-secondary fs-6">{{__($method['title'])}}</span>
                     </div>
+
+                    <!-- include payment method message -->
+                    @if(!empty($template))
+                        @include($template)
+                    @endif
                 </div>
             </div>
         </div>

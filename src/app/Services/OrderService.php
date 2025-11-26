@@ -25,6 +25,19 @@ class OrderService implements OrderServiceInterface
         return $orders;
     }
 
+    public function update($code, $payload)
+    {
+       try{
+            DB::beginTransaction();
+            $this->orderRepository->update($code, $payload);
+            DB::commit();
+            return true;
+       }catch(\Exception $e){
+            DB::rollBack();
+            return false;
+       }
+    }
+
     public function findById($code)
     {
         $order =  $this->orderRepository->findById($code);
@@ -89,8 +102,8 @@ class OrderService implements OrderServiceInterface
     }
 
     private function caculateOrderDiscount($order){
-        $product_discount = floatval($order->cart['totalDiscount']);
-        $cart_discount = floatval($order->promotion['discount']);
+        $product_discount = floatval($order->cart['totalDiscount'] ?? 0);
+        $cart_discount = floatval($order->promotion['discount'] ?? 0);
 
         return $product_discount + $cart_discount;
     }

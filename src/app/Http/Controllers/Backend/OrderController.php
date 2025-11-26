@@ -38,6 +38,7 @@ class OrderController extends Controller
 
     public function detail($code)
     {
+         Gate::authorize('modules', 'order.detail');
         $order = $this->orderService->findById($code);
         $provinces = $this->provinceRepository->getAll();
 

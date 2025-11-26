@@ -108,26 +108,26 @@ return [
             'img' => asset('frontend/imgs/payment/cod.webp'),
             'title' => 'custom.payByCOD'
         ],
-        [
-            'id' => 'zalopay',
-            'img' => asset('frontend/imgs/payment/zalopay.webp'),
-            'title' => 'custom.payByZalo'
-        ],
+        // [
+        //     'id' => 'zalopay',
+        //     'img' => asset('frontend/imgs/payment/zalopay.webp'),
+        //     'title' => 'custom.payByZalo'
+        // ],
         [
             'id' => 'momo',
             'img' => asset('frontend/imgs/payment/momo.webp'),
             'title' => 'custom.payByMomo'
         ],
-        [
-            'id' => 'shopee',
-            'img' => asset('frontend/imgs/payment/shopeepay.webp'),
-            'title' => 'custom.payByShopee'
-        ],
-        [
-            'id' => 'vnpay',
-            'img' => asset('frontend/imgs/payment/vnpay.webp'),
-            'title' => 'custom.payByVNP'
-        ],
+        // [
+        //     'id' => 'shopee',
+        //     'img' => asset('frontend/imgs/payment/shopeepay.webp'),
+        //     'title' => 'custom.payByShopee'
+        // ],
+        // [
+        //     'id' => 'vnpay',
+        //     'img' => asset('frontend/imgs/payment/vnpay.webp'),
+        //     'title' => 'custom.payByVNP'
+        // ],
     ],
 
     'confirm_stt' => [

@@ -11,6 +11,7 @@ use App\Services\OrderService;
 use App\Services\SystemService;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Mail;
+use App\Classes\Momo;
 
 class CartController extends Controller
 {
@@ -18,17 +19,20 @@ class CartController extends Controller
     private $cartService;
     private $orderService;
     private $systemService;
+    private $momo;
 
     public function __construct(
         ProvinceRepository $provinceRepository,
         CartService $cartService,
         OrderService $orderService,
-        SystemService $systemService
+        SystemService $systemService,
+        Momo $momo
     ) {
         $this->provinceRepository = $provinceRepository;
         $this->cartService = $cartService;
         $this->orderService = $orderService;
         $this->systemService = $systemService;
+        $this->momo = $momo;
     }
 
     public function index()
@@ -45,8 +49,13 @@ class CartController extends Controller
     public function store(StoreCartRequest $request)
     {
         $order = $this->cartService->order($request);
+
         if ($order) {
-            $this->mail($order->code);
+            // $this->mail($order->code);
+            $response = $this->paymentOnline($order);
+            if($response['resultCode'] == 0){
+                return redirect()->away($response['payUrl']);
+            }
 
             return redirect()->route('cart.success', ['code' => $order->code])->with('success', __('alert.addSuccess', ['attribute' => __('custom.PurchaseOrder')]));
         }
@@ -78,5 +87,24 @@ class CartController extends Controller
         }catch(\Exception $e){
             echo $e->getMessage();
         }
+    }
+
+    private function paymentOnline($order)
+    {
+        $response = null;
+
+        switch ($order->method) {
+            case "zalopay":
+                break;
+            case "momo":
+                $response =  $this->momo->payment($order);
+                break;
+            case "shopee":
+                break;
+            default:
+                break;
+        }
+
+        return $response;
     }
 }

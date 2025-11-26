@@ -34,6 +34,7 @@ use App\Http\Controllers\Backend\SourceController;
 use App\Http\Controllers\Backend\SystemController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\MomoController;
 use App\Http\Controllers\Frontend\RouterController;
 
 /** FONTEND ROUTES */
@@ -69,6 +70,12 @@ Route::controller(AjaxCartController::class)->prefix('ajax/cart')->middleware(['
 //LanguageController
 Route::controller(LanguageController::class)->middleware(['locale'])->prefix('home/language')->group(function () {
     Route::get('change/{canonical}', 'changeCurrent')->name('home.language.change');
+});
+
+// MomoController
+Route::controller(MomoController::class)->middleware(['locale'])->group(function(){
+    Route::get('return/momo', 'return_momo')->name('return.momo');
+    Route::post('rerturn/momo_ipn', 'return_ipn')->name('return.momo.ipn');
 });
 
 /*********************************************************************************************************************************************************/

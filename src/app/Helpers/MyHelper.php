@@ -33,7 +33,7 @@ if (!function_exists("price_format")) {
 
 
         $price = number_format(intval($number), $decimals, '.', ',');
-        if($onlyNumber){
+        if ($onlyNumber) {
             return $price;
         }
         return $price . $symbol;
@@ -118,7 +118,7 @@ if (!function_exists('caculate_cart_total')) {
 }
 
 //helper format address from collection
-if(!function_exists('format_address')){
+if (!function_exists('format_address')) {
     function format_address($object)
     {
 
@@ -130,5 +130,43 @@ if(!function_exists('format_address')){
         ]);
 
         return implode(', ', $full_address);
+    }
+}
+
+// helper momo
+if (!function_exists('execPostRequest')) {
+    function execPostRequest($url, $data)
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt(
+            $ch,
+            CURLOPT_HTTPHEADER,
+            array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data)
+            )
+        );
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+        //execute post
+        $result = curl_exec($ch);
+        //close connection
+        curl_close($ch);
+        return $result;
+    }
+}
+
+//momo config
+if (!function_exists('momo_config')) {
+    function momo_config()
+    {
+        return [
+            'partnerCode' => 'MOMOBKUN20180529',
+            'accessKey' => 'klm05TvNBzhg7h7j',
+            'secretKey' => 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa'
+        ];
     }
 }

@@ -11,5 +11,7 @@ interface OrderServiceInterface
     public function findById($code);
     public function paginate($request);
     public function ajaxUpdate($request);
-    public function updateStatusAll($payload);
+    public function updateStatusAll($payload); 
+    public function update($code, $payload);
+
 }
